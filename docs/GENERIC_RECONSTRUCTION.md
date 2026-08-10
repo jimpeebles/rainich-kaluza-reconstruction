@@ -86,7 +86,11 @@ a factorization if and only if
 It also proves both the rank-one determinant identity and metric
 self-adjointness after lowering the raised index. Equation (GR4), not merely
 `uv≥0`, is the correct pointwise scalar-factorization condition in a fixed
-Lorentzian signature assignment.
+Lorentzian signature assignment. In a definite-signature complementary block,
+(GR4) refines the unsigned test (GR3). On a mixed-signature block the tests are
+incomparable: a mixed scalar endomorphism is metric-self-adjoint rather than an
+ordinary symmetric matrix, so its two mixed diagonal entries can have opposite
+signs.
 
 The packaged theorem `exists_scalarComplementaryBlock_iff` goes one step
 further: it quantifies over scalar components and proves that a

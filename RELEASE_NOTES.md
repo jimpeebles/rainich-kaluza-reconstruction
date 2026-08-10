@@ -1,5 +1,19 @@
 # Draft release notes
 
+## Unreleased — submission held for theorem development
+
+The proposed `v0.2.0` VibeMathed submission is intentionally paused. Current
+development adds a basis-independent protected-eigenspace theorem and the
+first differential-selection result for the reflection-related scalar
+branches. It also begins the high-impact differential-coupling phase: the
+rescaled Maxwell channels determine the signed EMD coupling on a nondegenerate
+branch, while the squared coupling is invariant under scalar-orientation
+reversal. A reviewer-identified mixed-signature comparison error has been
+corrected and guarded by a Lean incomparability counterexample. The next
+release candidate should complete more of the
+full-tangent-space and differential reconstruction rather than merely append
+these results to the existing partial submission.
+
 ## v0.2.0 — Generic pointwise reconstruction orbit
 
 This release is the proposed primary source for a VibeMathed partial-result
@@ -37,4 +51,3 @@ axiom dependencies of every advertised theorem.
 - Commit: `[PIN AFTER FINAL AUDIT]`
 - Passing workflow: `[PIN AFTER PUBLIC PUSH]`
 - Independent statement/domain audit: pending
-

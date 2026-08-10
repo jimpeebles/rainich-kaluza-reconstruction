@@ -251,4 +251,23 @@ theorem exists_scalarComplementaryBlock_iff
     · simpa [scalarMixedBlockOfComponents] using hx.symm
     · simpa [scalarMixedBlockOfComponents] using hy.symm
 
+/-- **Mixed-signature comparison audit.** The unsigned symmetric-completion
+test and the Lorentzian scalar-factorization test are incomparable in general.
+
+The first conjunct is the review counterexample: for `a=5`, `b=-5`, and
+`qSq=5`, the forced diagonals are `2,-2`. Signature `(+,−)` admits a scalar
+factorization although their product is negative. The second conjunct gives
+the reverse failure: for `a=2`, `b=1`, and `qSq=2`, the forced diagonals have
+nonnegative product, but signature `(−,+)` rejects them. -/
+theorem reconstructed_signature_unsigned_tests_incomparable :
+    ((0 ≤ (1 : ℝ) * reconstructedDiagonalA 5 (-5) 5 ∧
+        0 ≤ (-1 : ℝ) * reconstructedDiagonalB 5 (-5) 5) ∧
+      ¬ 0 ≤ reconstructedDiagonalA 5 (-5) 5 *
+        reconstructedDiagonalB 5 (-5) 5) ∧
+    ((0 ≤ reconstructedDiagonalA 2 1 2 *
+        reconstructedDiagonalB 2 1 2) ∧
+      ¬ (0 ≤ (-1 : ℝ) * reconstructedDiagonalA 2 1 2 ∧
+        0 ≤ (1 : ℝ) * reconstructedDiagonalB 2 1 2)) := by
+  norm_num [reconstructedDiagonalA, reconstructedDiagonalB]
+
 end RainichKaluza

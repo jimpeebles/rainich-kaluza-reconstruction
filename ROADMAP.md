@@ -1,5 +1,9 @@
 # Research roadmap
 
+The high-impact theorem program and its phase exit criteria are specified in
+[`docs/HIGH_IMPACT_PROGRAM.md`](docs/HIGH_IMPACT_PROGRAM.md). This roadmap
+tracks the same program at repository-task granularity.
+
 ## Phase 0 — Provenance and novelty audit
 
 - Fix the exact `a = √3` EMD action, frame, signature, and normalizations.
@@ -13,6 +17,12 @@ novelty statement is phrased comparatively.
 ## Phase 1 — Generic algebraic reconstruction
 
 - Derive the Ricci characteristic factorization from `R = S + V`.
+- Prove that rank-one scalar perturbations retain one direction in each
+  two-dimensional Maxwell principal plane. **Complete in Lean.**
+- Formalize the four-dimensional Maxwell principal-plane multiplicities and
+  convert the protected eigenvectors into characteristic-polynomial factors.
+- Prove that nonzero opposite roots force the complete quadratic
+  characteristic factorization. **Complete in Lean.**
 - Formalize the rank-one determinant identity in Lean.
 - Prove the protected eigenpair and invariant formulas.
 - Solve the linear tensor equation for `V` on the generic branch.
@@ -31,9 +41,22 @@ nondegeneracy hypothesis.
 - Factor the reconstructed rank-one tensor into a covector up to sign.
 - Determine which differential conditions select or identify the two
   pointwise relative-sign partners.
+- Prove that both relative-sign branches can be closed only on the locus where
+  their two spectral components are separately closed. **Complete in Lean as
+  an abstract linear differential lemma.**
 - State and prove the closure condition implying local exactness.
 - Apply Maxwell–Rainich algebraic and differential conditions to `S = R - V`.
 - Add the Kaluza scalar equation and duality-complexion datum.
+- Derive the rescaled Maxwell differential channels and prove abstract
+  uniqueness of `a` on a nonzero channel. **Complete in Lean at the evaluated
+  module level; curvature and differential-form instantiation open.**
+- Construct an intrinsic `a_geom²` and test `a_geom²=3` on Kaluza metrics and
+  `a_geom²≠3` on adversarial EMD metrics.
+- Prove the Lorentzian-pairing formula for `a_geom²` and primal/dual channel
+  agreement. **Complete in Lean on the non-null evaluated-channel branch.**
+- Construct the two-root polynomial spectral projector without eigenvectors.
+  **Complete in Lean; full four-root assembly and smooth differentiation
+  remain open.**
 - Prove a local necessary-and-sufficient theorem.
 
 Exit criterion: Paper I candidate with manuscript-to-Lean claim translation.

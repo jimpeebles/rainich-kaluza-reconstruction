@@ -74,10 +74,52 @@ Equations (E3)--(E5) imply, without assuming that `S` and `V` commute,
 This noncommutative implication is Lean-verified by
 `reconstructionEquation_of_decomposition`.
 
+## Rescaled differential equations and the coupling
+
+The Bianchi and Maxwell equations in this convention are
+
+`dF=0`, `d(exp(aφ) *F)=0`.                              (E7)
+
+Define the scalar covector and stress-normalized Maxwell two-form
+
+`v=dφ`, `𝓕=exp(aφ/2)F`.                                (E8)
+
+The product and chain rules give
+
+`d𝓕=(a/2)v∧𝓕`.                                         (E9)
+
+Also `exp(aφ)*F=exp(aφ/2)*𝓕`, so the second equation in (E7) gives
+
+`d(*𝓕)=-(a/2)v∧(*𝓕)`.                                  (E10)
+
+Equations (E9)--(E10) are important because the pointwise Einstein equation
+absorbs `exp(aφ)` into `𝓕` and therefore cannot identify `a`, whereas these
+differential equations contain it explicitly. Once the global sign of the
+reconstructed `v` is fixed, either nonzero wedge channel determines `a`
+uniquely. Reversing `v` reverses `a`, so the convention-independent metric
+target is `a²`; Kaluza reduction is selected by `a²=3`.
+
+If the Lorentzian pairing of the three-form `Y=v∧𝓕` with itself is nonzero,
+(E9) yields the coordinate-free formulas
+
+`a = 2⟪d𝓕,Y⟫/⟪Y,Y⟫`,
+
+`a² = 4⟪d𝓕,d𝓕⟫/⟪Y,Y⟫`.                                (E11)
+
+The dual equation gives the same value of `a²`. `CouplingInvariant.lean`
+verifies (E11), its orientation behavior, and primal/dual agreement for an
+arbitrary real bilinear pairing, so an indefinite Lorentzian pairing is
+allowed. The non-null denominator is an explicit branch restriction.
+
+`DifferentialCoupling.lean` formalizes the abstract compatibility equations,
+coupling uniqueness on a nonzero channel, probe formulas for `a` and `a²`, and
+the `(v,a)↦(-v,-a)` orientation symmetry. It does not yet formalize exterior
+differentiation or reconstruct the entries of (E9)--(E10) from curvature.
+
 ## Scope boundary
 
-This note fixes the pointwise Einstein-equation provenance. It does not assume
-or prove the Maxwell equation, scalar equation, closure of a reconstructed
-one-form, or five-dimensional local uplift. Those are differential closure
+This note fixes the field-equation provenance and derives the rescaled
+differential identities. It does not prove that curvature reconstructs forms
+satisfying those identities, the scalar equation, closure of a reconstructed
+one-form, or five-dimensional local uplift. Those remain differential closure
 obligations for the larger project.
-

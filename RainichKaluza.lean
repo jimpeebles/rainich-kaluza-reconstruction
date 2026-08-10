@@ -1,9 +1,15 @@
 import RainichKaluza.CharacteristicData
 import RainichKaluza.AlgebraicFingerprint
 import RainichKaluza.RankOneEndomorphism
+import RainichKaluza.ProtectedEigenspaces
+import RainichKaluza.ProtectedFactorization
 import RainichKaluza.GenericReconstruction
 import RainichKaluza.LorentzianScalarBlock
 import RainichKaluza.RelativeSignAmbiguity
 import RainichKaluza.ReconstructionEquation
 import RainichKaluza.SpectralReflection
+import RainichKaluza.PolynomialProjector
+import RainichKaluza.DifferentialBranchSelection
+import RainichKaluza.DifferentialCoupling
+import RainichKaluza.CouplingInvariant
 import RainichKaluza.ClaimLedger

@@ -11,6 +11,9 @@ than its machine-checked counterpart.
 | Curvature formula for `q²` | `reconstructedQSq_fromFactorization` | complete for nonzero trace |
 | Obstruction alone is insufficient | `algebraicFalsePositive_has_no_real_protected_pair` | complete explicit counterexample |
 | Basis-independent rank-one square law | `rankOneEndomorphism_sq`, `rankOneEndomorphism_sq_eq_trace_smul` | complete for finite free real modules; no basis chosen |
+| Rank-one perturbation protects an eigenvalue carried by a two-dimensional eigenspace | `exists_protected_eigenvector_of_pair` | complete basis-independent theorem |
+| Two Maxwell principal planes protect a `+q/-q` pair | `exists_protected_opposite_eigenvectors` | complete conditional theorem; Maxwell principal-plane multiplicity remains to be formalized |
+| Nonzero opposite roots force the quadratic factorization | `monicQuartic_factorization_of_opposite_roots`, `characteristicData_eq_fromFactorization_of_opposite_roots` | complete polynomial converse |
 | Coordinate-free reconstruction equation | `reconstructionEquation_of_decomposition`, `reconstructionEquation_of_eq_add` | complete in any associative real algebra, conditional on the two square laws |
 | Centralizer invariance of reconstruction | `reconstructionEquation_conjugation_invariant` | complete for involutions commuting with the Ricci-like algebra element |
 | Basis-independent spectral reflection | `reflectionOfIdempotent_sq`, `reflectionOfIdempotent_commutes`, `reconstructionEquation_reflectionOfIdempotent` | complete for commuting idempotents in any associative real algebra |
@@ -28,9 +31,14 @@ than its machine-checked counterpart.
 | Classification into same/relative-sign blocks | `scalarComplementarySolutions_eq_or_flip` | complete for scalar-generated generic solutions |
 | Distinct relative-sign counterpartner | `exists_distinct_relative_sign_solution` | complete when both components are nonzero |
 | Reflection preserves Ricci and exchanges scalar blocks | `secondSpectralReflection_preserves_Ricci`, `secondSpectralReflection_conjugates` | complete two-dimensional centralizer realization |
+| Simultaneous closure of both relative-sign branches | `both_relativeSign_branches_closed_iff`, `reflected_branch_closed_iff_of_branch_closed` | complete for any real-linear differential operator; exterior-derivative instantiation open |
+| Mixed-signature incomparability of unsigned and scalar tests | `reconstructed_signature_unsigned_tests_incomparable` | complete explicit counterexamples in both directions |
+| Differential coupling uniqueness and orientation orbit | `couplingCompatible_unique_of_nondegenerate`, `couplingCompatible_neg_orientation`, `couplingFromProbe_eq_of_compatible`, `couplingSqFromProbe_eq_of_compatible`, `couplingSqFromProbe_neg_source` | complete for evaluated differential channels; curvature/form reconstruction open |
+| Lorentzian-pairing formula for `a²` | `couplingFromPairing_eq_of_smul`, `couplingSqFromPairing_eq_of_smul`, `couplingSqFromPairing_primal_dual_agree` | complete on non-null evaluated channels; curvature construction open |
+| Eigenvector-free two-root spectral projector | `twoRootProjector_sq`, `twoRootProjector_commutes`, `twoRootProjector_apply_eq_self`, `twoRootProjector_apply_eq_zero` | complete for a quadratic invariant block |
 | Convention-fixed EMD decomposition | `docs/EMD_CONVENTION.md`; `rankOneEndomorphism_sq_eq_trace_smul` | field-equation derivation documented; scalar square formalized; Maxwell square is a named literature input |
-| Full tangent-space spectral assembly | — | open |
-| Differential closure and local sufficiency | — | open |
+| Full tangent-space spectral assembly | `exists_protected_opposite_eigenvectors` | protected pair complete under plane hypotheses; remaining block assembly open |
+| Differential closure and local sufficiency | `both_relativeSign_branches_closed_iff` | simultaneous-branch obstruction complete; existence, exactness, and local sufficiency open |
 
 The paper must not call the first five rows a geometric reconstruction theorem.
 The public partial result is the generic existence/orbit classification and

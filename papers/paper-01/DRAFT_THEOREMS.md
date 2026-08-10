@@ -20,6 +20,14 @@ If `R≠0`, then `q²=-e₃/R`.
 Status: verified as coefficient algebra. The geometric derivation of the
 factorization is not part of this proposition's Lean premise.
 
+Conversely, if a monic quartic has nonzero opposite roots `+q` and `-q`, it
+necessarily factors as
+
+`(x²-q²)(x²-e₁x+e₂+q²)`.
+
+Status: verified by `monicQuartic_factorization_of_opposite_roots` and
+`characteristicData_eq_fromFactorization_of_opposite_roots`.
+
 ## Proposition B — the obstruction is not sufficient
 
 There exist real monic quartic coefficients satisfying `C_KK=0` for which the
@@ -73,8 +81,10 @@ the forced diagonal block exists if and only if
 
 `(a²-q²)(b²-q²)≤0`.
 
-Status: verified. This corollary concerns rank one over the reals and is weaker
-than Lorentzian scalar-covector factorization.
+Status: verified. This corollary concerns ordinary symmetric rank-one
+completion. In a definite-signature complementary block the signature-aware
+condition refines it; on mixed-signature blocks the two tests are
+incomparable.
 
 ## Theorem E — signature-aware scalar-block existence
 
@@ -133,7 +143,37 @@ projector construction is verified by `reflectionOfIdempotent_sq`,
 `reflectionOfIdempotent_commutes`, and
 `reconstructionEquation_reflectionOfIdempotent`.
 
-## Target Theorem G — local generalized Rainich–Kaluza reconstruction
+On a quadratic invariant block satisfying `(R-aI)(R-bI)=0`, `a≠b`, the
+projector can be constructed without eigenvectors as
+
+`Pₐ=(R-bI)/(a-b)`.
+
+Its idempotence, commutation with `R`, correct action on both eigenspaces, and
+the associated reflection are verified by the `twoRootProjector_*` and
+`twoRootReflection_*` theorem families.
+
+## Theorem G — simultaneous differential closure is exceptional
+
+Write the two reflection-related covector candidates on the complementary
+spectral plane as
+
+`v₊=α+β`, `v₋=α-β`.
+
+For any real-linear differential operator `d`,
+
+`d v₊=0` and `d v₋=0` if and only if `dα=0` and `dβ=0`.
+
+Thus, if one candidate is closed, its reflected partner is also closed exactly
+when the two spectral components are separately closed. This identifies the
+exceptional locus on which first-order differential data fail to select the
+pointwise orbit.
+
+Status: verified by `both_relativeSign_branches_closed_iff` and
+`reflected_branch_closed_iff_of_branch_closed`. The theorem is abstractly
+linear; it does not prove the existence of a closed branch or the manifold
+exterior-derivative hypotheses.
+
+## Target Theorem H — local generalized Rainich–Kaluza reconstruction
 
 On a generic non-null branch satisfying explicit spectral, Lorentzian-sign,
 smoothness, and differential conditions, a four-dimensional metric is locally

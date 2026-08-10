@@ -1,5 +1,9 @@
 # VibeMathed submission draft
 
+**Status: held. Do not submit this draft.** The research program is continuing
+toward full tangent-space and differential reconstruction; the eventual
+submission should be re-evaluated against the stronger theorem surface.
+
 This is a staging document. Replace bracketed URLs and collaborator metadata
 only when the public release exists.
 

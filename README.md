@@ -35,7 +35,22 @@ candidate Ricci fingerprint and the generic pointwise reconstruction layer:
   second, distinct scalar tensor under a relative component sign flip;
 - realization of that ambiguity by an involutive spectral reflection which
   commutes with the Ricci block;
+- an exact first differential-selection result: both relative-sign covector
+  branches can satisfy a linear closure condition only when their spectral
+  pieces satisfy it separately;
+- a Phase-I differential-coupling layer proving that either nonzero rescaled
+  Maxwell channel uniquely fixes the signed EMD coupling after scalar
+  orientation is chosen, while `a²` is orientation invariant;
+- a coordinate-free bilinear formula for `a²` on non-null differential
+  channels, with primal/dual agreement;
+- an explicit polynomial spectral projector and reflection for two-root
+  invariant blocks, requiring no chosen eigenvectors;
 - the basis-independent square law for rank-one endomorphisms;
+- a basis-independent theorem that a rank-one perturbation preserves an
+  eigenvalue carried by a two-dimensional eigenspace, and hence conditionally
+  protects the Maxwell `+q/-q` pair;
+- the converse polynomial theorem that a nonzero protected opposite root pair
+  forces the full `(x²-q²)` characteristic factor;
 - a coordinate-free, noncommutative derivation of the Sylvester reconstruction
   equation, together with its invariance under Ricci-centralizing involutions.
 
@@ -93,6 +108,10 @@ forbidding `sorryAx`.
 
 - `RainichKaluza/`: machine-checked definitions and theorems.
 - `docs/RESEARCH_STATE.md`: inherited results, corrections, and open questions.
+- `docs/PROGRAM_SYNTHESIS.md`: cross-conversation research map and adopted
+  physics-first sequence.
+- `docs/HIGH_IMPACT_PROGRAM.md`: north-star local uplift theorem, phased proof
+  program, exact-solution tests, and kill criteria.
 - `docs/EMD_CONVENTION.md`: convention-fixed field-equation provenance.
 - `docs/GENERIC_RECONSTRUCTION.md`: derivation and boundary of the current
   generic eigenbasis result.

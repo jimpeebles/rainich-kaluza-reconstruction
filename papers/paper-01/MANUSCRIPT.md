@@ -97,6 +97,38 @@ Equation (3.1) is equivariant under the Ricci centralizer. If `J²=I` and
 `J𝓡=𝓡J`, then `V↦JVJ` maps solutions of (3.1) to solutions. This is verified
 by `reconstructionEquation_conjugation_invariant`.
 
+There is also a basis-independent reason for the protected pair in (4.1).
+Let an eigenspace of `S` contain two linearly independent vectors and write
+`V=x⊗f`. The restriction of `f` to that two-dimensional plane has a nonzero
+kernel vector `y`. Hence `Vy=0` and
+
+`𝓡y=(S+V)y=Sy=λy`.                                          (3.2)
+
+The Lean theorem `exists_protected_eigenvector_of_pair` proves this over an
+arbitrary real module. Its paired corollary
+`exists_protected_opposite_eigenvectors` applies it to `+q` and `-q`
+eigenplanes. Thus, once the standard four-dimensional non-null Maxwell
+principal-plane multiplicities are supplied, the full Ricci endomorphism
+necessarily retains nonzero `+q` and `-q` eigenvectors. Formalizing that
+exterior-algebra multiplicity result and the finite-dimensional
+eigenvector-to-characteristic-root bridge remain open.
+
+The remaining polynomial step is now exact. For a monic quartic in the sign
+convention of Section 7, nonzero roots `+q` and `-q` force
+
+`e₃=-e₁q²`, `e₄=-q²(e₂+q²)`,                           (3.3)
+
+and hence
+
+`p(x)=(x²-q²)(x²-e₁x+e₂+q²)`.                           (3.4)
+
+This converse is verified by
+`monicQuartic_factorization_of_opposite_roots` and
+`characteristicData_eq_fromFactorization_of_opposite_roots`. Consequently the
+proposed factorization is no longer an independent coefficient ansatz once
+the geometric protected pair has been connected to the characteristic
+polynomial.
+
 ## 4. Generic complementary block
 
 Assume that `𝓡` is real diagonalizable with eigenvalues
@@ -146,7 +178,9 @@ The forced diagonals (4.3) admit such a factorization if and only if
 
 `ε_a u≥0` and `ε_b w≥0`.                                  (5.2)
 
-This is stronger than the unsigned product test (4.6). Theorem
+In a definite-signature complementary block this refines (4.6); in general it
+replaces it, and the two tests are incomparable on mixed-signature blocks.
+Theorem
 `exists_scalarComplementaryBlock_iff` proves that a scalar-generated block
 solving all four complementary equations exists exactly under (5.2).
 `scalarMixedBlock_metric_selfAdjoint` verifies symmetry after lowering the
@@ -198,10 +232,47 @@ Lean proves that (6.3) is involutive, commutes with every endomorphism
 commuting with `P`, and acts on reconstruction solutions by conjugation. The
 principal declaration is `reconstructionEquation_reflectionOfIdempotent`.
 
+The projector need not be supplied abstractly. On a two-root invariant block
+satisfying
+
+`(𝓡-aI)(𝓡-bI)=0`, `a≠b`,
+
+the polynomial
+
+`Pₐ=(𝓡-bI)/(a-b)`                                         (6.4)
+
+is idempotent, commutes with `𝓡`, acts as the identity on the `a` eigenspace,
+and vanishes on the `b` eigenspace. These statements are verified by the
+`twoRootProjector_*` theorem family. This supplies an eigenvector-free object
+that can, after smooth geometric assembly, be differentiated in the local
+closure problem.
+
 The conclusion is a no-go statement: pointwise curvature algebra determines
 the scalar tensor only up to the relevant Ricci-centralizer action. Additional
 differential or orientation data are logically necessary for unique local
 reconstruction.
+
+### 6.3 First differential selection result
+
+Write the two covector representatives in a smooth complementary spectral
+splitting as
+
+`v₊=α+β`, `v₋=α-β`.                                      (6.5)
+
+Exterior differentiation is linear. Therefore
+
+`dv₊=0` and `dv₋=0  ⇔  dα=0 and dβ=0`.                   (6.6)
+
+The Lean theorem `both_relativeSign_branches_closed_iff` proves (6.6) for any
+real-linear operator, so it applies to exterior differentiation once the
+smooth differential-form setting has been supplied. Its corollary
+`reflected_branch_closed_iff_of_branch_closed` says that, if one branch is
+closed, the reflected branch is closed precisely on the separately closed
+locus.
+
+This does not establish that either candidate is closed. It does show that the
+pointwise ambiguity is generically visible to first-order differential data:
+both branches survive only under the stronger pair of conditions `dα=dβ=0`.
 
 ## 7. Polynomial obstruction and false positives
 

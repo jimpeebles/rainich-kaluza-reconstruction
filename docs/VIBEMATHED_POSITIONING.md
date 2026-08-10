@@ -65,3 +65,10 @@ minimum meaningful advance is one of:
 The second is stronger. The first could still be a focused paper if it resolves
 a clearly documented missing algebraic step in the literature and is paired
 with exact counterexamples showing why weaker conditions fail.
+
+The repository now has a machine-checked generic eigenbasis block
+classification and a signature-aware scalar-factorization criterion. This is
+closer to the first minimum, but submission should wait until the result is
+lifted from eigenbasis scalar algebra to a basis-independent Lorentzian tensor
+theorem and compared explicitly with the symmetry-reduced generalized Rainich
+work of Costa, Naves de Oliveira, and Guimarães.

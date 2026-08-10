@@ -24,7 +24,15 @@ algebra underlying the candidate Ricci fingerprint:
 - recovery of `q² = -e₃/e₁` on the nonzero-trace branch;
 - an exact perfect-fluid-spectrum adversarial check;
 - an explicit obstruction-zero false positive with no real protected pair,
-  proving that the polynomial condition alone is insufficient.
+  proving that the polynomial condition alone is insufficient;
+- forced generic-eigenbasis scalar-block diagonals and automatic trace
+  compatibility;
+- exact real rank-one and Lorentzian signature-aware scalar-factorization
+  criteria for the complementary two-dimensional block;
+- uniqueness of nondegenerate scalar components up to the unavoidable global
+  sign;
+- a coordinate-free, noncommutative derivation of the Sylvester reconstruction
+  equation from the Maxwell and scalar square laws.
 
 These statements are necessary algebraic groundwork. They do **not** yet prove
 that the fingerprint is sufficient, that a scalar gradient exists, that the
@@ -72,10 +80,15 @@ forbidding `sorryAx`.
 
 - `RainichKaluza/`: machine-checked definitions and theorems.
 - `docs/RESEARCH_STATE.md`: inherited results, corrections, and open questions.
+- `docs/GENERIC_RECONSTRUCTION.md`: derivation and boundary of the current
+  generic eigenbasis result.
 - `docs/CLAIM_LEDGER.md`: exact claim classification and proof obligations.
 - `docs/LITERATURE_MAP.md`: relation to known reconstruction results.
 - `docs/VIBEMATHED_POSITIONING.md`: publication narrative and Lean contract.
 - `papers/paper-01/OUTLINE.md`: first-paper theorem architecture.
+- `papers/paper-01/LEAN_MAP.md`: manuscript-to-Lean claim translation.
+- `papers/paper-01/DRAFT_THEOREMS.md`: precise working statements and proof
+  status for the first paper.
 - `RainichKaluza/AxiomAudit.lean`: printed axiom dependencies for advertised
   theorems.
 - `ROADMAP.md`: staged research program.

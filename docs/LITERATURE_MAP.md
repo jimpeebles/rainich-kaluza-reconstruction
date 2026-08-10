@@ -57,7 +57,33 @@ Exact rotating and dyonic Kaluza solutions provide nonlinear positive tests,
 but an exact solution satisfying a condition does not establish that the
 condition is new or sufficient.
 
-## 5. The precise synthesis question
+A useful convention and provenance reference is:
+
+- H. Lü, P. Mao, and J.-B. Wu,
+  [*Asymptotic Structure of Einstein–Maxwell–Dilaton Theory and Its Five
+  Dimensional Origin*](https://arxiv.org/abs/1909.00970).
+
+It explicitly gives the four-dimensional EMD equations, the trace relation
+`R = ½(∂φ)²` in its normalization, and the lift of the Kaluza-coupled solution
+space to five dimensions.
+
+## 5. Prior generalized Rainich work in scalar–tensor settings
+
+The phrase “generalized Rainich algebra” has already been used for
+scalar–tensor/Einstein–Maxwell–dilaton systems. Costa, Naves de Oliveira, and
+Guimarães apply modified Ricci algebra to static charged cosmic-string
+solutions:
+
+- M. L. Costa, A. L. Naves de Oliveira, and M. E. X. Guimarães,
+  *On the Generalized Rainich Algebra in Scalar-Tensor Gravities*,
+  PoS(IC2006)061 (2006).
+
+This is essential prior art. Our defensible delta must therefore be a generic,
+coordinate-free reconstruction/uniqueness theorem with differential closure,
+not the observation that a dilaton modifies Rainich algebra and not a
+symmetry-reduced exact-solution construction.
+
+## 6. The precise synthesis question
 
 The repository asks:
 
@@ -71,7 +97,7 @@ geometrization problems under a physically distinguished coupling. The first
 paper succeeds only if it proves more than the separate application of known
 scalar and Maxwell results.
 
-## 6. Mandatory novelty checks
+## 7. Mandatory novelty checks
 
 Before a novelty claim is made, the bibliography must be audited for:
 
@@ -80,4 +106,3 @@ Before a novelty claim is made, the bibliography must be audited for:
 - invariant classification of `a = √3` EMD spacetimes;
 - Kaluza uplift criteria stated directly in four-dimensional curvature;
 - degenerate/null reconstructions and global duality obstructions.
-

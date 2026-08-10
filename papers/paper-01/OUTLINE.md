@@ -27,6 +27,10 @@ a convention comparison table against the exact solutions used later.
 - Solve the tensor equation for the rank-one contribution.
 - State exact existence, causal-sign, and uniqueness conditions.
 - Show explicitly why the polynomial obstruction alone is insufficient.
+- Present the generic eigenbasis formulas
+  `u=(a²-q²)/(a-b)` and `v=(b²-q²)/(b-a)`.
+- Prove automatic trace compatibility and distinguish real symmetric
+  rank-one completion from Lorentzian scalar-covector factorization.
 
 ## 5. Differential closure
 
@@ -56,9 +60,10 @@ negative tests. Separate theorem proof from computational evidence.
 
 Include a table with columns: prior result, reused theorem, new coupled step,
 and machine-checked declaration. This section is essential for Vibemathed.
+It must include the earlier symmetry-reduced “generalized Rainich algebra” in
+scalar–tensor gravity and explain why the present target is more general.
 
 ## 10. Discussion
 
 Discuss curvature-based identification of hidden Kaluza structure and possible
 applications only after the theorem and limitations are complete.
-

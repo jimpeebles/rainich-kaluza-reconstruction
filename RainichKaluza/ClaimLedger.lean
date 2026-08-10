@@ -1,4 +1,4 @@
-import RainichKaluza.AlgebraicFingerprint
+import RainichKaluza.ReconstructionEquation
 
 /-!
 # Formal claim boundary
@@ -37,4 +37,3 @@ structure GeometricProvenanceObligations where
   globalTopologyControlled : Prop
 
 end RainichKaluza
-

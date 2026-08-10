@@ -77,7 +77,9 @@ At the first differential layer, write the two covector candidates as
 differential operator `d`, Lean now proves that both branches lie in `ker d`
 if and only if `dα=dβ=0`. Thus differential closure generically removes the
 pointwise ambiguity; it fails to do so precisely on the separately closed
-locus. This does not prove that either candidate is closed, nor does it yet
+locus. Lean also proves the sharp existence-to-uniqueness statement: away
+from that locus, if either branch is closed, exactly one branch is closed.
+This does not prove that either candidate is closed, nor does it yet
 instantiate `d` as the exterior derivative on a Lorentzian manifold.
 
 The differential-coupling layer now goes one step farther. For the rescaled
@@ -88,10 +90,94 @@ when the source three-form is non-null. The primal and dual pairing formulas
 are proved to agree. These are evaluated-channel theorems; obtaining the
 forms from curvature is still open.
 
-For smooth branch construction, the repository also proves that the
-polynomial `Pₐ=(R-bI)/(a-b)` is the idempotent Ricci-commuting projector on a
-two-root invariant block. This removes eigenvector orientation from the next
-spectral-splitting step.
+For smooth branch construction, the repository proves the two-root polynomial
+projector and the full four-root Lagrange resolution without choosing an
+eigenbasis. At the differentiated-algebra level it further proves
+
+`dPᵢ = Σ_{j≠i}(aᵢ-aⱼ)⁻¹[Pⱼ(dR)Pᵢ + Pᵢ(dR)Pⱼ]`.
+
+Thus the full projector derivative is fixed by the Ricci derivative and
+spectral gaps; eigenvalue derivatives cancel. The outstanding geometric step
+is smooth Levi-Civita instantiation. The evaluated scalar-amplitude layer is
+also now explicit: derivatives of `q²`, both forced scalar diagonals, and both
+nonzero scalar amplitudes are rationally reconstructed from characteristic and
+root derivatives. Combining these results into smooth one-form derivatives
+and antisymmetrizing into `dα,dβ` remains open.
+
+Phase III has now begun. For `S=𝓡-V`, the reconstruction equation is
+Lean-verified to be equivalent to `S²=q²I` once the scalar square law is
+imposed, and matching traces make `S` tracefree. On the non-null branch,
+`S/q` yields two orthogonal polynomial projectors `½(I±S/q)` resolving the
+Maxwell principal subspaces.
+
+At the canonical principal-frame level, the non-null square roots are now
+Lean-classified exactly: equal nonzero `E²+B²` amplitudes form one duality
+circle, and the unit parameter between any two representatives is constructive
+and unique. Its derivative contains exactly one complexion rate. Moreover, a
+two-probe system with determinant `Δ=z₁y₂-z₂y₁≠0` uniquely recovers that rate
+and the signed EMD coupling simultaneously. This exposes a new explicit
+degenerate locus `Δ=0` where those two differential responses cannot be
+separated by the chosen probes. The remaining obligations are smooth
+exterior-form assembly, differential closure, and construction of the probe
+data from exterior derivatives.
+
+The canonical square-root clause itself is no longer merely schematic. Lean
+now represents `𝓕=Ee⁰∧e¹+Be²∧e³` as an explicit antisymmetric `4×4` tensor,
+raises indices with the `(-,+,+,+)` metric, and evaluates the Maxwell stress
+definition component by component. It obtains the tracefree
+`diag(-ρ,-ρ,ρ,ρ)` form, square law, nonnegative energy density, Hodge action,
+and duality invariance. Every `q>0` canonical residual has the explicit real
+seed `E=√(2q),B=0`. The remaining geometric issue is transporting and patching
+this canonical construction over smooth oriented principal-plane bundles—not
+existence of a canonical algebraic square root.
+
+The coordinate dependence of that calculation has now also been removed at
+the finite-dimensional level. For any supplied Lorentz frame and inverse,
+Lean proves that congruence transport preserves antisymmetry and carries the
+matrix Maxwell stress by similarity. The square identity and complementary
+principal-projector splitting transport with it, and the positive-`q` seed
+realizes the transported residual. What remains is no longer a frame-algebra
+calculation: it is the smooth bundle theorem producing local oriented Lorentz
+frames from the projector fields and describing their transition functions.
+
+An explicit principal-frame construction has now reduced that theorem further.
+Lean verifies Lorentzian and spacelike two-plane Gram--Schmidt, proves that the
+normalized vectors remain in their curvature-polynomial projector ranges, and
+proves all cross-plane inner products vanish. Four ambient probe vectors with
+strict projected Gram-sign conditions therefore generate a full
+pseudo-orthonormal tetrad by an explicit formula. The Maxwell projectors are
+verified to satisfy the necessary idempotence, annihilation, and metric
+self-adjointness hypotheses. The pointwise existence issue is now resolved as
+well. In four dimensions the tracefree involution forces both projector ranges
+to have rank two; index-one Lorentz signature and a timelike witness in the
+physical minus range then produce suitable noncollinear probes, a
+pseudo-orthonormal tetrad basis, and a real skew two-form whose Maxwell stress
+is exactly the supplied residual. The
+strict Gram signs are Lean-verified to persist on a neighborhood whenever
+their scalar functions are continuous. On such a patch, Lean now proves that
+the fixed-probe tetrad, its matrix, and the transported positive-`q` seed are
+`C^n`. Its transpose is a Lorentz coframe, `K=G LᵀG` is a smooth two-sided
+inverse, and the seed has the transported residual as its Maxwell stress. The
+remaining geometric connector is intrinsic bundle orientation/connection and
+exterior-form assembly.
+
+For the Maxwell seed overlaps, the transition algebra is now verified beyond
+the constant case. Unit duality parameters have an associative composition,
+identity, inverse, and action cocycle. Applying the product rule to a variable
+transition of rate `τ` gives the exact Lean-checked law `ω↦ω+τ`. A local
+connection coefficient transforming as `A↦A+τ` therefore makes `ω-A`
+overlap-invariant. The evaluated two-channel reconstruction obeys the same
+law, while its recovered EMD coupling is invariant. The remaining problem is
+to instantiate this algebra with smooth transition maps, connection one-forms,
+and curvature-derived exterior-form channels on the principal-plane bundles.
+
+At the exterior-algebra level, the duality product rule and both EMD closure
+equations are now formalized with one-, two-, and three-form types. The exact
+seed-channel iff exposes a new generic orbit result: nonzero dilaton coupling
+with an active source channel breaks constant duality from a circle to the
+overall sign. Lean also verifies the complementary exceptional cases: the
+full circle survives at zero coupling or when both scalar-source wedge
+channels vanish.
 
 ## Evidence inherited from earlier conversations
 

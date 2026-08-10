@@ -45,6 +45,40 @@ candidate Ricci fingerprint and the generic pointwise reconstruction layer:
   channels, with primal/dual agreement;
 - an explicit polynomial spectral projector and reflection for two-root
   invariant blocks, requiring no chosen eigenvectors;
+- full four-root Lagrange projectors which commute with the Ricci operator,
+  extract each eigenspace component, are idempotent, and resolve the identity
+  under an explicit simple-spectrum decomposition hypothesis;
+- the basis-free spectral-derivative identities reconstructing every
+  off-diagonal projector derivative from the Ricci derivative divided by an
+  eigenvalue gap, including the complete four-block sum and no dependence on
+  eigenvalue derivatives;
+- explicit evaluated derivatives for the curvature-derived `q²`, scalar
+  diagonals, and nonzero scalar amplitudes;
+- an exact Phase-III equivalence between the scalar reconstruction equation
+  and the residual Maxwell square law, followed by eigenvector-free Maxwell
+  principal-plane projectors on the non-null branch;
+- a constructive canonical Maxwell duality-orbit classification, unique
+  infinitesimal complexion rate, and simultaneous two-channel recovery of
+  complexion and signed EMD coupling;
+- an explicit antisymmetric Lorentzian two-form calculation producing the
+  canonical Maxwell stress, energy sign, Hodge action, duality invariance, and
+  a real seed for every positive residual magnitude;
+- Lorentz-frame covariance of the seed and Maxwell stress, including
+  preservation of the residual square law and principal-projector splitting;
+- a constructive indefinite Gram--Schmidt theorem extracting a full
+  pseudo-orthonormal principal tetrad from projected local probes on explicit
+  open Gram-sign branches;
+- a four-dimensional rank/signature theorem that supplies those probes
+  pointwise, promotes the tetrad to a basis, and constructs a real skew
+  two-form whose Maxwell stress is exactly the supplied residual;
+- a `C^n` fixed-probe theorem producing a smooth tetrad, frame matrix, and
+  transported Maxwell seed on every strict Gram-sign patch;
+- an exterior-form complexion theorem reducing both EMD equations to explicit
+  seed channels, together with the generic collapse of constant duality to
+  overall sign and its zero-coupling/inactive-source exceptions;
+- an explicit duality transition group and overlap cocycle, including the
+  exact variable-transition law `ω↦ω+τ`, an invariant corrected rate `ω-A`,
+  and gauge-invariant recovery of the EMD coupling;
 - the basis-independent square law for rank-one endomorphisms;
 - a basis-independent theorem that a rank-one perturbation preserves an
   eigenvalue carried by a two-dimensional eigenspace, and hence conditionally
@@ -56,8 +90,8 @@ candidate Ricci fingerprint and the generic pointwise reconstruction layer:
 
 These statements are necessary algebraic groundwork. They do **not** yet prove
 that the fingerprint is sufficient, that a scalar gradient exists, that the
-residual tensor has a Maxwell square root, or that a metric uplifts to a
-five-dimensional Ricci-flat geometry.
+smooth seed satisfies the curvature-derived differential closure conditions,
+or that a metric uplifts to a five-dimensional Ricci-flat geometry.
 
 The current result also corrects an earlier uniqueness expectation: on the
 genuinely two-component generic branch, curvature algebra determines the
@@ -112,6 +146,8 @@ forbidding `sorryAx`.
   physics-first sequence.
 - `docs/HIGH_IMPACT_PROGRAM.md`: north-star local uplift theorem, phased proof
   program, exact-solution tests, and kill criteria.
+- `docs/PHASE_III_MAXWELL_RECONSTRUCTION.md`: proved residual entry point and
+  the remaining two-form/complexion work packages.
 - `docs/EMD_CONVENTION.md`: convention-fixed field-equation provenance.
 - `docs/GENERIC_RECONSTRUCTION.md`: derivation and boundary of the current
   generic eigenbasis result.

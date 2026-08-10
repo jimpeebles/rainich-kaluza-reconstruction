@@ -2,8 +2,8 @@
 
 This document records the intellectual lineage that makes the project a
 recognizable reconstruction problem rather than a free-standing speculative
-theory. Novelty remains provisional until a specialist literature audit is
-complete.
+theory. A targeted literature audit was completed on 2026-08-10; any priority
+claim remains provisional pending specialist review.
 
 ## 1. Classical Rainich question
 
@@ -106,3 +106,27 @@ Before a novelty claim is made, the bibliography must be audited for:
 - invariant classification of `a = √3` EMD spacetimes;
 - Kaluza uplift criteria stated directly in four-dimensional curvature;
 - degenerate/null reconstructions and global duality obstructions.
+
+## 8. Provisional novelty and significance assessment (2026-08-10)
+
+The audit found substantial prior work on each neighboring ingredient:
+classical and higher-dimensional algebraic Rainich theory, separate
+geometrization theorems for scalar and Maxwell matter, Kaluza reduction to the
+distinguished `a=√3` EMD theory, and symmetry-reduced generalized Rainich
+calculations in scalar--tensor gravity. It did not locate a generic
+four-dimensional, metric-only, necessary-and-sufficient reconstruction theorem
+for the coupled Kaluza EMD sector, nor a comparable machine-checked
+formalization.
+
+Accordingly, the defensible novelty is not any isolated Rainich identity. It
+is the coupled synthesis: curvature-derived scalar-branch classification,
+Maxwell residual and principal-plane reconstruction, simultaneous
+complexion/coupling recovery, a constructive real two-form square root, and
+eventually a local Kaluza uplift theorem, with an explicit Lean claim ledger.
+This is a targeted-search conclusion, not a claim of exhaustive priority; the
+paper should use “we are unaware of” until expert review confirms the gap.
+
+The current result is a substantial formal algebraic reconstruction result but
+not yet the high-impact theorem. Its significance rises sharply if Phase III
+closes the smooth local Maxwell orbit and differential integrability, and
+again if Phase IV proves the full local necessary-and-sufficient uplift.

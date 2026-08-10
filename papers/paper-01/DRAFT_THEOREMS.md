@@ -168,10 +168,231 @@ when the two spectral components are separately closed. This identifies the
 exceptional locus on which first-order differential data fail to select the
 pointwise orbit.
 
+Consequently, away from that separately closed locus, if at least one of the
+two relative-sign branches is closed, exactly one is closed.
+
 Status: verified by `both_relativeSign_branches_closed_iff` and
-`reflected_branch_closed_iff_of_branch_closed`. The theorem is abstractly
-linear; it does not prove the existence of a closed branch or the manifold
-exterior-derivative hypotheses.
+`reflected_branch_closed_iff_of_branch_closed`; the exact uniqueness clause is
+verified by `relativeSign_closed_branch_unique_of_exists`. The theorem is
+abstractly linear; it does not prove the existence of a closed branch or the
+manifold exterior-derivative hypotheses.
+
+## Proposition G2 — full simple-spectrum projector derivative
+
+Let `Pᵢ` be one member of a four-projector resolution of the identity for an
+operator `R` with distinct roots `aᵢ`. After evaluating a derivative in one
+tangent direction, write `dR` and `dPᵢ` for the resulting endomorphisms. If
+the differentiated spectral and idempotence identities hold, then
+
+`dPᵢ = Σ_{j≠i}(aᵢ-aⱼ)⁻¹[Pⱼ(dR)Pᵢ + Pᵢ(dR)Pⱼ]`.
+
+In particular `Pᵢ(dPᵢ)Pᵢ=0`, and derivatives of the eigenvalues do not occur
+in the result.
+
+Status: verified algebraically by `spectralProjectorDerivative_fourBlock` and
+the `spectralProjectorDerivative_*_block` lemmas. The current Lean theorem
+takes the differentiated identities as hypotheses. Smooth vector-bundle and
+Levi-Civita instantiation remains open.
+
+## Proposition G3 — Maxwell residual and principal splitting
+
+Let `V` obey `V²=tr(V)V` and define `S=R-V`. Then
+
+`RV+VR-tr(V)V=R²-q²I`
+
+if and only if
+
+`S²=q²I`.
+
+If the supplied traces of `R` and `V` agree, `S` is tracefree. On a non-null
+branch with `q≠0`, `J_M=S/q` satisfies `J_M²=I`, and
+
+`Π₊=½(I+J_M)`, `Π₋=½(I-J_M)`
+
+are orthogonal idempotents whose sum is the identity.
+
+Status: verified by `reconstructionEquation_iff_maxwellResidual_sq`,
+`maxwellResidual_trace_zero`, `normalizedMaxwellResidual_sq`, and the
+`maxwell*Projector_*` family. This reconstructs the Maxwell stress principal
+splitting, not a two-form square root; the Lorentzian energy condition,
+duality complexion, and Maxwell differential equations remain open.
+
+## Proposition G4 — canonical duality orbit and coupled differential probes
+
+In a compatible Maxwell principal frame, let `(E,B)` and `(E',B')` be
+nonzero amplitude pairs. They have equal canonical stress magnitude
+
+`E²+B²=E'²+B'²`
+
+if and only if a unit pair `(c,s)`, `c²+s²=1`, maps one to the other by
+
+`E'=cE-sB`, `B'=sE+cB`.
+
+The parameter is unique and is constructed by normalized dot and determinant
+pairings. If `(c,s)` is differentiated, the circle tangency equation is
+equivalent to a unique rate `ω` satisfying `dc=-ωs`, `ds=ωc`.
+
+For two evaluated channels `xᵢ=ωzᵢ+(a/2)yᵢ`, define
+`Δ=z₁y₂-z₂y₁`. If `Δ≠0`, then
+
+`ω=(x₁y₂-x₂y₁)/Δ`,
+
+`a=2(z₁x₂-z₂x₁)/Δ`,
+
+and the pair `(ω,a)` is unique. Reversing `(y₁,y₂)` leaves `ω` unchanged and
+reverses `a`.
+
+Status: the canonical orbit is verified by
+`exists_dualityParameter_iff_same_magnitude` and
+`dualityParameter_unique`; the infinitesimal statement by
+`duality_tangent_iff_existsUnique_complexionRate`; and the two-probe result by
+`complexion_coupling_pair_unique` and its recovery formulas. Lifting the
+canonical amplitudes and probes to smooth Lorentzian two-forms remains open.
+
+## Proposition G5 — canonical Lorentzian two-form seed
+
+In an oriented orthonormal frame of signature `(-,+,+,+)`, define
+
+`𝓕=E e⁰∧e¹+B e²∧e³`.
+
+Then `𝓕` is antisymmetric,
+
+`𝓕_{mn}𝓕^{mn}=2(B²-E²)`,
+
+and its mixed Maxwell stress is
+
+`T(𝓕)=diag(-ρ,-ρ,ρ,ρ)`, `ρ=(E²+B²)/2`.
+
+Consequently `tr(T)=0`, `T²=ρ²I`, and the canonical energy density is
+nonnegative. The selected canonical Hodge action squares to minus the identity,
+and the unit duality orbit is exactly `c𝓕+s(*𝓕)`, with invariant stress. For
+every `q>0`, `E=√(2q), B=0` gives a real two-form whose stress is
+`diag(-q,-q,q,q)`.
+
+Status: verified by `canonicalMaxwellTwoForm_transpose`,
+`canonicalMaxwellTwoForm_invariant`, `maxwellStressMixed_canonical`,
+`canonicalMaxwellStress_sq`, `canonicalMaxwellStress_energy_nonneg`,
+`canonicalHodgeStar_sq`, `canonicalTwoForm_duality`, and
+`exists_canonicalMaxwellTwoForm_of_pos`. Smooth transport from abstract
+principal projector bundles to such oriented frames remains open.
+
+## Proposition G6 — Lorentz-frame covariance of the local seed
+
+Let `L` be a supplied Lorentz frame matrix with inverse `K`, satisfying the
+explicit left/right inverse and metric identities. Transport a covariant
+two-form and mixed stress by
+
+`𝓕↦Lᵀ𝓕L`, `T↦KTL`.
+
+Then antisymmetry is preserved, the matrix Maxwell stress of the transported
+two-form equals the transported original stress, and scalar square laws are
+preserved. Idempotent principal projectors remain idempotent and complementary
+projector pairs continue to resolve the identity. Consequently the explicit
+positive-`q` canonical seed transports to a real two-form realizing the
+transported canonical residual.
+
+Status: verified by `transportTwoForm_transpose`,
+`matrixMaxwellStress_lorentzTransport`, `transportMixed_sq`,
+`transportMixed_idempotent`, `transportMixed_projectors_sum`, and
+`matrixMaxwellStress_transported_seed`. The theorem assumes the frame
+identities; constructing smooth frames from the curvature-derived projector
+subbundles and controlling their overlap cocycles remains open.
+
+## Proposition G7 — pointwise adapted principal tetrad and real seed
+
+Let `S` be a tracefree metric-self-adjoint endomorphism on a four-dimensional
+index-one Lorentz space with `S²=q²I`, `q>0`. Let `P₋,P₊` be the polynomial
+projectors of `J=S/q`, and assume the physical `-1` principal range contains a
+timelike vector. Then both projector ranges have dimension two and admit
+projected probes from which indefinite/definite Gram--Schmidt produces a
+pseudo-orthonormal principal tetrad. The tetrad is linearly independent, hence
+defines a basis. In that basis there is an explicit real skew bilinear form
+with canonical positive-`q` Maxwell matrix, and its Maxwell stress equals `S`.
+
+Status: verified by `maxwellProjectors_finrank_range_eq_two`,
+`exists_maxwellPrincipalTetrad`,
+`IsPseudoOrthonormalPrincipalTetrad.linearIndependent`,
+`principalTetradBasis`, and
+`exists_adaptedPrincipalMaxwellTwoForm_stress_eq`, together with the explicit
+Gram--Schmidt lemmas. The strict Gram signs persist locally
+for continuous Gram data by `principalGramSigns_eventually`. Smooth fixed-probe
+assembly is Proposition G9; orientation and the manifold exterior-form
+connector remain.
+
+## Proposition G8 — duality overlap cocycle
+
+Unit duality parameters compose by complex multiplication of their coordinate
+pairs. This composition is associative, has `(1,0)` as identity and `(c,-s)`
+as inverse, and its action on canonical Maxwell amplitudes respects
+composition. Successive local seed changes therefore satisfy the expected
+overlap cocycle.
+
+If a seed is changed by a constant unit duality parameter, the reconstructed
+infinitesimal complexion rate `ω=c ds-s dc` is unchanged. More generally, for
+a variable transition `(u,v)` with transition rate `τ=u dv-v du`, the product
+rule gives
+
+`ω' = ω + τ`.
+
+Therefore a local duality connection coefficient satisfying `A'=A+τ` makes
+the corrected quantity `ω-A` independent of the chosen seed. Under the
+corresponding evaluated-channel shift `xᵢ'=xᵢ+τzᵢ`, the reconstructed raw rate
+has the same inhomogeneous transformation and the reconstructed EMD coupling
+is invariant. Transition rates add under composition and negate under
+inversion, so these derivative data satisfy the expected triple-overlap
+cocycle identities.
+
+Status: verified by `dualityCompose_assoc`, the identity/inverse lemmas,
+`duality_overlap_cocycle`, `complexionRate_constant_duality_invariant`,
+`complexionRate_variable_duality_add`,
+`complexionRate_dualityComposeDerivative`,
+`complexionRate_dualityInverseDerivative`,
+`gaugeCorrectedComplexionRate_invariant`,
+`complexionRateFromChannels_gauge_shift`, and
+`couplingFromComplexionChannels_gauge_invariant`. The remaining obligation is
+to realize these pointwise derivative variables as smooth transition maps and
+connection one-forms on the principal-plane bundles.
+
+## Proposition G9 — smooth fixed-probe tetrad and Maxwell seed
+
+In a normed local trivialization, let the metric and the two principal
+projectors be `C^n`. Fix one ambient probe quadruple whose projected Gram
+pivots remain on the strict Lorentzian/spacelike branches. Then the projected
+vectors, Gram--Schmidt tetrad, tetrad matrix, and transported positive-`q`
+Maxwell seed are all `C^n` on that patch. The seed is pointwise skew and, under
+the supplied Lorentz inverse identities, its Maxwell stress is the transported
+canonical residual.
+
+Status: verified by `contDiffOn_smoothProjectedPrincipalTetrad`,
+`contDiffOn_smoothPrincipalCoframeMatrix`,
+`smoothPrincipalCoframeMatrix_lorentz`, `contDiffOn_smoothLorentzInverse`,
+`contDiffOn_smoothTransportedPositiveQSeed`,
+`smoothTransportedPositiveQSeed_transpose`, and
+`smoothTransportedPositiveQSeed_stress_of_lorentz`. Instantiating the
+connection and exterior derivative intrinsically on the tangent bundle
+remains open.
+
+## Proposition G10 — exterior complexion reduction and duality collapse
+
+Let `(𝓕₀,𝓖₀)` be a seed/Hodge pair and let `(c,s)` be a unit duality parameter
+with one-form derivative `dc=-sω`, `ds=cω`. Then
+
+`d𝓕_θ = ω∧𝓖_θ + c d𝓕₀ + s d𝓖₀`,
+
+`d𝓖_θ = -ω∧𝓕_θ - s d𝓕₀ + c d𝓖₀`.
+
+Consequently the two EMD closure equations are equivalent to two explicit
+seed-channel three-form equations. Moreover, if `a≠0` and at least one of
+`v∧𝓕₀`, `v∧𝓖₀` is nonzero, a constant unit duality rotation preserving the
+same EMD equations has `(c,s)=(±1,0)`. For `a=0`, or when both source channels
+vanish, the full constant duality circle remains.
+
+Status: verified by `ExteriorDualityJet.rotatedDF_eq`,
+`ExteriorDualityJet.rotatedDG_eq`, `emdExteriorClosure_iff_seedChannels`,
+`constantDuality_eq_sign_of_emd`,
+`constantDuality_emd_of_zero_coupling`, and
+`constantDuality_emd_of_inactive_source`. Curvature construction of the seed
+derivative three-forms remains open.
 
 ## Target Theorem H — local generalized Rainich–Kaluza reconstruction
 

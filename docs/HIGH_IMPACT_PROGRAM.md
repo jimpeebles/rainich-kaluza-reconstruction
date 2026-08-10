@@ -114,13 +114,42 @@ The remaining work is to:
   (HC1);
 - classify the exceptional separately integrable locus.
 
-Current status: on any invariant block obeying
-`(R-aI)(R-bI)=0`, the eigenvector-free polynomial
-`Pₐ=(R-bI)/(a-b)` is Lean-verified to be an idempotent commuting with `R`, to
-act as identity on the `a` eigenspace and as zero on the `b` eigenspace, and to
-generate the corresponding involutive reflection. Extending these projectors
-to the full four-root Ricci splitting and differentiating them are the next
-geometric steps.
+Current status: on any invariant block obeying `(R-aI)(R-bI)=0`, the
+eigenvector-free polynomial `Pₐ=(R-bI)/(a-b)` is Lean-verified to be an
+idempotent commuting with `R` and to generate the corresponding involutive
+reflection. More importantly, the full simple-spectrum Lagrange projector
+
+`Pₐ=((a-b)(a-c)(a-d))⁻¹(R-bI)(R-cI)(R-dI)`
+
+is now Lean-verified to act as identity on its target eigenspace, vanish on
+the other three, commute with `R`, be idempotent under an explicit four-space
+spectral-decomposition hypothesis, and participate in a four-projector
+resolution of the identity. No eigenbasis or eigenspace orientation is
+chosen. The next geometric step is to promote the pointwise projectors to
+smooth tensor fields. The universal derivative algebra is already in place:
+if `p` is the projector for root `a`, `q` is a complementary projector for
+root `b`, and `dR,dp` denote a directional evaluation of `∇R,∇p`, Lean proves
+
+`q dp = (a-b)⁻¹ q(dR)p`,  `dp q = (a-b)⁻¹ p(dR)q`.
+
+It also proves the vanishing target block `p(dp)p=0`. Eigenvalue derivatives
+cancel from the off-diagonal formulas. Using the four-projector resolution of
+the identity, Lean now assembles these blocks into the complete formula
+
+`dp = Σ_{j≠i}(aᵢ-aⱼ)⁻¹[Pⱼ(dR)Pᵢ + Pᵢ(dR)Pⱼ]`.
+
+The branch-selection layer now also proves: outside the locus where the two
+spectral covector components are separately closed, existence of one closed
+relative-sign branch implies that exactly one branch is closed. Instantiating
+the projector identities for smooth Ricci-projector fields, differentiating
+the scalar amplitudes, and antisymmetrizing to obtain the exterior derivatives
+of those covector components are the next geometric steps.
+
+The scalar-amplitude part of that task is now verified at the evaluated
+algebraic level: Lean gives explicit directional derivatives of `q²`, both
+forced scalar diagonals, and both nonzero scalar amplitudes from derivatives
+of the characteristic data and complementary roots. Smooth Levi-Civita
+instantiation and antisymmetrization remain the Phase-II geometric gap.
 
 ### Phase-II exit criterion
 
@@ -140,6 +169,80 @@ This phase must distinguish:
 - two-form reconstruction up to duality;
 - Bianchi and Maxwell differential closure;
 - residual constant duality and orientation freedoms.
+
+Current status: Phase III has begun at the algebraic residual layer. With
+`S=𝓡-V` and `V²=tr(V)V`, Lean proves that the reconstruction equation is
+equivalent to `S²=q²I`; matching traces make `S` tracefree. For `q≠0`, the
+normalized residual `S/q` is Lean-verified to be an involution, and its
+orthogonal projectors `½(I±S/q)` reconstruct the two Maxwell principal
+subspaces and resolve the identity without eigenvectors.
+
+At the canonical principal-frame level, Lean now proves that all nonzero
+electric/magnetic amplitude pairs with the same stress magnitude form exactly
+one duality orbit, with a unique constructively recovered unit parameter.
+Differentiating that orbit gives a unique complexion rate. A nondegenerate
+two-probe system then reconstructs the complexion rate and signed EMD coupling
+simultaneously, with determinant `Δ=z₁y₂-z₂y₁`; scalar-orientation reversal
+fixes the complexion rate and reverses the coupling. Smooth exterior-form
+assembly, differential closure, and identification of the probe channels with
+curvature-derived forms remain open; see
+`docs/PHASE_III_MAXWELL_RECONSTRUCTION.md`.
+
+The canonical amplitudes have also been lifted to an explicit antisymmetric
+four-dimensional tensor. Lean directly computes its Lorentzian Maxwell stress,
+trace, square, energy sign, Hodge-square, and duality invariance. In particular,
+every `q>0` canonical residual `diag(-q,-q,q,q)` has the real seed
+`𝓕=√(2q)e⁰∧e¹`. The remaining square-root gap is therefore geometric rather
+than algebraic: construct smooth oriented orthonormal frames for the two
+principal projector bundles and prove frame-independent patching of the local
+duality orbit.
+
+Finite-dimensional frame covariance is now complete in Lean: congruence
+transport preserves two-form antisymmetry, the Maxwell stress transforms by
+similarity, and the square law plus principal-projector relations survive.
+The explicit positive-`q` seed therefore works in any supplied Lorentz frame.
+The unresolved step is differential topology and smooth geometry—constructing
+those frames locally from the projector subbundles and controlling transition
+functions on overlaps.
+
+The frame construction is now explicit on a fixed local probe patch. Lean
+proves indefinite Gram--Schmidt for a Lorentzian principal plane, ordinary
+Gram--Schmidt for its spacelike complement, preservation of projector-range
+membership, and cross-plane metric orthogonality. For any four ambient probes
+whose projected Gram pivots satisfy the displayed strict sign conditions, the
+formulas produce a full pseudo-orthonormal tetrad. Lean also proves that the
+curvature-polynomial Maxwell projectors meet the required idempotence,
+annihilation, and metric-self-adjointness hypotheses. The pointwise existence
+step is now complete: in dimension four, trace zero of the normalized
+involution forces both projector ranges to have rank two, while index-one
+signature and a timelike witness in the physical minus range yield
+noncollinear probes, a pseudo-orthonormal tetrad basis, and an explicit real
+skew two-form whose Maxwell stress is exactly the supplied residual. Lean
+already proves that the strict Gram signs persist on a neighborhood once the
+associated scalar Gram functions are continuous. It now also proves that one
+fixed probe quadruple produces a `C^n` tetrad, frame matrix, and transported
+positive-`q` seed throughout that patch. The transpose coframe is proved
+Lorentz, `K=G LᵀG` is its smooth two-sided inverse, and the seed stress is the
+transported residual. The remaining connector is intrinsic bundle
+orientation/connection and exterior-form assembly.
+
+The overlap group law is now formalized as well: duality parameters compose
+associatively with explicit identity and inverse, and their action satisfies
+the seed-transition cocycle. For a variable transition with rate `τ`, Lean now
+proves the exact inhomogeneous law `ω↦ω+τ`. Consequently `ω-A` is invariant
+when a local duality connection transforms as `A↦A+τ`; the nondegenerate
+two-probe reconstruction transforms in precisely this way while the recovered
+EMD coupling remains fixed. The remaining patching issue is geometric rather
+than algebraic: realize the transition parameters and connection as smooth
+objects derived from the principal-plane bundles.
+
+The exterior product rule is no longer schematic. Lean now treats `dc,ds,ω,v`
+as one-forms, the seed as two-forms, and their wedges as three-forms. It proves
+the exact rotated Bianchi/Maxwell identities and reduces EMD closure to two
+explicit seed-channel equations. A notable orbit theorem follows: for
+`a≠0` with either `v∧𝓕₀` or `v∧*𝓕₀` active, constant duality rotations
+preserving the same equations reduce to overall sign. The full circle remains
+only on the verified zero-coupling or inactive-source exceptional loci.
 
 ### Phase-III exit criterion
 

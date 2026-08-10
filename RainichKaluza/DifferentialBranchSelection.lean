@@ -62,4 +62,24 @@ theorem reflected_branch_closed_iff_of_branch_closed
     exact (both_relativeSign_branches_closed_iff d alpha beta).mpr
       hseparate |>.2
 
+/-- Away from the separately closed exceptional locus, existence of a closed
+relative-sign branch implies that exactly one of the two branches is closed. -/
+theorem relativeSign_closed_branch_unique_of_exists
+    (d : E →ₗ[ℝ] W) (alpha beta : E)
+    (hexists : d (alpha + beta) = 0 ∨ d (alpha - beta) = 0)
+    (hgeneric : ¬(d alpha = 0 ∧ d beta = 0)) :
+    (d (alpha + beta) = 0 ∧ d (alpha - beta) ≠ 0) ∨
+      (d (alpha + beta) ≠ 0 ∧ d (alpha - beta) = 0) := by
+  rcases hexists with hplus | hminus
+  · left
+    refine ⟨hplus, ?_⟩
+    intro hminus
+    exact hgeneric <|
+      (both_relativeSign_branches_closed_iff d alpha beta).mp ⟨hplus, hminus⟩
+  · right
+    refine ⟨?_, hminus⟩
+    intro hplus
+    exact hgeneric <|
+      (both_relativeSign_branches_closed_iff d alpha beta).mp ⟨hplus, hminus⟩
+
 end RainichKaluza

@@ -1,6 +1,9 @@
 import RainichKaluza.CharacteristicData
 import RainichKaluza.AlgebraicFingerprint
+import RainichKaluza.RankOneEndomorphism
 import RainichKaluza.GenericReconstruction
 import RainichKaluza.LorentzianScalarBlock
+import RainichKaluza.RelativeSignAmbiguity
 import RainichKaluza.ReconstructionEquation
+import RainichKaluza.SpectralReflection
 import RainichKaluza.ClaimLedger

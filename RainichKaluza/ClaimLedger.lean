@@ -1,4 +1,7 @@
+import RainichKaluza.RankOneEndomorphism
 import RainichKaluza.ReconstructionEquation
+import RainichKaluza.RelativeSignAmbiguity
+import RainichKaluza.SpectralReflection
 
 /-!
 # Formal claim boundary
@@ -23,7 +26,8 @@ structure GenericBranchAssumptions where
 metric-only reconstruction theorem. -/
 structure LocalReconstructionObligations where
   rankOneTensor_exists : Prop
-  rankOneTensor_unique_up_to_sign : Prop
+  rankOneTensor_centralizerOrbit_classified : Prop
+  differentialData_resolvesOrbit : Prop
   scalarOneForm_closed : Prop
   residualStress_isMaxwell : Prop
   maxwellDifferentialConditions : Prop

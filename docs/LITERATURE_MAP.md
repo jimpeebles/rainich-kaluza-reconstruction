@@ -79,7 +79,7 @@ solutions:
   PoS(IC2006)061 (2006).
 
 This is essential prior art. Our defensible delta must therefore be a generic,
-coordinate-free reconstruction/uniqueness theorem with differential closure,
+coordinate-free reconstruction/orbit-classification theorem with differential closure,
 not the observation that a dilaton modifies Rainich algebra and not a
 symmetry-reduced exact-solution construction.
 

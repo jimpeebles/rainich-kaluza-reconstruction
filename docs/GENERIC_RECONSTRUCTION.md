@@ -5,7 +5,9 @@ the assumptions separating it from the intended geometric theorem.
 
 ## Setup
 
-Assume the mixed Ricci endomorphism is real-diagonalizable at a point with
+The convention-fixed origin of the decomposition below is given in
+`docs/EMD_CONVENTION.md`. Assume the mixed Ricci endomorphism is
+real-diagonalizable at a point with
 spectrum
 
 `{q, -q, a, b}`
@@ -17,8 +19,10 @@ noncommutative theorem `reconstructionEquation_of_decomposition` then derives
 `R V + V R - T V = R² - q² I`.                         (GR1)
 
 This derivation is coordinate-free and valid in any associative real algebra.
-The open geometric task is to obtain its decomposition and square-law premises
-with the correct normalization from the `a=√3` EMD field equations.
+The decomposition and scalar square law now have convention-fixed provenance
+from the `a=√3` EMD Einstein equation. The Maxwell square law remains an
+established four-dimensional Rainich identity rather than a formalized
+exterior-algebra theorem in this repository.
 
 In an eigenbasis, each matrix component satisfies
 
@@ -94,23 +98,48 @@ equations and makes the off-diagonal resonance explicit.
 On the nondegenerate branch where the first component is nonzero,
 `scalarMixedBlock_components_unique_up_to_sign` additionally proves that two
 component pairs generating the same mixed block agree up to the simultaneous
-global sign. Thus the pointwise component ambiguity is classified exactly;
-basis-independent tensor assembly remains open.
+global sign. This is factorization uniqueness for a **fixed tensor**, not
+uniqueness of the tensor reconstructed from curvature.
+
+## Relative-sign ambiguity and centralizer orbit
+
+When both scalar components are nonzero, reversing only one of them changes
+both off-diagonal mixed entries while preserving the two forced diagonals. The
+new block still solves every complementary Sylvester equation and is distinct
+from the original block.
+
+The repository proves more than existence of this counterpartner:
+
+- any two scalar-generated generic solutions are equal or relative-sign
+  partners;
+- the partner is obtained by conjugation with the involution
+  `diag(1,-1)` on the complementary eigenspace;
+- that involution commutes with `diag(a,b)` and hence leaves the Ricci block
+  unchanged;
+- in any associative real algebra, every involution commuting with `𝓡` maps a
+  reconstruction-equation solution to another solution by conjugation.
+- an idempotent spectral projector `P` constructs such an involution
+  basis-independently as `J=I-2P`.
+
+Therefore pointwise curvature algebra determines an orbit under the Ricci
+centralizer, not a unique rank-one tensor. This is an intrinsic obstruction;
+calling it “eigenvector orientation freedom” would understate the fact that the
+two tensors themselves are distinct.
 
 ## What remains before this is a geometric theorem
 
-1. Derive the decomposition and two square-law premises of (GR1) from a
-   convention-fixed `a=√3` EMD Einstein equation.
+1. Formalize the four-dimensional Maxwell square law from exterior algebra,
+   or state it explicitly as a named literature input.
 2. Prove the spectral factorization and existence of the required real
    pseudo-orthonormal eigenbasis on the stated generic branch.
 3. Classify all eigenvalue-sum resonances excluded above.
-4. Show the reconstructed block is basis-independent and unique modulo the
-   discrete eigenvector-orientation freedom.
+4. Assemble the complementary classification on the full tangent space using
+   the now-formalized idempotent-reflection construction.
 5. Convert the pointwise scalar covector into a smooth local one-form and
    impose closure.
 6. Reconstruct the Maxwell field and impose the differential Rainich and
    scalar equations.
 
 Until these steps are complete, the result should be described as a
-machine-checked generic eigenbasis reconstruction lemma, not a generalized
-Rainich–Kaluza theorem.
+machine-checked generic pointwise block classification and uniqueness
+obstruction, not a generalized Rainich–Kaluza theorem.

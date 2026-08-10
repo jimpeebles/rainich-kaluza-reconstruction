@@ -2,7 +2,8 @@
 
 Working title:
 
-**Metric Reconstruction of the Generic Kaluza Einstein–Maxwell–Dilaton Sector**
+**Pointwise Scalar Reconstruction and Its Discrete Ambiguity in the Generic
+Kaluza Einstein–Maxwell–Dilaton Sector**
 
 ## 1. Recognizable prior question
 
@@ -25,12 +26,15 @@ a convention comparison table against the exact solutions used later.
 ## 4. Scalar-gradient reconstruction
 
 - Solve the tensor equation for the rank-one contribution.
-- State exact existence, causal-sign, and uniqueness conditions.
+- State exact existence, causal-sign, and factorization-uniqueness conditions.
 - Show explicitly why the polynomial obstruction alone is insufficient.
 - Present the generic eigenbasis formulas
   `u=(a²-q²)/(a-b)` and `v=(b²-q²)/(b-a)`.
 - Prove automatic trace compatibility and distinguish real symmetric
   rank-one completion from Lorentzian scalar-covector factorization.
+- Prove that the two relative-sign tensors are distinct, classify all
+  scalar-generated solutions into the two reflection-related possibilities,
+  and interpret the reflection as an element of the Ricci centralizer.
 
 ## 5. Differential closure
 
@@ -40,30 +44,35 @@ a convention comparison table against the exact solutions used later.
   differential condition.
 - Close with the scalar field equation and global duality datum.
 
-## 6. Main theorem
+## 6. Algebraic main theorem
+
+State the generic pointwise existence-and-orbit classification and the
+curvature-only uniqueness obstruction. This is the first public-release result.
+
+## 7. Target local theorem
 
 State a local necessary-and-sufficient theorem for the generic, non-null,
 nondegenerate branch. Every hypothesis should have a geometric interpretation
 and a matching Lean declaration or an explicitly documented formalization gap.
 
-## 7. Degenerate cases and limitations
+## 8. Degenerate cases and limitations
 
 Give a branch table even if complete proofs are deferred. Do not describe the
 generic theorem as universal.
 
-## 8. Exact and adversarial tests
+## 9. Exact and adversarial tests
 
 Use exact Kaluza metrics as positive tests and unrelated matter models as
 negative tests. Separate theorem proof from computational evidence.
 
-## 9. Relation to prior work
+## 10. Relation to prior work
 
 Include a table with columns: prior result, reused theorem, new coupled step,
 and machine-checked declaration. This section is essential for Vibemathed.
 It must include the earlier symmetry-reduced “generalized Rainich algebra” in
 scalar–tensor gravity and explain why the present target is more general.
 
-## 10. Discussion
+## 11. Discussion
 
 Discuss curvature-based identification of hidden Kaluza structure and possible
 applications only after the theorem and limitations are complete.

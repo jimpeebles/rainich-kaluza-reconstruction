@@ -30,7 +30,9 @@ This implies:
 - the polynomial obstruction
   `C_KK = e₁²e₄ - e₁e₂e₃ + e₃² = 0`.
 
-The Lean project presently verifies only these coefficient consequences.
+The Lean project verifies these coefficient consequences and the later generic
+block results; the characteristic factorization still awaits a full tensor
+derivation.
 
 ## Candidate reconstruction step
 
@@ -39,14 +41,26 @@ The proposed scalar-gradient tensor should satisfy
 `R V + V R - R V = R² - q² I`,
 
 where the unadorned scalar `R` on the left is the Ricci trace. A publishable
-result requires proving existence and uniqueness of an admissible rank-one
-solution on a generic Lorentzian branch, then proving that its covector factor
-is closed and hence locally a scalar gradient.
+result requires proving existence and classifying the Ricci-centralizer orbit
+of admissible rank-one solutions on a generic Lorentzian branch, then proving
+which covector representatives are closed and hence locally scalar gradients.
 
-After reconstructing `V`, one sets `S = R - V` and must impose the classical
+After choosing a centralizer orbit representative for `V`, one sets `S = R - V`
+and must impose the classical
 algebraic and differential Maxwell–Rainich conditions. The scalar equation and
 the electromagnetic duality-complexion ambiguity supply additional closure
 conditions.
+
+## New discrete obstruction
+
+The pointwise algebra does not uniquely reconstruct `V` on the genuinely
+two-component branch. Reversing one scalar component preserves both forced
+diagonal entries and the Sylvester equation but changes both off-diagonal
+entries. The two tensors are exchanged by reflection of one complementary
+Ricci eigendirection. This reflection commutes with the Ricci block, so no
+pointwise invariant built only from that curvature endomorphism can select
+between them. The formal development classifies all scalar-generated block
+solutions into these two possibilities.
 
 ## Evidence inherited from earlier conversations
 
@@ -76,4 +90,3 @@ The quadratic scalar/EM cavity model and its Lean Hamiltonian audit will be
 preserved later under a separate application directory. It should reconnect to
 this repository only if the relevant four-dimensional EFT coupling is derived
 with matched conventions or explicitly declared independent of Kaluza theory.
-

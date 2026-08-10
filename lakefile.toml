@@ -1,5 +1,5 @@
 name = "rainich-kaluza"
-version = "0.1.0"
+version = "0.2.0"
 defaultTargets = ["RainichKaluza"]
 
 [[require]]
@@ -9,4 +9,3 @@ rev = "v4.32.1"
 
 [[lean_lib]]
 name = "RainichKaluza"
-

@@ -16,15 +16,21 @@ novelty statement is phrased comparatively.
 - Formalize the rank-one determinant identity in Lean.
 - Prove the protected eigenpair and invariant formulas.
 - Solve the linear tensor equation for `V` on the generic branch.
-- Prove admissibility and uniqueness up to the scalar sign.
+- Prove admissibility and factorization uniqueness for a fixed tensor up to the
+  scalar global sign.
+- Classify the additional relative-sign tensor ambiguity and its Ricci
+  centralizer action.
 - Construct counterexamples to algebraic sufficiency.
 
 Exit criterion: a zero-placeholder theorem package for the generic algebraic
-step, with every nondegeneracy hypothesis visible.
+step, including an honest existence/orbit classification and every
+nondegeneracy hypothesis.
 
 ## Phase 2 — Differential closure and local sufficiency
 
 - Factor the reconstructed rank-one tensor into a covector up to sign.
+- Determine which differential conditions select or identify the two
+  pointwise relative-sign partners.
 - State and prove the closure condition implying local exactness.
 - Apply Maxwell–Rainich algebraic and differential conditions to `S = R - V`.
 - Add the Kaluza scalar equation and duality-complexion datum.
@@ -51,4 +57,3 @@ Only after the reconstruction theorem is stable should the project reconnect
 to spin-induced scalar multipoles, binary signatures, or the scalar parametric
 amplifier. Each application must state whether it follows from Kaluza reduction
 or from an independent EFT assumption.
-

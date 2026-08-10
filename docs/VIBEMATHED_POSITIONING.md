@@ -10,8 +10,11 @@ relativity, not with spacetime engineering:
 3. Kaluza reduction produces a distinguished theory containing both fields.
 4. The coupled reconstruction problem is not obtained by naively applying the
    two separate theorems, because curvature contains their sum.
-5. We derive and machine-check the generic algebraic decomposition, then prove
-   the differential conditions required for a local if-and-only-if result.
+5. We derive and machine-check the generic algebraic decomposition and show
+   that curvature determines a two-element centralizer orbit rather than a
+   unique scalar tensor.
+6. The larger project asks which differential conditions select or identify
+   those partners and complete a local if-and-only-if result.
 
 That progression makes the paper a response to known mathematical questions.
 The broader Kaluza motivation belongs in the introduction and discussion, not
@@ -23,7 +26,7 @@ Lean should cover the exact logical spine:
 
 - characteristic-polynomial and invariant identities;
 - the matrix determinant/rank-one argument;
-- generic uniqueness of the reconstructed rank-one tensor;
+- existence and classification of reconstructed rank-one tensor orbits;
 - branch hypotheses and all divisions/nondegeneracy conditions;
 - algebraic Maxwell residual conditions;
 - eventually, the local differential integrability implications to the extent
@@ -55,20 +58,22 @@ A credible Vibemathed package should contain:
 
 ## Minimum publishable delta
 
-The current polynomial obstruction is not sufficient for submission. The
-minimum meaningful advance is one of:
+The polynomial obstruction alone is not sufficient for submission. A meaningful
+advance is one of:
 
-1. a proved generic rank-one reconstruction and uniqueness theorem with a
-   complete branch analysis; or
+1. a proved generic rank-one reconstruction/orbit classification, including a
+   no-go theorem for pointwise uniqueness; or
 2. a genuine local necessary-and-sufficient EMD geometrization theorem.
 
 The second is stronger. The first could still be a focused paper if it resolves
 a clearly documented missing algebraic step in the literature and is paired
 with exact counterexamples showing why weaker conditions fail.
 
-The repository now has a machine-checked generic eigenbasis block
-classification and a signature-aware scalar-factorization criterion. This is
-closer to the first minimum, but submission should wait until the result is
-lifted from eigenbasis scalar algebra to a basis-independent Lorentzian tensor
-theorem and compared explicitly with the symmetry-reduced generalized Rainich
-work of Costa, Naves de Oliveira, and Guimarães.
+The repository now meets the algebraic core of the first option: it has a
+machine-checked generic block classification, a signature-aware
+scalar-factorization criterion, a complete two-branch classification, and a
+basis-independent theorem showing invariance under Ricci-centralizing
+involutions. A public partial-result submission should emphasize the discrete
+uniqueness obstruction and should be released only with the convention note,
+claim map, pinned source, and explicit comparison to the symmetry-reduced work
+of Costa, Naves de Oliveira, and Guimarães.

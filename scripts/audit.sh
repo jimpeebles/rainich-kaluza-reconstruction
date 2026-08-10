@@ -6,6 +6,5 @@ if rg -n '^\s*(sorry|admit|axiom)\b' RainichKaluza RainichKaluza.lean; then
   exit 1
 fi
 
-lake build
+lake build --wfail
 lake env lean RainichKaluza/AxiomAudit.lean
-

@@ -1,0 +1,64 @@
+# Paper I outline
+
+Working title:
+
+**Metric Reconstruction of the Generic Kaluza Einstein–Maxwell–Dilaton Sector**
+
+## 1. Recognizable prior question
+
+Introduce the classical Rainich inverse problem, scalar geometrization, and
+the distinguished `a = √3` EMD theory from Kaluza reduction. State that the
+coupled inverse problem—not unification in general—is the target.
+
+## 2. Conventions and field equations
+
+Give the selected action and derive all equations and trace identities. Include
+a convention comparison table against the exact solutions used later.
+
+## 3. Generic algebraic theorem
+
+- Decompose the Ricci endomorphism into Maxwell and scalar parts.
+- Use the non-null Maxwell square identity and rank-one update.
+- Derive the characteristic factorization and protected pair.
+- Express `q²` and the obstruction through curvature invariants.
+
+## 4. Scalar-gradient reconstruction
+
+- Solve the tensor equation for the rank-one contribution.
+- State exact existence, causal-sign, and uniqueness conditions.
+- Show explicitly why the polynomial obstruction alone is insufficient.
+
+## 5. Differential closure
+
+- Factor the rank-one tensor into a covector.
+- Impose local closure/exactness.
+- Reconstruct the residual Maxwell stress and impose the Maxwell–Rainich
+  differential condition.
+- Close with the scalar field equation and global duality datum.
+
+## 6. Main theorem
+
+State a local necessary-and-sufficient theorem for the generic, non-null,
+nondegenerate branch. Every hypothesis should have a geometric interpretation
+and a matching Lean declaration or an explicitly documented formalization gap.
+
+## 7. Degenerate cases and limitations
+
+Give a branch table even if complete proofs are deferred. Do not describe the
+generic theorem as universal.
+
+## 8. Exact and adversarial tests
+
+Use exact Kaluza metrics as positive tests and unrelated matter models as
+negative tests. Separate theorem proof from computational evidence.
+
+## 9. Relation to prior work
+
+Include a table with columns: prior result, reused theorem, new coupled step,
+and machine-checked declaration. This section is essential for Vibemathed.
+
+## 10. Discussion
+
+Discuss curvature-based identification of hidden Kaluza structure and possible
+applications only after the theorem and limitations are complete.
+

@@ -1,0 +1,67 @@
+# Vibemathed positioning and Lean contract
+
+## Recommended submission narrative
+
+The submission should begin with a standard inverse problem in general
+relativity, not with spacetime engineering:
+
+1. Rainich reconstructed electromagnetism from geometry.
+2. Later work reconstructed scalar fields from geometry.
+3. Kaluza reduction produces a distinguished theory containing both fields.
+4. The coupled reconstruction problem is not obtained by naively applying the
+   two separate theorems, because curvature contains their sum.
+5. We derive and machine-check the generic algebraic decomposition, then prove
+   the differential conditions required for a local if-and-only-if result.
+
+That progression makes the paper a response to known mathematical questions.
+The broader Kaluza motivation belongs in the introduction and discussion, not
+in the theorem statement.
+
+## What Lean should certify
+
+Lean should cover the exact logical spine:
+
+- characteristic-polynomial and invariant identities;
+- the matrix determinant/rank-one argument;
+- generic uniqueness of the reconstructed rank-one tensor;
+- branch hypotheses and all divisions/nondegeneracy conditions;
+- algebraic Maxwell residual conditions;
+- eventually, the local differential integrability implications to the extent
+  supported by the formal differential-geometry library.
+
+Lean should not be presented as verifying:
+
+- novelty;
+- physical realization of Kaluza theory;
+- a numerical scan without certified error bounds;
+- an approximation imported from physics prose;
+- correspondence between informal tensors and Lean objects unless an explicit
+  claim-translation table is included.
+
+## Submission artifact
+
+A credible Vibemathed package should contain:
+
+- a short conventional mathematical-physics manuscript;
+- a theorem dependency graph;
+- pinned Lean/Mathlib versions;
+- zero `sorry`, `admit`, or project axioms on the advertised theorem surface;
+- an assumptions report (`#print axioms` for principal theorems), explaining
+  Lean's standard logical dependencies separately from project assumptions;
+- exact-solution and adversarial examples;
+- a claim-translation table connecting every displayed manuscript theorem to
+  a Lean declaration;
+- a prior-work table saying what is reused, strengthened, or genuinely new.
+
+## Minimum publishable delta
+
+The current polynomial obstruction is not sufficient for submission. The
+minimum meaningful advance is one of:
+
+1. a proved generic rank-one reconstruction and uniqueness theorem with a
+   complete branch analysis; or
+2. a genuine local necessary-and-sufficient EMD geometrization theorem.
+
+The second is stronger. The first could still be a focused paper if it resolves
+a clearly documented missing algebraic step in the literature and is paired
+with exact counterexamples showing why weaker conditions fail.

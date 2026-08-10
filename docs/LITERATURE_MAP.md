@@ -1,0 +1,83 @@
+# Literature map and problem lineage
+
+This document records the intellectual lineage that makes the project a
+recognizable reconstruction problem rather than a free-standing speculative
+theory. Novelty remains provisional until a specialist literature audit is
+complete.
+
+## 1. Classical Rainich question
+
+Rainich asked for local geometric conditions, expressed through curvature,
+that are necessary and sufficient for a spacetime to be an Einstein–Maxwell
+solution, together with reconstruction of the electromagnetic field up to the
+expected duality freedom.
+
+- G. Y. Rainich, *Electrodynamics in the General Relativity Theory* (1925).
+- C. W. Misner and J. A. Wheeler, *Classical Physics as Geometry* (1957).
+
+Our project inherits the same question but changes the matter sector from
+Maxwell alone to the coupled scalar–Maxwell system fixed by Kaluza reduction.
+
+## 2. Scalar geometrization
+
+Metric-only necessary-and-sufficient conditions and scalar reconstruction are
+known for broad Einstein–scalar systems. Krongos and Torre unify and extend
+this line, including null/non-null branches and potentials:
+
+- D. S. Krongos and C. G. Torre,
+  [*Geometrization Conditions for Perfect Fluids, Scalar Fields, and
+  Electromagnetic Fields*](https://arxiv.org/abs/1503.06311).
+
+This establishes that reconstructing a scalar from curvature is a known and
+serious problem. It does not by itself solve the **coupled** EMD reconstruction,
+because the Ricci tensor contains scalar and Maxwell contributions at once.
+
+## 3. Algebraic Rainich theory beyond four dimensions
+
+Bergqvist and Höglund develop algebraic Rainich identities for forms and obtain
+a complete five-dimensional generalization in their setting:
+
+- G. Bergqvist and A. Höglund,
+  [*Algebraic Rainich Theory and Antisymmetrisation in Higher
+  Dimensions*](https://arxiv.org/abs/gr-qc/0202092).
+
+Our target is not “Rainich theory in five dimensions.” It is a four-dimensional
+metric-only characterization of the particular **reduced** scalar–Maxwell
+sector arising from five-dimensional vacuum gravity.
+
+## 4. Kaluza reduction and the selected EMD theory
+
+Five-dimensional vacuum gravity with a spacelike circle symmetry reduces,
+after frame and field redefinitions, to a four-dimensional
+Einstein–Maxwell–dilaton theory with the distinguished coupling `a = √3`.
+Paper I must select one convention and derive every coefficient used in the
+reconstruction equations.
+
+Exact rotating and dyonic Kaluza solutions provide nonlinear positive tests,
+but an exact solution satisfying a condition does not establish that the
+condition is new or sufficient.
+
+## 5. The precise synthesis question
+
+The repository asks:
+
+> Given only a generic four-dimensional Lorentzian metric, can curvature
+> locally identify the `a = √3` EMD sector, reconstruct the scalar-gradient
+> tensor and Maxwell stress, and state the remaining differential conditions
+> as a necessary-and-sufficient theorem?
+
+The expected contribution is therefore a synthesis theorem joining two known
+geometrization problems under a physically distinguished coupling. The first
+paper succeeds only if it proves more than the separate application of known
+scalar and Maxwell results.
+
+## 6. Mandatory novelty checks
+
+Before a novelty claim is made, the bibliography must be audited for:
+
+- Rainich-like conditions in scalar–tensor and EMD theories;
+- inverse problems for coupled Einstein–matter systems;
+- invariant classification of `a = √3` EMD spacetimes;
+- Kaluza uplift criteria stated directly in four-dimensional curvature;
+- degenerate/null reconstructions and global duality obstructions.
+

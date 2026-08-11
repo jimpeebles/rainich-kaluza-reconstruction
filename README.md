@@ -168,8 +168,11 @@ including changes mixing base and circle directions, with Ricci-flatness
 preserved and reflected. The universal inhomogeneous nonlinear connection and
 Ricci cancellation is now proved for arbitrary coordinate three-jets as well.
 The metric endpoint now proves the transformed inverse-metric derivative, the
-explicit four-term differentiated first-kind pullback, and the
-undifferentiated raised connection bracket. The remaining chart seam is their
+explicit four-term differentiated first-kind pullback, the undifferentiated
+raised connection bracket, and the product-rule derivative of its retained
+old-upper-index raising factor. The last theorem cancels the derivative of the
+first inverse Jacobian and records exactly where first-metric-jet symmetry is
+needed. The remaining chart seam is the affine plus inhomogeneous
 differentiated-bracket contraction into the certified connection jet,
 followed by intrinsic pseudo-Riemannian manifold packaging and the uniqueness
 classification of IV.4.

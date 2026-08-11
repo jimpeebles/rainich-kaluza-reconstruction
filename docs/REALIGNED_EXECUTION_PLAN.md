@@ -38,11 +38,13 @@ curvature gate and the uplift theorem are both closed.
   Levi--Civita Ricci.
 - Affine coordinate covariance and universal nonlinear connection-level Ricci
   covariance are complete.
-- The remaining metric realization has been decomposed and three ingredients
-  are Lean-verified: the nonlinear inverse-metric jet product rule, the full
-  differentiated first-kind pullback, and its undifferentiated raised
-  contraction. The remaining endpoint is the differentiated-bracket
-  contraction assembling them into the certified connection jet.
+- The remaining metric realization has been decomposed. Lean verifies the
+  nonlinear inverse-metric jet product rule, the full differentiated
+  first-kind pullback, its undifferentiated raised contraction, both
+  differentiated inverse-Jacobian identities, and the product-rule derivative
+  of the retained-old-upper-index raising factor. The remaining endpoint is
+  the differentiated-bracket contraction assembling them into the certified
+  connection jet.
 - The Phase-II existence/closure problem remains the principal mathematical
   risk of the north-star theorem.
 
@@ -63,9 +65,15 @@ second-kind connection jet. Derive as immediate corollaries:
 coordinate-Ricci surface.
 
 **Current substatus:** the transformed inverse-metric derivative, explicit
-first-kind derivative, and undifferentiated raising/bracket contraction are
-complete. Next prove the differentiated-bracket contraction and assemble the
-unconditional theorem.
+first-kind derivative, undifferentiated raising/bracket contraction, and the
+raising-factor derivative are complete. The latter proves the cancellation of
+the derivative of the first inverse-Jacobian factor and reduces the endpoint
+to two coupled contractions: the affine first-kind product rule and the
+inhomogeneous metric-Hessian/third-derivative product rule. The actual metric
+theorem must explicitly assume symmetry of the first metric jet
+`dg R A B = dg R B A`; Lean now records the inverse-metric contraction where
+that hypothesis first becomes essential. Prove those two contractions, then
+assemble the unconditional theorem.
 
 ### IV-G2 — intrinsic local packaging
 

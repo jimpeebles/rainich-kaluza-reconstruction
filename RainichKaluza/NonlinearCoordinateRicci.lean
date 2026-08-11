@@ -509,6 +509,58 @@ theorem inverseJacobianJet_defining
   rw [h]
   ring
 
+/-- The companion differentiated inverse identity `(∂K)J + K(∂J) = 0`.
+This orientation is the one needed when an old upper index is retained while
+the transformed inverse metric is differentiated. -/
+theorem inverseJacobianJet_jac_defining
+    (C : CoordinateChangeJet3 I) (R A B : I) :
+    (∑ M : I, C.inverseJacobianJet R A M * C.affine.jac M B) +
+      (∑ M : I, C.affine.invJac A M * C.secondJet.second R M B) = 0 := by
+  have hJet :
+      (∑ M : I, C.inverseJacobianJet R A M * C.affine.jac M B) =
+        -∑ S : I, C.secondJet.second R S B * C.affine.invJac A S := by
+    unfold inverseJacobianJet
+    calc
+      _ = -∑ M : I, ∑ D : I, ∑ S : I,
+          (C.affine.invJac D M * C.secondJet.second R S D *
+            C.affine.invJac A S) * C.affine.jac M B := by
+        simp only [neg_mul, Finset.sum_neg_distrib, Finset.sum_mul]
+      _ = -∑ D : I, ∑ S : I, ∑ M : I,
+          (C.affine.invJac D M * C.secondJet.second R S D *
+            C.affine.invJac A S) * C.affine.jac M B := by
+        apply congrArg Neg.neg
+        exact sum3_first_last _
+      _ = -∑ D : I, ∑ S : I,
+          (∑ M : I, C.affine.invJac D M * C.affine.jac M B) *
+            (C.secondJet.second R S D * C.affine.invJac A S) := by
+        apply congrArg Neg.neg
+        apply Finset.sum_congr rfl
+        intro D _
+        apply Finset.sum_congr rfl
+        intro S _
+        rw [Finset.sum_mul]
+        apply Finset.sum_congr rfl
+        intro M _
+        ring
+      _ = -∑ D : I, ∑ S : I, (if D = B then 1 else 0) *
+            (C.secondJet.second R S D * C.affine.invJac A S) := by
+        apply congrArg Neg.neg
+        apply Finset.sum_congr rfl
+        intro D _
+        apply Finset.sum_congr rfl
+        intro S _
+        rw [C.affine.inv_jac_contract]
+      _ = _ := by simp
+  rw [hJet]
+  have hswap :
+      (∑ S : I, C.secondJet.second R S B * C.affine.invJac A S) =
+        ∑ S : I, C.affine.invJac A S * C.secondJet.second R S B := by
+    apply Finset.sum_congr rfl
+    intro S _
+    ring
+  rw [hswap]
+  ring
+
 /-- The bracket before multiplication by the inverse Jacobian in the
 nonlinear connection law. -/
 noncomputable def connectionBracket (C : CoordinateChangeJet3 I)
@@ -996,6 +1048,63 @@ theorem coordinateInverseMetricJet_transformMetricJet1
       unfold transformInverseMetricJet
       ring
 
+/-- The forced inverse-metric jet differentiates the inverse identity after
+contraction with a symmetric metric jet.  Symmetry of the metric first jet
+is essential here: without it an arbitrary three-array need not be the
+derivative of the symmetric metric. -/
+theorem coordinateInverseMetricJet_contract_metric
+    (gInv g : I → I → ℝ) (dg : CoordinateMetricJet1 I)
+    (hg : ∀ A B, g A B = g B A)
+    (hdg : ∀ R A B, dg R A B = dg R B A)
+    (hInv : ∀ A B, (∑ D : I, gInv A D * g D B) =
+      if A = B then 1 else 0)
+    (R A X : I) :
+    (∑ B : I, coordinateInverseMetricJet gInv dg R A B * g X B) =
+      -∑ B : I, gInv A B * dg R X B := by
+  unfold coordinateInverseMetricJet
+  calc
+    _ = -∑ B : I, ∑ D : I, ∑ E : I,
+        (gInv A D * dg R D E * gInv E B) * g X B := by
+      simp only [neg_mul, Finset.sum_neg_distrib, Finset.sum_mul]
+    _ = -∑ D : I, ∑ E : I, ∑ B : I,
+        (gInv A D * dg R D E * gInv E B) * g X B := by
+      apply congrArg Neg.neg
+      exact sum3_first_last _
+    _ = -∑ D : I, ∑ E : I,
+        (gInv A D * dg R D E) *
+          (∑ B : I, gInv E B * g X B) := by
+      apply congrArg Neg.neg
+      apply Finset.sum_congr rfl
+      intro D _
+      apply Finset.sum_congr rfl
+      intro E _
+      rw [Finset.mul_sum]
+      apply Finset.sum_congr rfl
+      intro B _
+      ring
+    _ = -∑ D : I, ∑ E : I,
+        (gInv A D * dg R D E) * (if E = X then 1 else 0) := by
+      apply congrArg Neg.neg
+      apply Finset.sum_congr rfl
+      intro D _
+      apply Finset.sum_congr rfl
+      intro E _
+      have hcontract :
+          (∑ B : I, gInv E B * g X B) = if E = X then 1 else 0 := by
+        calc
+          _ = ∑ B : I, gInv E B * g B X := by
+            apply Finset.sum_congr rfl
+            intro B _
+            rw [hg X B]
+          _ = _ := hInv E X
+      rw [hcontract]
+    _ = -∑ D : I, gInv A D * dg R D X := by simp
+    _ = _ := by
+      apply congrArg Neg.neg
+      apply Finset.sum_congr rfl
+      intro D _
+      rw [hdg R D X]
+
 /-- Product-rule transform of the derivative of a first-kind Christoffel
 symbol before the nonlinear metric-Hessian contribution is added. -/
 noncomputable def affineChristoffelFirstKindJet
@@ -1393,6 +1502,326 @@ private theorem jac_transformContravariant2_contract
       intro D _
       rw [C.affine.inv_jac_contract]
     _ = _ := by simp
+
+/-- The transformed inverse-metric factor that raises a first-kind symbol
+while leaving its upper index in the old chart. -/
+noncomputable def connectionRaiseFactor (C : CoordinateChangeJet3 I)
+    (gInv : I → I → ℝ) (A Q : I) : ℝ :=
+  ∑ B : I, C.affine.invJac B Q * gInv A B
+
+/-- Product-rule derivative of `connectionRaiseFactor`, expressed entirely
+in old-chart inverse-metric data. -/
+noncomputable def connectionRaiseFactorJet (C : CoordinateChangeJet3 I)
+    (gInv : I → I → ℝ) (dg : CoordinateMetricJet1 I)
+    (R A Q : I) : ℝ :=
+  (∑ B : I, C.inverseJacobianJet R B Q * gInv A B) +
+    ∑ E : I, ∑ B : I,
+      C.affine.jac R E * C.affine.invJac B Q *
+        coordinateInverseMetricJet gInv dg E A B
+
+/-- Contracting the transformed inverse metric with the forward Jacobian
+leaves precisely the old-upper-index raising factor. -/
+theorem connectionRaiseFactor_eq_jac_transformContravariant2
+    (C : CoordinateChangeJet3 I) (gInv : I → I → ℝ) (A Q : I) :
+    C.connectionRaiseFactor gInv A Q =
+      ∑ M : I, C.affine.jac M A *
+        C.affine.transformContravariant2 gInv M Q := by
+  unfold connectionRaiseFactor
+  exact (C.jac_transformContravariant2_contract gInv A Q).symm
+
+/-- A retained old upper index contracts one transformed covector Jacobian
+and the metric back to the original vector.  This is the generic contraction
+behind the inhomogeneous Hessian and third-derivative terms. -/
+theorem connectionRaiseFactor_jac_metric_contract
+    (C : CoordinateChangeJet3 I) (gInv g : I → I → ℝ)
+    (hg : ∀ A B, g A B = g B A)
+    (hInv : ∀ A B, (∑ D : I, gInv A D * g D B) =
+      if A = B then 1 else 0)
+    (v : I → ℝ) (A : I) :
+    (∑ Q : I, C.connectionRaiseFactor gInv A Q *
+      (∑ X : I, ∑ Y : I,
+        v X * C.affine.jac Q Y * g X Y)) = v A := by
+  unfold connectionRaiseFactor
+  calc
+    _ = ∑ Q : I, ∑ B : I, ∑ X : I, ∑ Y : I,
+        (C.affine.invJac B Q * gInv A B) *
+          (v X * C.affine.jac Q Y * g X Y) := by
+      apply Finset.sum_congr rfl
+      intro Q _
+      rw [Finset.sum_mul]
+      apply Finset.sum_congr rfl
+      intro B _
+      rw [Finset.mul_sum]
+      apply Finset.sum_congr rfl
+      intro X _
+      rw [Finset.mul_sum]
+    _ = ∑ X : I, ∑ Y : I, ∑ B : I, ∑ Q : I,
+        (C.affine.invJac B Q * gInv A B) *
+          (v X * C.affine.jac Q Y * g X Y) := by
+      calc
+        _ = ∑ X : I, ∑ Y : I, ∑ Q : I, ∑ B : I,
+            (C.affine.invJac B Q * gInv A B) *
+              (v X * C.affine.jac Q Y * g X Y) := sum4_last2_first _
+        _ = _ := by
+          apply Finset.sum_congr rfl
+          intro X _
+          apply Finset.sum_congr rfl
+          intro Y _
+          exact Finset.sum_comm
+    _ = ∑ X : I, ∑ Y : I, ∑ B : I,
+        (∑ Q : I, C.affine.invJac B Q * C.affine.jac Q Y) *
+          (gInv A B * v X * g X Y) := by
+      apply Finset.sum_congr rfl
+      intro X _
+      apply Finset.sum_congr rfl
+      intro Y _
+      apply Finset.sum_congr rfl
+      intro B _
+      rw [Finset.sum_mul]
+      apply Finset.sum_congr rfl
+      intro Q _
+      ring
+    _ = ∑ X : I, ∑ Y : I, ∑ B : I,
+        (if B = Y then 1 else 0) * (gInv A B * v X * g X Y) := by
+      apply Finset.sum_congr rfl
+      intro X _
+      apply Finset.sum_congr rfl
+      intro Y _
+      apply Finset.sum_congr rfl
+      intro B _
+      rw [C.affine.inv_jac_contract]
+    _ = ∑ X : I, v X * (∑ Y : I, gInv A Y * g X Y) := by
+      simp
+      apply Finset.sum_congr rfl
+      intro X _
+      rw [Finset.mul_sum]
+      apply Finset.sum_congr rfl
+      intro Y _
+      ring
+    _ = ∑ X : I, v X * (if A = X then 1 else 0) := by
+      apply Finset.sum_congr rfl
+      intro X _
+      have hcontract :
+          (∑ Y : I, gInv A Y * g X Y) = if A = X then 1 else 0 := by
+        calc
+          _ = ∑ Y : I, gInv A Y * g Y X := by
+            apply Finset.sum_congr rfl
+            intro Y _
+            rw [hg X Y]
+          _ = _ := hInv A X
+      rw [hcontract]
+    _ = _ := by simp
+
+omit [DecidableEq I] in
+private theorem sum4_first_last
+    (f : I → I → I → I → ℝ) :
+    (∑ a, ∑ b, ∑ c, ∑ d, f a b c d) =
+      ∑ b, ∑ c, ∑ d, ∑ a, f a b c d := by
+  calc
+    _ = ∑ b, ∑ a, ∑ c, ∑ d, f a b c d := Finset.sum_comm
+    _ = ∑ b, ∑ c, ∑ a, ∑ d, f a b c d := by
+      apply Finset.sum_congr rfl
+      intro b _
+      exact Finset.sum_comm
+    _ = _ := by
+      apply Finset.sum_congr rfl
+      intro b _
+      apply Finset.sum_congr rfl
+      intro c _
+      exact Finset.sum_comm
+
+set_option maxHeartbeats 800000 in
+/-- Differentiating the Jacobian contraction that defines
+`connectionRaiseFactor` gives its old-chart formula.  The cancellation of
+the derivative of the first inverse-Jacobian factor is the key nonlinear
+inverse-metric seam in the differentiated connection proof. -/
+theorem connectionRaiseFactorJet_eq_productRule
+    (C : CoordinateChangeJet3 I) (gInv : I → I → ℝ)
+    (dg : CoordinateMetricJet1 I) (R A Q : I) :
+    C.connectionRaiseFactorJet gInv dg R A Q =
+      (∑ M : I, C.secondJet.second R M A *
+        C.affine.transformContravariant2 gInv M Q) +
+      ∑ M : I, C.affine.jac M A *
+        C.transformInverseMetricJet gInv dg R M Q := by
+  have hH :
+      (∑ M : I, C.secondJet.second R M A *
+        C.affine.transformContravariant2 gInv M Q) =
+        ∑ X : I, ∑ B : I,
+          (∑ M : I, C.affine.invJac X M *
+            C.secondJet.second R M A) *
+              (C.affine.invJac B Q * gInv X B) := by
+    unfold AffineCoordinateChange.transformContravariant2
+    calc
+      _ = ∑ M : I, ∑ X : I, ∑ B : I,
+          C.secondJet.second R M A *
+            (C.affine.invJac X M * C.affine.invJac B Q * gInv X B) := by
+        apply Finset.sum_congr rfl
+        intro M _
+        simp only [Finset.mul_sum]
+      _ = ∑ X : I, ∑ B : I, ∑ M : I,
+          C.secondJet.second R M A *
+            (C.affine.invJac X M * C.affine.invJac B Q * gInv X B) :=
+        sum3_first_last _
+      _ = _ := by
+        apply Finset.sum_congr rfl
+        intro X _
+        apply Finset.sum_congr rfl
+        intro B _
+        rw [Finset.sum_mul]
+        apply Finset.sum_congr rfl
+        intro M _
+        ring
+  have hKleft :
+      (∑ M : I, C.affine.jac M A *
+        (∑ X : I, ∑ B : I,
+          C.inverseJacobianJet R X M * C.affine.invJac B Q * gInv X B)) =
+        ∑ X : I, ∑ B : I,
+          (∑ M : I, C.inverseJacobianJet R X M *
+            C.affine.jac M A) * (C.affine.invJac B Q * gInv X B) := by
+    calc
+      _ = ∑ M : I, ∑ X : I, ∑ B : I,
+          C.affine.jac M A *
+            (C.inverseJacobianJet R X M * C.affine.invJac B Q * gInv X B) := by
+        apply Finset.sum_congr rfl
+        intro M _
+        simp only [Finset.mul_sum]
+      _ = ∑ X : I, ∑ B : I, ∑ M : I,
+          C.affine.jac M A *
+            (C.inverseJacobianJet R X M * C.affine.invJac B Q * gInv X B) :=
+        sum3_first_last _
+      _ = _ := by
+        apply Finset.sum_congr rfl
+        intro X _
+        apply Finset.sum_congr rfl
+        intro B _
+        rw [Finset.sum_mul]
+        apply Finset.sum_congr rfl
+        intro M _
+        ring
+  have hCancel :
+      (∑ M : I, C.secondJet.second R M A *
+        C.affine.transformContravariant2 gInv M Q) +
+      (∑ M : I, C.affine.jac M A *
+        (∑ X : I, ∑ B : I,
+          C.inverseJacobianJet R X M * C.affine.invJac B Q * gInv X B)) = 0 := by
+    rw [hH, hKleft, ← Finset.sum_add_distrib]
+    apply Finset.sum_eq_zero
+    intro X _
+    rw [← Finset.sum_add_distrib]
+    apply Finset.sum_eq_zero
+    intro B _
+    rw [← add_mul]
+    have hdef := C.inverseJacobianJet_jac_defining R X A
+    rw [add_comm, hdef]
+    ring
+  have hKright :
+      (∑ M : I, C.affine.jac M A *
+        (∑ X : I, ∑ B : I,
+          C.affine.invJac X M * C.inverseJacobianJet R B Q * gInv X B)) =
+        ∑ B : I, C.inverseJacobianJet R B Q * gInv A B := by
+    calc
+      _ = ∑ M : I, ∑ X : I, ∑ B : I,
+          C.affine.jac M A *
+            (C.affine.invJac X M * C.inverseJacobianJet R B Q * gInv X B) := by
+        apply Finset.sum_congr rfl
+        intro M _
+        simp only [Finset.mul_sum]
+      _ = ∑ X : I, ∑ B : I, ∑ M : I,
+          C.affine.jac M A *
+            (C.affine.invJac X M * C.inverseJacobianJet R B Q * gInv X B) :=
+        sum3_first_last _
+      _ = ∑ X : I, ∑ B : I,
+          (∑ M : I, C.affine.invJac X M * C.affine.jac M A) *
+            (C.inverseJacobianJet R B Q * gInv X B) := by
+        apply Finset.sum_congr rfl
+        intro X _
+        apply Finset.sum_congr rfl
+        intro B _
+        rw [Finset.sum_mul]
+        apply Finset.sum_congr rfl
+        intro M _
+        ring
+      _ = ∑ X : I, ∑ B : I, (if X = A then 1 else 0) *
+            (C.inverseJacobianJet R B Q * gInv X B) := by
+        apply Finset.sum_congr rfl
+        intro X _
+        apply Finset.sum_congr rfl
+        intro B _
+        rw [C.affine.inv_jac_contract]
+      _ = _ := by simp
+  have hOld :
+      (∑ M : I, C.affine.jac M A *
+        C.affine.transformContravariant2Jet
+          (coordinateInverseMetricJet gInv dg) R M Q) =
+        ∑ E : I, ∑ B : I,
+          C.affine.jac R E * C.affine.invJac B Q *
+            coordinateInverseMetricJet gInv dg E A B := by
+    unfold AffineCoordinateChange.transformContravariant2Jet
+    unfold AffineCoordinateChange.transformContravariant2
+    calc
+      _ = ∑ M : I, ∑ E : I, ∑ X : I, ∑ B : I,
+          C.affine.jac M A *
+            (C.affine.jac R E * C.affine.invJac X M *
+              C.affine.invJac B Q *
+                coordinateInverseMetricJet gInv dg E X B) := by
+        apply Finset.sum_congr rfl
+        intro M _
+        simp only [Finset.mul_sum]
+        apply Finset.sum_congr rfl
+        intro E _
+        apply Finset.sum_congr rfl
+        intro X _
+        apply Finset.sum_congr rfl
+        intro B _
+        ring
+      _ = ∑ E : I, ∑ X : I, ∑ B : I, ∑ M : I,
+          C.affine.jac M A *
+            (C.affine.jac R E * C.affine.invJac X M *
+              C.affine.invJac B Q *
+                coordinateInverseMetricJet gInv dg E X B) :=
+        sum4_first_last _
+      _ = ∑ E : I, ∑ X : I, ∑ B : I,
+          (∑ M : I, C.affine.invJac X M * C.affine.jac M A) *
+            (C.affine.jac R E * C.affine.invJac B Q *
+              coordinateInverseMetricJet gInv dg E X B) := by
+        apply Finset.sum_congr rfl
+        intro E _
+        apply Finset.sum_congr rfl
+        intro X _
+        apply Finset.sum_congr rfl
+        intro B _
+        rw [Finset.sum_mul]
+        apply Finset.sum_congr rfl
+        intro M _
+        ring
+      _ = ∑ E : I, ∑ X : I, ∑ B : I,
+          (if X = A then 1 else 0) *
+            (C.affine.jac R E * C.affine.invJac B Q *
+              coordinateInverseMetricJet gInv dg E X B) := by
+        apply Finset.sum_congr rfl
+        intro E _
+        apply Finset.sum_congr rfl
+        intro X _
+        apply Finset.sum_congr rfl
+        intro B _
+        rw [C.affine.inv_jac_contract]
+      _ = _ := by simp
+  symm
+  unfold transformInverseMetricJet connectionRaiseFactorJet
+  simp only [mul_add, Finset.sum_add_distrib]
+  calc
+    _ = ((∑ M : I, C.secondJet.second R M A *
+          C.affine.transformContravariant2 gInv M Q) +
+        ∑ M : I, C.affine.jac M A *
+          (∑ X : I, ∑ B : I,
+            C.inverseJacobianJet R X M * C.affine.invJac B Q * gInv X B)) +
+        (∑ M : I, C.affine.jac M A *
+          (∑ X : I, ∑ B : I,
+            C.affine.invJac X M * C.inverseJacobianJet R B Q * gInv X B)) +
+        ∑ M : I, C.affine.jac M A *
+          C.affine.transformContravariant2Jet
+            (coordinateInverseMetricJet gInv dg) R M Q := by ring
+    _ = _ := by rw [hCancel, hKright, hOld]; ring
 
 /-- Raising the nonlinearly transformed first-kind symbols while retaining
 the old upper index gives exactly `connectionBracket`.  This is the undifferentiated

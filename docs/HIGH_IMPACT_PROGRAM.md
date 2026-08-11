@@ -341,10 +341,13 @@ third-derivative/quadratic cancellation and the mixed old-connection/Hessian
 cancellation. The complete transformed metric second jet is constructed and
 its differentiated first-kind cancellation is verified. The metric endpoint
 now also proves the nonlinear inverse-metric derivative product rule, expands
-the complete four-term differentiated first-kind pullback, and recovers the
-undifferentiated inhomogeneous connection bracket by raising. The remaining
-identity is the differentiated-bracket contraction assembling those pieces
-into the certified product-rule connection jet. It immediately yields an
+the complete four-term differentiated first-kind pullback, recovers the
+undifferentiated inhomogeneous connection bracket by raising, and proves the
+product-rule derivative of that retained-index raising factor. This last step
+cancels the derivative of the first inverse Jacobian and makes the required
+first-metric-jet symmetry explicit. The remaining identity is the affine plus
+inhomogeneous differentiated-bracket contraction assembling those pieces into
+the certified product-rule connection jet. It immediately yields an
 unconditional coordinate-Ricci theorem for the actual Kaluza metric;
 intrinsic pseudo-Riemannian packaging follows.
 

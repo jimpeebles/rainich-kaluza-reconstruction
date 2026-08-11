@@ -125,11 +125,17 @@ displayed jet is its actual Frechet derivative. On an open convex patch this
 is equivalent to local scalar-potential existence. Hence the plus-only,
 minus-only, both, and neither cases give an exact exhaustive one/one/two/zero
 potential classification, and the two finite witnesses prohibit either
-potential. The remaining curvature-entry seam is constructive rather than
-logical: build the realization certificate directly from the smooth
-projector/amplitude fields already supplied by II-G2, then send every
-surviving branch to the Phase-III obstruction interface. HC1 is downstream of
-this scalar integration decision.
+potential. The derived realization is now automatic at the constituent-field
+level. Coordinate-basis components reconstruct scalar and one-form Frechet
+derivatives in arbitrary directions; the product rule then proves that the
+full `xθ` derivative is exactly the displayed spectral-component jet.
+`CurvatureScalarBranchComponentPatch4.ofCoordinateFDerivs` packages this into
+the realized classifier without assuming the product rule. The remaining
+curvature-entry seam is exactly four concrete identities: the two amplitude
+and two eigen-one-form jets from II-G2 must be identified with the coordinate
+components of their actual smooth-field derivatives. Once these are supplied,
+every surviving branch goes directly to the Phase-III obstruction interface.
+HC1 is downstream of this scalar integration decision.
 
 Phase III has reached its generic local decision interface. For `S=𝓡-V`, the reconstruction equation is
 Lean-verified to be equivalent to `S²=q²I` once the scalar square law is

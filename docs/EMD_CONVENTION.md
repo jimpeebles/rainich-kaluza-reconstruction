@@ -131,9 +131,11 @@ This note fixes the field-equation provenance and derives the rescaled
 differential identities. The repository now gives an exact conditional local
 decision for those identities. For every realized curvature patch it also
 classifies exactly which of the two scalar candidates admit local potentials,
-including the no-potential case. It does not yet construct that Frechet-jet
-realization certificate directly from every smooth metric-derived candidate
-or cover degenerate branches. The uniform analytic splice identifying the
+including the no-potential case. It now constructs the Frechet-jet realization
+automatically from constituent amplitude/eigen-one-form coordinate jets, but
+does not yet prove the four required jet identities for every concrete smooth
+metric-derived candidate or cover degenerate branches. The uniform analytic
+splice identifying the
 radial derivative candidate with `dA`, the uplift constants, and the
 conditional intrinsic forward/converse five-dimensional uplift are complete;
 the remaining sufficiency obligation is their curvature-only composition.

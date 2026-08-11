@@ -55,6 +55,19 @@ theorem oneForm4ContinuousLinearMap_apply
     oneForm4ContinuousLinearMap v u = oneForm4Evaluate v u := by
   rfl
 
+@[simp]
+theorem oneForm4ContinuousLinearMap_smul
+    (c : ℝ) (v : OneForm4) :
+    oneForm4ContinuousLinearMap (c • v) =
+      c • oneForm4ContinuousLinearMap v := by
+  ext u
+  change oneForm4Evaluate (c • v) u = c * oneForm4Evaluate v u
+  simp only [oneForm4Evaluate, Pi.smul_apply, smul_eq_mul]
+  rw [Finset.mul_sum]
+  apply Finset.sum_congr rfl
+  intro i _
+  ring
+
 /-- Bilinear evaluation of a coordinate one-form first jet. -/
 def oneFormJetEvaluate
     (D : Fin 4 → OneForm4) (u w : CurvatureCoordinateSpace4) : ℝ :=
@@ -76,9 +89,92 @@ theorem oneFormJetEvaluate_sub
   simp only [oneFormJetEvaluate, Pi.sub_apply, mul_sub, sub_mul,
     Finset.sum_sub_distrib]
 
+/-- The evaluated coordinate jet of a scalar times a one-form is the exact
+Frechet product rule: amplitude derivative times the one-form plus amplitude
+times the one-form derivative. -/
+theorem oneFormJetEvaluate_spectralComponentOneFormJet
+    (x : ℝ) (dx theta : OneForm4) (dtheta : Fin 4 → OneForm4)
+    (u w : CurvatureCoordinateSpace4) :
+    oneFormJetEvaluate
+        (spectralComponentOneFormJet x dx theta dtheta) u w =
+      x * oneFormJetEvaluate dtheta u w +
+        oneForm4Evaluate dx u * oneForm4Evaluate theta w := by
+  simp only [oneFormJetEvaluate, spectralComponentOneFormJet,
+    oneForm4Evaluate, mul_add, add_mul, Finset.sum_add_distrib]
+  rw [add_comm]
+  congr 1
+  · rw [Finset.mul_sum]
+    apply Finset.sum_congr rfl
+    intro k _
+    rw [Finset.mul_sum]
+    apply Finset.sum_congr rfl
+    intro j _
+    ring
+  · rw [Finset.sum_mul]
+    apply Finset.sum_congr rfl
+    intro k _
+    rw [Finset.mul_sum]
+    apply Finset.sum_congr rfl
+    intro j _
+    ring
+
 /-- Standard coordinate basis vector. -/
 def curvatureCoordinateDirection (i : Fin 4) : CurvatureCoordinateSpace4 :=
   fun j => if j = i then 1 else 0
+
+/-- Every coordinate vector is the finite linear combination of the standard
+coordinate directions with its displayed components. -/
+theorem curvatureCoordinateDirection_expansion
+    (u : CurvatureCoordinateSpace4) :
+    (∑ i, u i • curvatureCoordinateDirection i) = u := by
+  funext j
+  simp [curvatureCoordinateDirection]
+
+/-- Actual coordinate components of the Frechet derivative of a scalar
+field. -/
+noncomputable def scalarFieldCoordinateFDeriv
+    (f : CurvatureCoordinateSpace4 → ℝ)
+    (x : CurvatureCoordinateSpace4) : OneForm4 :=
+  fun k => fderiv ℝ f x (curvatureCoordinateDirection k)
+
+/-- Actual coordinate components of the Frechet derivative of a one-form
+field. -/
+noncomputable def oneFormFieldCoordinateFDeriv
+    (v : CurvatureCoordinateSpace4 →
+      CurvatureCoordinateSpace4 →L[ℝ] ℝ)
+    (x : CurvatureCoordinateSpace4) : Fin 4 → OneForm4 :=
+  fun k j => fderiv ℝ v x (curvatureCoordinateDirection k)
+    (curvatureCoordinateDirection j)
+
+/-- A scalar Frechet derivative is recovered from its four coordinate
+components. -/
+theorem scalarField_fderiv_eq_coordinateEvaluation
+    (f : CurvatureCoordinateSpace4 → ℝ)
+    (x u : CurvatureCoordinateSpace4) :
+    fderiv ℝ f x u =
+      oneForm4Evaluate (scalarFieldCoordinateFDeriv f x) u := by
+  conv_lhs => rw [← curvatureCoordinateDirection_expansion u]
+  simp [scalarFieldCoordinateFDeriv, oneForm4Evaluate, mul_comm]
+
+/-- A one-form-field Frechet derivative is recovered from its `4×4`
+coordinate component jet. -/
+theorem oneFormField_fderiv_eq_coordinateEvaluation
+    (v : CurvatureCoordinateSpace4 →
+      CurvatureCoordinateSpace4 →L[ℝ] ℝ)
+    (x u w : CurvatureCoordinateSpace4) :
+    fderiv ℝ v x u w =
+      oneFormJetEvaluate (oneFormFieldCoordinateFDeriv v x) u w := by
+  conv_lhs =>
+    rw [← curvatureCoordinateDirection_expansion u]
+    rw [← curvatureCoordinateDirection_expansion w]
+  simp [oneFormFieldCoordinateFDeriv, oneFormJetEvaluate]
+  simp_rw [Finset.mul_sum]
+  rw [Finset.sum_comm]
+  apply Finset.sum_congr rfl
+  intro k _
+  apply Finset.sum_congr rfl
+  intro j _
+  ring
 
 @[simp]
 theorem oneFormJetEvaluate_coordinateDirections
@@ -159,6 +255,99 @@ theorem isClosedScalarOneFormOn_of_scalarPotential
   · exact ((hdiff x hx).differentiableAt
       (hopen.mem_nhds hx)).hasFDerivAt
 
+namespace CurvatureScalarBranchJet4
+
+/-- Curvature-reconstructed first derivative of the first scalar amplitude. -/
+noncomputable def alphaAmplitudeJet
+    (J : CurvatureScalarBranchJet4) : OneForm4 :=
+  reconstructedAmplitudeAOneForm J.epsilonA J.x J.a J.b J.qSq
+    J.da J.db J.dqSq
+
+/-- Curvature-reconstructed first derivative of the second scalar amplitude. -/
+noncomputable def betaAmplitudeJet
+    (J : CurvatureScalarBranchJet4) : OneForm4 :=
+  reconstructedAmplitudeBOneForm J.epsilonB J.y J.a J.b J.qSq
+    J.da J.db J.dqSq
+
+theorem alphaJet_eq_spectralComponent
+    (J : CurvatureScalarBranchJet4) :
+    J.alphaJet = spectralComponentOneFormJet J.x
+      J.alphaAmplitudeJet J.thetaA J.dthetaA := by
+  rfl
+
+theorem betaJet_eq_spectralComponent
+    (J : CurvatureScalarBranchJet4) :
+    J.betaJet = spectralComponentOneFormJet J.y
+      J.betaAmplitudeJet J.thetaB J.dthetaB := by
+  rfl
+
+/-- The differentiated first scalar-diagonal identity identifies the actual
+coordinate derivative of the first amplitude with its curvature formula. -/
+theorem alphaAmplitudeCoordinateFDeriv_eq_reconstructed
+    (J : CurvatureCoordinateSpace4 → CurvatureScalarBranchJet4)
+    (x : CurvatureCoordinateSpace4)
+    (hepsilon : (J x).epsilonA ^ 2 = 1) (hx : (J x).x ≠ 0)
+    (hdiff : ∀ k,
+      (J x).epsilonA * (J x).x *
+          scalarFieldCoordinateFDeriv (fun y => (J y).x) x k =
+        reconstructedDiagonalADerivative (J x).a (J x).b (J x).qSq
+          ((J x).da k) ((J x).db k) ((J x).dqSq k)) :
+    scalarFieldCoordinateFDeriv (fun y => (J y).x) x =
+      (J x).alphaAmplitudeJet := by
+  exact amplitudeAOneForm_eq_reconstructed
+    (J x).epsilonA (J x).x (J x).a (J x).b (J x).qSq
+    (scalarFieldCoordinateFDeriv (fun y => (J y).x) x)
+    (J x).da (J x).db (J x).dqSq hepsilon hx hdiff
+
+/-- The differentiated second scalar-diagonal identity identifies the actual
+coordinate derivative of the second amplitude with its curvature formula. -/
+theorem betaAmplitudeCoordinateFDeriv_eq_reconstructed
+    (J : CurvatureCoordinateSpace4 → CurvatureScalarBranchJet4)
+    (x : CurvatureCoordinateSpace4)
+    (hepsilon : (J x).epsilonB ^ 2 = 1) (hy : (J x).y ≠ 0)
+    (hdiff : ∀ k,
+      (J x).epsilonB * (J x).y *
+          scalarFieldCoordinateFDeriv (fun z => (J z).y) x k =
+        reconstructedDiagonalBDerivative (J x).a (J x).b (J x).qSq
+          ((J x).da k) ((J x).db k) ((J x).dqSq k)) :
+    scalarFieldCoordinateFDeriv (fun z => (J z).y) x =
+      (J x).betaAmplitudeJet := by
+  exact amplitudeBOneForm_eq_reconstructed
+    (J x).epsilonB (J x).y (J x).a (J x).b (J x).qSq
+    (scalarFieldCoordinateFDeriv (fun z => (J z).y) x)
+    (J x).da (J x).db (J x).dqSq hepsilon hy hdiff
+
+end CurvatureScalarBranchJet4
+
+/-- Constituent-field realization of a curvature branch jet.  Unlike the
+derived branch certificate below, this structure asks only for the actual
+amplitude and eigen-one-form derivatives already computed in the smooth
+projector construction.  The scalar-times-one-form product rule is not an
+assumption. -/
+structure CurvatureScalarBranchComponentPatch4
+    (U : Set CurvatureCoordinateSpace4) where
+  jet : CurvatureCoordinateSpace4 → CurvatureScalarBranchJet4
+  alphaAmplitudeDifferentiable : DifferentiableOn ℝ (fun x => (jet x).x) U
+  betaAmplitudeDifferentiable : DifferentiableOn ℝ (fun x => (jet x).y) U
+  thetaADifferentiable : DifferentiableOn ℝ
+    (fun x => oneForm4ContinuousLinearMap (jet x).thetaA) U
+  thetaBDifferentiable : DifferentiableOn ℝ
+    (fun x => oneForm4ContinuousLinearMap (jet x).thetaB) U
+  alphaAmplitudeFDeriv : ∀ x ∈ U, ∀ u,
+    fderiv ℝ (fun y => (jet y).x) x u =
+      oneForm4Evaluate (jet x).alphaAmplitudeJet u
+  betaAmplitudeFDeriv : ∀ x ∈ U, ∀ u,
+    fderiv ℝ (fun y => (jet y).y) x u =
+      oneForm4Evaluate (jet x).betaAmplitudeJet u
+  thetaAFDeriv : ∀ x ∈ U, ∀ u w,
+    fderiv ℝ
+        (fun y => oneForm4ContinuousLinearMap (jet y).thetaA) x u w =
+      oneFormJetEvaluate (jet x).dthetaA u w
+  thetaBFDeriv : ∀ x ∈ U, ∀ u w,
+    fderiv ℝ
+        (fun y => oneForm4ContinuousLinearMap (jet y).thetaB) x u w =
+      oneFormJetEvaluate (jet x).dthetaB u w
+
 /-- Genuine local field realization of the two curvature spectral
 components.  The one-form values are those assembled by the curvature jet;
 the last two fields state that its displayed first jets are their actual
@@ -176,6 +365,168 @@ structure RealizedCurvatureScalarBranchPatch4
   betaFDeriv : ∀ x ∈ U, ∀ u w,
     fderiv ℝ (fun y => oneForm4ContinuousLinearMap (jet y).beta) x u w =
       oneFormJetEvaluate (jet x).betaJet u w
+
+namespace CurvatureScalarBranchComponentPatch4
+
+variable {U : Set CurvatureCoordinateSpace4}
+
+/-- Build constituent curvature fields from equality of the displayed jets
+with the coordinate components of the actual Frechet derivatives.  Arbitrary
+directional derivative formulas then follow automatically by linearity. -/
+noncomputable def ofCoordinateFDerivs
+    (J : CurvatureCoordinateSpace4 → CurvatureScalarBranchJet4)
+    (halphaAmplitude : DifferentiableOn ℝ (fun x => (J x).x) U)
+    (hbetaAmplitude : DifferentiableOn ℝ (fun x => (J x).y) U)
+    (hthetaA : DifferentiableOn ℝ
+      (fun x => oneForm4ContinuousLinearMap (J x).thetaA) U)
+    (hthetaB : DifferentiableOn ℝ
+      (fun x => oneForm4ContinuousLinearMap (J x).thetaB) U)
+    (halphaAmplitudeJet : ∀ x ∈ U,
+      scalarFieldCoordinateFDeriv (fun y => (J y).x) x =
+        (J x).alphaAmplitudeJet)
+    (hbetaAmplitudeJet : ∀ x ∈ U,
+      scalarFieldCoordinateFDeriv (fun y => (J y).y) x =
+        (J x).betaAmplitudeJet)
+    (hthetaAJet : ∀ x ∈ U,
+      oneFormFieldCoordinateFDeriv
+          (fun y => oneForm4ContinuousLinearMap (J y).thetaA) x =
+        (J x).dthetaA)
+    (hthetaBJet : ∀ x ∈ U,
+      oneFormFieldCoordinateFDeriv
+          (fun y => oneForm4ContinuousLinearMap (J y).thetaB) x =
+        (J x).dthetaB) :
+    CurvatureScalarBranchComponentPatch4 U where
+  jet := J
+  alphaAmplitudeDifferentiable := halphaAmplitude
+  betaAmplitudeDifferentiable := hbetaAmplitude
+  thetaADifferentiable := hthetaA
+  thetaBDifferentiable := hthetaB
+  alphaAmplitudeFDeriv := by
+    intro x hx u
+    rw [scalarField_fderiv_eq_coordinateEvaluation,
+      halphaAmplitudeJet x hx]
+  betaAmplitudeFDeriv := by
+    intro x hx u
+    rw [scalarField_fderiv_eq_coordinateEvaluation,
+      hbetaAmplitudeJet x hx]
+  thetaAFDeriv := by
+    intro x hx u w
+    rw [oneFormField_fderiv_eq_coordinateEvaluation,
+      hthetaAJet x hx]
+  thetaBFDeriv := by
+    intro x hx u w
+    rw [oneFormField_fderiv_eq_coordinateEvaluation,
+      hthetaBJet x hx]
+
+/-- The actual first spectral component is differentiable by the constituent
+amplitude/eigen-one-form product rule. -/
+theorem alphaDifferentiable
+    (C : CurvatureScalarBranchComponentPatch4 U) :
+    DifferentiableOn ℝ
+      (fun x => oneForm4ContinuousLinearMap (C.jet x).alpha) U := by
+  simp only [CurvatureScalarBranchJet4.alpha,
+    oneForm4ContinuousLinearMap_smul]
+  intro x hx
+  have h := (C.alphaAmplitudeDifferentiable x hx).smul
+    (C.thetaADifferentiable x hx)
+  change DifferentiableWithinAt ℝ
+    (fun y => (C.jet y).x •
+      oneForm4ContinuousLinearMap (C.jet y).thetaA) U x at h
+  exact h
+
+/-- The actual second spectral component is differentiable by the constituent
+amplitude/eigen-one-form product rule. -/
+theorem betaDifferentiable
+    (C : CurvatureScalarBranchComponentPatch4 U) :
+    DifferentiableOn ℝ
+      (fun x => oneForm4ContinuousLinearMap (C.jet x).beta) U := by
+  simp only [CurvatureScalarBranchJet4.beta,
+    oneForm4ContinuousLinearMap_smul]
+  intro x hx
+  have h := (C.betaAmplitudeDifferentiable x hx).smul
+    (C.thetaBDifferentiable x hx)
+  change DifferentiableWithinAt ℝ
+    (fun y => (C.jet y).y •
+      oneForm4ContinuousLinearMap (C.jet y).thetaB) U x at h
+  exact h
+
+/-- The curvature formula for the first spectral-component jet is its actual
+Frechet derivative; this is derived, not assumed, from the two constituent
+derivatives. -/
+theorem alphaFDeriv
+    (C : CurvatureScalarBranchComponentPatch4 U) (hopen : IsOpen U)
+    (x : CurvatureCoordinateSpace4) (hx : x ∈ U)
+    (u w : CurvatureCoordinateSpace4) :
+    fderiv ℝ
+        (fun y => oneForm4ContinuousLinearMap (C.jet y).alpha) x u w =
+      oneFormJetEvaluate (C.jet x).alphaJet u w := by
+  have hxDiff : DifferentiableAt ℝ (fun y => (C.jet y).x) x :=
+    (C.alphaAmplitudeDifferentiable x hx).differentiableAt
+      (hopen.mem_nhds hx)
+  have hthetaDiff : DifferentiableAt ℝ
+      (fun y => oneForm4ContinuousLinearMap (C.jet y).thetaA) x :=
+    (C.thetaADifferentiable x hx).differentiableAt
+      (hopen.mem_nhds hx)
+  have hfield :
+      (fun y => oneForm4ContinuousLinearMap (C.jet y).alpha) =
+        (fun y => (C.jet y).x •
+          oneForm4ContinuousLinearMap (C.jet y).thetaA) := by
+    funext y
+    simp only [CurvatureScalarBranchJet4.alpha,
+      oneForm4ContinuousLinearMap_smul]
+  rw [hfield, fderiv_fun_smul hxDiff hthetaDiff]
+  simp only [add_apply, smul_apply, ContinuousLinearMap.smulRight_apply]
+  rw [C.thetaAFDeriv x hx u w, C.alphaAmplitudeFDeriv x hx u,
+    oneForm4ContinuousLinearMap_apply,
+    (C.jet x).alphaJet_eq_spectralComponent,
+    oneFormJetEvaluate_spectralComponentOneFormJet]
+  simp only [smul_eq_mul]
+
+/-- The curvature formula for the second spectral-component jet is its actual
+Frechet derivative; this is derived, not assumed, from the two constituent
+derivatives. -/
+theorem betaFDeriv
+    (C : CurvatureScalarBranchComponentPatch4 U) (hopen : IsOpen U)
+    (x : CurvatureCoordinateSpace4) (hx : x ∈ U)
+    (u w : CurvatureCoordinateSpace4) :
+    fderiv ℝ
+        (fun y => oneForm4ContinuousLinearMap (C.jet y).beta) x u w =
+      oneFormJetEvaluate (C.jet x).betaJet u w := by
+  have hyDiff : DifferentiableAt ℝ (fun y => (C.jet y).y) x :=
+    (C.betaAmplitudeDifferentiable x hx).differentiableAt
+      (hopen.mem_nhds hx)
+  have hthetaDiff : DifferentiableAt ℝ
+      (fun y => oneForm4ContinuousLinearMap (C.jet y).thetaB) x :=
+    (C.thetaBDifferentiable x hx).differentiableAt
+      (hopen.mem_nhds hx)
+  have hfield :
+      (fun y => oneForm4ContinuousLinearMap (C.jet y).beta) =
+        (fun y => (C.jet y).y •
+          oneForm4ContinuousLinearMap (C.jet y).thetaB) := by
+    funext y
+    simp only [CurvatureScalarBranchJet4.beta,
+      oneForm4ContinuousLinearMap_smul]
+  rw [hfield, fderiv_fun_smul hyDiff hthetaDiff]
+  simp only [add_apply, smul_apply, ContinuousLinearMap.smulRight_apply]
+  rw [C.thetaBFDeriv x hx u w, C.betaAmplitudeFDeriv x hx u,
+    oneForm4ContinuousLinearMap_apply,
+    (C.jet x).betaJet_eq_spectralComponent,
+    oneFormJetEvaluate_spectralComponentOneFormJet]
+  simp only [smul_eq_mul]
+
+/-- **Automatic branch realization.** Actual amplitude and eigen-one-form
+derivatives generate the complete derived branch certificate by the Frechet
+product rule. -/
+noncomputable def toRealized
+    (C : CurvatureScalarBranchComponentPatch4 U) (hopen : IsOpen U) :
+    RealizedCurvatureScalarBranchPatch4 U where
+  jet := C.jet
+  alphaDifferentiable := C.alphaDifferentiable
+  betaDifferentiable := C.betaDifferentiable
+  alphaFDeriv := C.alphaFDeriv hopen
+  betaFDeriv := C.betaFDeriv hopen
+
+end CurvatureScalarBranchComponentPatch4
 
 namespace RealizedCurvatureScalarBranchPatch4
 
@@ -408,5 +759,115 @@ theorem no_local_scalarPotentialBranch_of_witnesses
           hconvex hopen).mp hm)⟩
 
 end RealizedCurvatureScalarBranchPatch4
+
+namespace CurvatureScalarBranchComponentPatch4
+
+variable {U : Set CurvatureCoordinateSpace4}
+
+/-- First actual spectral-component one-form field, before the derived
+realization wrapper is constructed. -/
+noncomputable def alphaField
+    (C : CurvatureScalarBranchComponentPatch4 U) :
+    CurvatureCoordinateSpace4 → CurvatureCoordinateSpace4 →L[ℝ] ℝ :=
+  fun x => oneForm4ContinuousLinearMap (C.jet x).alpha
+
+/-- Second actual spectral-component one-form field. -/
+noncomputable def betaField
+    (C : CurvatureScalarBranchComponentPatch4 U) :
+    CurvatureCoordinateSpace4 → CurvatureCoordinateSpace4 →L[ℝ] ℝ :=
+  fun x => oneForm4ContinuousLinearMap (C.jet x).beta
+
+/-- Actual sum candidate assembled directly from the constituent fields. -/
+noncomputable def plusField
+    (C : CurvatureScalarBranchComponentPatch4 U) :=
+  C.alphaField + C.betaField
+
+/-- Actual difference candidate assembled directly from the constituent
+fields. -/
+noncomputable def minusField
+    (C : CurvatureScalarBranchComponentPatch4 U) :=
+  C.alphaField - C.betaField
+
+/-- Direct component-field statement that the sum candidate has a local
+scalar potential. -/
+def PlusScalarPotentialExists
+    (C : CurvatureScalarBranchComponentPatch4 U) : Prop :=
+  ∃ phi : CurvatureCoordinateSpace4 → ℝ,
+    IsScalarPotentialOn phi C.plusField U
+
+/-- Direct component-field statement that the difference candidate has a
+local scalar potential. -/
+def MinusScalarPotentialExists
+    (C : CurvatureScalarBranchComponentPatch4 U) : Prop :=
+  ∃ phi : CurvatureCoordinateSpace4 → ℝ,
+    IsScalarPotentialOn phi C.minusField U
+
+/-- The directly assembled sum field is closed exactly when the curvature
+sum obstruction vanishes. -/
+theorem plusField_closed_iff
+    (C : CurvatureScalarBranchComponentPatch4 U) (hopen : IsOpen U) :
+    IsClosedScalarOneFormOn C.plusField U ↔
+      CurvaturePlusBranchClosesOn C.jet U := by
+  exact (C.toRealized hopen).plusField_closed_iff hopen
+
+/-- The directly assembled difference field is closed exactly when the
+curvature difference obstruction vanishes. -/
+theorem minusField_closed_iff
+    (C : CurvatureScalarBranchComponentPatch4 U) (hopen : IsOpen U) :
+    IsClosedScalarOneFormOn C.minusField U ↔
+      CurvatureMinusBranchClosesOn C.jet U := by
+  exact (C.toRealized hopen).minusField_closed_iff hopen
+
+/-- Direct smooth-component sum-branch potential criterion. -/
+theorem plusScalarPotentialExists_iff_curvatureBranchCloses
+    (C : CurvatureScalarBranchComponentPatch4 U)
+    (hconvex : Convex ℝ U) (hopen : IsOpen U) :
+    C.PlusScalarPotentialExists ↔
+      CurvaturePlusBranchClosesOn C.jet U := by
+  exact (C.toRealized hopen).plusScalarPotentialExists_iff_curvatureBranchCloses
+    hconvex hopen
+
+/-- Direct smooth-component difference-branch potential criterion. -/
+theorem minusScalarPotentialExists_iff_curvatureBranchCloses
+    (C : CurvatureScalarBranchComponentPatch4 U)
+    (hconvex : Convex ℝ U) (hopen : IsOpen U) :
+    C.MinusScalarPotentialExists ↔
+      CurvatureMinusBranchClosesOn C.jet U := by
+  exact (C.toRealized hopen).minusScalarPotentialExists_iff_curvatureBranchCloses
+    hconvex hopen
+
+/-- **Smooth-component scalar-branch composition theorem.** The actual
+curvature amplitude and eigen-one-form fields, with only their constituent
+first derivatives supplied, return the exhaustive zero/one/two local
+potential list. -/
+theorem exhaustive_local_scalarPotential_classification
+    (C : CurvatureScalarBranchComponentPatch4 U)
+    (hconvex : Convex ℝ U) (hopen : IsOpen U) :
+    (C.PlusScalarPotentialExists ∧
+        ¬C.MinusScalarPotentialExists) ∨
+      (¬C.PlusScalarPotentialExists ∧
+        C.MinusScalarPotentialExists) ∨
+      (C.PlusScalarPotentialExists ∧
+        C.MinusScalarPotentialExists) ∨
+      (¬C.PlusScalarPotentialExists ∧
+        ¬C.MinusScalarPotentialExists) := by
+  exact (C.toRealized hopen).exhaustive_local_scalarPotential_classification
+    hconvex hopen
+
+/-- Direct smooth-component finite certificate ruling out both scalar
+potentials. -/
+theorem no_local_scalarPotentialBranch_of_witnesses
+    (C : CurvatureScalarBranchComponentPatch4 U)
+    (hconvex : Convex ℝ U) (hopen : IsOpen U)
+    {zPlus zMinus : CurvatureCoordinateSpace4}
+    (hzPlus : zPlus ∈ U) (hzMinus : zMinus ∈ U)
+    (hplus : (C.jet zPlus).dalpha + (C.jet zPlus).dbeta ≠ 0)
+    (hminus : (C.jet zMinus).dalpha - (C.jet zMinus).dbeta ≠ 0) :
+    ¬C.PlusScalarPotentialExists ∧
+      ¬C.MinusScalarPotentialExists := by
+  exact (C.toRealized hopen).no_local_scalarPotentialBranch_of_witnesses
+    hconvex hopen hzPlus hzMinus hplus hminus
+
+end CurvatureScalarBranchComponentPatch4
 
 end RainichKaluza

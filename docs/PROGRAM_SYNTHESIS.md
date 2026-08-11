@@ -75,7 +75,7 @@ spectral problem are independently secured.
 | Coupled pointwise block reconstruction and its two-branch ambiguity | Lean-checked in this repository | present core result |
 | Protected `±q` directions under the scalar rank-one perturbation | Lean-checked from the four-dimensional tracefree square-law hypotheses | completed algebraic entrance |
 | Full characteristic factorization from four-dimensional Maxwell algebra | Lean-checked for `S+V` with square-law `S` and rank-one `V` | necessary pointwise theorem; not sufficient for reconstruction |
-| Differential selection/identification of pointwise partners | exact obstruction and local-potential classifier complete for realized curvature jets; direct smooth-field realization seam open | decisive local-reconstruction target |
+| Differential selection/identification of pointwise partners | exact obstruction and local-potential classifier complete; actual constituent jets automatically generate the realized branch certificate | four concrete II-G2 coordinate-jet identities remain before composition |
 | Maxwell two-form recovery and scalar/Maxwell field equations | open | required for sufficiency and for identifying `a=√3` |
 | Exact-solution scalar multipoles and binary hierarchy | promising inherited derivation, unreproduced here | strongest physics validation track |
 | Laboratory critical amplifier | conditional and speculative | downstream falsifiable application only |
@@ -102,9 +102,11 @@ plus the sharp empty-list outcome:
    missing differential invariant.
 
 The realized classifier returns these outcomes exhaustively rather than
-assuming that one branch exists. The remaining bridge is to construct its
-Frechet-derivative realization certificate directly from the smooth
-curvature-derived fields.
+assuming that one branch exists. The constituent-field constructor now
+derives the realization by coordinate reconstruction and the Frechet product
+rule. The remaining bridge is reduced to four equality proofs matching the
+II-G2 displayed amplitude/eigen-one-form jets to the actual coordinate
+components of those smooth-field derivatives.
 
 ## Research sequence now adopted
 
@@ -113,9 +115,10 @@ curvature-derived fields.
    **Complete on the explicit generic coordinate patch.**
 2. Formulate differential closure at the tensor level without prematurely
    choosing a scalar sign; classify the reflection-related branches.
-   **The four-way exact obstruction classifier and its zero/one/two local
-   scalar-potential interpretation are complete for realized curvature
-   fields; direct construction of the realization certificate remains.**
+   **The four-way exact obstruction classifier, its zero/one/two local
+   scalar-potential interpretation, and the constituent-field realization
+   constructor are complete; four concrete II-G2 coordinate-jet identities
+   remain.**
 3. Reconstruct the residual Maxwell stress and impose classical Rainich
    differential closure.
 4. Use the scalar and Maxwell equations to identify the EMD coupling, then

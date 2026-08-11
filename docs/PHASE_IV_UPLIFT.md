@@ -28,10 +28,11 @@ The Lean entry theorems are
 The local integration theorem does not assume that the upstream curvature
 construction produces a branch: it may return the exact no-potential case.
 Entering Phase IV is conditional on selecting one of the surviving branches
-and discharging the remaining Phase-III accepted-data conditions. Direct
-construction of the realized Frechet-jet certificate from the smooth
-curvature fields, and null, repeated-root, and global topological cases,
-remain outside this entry theorem.
+and discharging the remaining Phase-III accepted-data conditions. The
+constituent-field constructor now generates the realized Frechet-jet
+certificate automatically once four coordinate-jet identities for the
+concrete smooth curvature fields are proved. Those identities, and null,
+repeated-root, and global topological cases, remain outside this entry theorem.
 
 ## IV.1 — integrate the closed two-form
 

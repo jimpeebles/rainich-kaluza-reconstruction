@@ -80,6 +80,13 @@ candidate Ricci fingerprint and the generic pointwise reconstruction layer:
   closedness, and on an open convex patch it is equivalent to existence of a
   local scalar potential; the resulting zero/one/two-potential list is
   exhaustive, while two finite witnesses rule out both potentials;
+- an automatic constituent-field constructor for that realization:
+  coordinate components reconstruct arbitrary scalar and one-form Frechet
+  derivatives, while the product rule derives the full `d(xθ)` branch jet
+  from the actual amplitude and eigen-one-form jets; callers need only verify
+  the four displayed constituent coordinate-jet identities, with the two
+  amplitude identities already reduced to the differentiated scalar-diagonal
+  equations;
 - an exact Phase-III equivalence between the scalar reconstruction equation
   and the residual Maxwell square law, followed by eigenvector-free Maxwell
   principal-plane projectors on the non-null branch;
@@ -240,8 +247,12 @@ precise analytic meaning for realized curvature fields: each candidate has a
 local scalar potential exactly when its obstruction vanishes. This yields the
 complete zero/one/two local potential list and a sharp no-potential
 certificate without assuming that some branch exists. The next north-star
-step is to instantiate the realization certificate directly from the smooth
-projector/amplitude construction, then feed every surviving branch through
+step is now four concrete identity proofs matching the existing smooth
+projector/amplitude derivatives to their displayed coordinate jets. The two
+amplitude proofs already follow from the corresponding differentiated
+scalar-diagonal identities; the eigen-one-form pair is the live geometric
+calculation. The new constructor then generates the realization and complete
+potential list automatically, and every surviving branch can pass through
 the completed Phase-III and uplift modules. See the
 [`realigned execution plan`](docs/REALIGNED_EXECUTION_PLAN.md) for the ordered
 proof obligations and publication decision points.

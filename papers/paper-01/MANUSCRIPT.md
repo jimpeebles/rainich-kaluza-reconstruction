@@ -329,8 +329,16 @@ On an open convex patch, the Poincare lemma and symmetry of second derivatives
 upgrade (6.10) to an iff with existence of a local scalar potential. Hence
 (6.9) is exactly an exhaustive zero/one/two-potential classification. The
 separate finite witnesses give a sharp proof that neither potential exists;
-no universal branch-existence assumption is present. Direct construction of
-the realization certificate from the smooth curvature fields is the remaining
+no universal branch-existence assumption is present.
+
+The realization itself is now derived from constituent fields rather than
+postulated at the product level. Lean proves that coordinate components
+recover arbitrary scalar and one-form Frechet derivatives, then applies the
+Frechet product rule to obtain the displayed derivative of each `xθ`
+component. Consequently four equalities—two amplitude jets and two
+eigen-one-form jets with the coordinate components of the concrete smooth
+II-G2 derivatives—are sufficient to construct the entire realized patch and
+(6.10) automatically. These four concrete identities are the remaining
 composition seam.
 
 ## 7. Polynomial obstruction and false positives

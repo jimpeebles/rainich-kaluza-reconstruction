@@ -167,14 +167,16 @@ assumption from the decision interface.
 
 The branch-selection layer now proves more than conditional uniqueness.
 `CurvatureBranchIntegration.lean` identifies the displayed coordinate jets
-with genuine Frechet derivatives through an explicit realization structure,
-and proves that each obstruction vanishes iff the corresponding one-form is
-closed. On an open convex patch this is iff a local scalar potential exists.
-Thus the four obstruction cases are exactly an exhaustive one/one/two/zero
-potential classification, and the finite no-branch witnesses rule out both
-potentials. The remaining Phase-II curvature seam is to construct that
-realization structure directly from the smooth projector/amplitude fields;
-HC1 is a downstream test of every surviving scalar branch.
+with genuine Frechet derivatives and proves that each obstruction vanishes
+iff the corresponding one-form is closed. On an open convex patch this is iff
+a local scalar potential exists. Thus the four obstruction cases are exactly
+an exhaustive one/one/two/zero potential classification, and the finite
+no-branch witnesses rule out both potentials. Coordinate components now
+recover arbitrary scalar/one-form Frechet derivatives, and the product rule
+automatically constructs the realized branch from actual amplitude and
+eigen-one-form jets. The remaining Phase-II curvature seam is four concrete
+coordinate-jet identities for the II-G2 smooth definitions; HC1 is a
+downstream test of every surviving scalar branch.
 
 ### Phase-II exit criterion
 
@@ -378,10 +380,10 @@ stated gauge/discrete freedoms.
 This exit has two necessary layers. The **uplift-module layer** is complete
 for the explicit accepted-data certificate: intrinsic chart-independent
 packaging, exhaustive IV.4 orbit classification, and the conditional
-forward/converse assembly are proved. The **curvature-entry layer** must
-instantiate the realized Frechet-jet certificate from the upstream Phase-II
-smooth projector/amplitude fields and compose the resulting exact branch list
-with the Phase-III decision interface.
+forward/converse assembly are proved. The **curvature-entry layer** must prove
+the four remaining II-G2 constituent coordinate-jet identities; RK-R2p then
+constructs the realized Frechet-jet certificate automatically and supplies
+the exact branch list for composition with the Phase-III decision interface.
 The first layer may be completed and used by exact-metric tests without
 claiming that Phase IV itself has exited. The canonical dependency order is
 specified in `REALIGNED_EXECUTION_PLAN.md`.

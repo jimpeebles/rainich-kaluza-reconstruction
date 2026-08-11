@@ -494,9 +494,13 @@ realized-field theorem is verified by
 `minusScalarPotentialExists_iff_curvatureBranchCloses`,
 `exhaustive_local_scalarPotential_classification`, and
 `no_local_scalarPotentialBranch_of_witnesses`. It returns exactly zero, one,
-or two local potentials without assuming that a branch exists. Directly
-building the Frechet-jet realization certificate from the smooth curvature
-fields remains part of the overall composition problem.
+or two local potentials without assuming that a branch exists. The additional
+theorems `scalarField_fderiv_eq_coordinateEvaluation`,
+`oneFormField_fderiv_eq_coordinateEvaluation`, and
+`CurvatureScalarBranchComponentPatch4.alphaFDeriv`/`betaFDeriv` construct the
+realization automatically from the constituent coordinate jets. The four
+concrete II-G2 jet identifications remain part of the overall composition
+problem.
 
 ## Proposition G14 — closed physical fields and the uplift handoff
 

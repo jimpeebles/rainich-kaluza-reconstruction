@@ -171,7 +171,9 @@ coupling-orientation, and product-presentation orbits. The certificate does
 not assert that curvature supplies the bridge; constructing an accepted
 closed branch remains the upstream curvature-entry obligation. RK-R2o now
 settles the scalar-potential part once the smooth curvature jet is realized as
-the actual Frechet derivative of its spectral one-form field.
+the actual Frechet derivative of its spectral one-form field, and RK-R2p
+reduces that realization to four concrete constituent coordinate-jet
+identities.
 
 ## Upstream curvature gate for the official Phase-IV exit
 
@@ -238,17 +240,26 @@ with Mathlib closedness for genuine differentiable one-form fields whose
 displayed jets are their actual Frechet derivatives. On every open convex
 patch, obstruction vanishing is iff local scalar-potential existence, all
 zero/one/two-potential outcomes are exhaustive, and the two witnesses rule
-out both potentials. No existence assumption is made. The remaining
-curvature-entry seam is to instantiate the explicit realization certificate
-directly from the II-G2 smooth projector and amplitude fields; downstream HC1
-then tests each surviving branch rather than deciding scalar integrability.
+out both potentials. No existence assumption is made. RK-R2p now removes the
+derived product-rule assumption: coordinate components reconstruct arbitrary
+scalar and one-form Frechet derivatives, and
+`CurvatureScalarBranchComponentPatch4.ofCoordinateFDerivs` automatically
+builds the realized branch certificate and exact potential list from the
+constituent amplitude/eigen-one-form jets. The remaining curvature-entry seam
+is exactly four concrete coordinate-jet identifications for the II-G2 smooth
+field definitions. The two amplitude identifications now follow from named
+theorems once the differentiated scalar-diagonal equations are supplied; the
+two eigen-one-form identifications are the remaining geometric pair.
+Downstream HC1 then tests each surviving branch rather than deciding scalar
+integrability.
 
 ### IV-N1 — north-star composition
 
-Instantiate the RK-R2o realization from the II-G2 smooth curvature fields,
-then compose II-G1--II-G3, the completed Phase-III decision interface, and
-IV-C1 into the finite-order curvature-only local recognition theorem. Every
-null, repeated-root, zero-trace, and topological exclusion remains explicit.
+Prove the four RK-R2p constituent coordinate-jet identities for the II-G2
+smooth curvature fields, then compose II-G1--II-G3, the completed Phase-III
+decision interface, and IV-C1 into the finite-order curvature-only local
+recognition theorem. Every null, repeated-root, zero-trace, and topological
+exclusion remains explicit.
 
 **Official Phase-IV gate:** IV-G1, IV-G2, IV-O1, IV-C1, and IV-N1 are all
 complete. A conditional uplift theorem alone does not close this gate.
@@ -320,9 +331,12 @@ research result.
 
 ## Immediate execution order
 
-1. Instantiate `RealizedCurvatureScalarBranchPatch4` from the existing smooth
-   projector/amplitude fields and their computed first jets; then pass every
-   scalar-potential branch returned by the exact classifier to Phase III.
+1. Prove that the two reconstructed amplitude jets and two eigen-one-form jets
+   equal the coordinate components of the actual II-G2 Frechet derivatives.
+   The amplitude pair is reduced to the differentiated scalar-diagonal
+   identities, so prioritize the eigen-one-form derivative pair. RK-R2p then
+   constructs the realized patch and passes its complete scalar-potential
+   branch list to Phase III automatically.
 2. In parallel, use the operational V-T1 harness to recover the V-T2 rotating
    source and convention map; feed its exact jets through the same obstruction
    interface.

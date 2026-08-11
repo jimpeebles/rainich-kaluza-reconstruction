@@ -224,9 +224,33 @@ blocks are proved. `R̂₅₅` is the convention-fixed scalar equation,
 residual plus the exact scalar trace correction. The opposite mixed block is
 proved equal under commuting gauge second jets, so vanishing of the full
 `5×5` Ricci tensor is Lean-proved equivalent, in both directions, to the
-full normal-frame EMD system. The remaining Phase-IV obligations are to lift this coordinate-jet
-result to smooth fields on a local circle product and finish the IV.4
-uniqueness/orbit classification.
+full normal-frame EMD system. The first smooth realization layer now extracts
+these arrays from actual `C²` fields, proves their Schwarz symmetries, extends
+the assembled metric circle-invariantly to a local product, and matches its
+point value, first derivative, and complete second derivative to the
+coordinate calculation. The remaining Phase-IV obligations are the intrinsic
+Ricci identification and the IV.4 uniqueness/orbit classification. The first
+of these has now been narrowed substantially: an ansatz-independent coordinate
+Levi--Civita/Ricci layer is proved equal both to the Kaluza contraction and to
+the curvature built from the actual local-product metric derivatives. The
+arbitrary invertible affine coordinate-change case is now also complete:
+Lean derives the transformed inverse jet, connection, differentiated
+connection, and covariant Ricci law and proves that affine pullback both
+preserves and reflects Ricci-flatness. No orthogonal or block-preserving
+restriction is imposed, so the theorem includes affine changes mixing base
+and circle directions. The genuinely nonlinear chart law, where the
+connection has an inhomogeneous second-coordinate-derivative term, has now
+been reduced to one metric realization identity. Lean derives the
+inhomogeneous Christoffel law from the transformed metric first jet, certifies
+the inverse-Jacobian derivative and product-rule differentiated connection,
+and proves full nonlinear covariance and flatness equivalence for the
+resulting connection Ricci contraction. Both the pure-coordinate and mixed
+Hessian/old-connection cancellations are explicit theorems. The transformed
+metric second jet is also constructed and its first-kind differentiated
+connection law is verified. It remains to prove that raising its first-kind
+jet gives exactly the certified nonlinear differentiated connection. After
+that, the coordinate-Ricci specialization and pseudo-Riemannian manifold
+packaging—not the component curvature formula—remain.
 
 ## Evidence inherited from earlier conversations
 

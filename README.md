@@ -123,6 +123,10 @@ candidate Ricci fingerprint and the generic pointwise reconstruction layer:
   trace correction. Mixed-order symmetry is proved for genuine second jets,
   and vanishing of the full `5×5` Ricci tensor is Lean-proved equivalent in
   both directions to the convention-fixed normal-frame EMD system;
+- a smooth coordinate-germ realization: actual componentwise `C²` fields in
+  normal coordinates and radial gauge assemble into a circle-invariant local
+  product metric whose point value, first derivative, and complete Hessian are
+  exactly the jets used by the Ricci-flatness/EMD equivalence;
 - an exterior-form complexion theorem reducing both EMD equations to explicit
   seed channels, together with the generic collapse of constant duality to
   overall sign and its zero-coupling/inactive-source exceptions;
@@ -152,9 +156,20 @@ repeated-root cases, or settle global bundle topology. The full IV.3
 coordinate-jet reduction is now complete: the full five-dimensional Ricci
 tensor vanishes if and only if the convention-fixed normal-frame EMD
 Einstein, weighted Maxwell, and scalar residuals vanish. What remains before
-claiming a local Ricci-flat uplift theorem is the smooth manifold/normal-
-coordinate wrapper for that audited calculation, followed by the uniqueness
-classification of IV.4.
+claiming a local Ricci-flat uplift theorem is now narrower. The smooth
+coordinate-germ wrapper extracts the jets from actual `C²` fields, derives all
+mixed-partial symmetries by Schwarz's theorem, extends the assembled metric
+circle-invariantly to a local product, and identifies its point value, first
+derivative, and complete second derivative with the audited Kaluza jets. The
+resulting curvature is now proved to be the ansatz-independent standard
+coordinate Levi--Civita/Ricci contraction of those actual derivatives. The
+affine coordinate seam is also closed for every invertible constant Jacobian,
+including changes mixing base and circle directions, with Ricci-flatness
+preserved and reflected. The universal inhomogeneous nonlinear connection and
+Ricci cancellation is now proved for arbitrary coordinate three-jets as well.
+The remaining chart seam is one metric-second-jet raising/product-rule
+identity, followed by intrinsic pseudo-Riemannian manifold packaging and the
+uniqueness classification of IV.4.
 
 The current result also corrects an earlier uniqueness expectation: on the
 genuinely two-component generic branch, curvature algebra determines the

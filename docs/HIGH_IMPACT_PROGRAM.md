@@ -309,9 +309,35 @@ equation, `R̂_{n5}` with the weighted Maxwell equation, and `R̂_{np}` with
 the EMD Einstein residual plus `g_{np}/(2√3)` times the scalar residual. A
 named mixed-order symmetry theorem closes the opposite block, and a single
 forward-and-converse theorem now proves that the full `5×5` Ricci tensor
-vanishes exactly when the normal-frame EMD system holds. The remaining
-uplift step is the smooth local-product/normal-coordinate wrapper for this
-coordinate-jet theorem.
+vanishes exactly when the normal-frame EMD system holds. The smooth
+coordinate-germ wrapper in `KaluzaFieldReduction.lean` now starts from actual
+`C²` fields in base normal coordinates and radial gauge. These generate all
+required commuting jets by Schwarz's theorem; the uplift extends
+circle-invariantly to the local product,
+and its point value, first derivative, and full second derivative are proved
+equal to the audited metric jets. `CoordinateRicci.lean` now defines the
+ansatz-independent coordinate Levi--Civita connection, its differentiated
+connection, and Ricci contraction; the Kaluza expression is proved to be its
+exact specialization, and the actual local-product derivatives satisfy the
+resulting Ricci-flatness/EMD equivalence. The remaining geometric bridge is
+now closed for every invertible affine coordinate change. The inverse metric
+jet, connection, differentiated connection, and Ricci tensor obey their exact
+transformation laws, and inverse-Jacobian contraction proves that the Ricci
+pullback is injective. Thus Ricci-flatness is preserved and reflected even by
+affine changes mixing base and circle directions. The remaining bridge is the
+nonlinear chart law and intrinsic packaging. Most of its universal algebra is
+now complete in `NonlinearCoordinateRicci.lean`: a coordinate two-jet applied
+to the metric first jet yields the exact inhomogeneous Christoffel law; a
+coordinate three-jet supplies the forced inverse-Jacobian derivative and full
+product-rule differentiated connection; and Lean proves that its Ricci
+contraction transforms covariantly and that nonlinear pullback preserves and
+reflects Ricci-flatness. The proof separately checks the pure-coordinate
+third-derivative/quadratic cancellation and the mixed old-connection/Hessian
+cancellation. The complete transformed metric second jet is constructed and
+its differentiated first-kind cancellation is verified. One explicit
+second-kind raising/product-rule identity remains before this universal result
+becomes an unconditional coordinate-Ricci theorem for the actual Kaluza
+metric. Intrinsic pseudo-Riemannian packaging follows that identity.
 
 ### Phase-IV exit criterion
 

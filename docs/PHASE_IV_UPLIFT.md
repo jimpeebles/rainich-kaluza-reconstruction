@@ -224,10 +224,45 @@ holds. The Christoffel-trace lemma
 determinant of the assembly layer.
 
 Thus the coordinate-algebra part of IV.3, including its forward/converse
-equivalence, is complete. The remaining geometric obligation is to package
-the jet arrays as derivatives of smooth fields in base normal coordinates
-and radial gauge on a local product with the circle. That wrapper must also
-relate the audited block condition to the intrinsic statement `Ric(ĝ)=0`;
+equivalence, is complete. `KaluzaFieldReduction.lean` now supplies the smooth
+coordinate-germ wrapper with actual `C²` scalar, potential, and metric fields in base normal
+coordinates and radial gauge. It extracts `phi1`, `phi2`, `A1`, `A2`, and
+`g2` from Frechet derivatives; Schwarz's theorem proves every derivative-slot
+symmetry; eventual symmetry of the metric proves the metric-slot symmetry.
+The assembled metric is extended circle-invariantly to the local product,
+and its value, first derivative, and complete second derivative are proved
+equal to `kaluzaNormalGaugePointMetric`, `kaluzaNormalGaugeMetricJet`, and
+`kaluzaNormalGaugeMetricJet2`. The last statement is the assembled theorem
+`KaluzaNormalGaugeFieldsAt.upliftSecondJetMatches`, built from reusable C²
+exponential, product, and sum Hessian rules rather than a postulated jet.
+
+`CoordinateRicci.lean` now removes the ansatz from the curvature definition:
+it defines the standard finite-coordinate Levi--Civita symbols, differentiated
+connection, and Ricci contraction from arbitrary inverse, first-, and
+second-metric jets. The Kaluza Ricci expression is proved equal to this generic
+coordinate Ricci tensor. Moreover the genuine five-coordinate Frechet
+derivatives of the actual circle-invariant local-product metric are proved to
+be precisely those jets, its point inverse is certified, and
+`localProductCoordinateRicciFlat_iff_emd` gives the resulting geometric
+coordinate-germ equivalence.
+
+The first chart-independence seam is now closed for arbitrary invertible
+affine changes of all five coordinates. `AffineCoordinateRicci.lean` derives
+the inverse-jet, connection, differentiated-connection, and Ricci
+transformation laws and proves the covariant pullback injective. Thus the
+Ricci-flatness/EMD equivalence survives every constant Jacobian, including
+ones mixing base and circle directions. The remaining seam is specifically
+nonlinear and intrinsic. The universal inhomogeneous cancellation is now
+proved in `NonlinearCoordinateRicci.lean`: nonlinear coordinate two-jets give
+the inhomogeneous Christoffel law, coordinate three-jets give the differentiated
+connection, and its Ricci contraction has the exact covariant law with a
+two-sided flatness equivalence. The proof audits pure-coordinate and mixed
+terms independently. A transformed metric second jet is also constructed,
+with its differentiated first-kind cancellation proved. The remaining chart
+identity is precisely that raising this first-kind jet produces the certified
+product-rule differentiated connection; it immediately unlocks the
+coordinate-Ricci and Kaluza specializations. Mathlib does not currently
+provide a ready-made Lorentzian Ricci API for the later intrinsic layer.
 IV.4 then supplies the orbit classification.
 
 ## IV.4 — uniqueness and exit condition

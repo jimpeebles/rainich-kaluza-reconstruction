@@ -146,7 +146,18 @@ nondegeneracy hypothesis.
   Einstein residual plus its exact scalar trace correction. Mixed-order
   symmetry is certified for genuine second jets, and vanishing of the full
   `5×5` Ricci tensor is Lean-proved equivalent to the complete normal-frame EMD
-  system. The smooth local-product/normal-coordinate wrapper is next.**
+  system. The smooth coordinate-germ wrapper is now complete through second
+  order: actual `C²` fields generate every symmetric jet automatically, and
+  the assembled circle-invariant local-product metric has the audited point
+  value, first jet, and full Hessian. Its curvature calculation is now
+  identified with an ansatz-independent coordinate Levi--Civita/Ricci
+  definition. Arbitrary invertible affine coordinate covariance is also
+  complete, including changes mixing base and circle directions, and
+  Ricci-flatness is preserved and reflected. The full inhomogeneous nonlinear
+  connection/Ricci cancellation is now verified for arbitrary coordinate
+  three-jets. The transformed metric second jet and its first-kind derivative
+  law are constructed; one second-kind raising/product-rule identity remains
+  before intrinsic pseudo-Riemannian manifold packaging.**
 
 Exit criterion: Paper I candidate with manuscript-to-Lean claim translation.
 

@@ -23,6 +23,10 @@ import RainichKaluza.KaluzaChristoffel
 import RainichKaluza.KaluzaRicci
 import RainichKaluza.KaluzaRicciMixed
 import RainichKaluza.KaluzaRicciBase
+import RainichKaluza.CoordinateRicci
+import RainichKaluza.AffineCoordinateRicci
+import RainichKaluza.NonlinearCoordinateRicci
+import RainichKaluza.KaluzaFieldReduction
 import RainichKaluza.MaxwellDualityOrbit
 import RainichKaluza.DualityComplexionDerivative
 import RainichKaluza.ComplexionCouplingSystem

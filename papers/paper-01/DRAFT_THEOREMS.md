@@ -391,8 +391,143 @@ Status: verified by `ExteriorDualityJet.rotatedDF_eq`,
 `ExteriorDualityJet.rotatedDG_eq`, `emdExteriorClosure_iff_seedChannels`,
 `constantDuality_eq_sign_of_emd`,
 `constantDuality_emd_of_zero_coupling`, and
-`constantDuality_emd_of_inactive_source`. Curvature construction of the seed
-derivative three-forms remains open.
+`constantDuality_emd_of_inactive_source`.
+
+## Proposition G11 — transported Maxwell-seed first jet
+
+Let `L` be a Lorentz coframe, `K=L⁻¹`, and let `dL,dq` denote evaluation of
+their first derivatives in one tangent direction. For
+
+`𝓕₀=Lᵀ𝓕can(q)L`, `𝓕can(q)=√(2q)e⁰∧e¹`,
+
+set `Ω=(dL)K`. On `q>0`,
+
+`d𝓕₀=Lᵀ(Ωᵀ𝓕can+(dq/2q)𝓕can+𝓕canΩ)L`.
+
+The derivative remains skew. If the Lorentz equation is differentiated, then
+`ΩG+GΩᵀ=0`, so the non-amplitude part of the seed derivative is exactly a
+Lorentz-connection action. The identical formula holds for the transported
+canonical Hodge partner.
+
+Status: verified by
+`canonicalPositiveQAmplitudeDerivative_eq_logarithmic`,
+`transportedTwoFormDerivative_eq_connectionTransport`,
+`lorentzFrameConnection_mem_lorentzLie`,
+`transportedPositiveQSeedDerivative_eq_connectionFormula`, and
+`transportedPositiveQHodgeSeedDerivative_eq_connectionFormula`.
+
+## Proposition G12 — local exterior obstruction and generic orbit list
+
+In an oriented four-dimensional coordinate trivialization, with the Lorentz
+coframe orientation matched to the spacetime Hodge convention, exteriorize
+the four directional first derivatives of the transported seed and Hodge seed by cyclic
+antisymmetrization. Both outputs are alternating three-forms. Substituting
+them into Proposition G10 gives two explicit obstruction forms
+
+`𝓞_F(L,dL,q,dq,ω,v,a)`, `𝓞_G(L,dL,q,dq,ω,v,a)`.
+
+The local rescaled Bianchi and Maxwell equations hold if and only if
+
+`𝓞_F=0`, `𝓞_G=0`.
+
+Thus, for every scalar branch and every candidate `(ω,a)` recovered from
+nondegenerate channels, the remaining Phase-III test is a finite exact
+vanishing test. On an accepted branch with `a≠0` and active scalar source,
+the constant duality orbit is exactly the two overall signs. The full circle
+is retained only on the previously classified exceptional loci.
+
+Status: verified by `matrixExteriorDerivative_alternating`,
+`matrixOneWedgeTwoTensor_alternating`,
+`localPositiveQSeedExteriorDerivative_alternating`,
+`localPositiveQHodgeSeedExteriorDerivative_alternating`,
+`localPositiveQ_emdClosure_iff_obstructions_zero`, and
+`localPositiveQ_constantDuality_eq_sign`. This is the generic local Phase-III
+exit theorem conditional on the upstream scalar branch and its first jet; it
+does not claim the null, repeated-root, or global topological cases.
+
+## Proposition G13 — generic scalar-branch integration
+
+Let `U` be an open convex coordinate patch and let `α,β` be differentiable
+one-form fields representing the two spectral components of the reconstructed
+scalar covector. Then the two relative-sign branches `α+β` and `α-β` are both
+closed if and only if `α` and `β` are separately closed. Away from that
+exceptional locus, if either relative-sign branch is closed, exactly one is
+closed.
+
+Every such closed branch has a scalar potential `φ` on `U`, with `dφ=v`.
+The potential is unique up to an additive constant. Reversing the scalar
+orientation sends `(v,φ)` to `(-v,-φ)`.
+
+Status: verified by `both_relativeSign_scalarOneForms_closed_iff`,
+`relativeSign_scalarPotential_exists_unique_branch`,
+`exists_scalarPotential_of_closed`,
+`scalarPotential_unique_up_to_constant`, and
+`neg_isScalarPotentialOn`. The potential theorem specializes Mathlib's
+Poincare lemma for one-forms on convex sets. The theorem is conditional on the
+existence of a closed relative-sign branch; deriving that existence from the
+curvature conditions remains part of the overall sufficiency problem.
+
+## Proposition G14 — closed physical fields and the uplift handoff
+
+Suppose the local Phase-III obstruction pair vanishes for the accepted scalar
+branch and reconstructed rescaled Maxwell pair `(𝓕,𝓖)`. Let `v=dφ`. The
+weights
+
+`r₋=exp(-aφ/2)`, `r₊=exp(aφ/2)`
+
+have derivatives
+
+`dr₋=-(a/2)r₋v`, `dr₊=(a/2)r₊v`.
+
+Consequently the product rule and the two rescaled EMD equations give
+
+`d(r₋𝓕)=0`, `d(r₊𝓖)=0`.
+
+The first closed two-form is the physical Maxwell field required for the
+Kaluza uplift; the second is its closed weighted dual flux. If the recovered
+orientation-independent coupling satisfies `a²=3`, one of the two scalar
+orientations has the convention-fixed value `a=√3`.
+
+Status: verified by `hasFDerivAt_negativeEMDWeight`,
+`hasFDerivAt_positiveEMDWeight`,
+`closed_unscaledMaxwell_of_rescaled_bianchi`,
+`closed_weightedHodgeFlux_of_rescaled_maxwell`,
+`localPositiveQ_obstructions_give_closed_exponentialWeightJets`, and
+`kaluzaCoupling_has_positive_orientation`. This is the formal entry point to
+Phase IV.
+
+## Proposition G15 — radial homotopy curvature core
+
+For a continuous alternating two-form field `F` on a star-shaped coordinate
+patch centered at the origin, define
+
+`A_x(v)=∫₀¹ t F_(tx)(x,v) dt`.
+
+Then `A_0=0` and `A_x(x)=0`. Let `DF` be a supplied first derivative satisfying
+alternation in the form slots and the cyclic closedness identity. The
+antisymmetrization of the formally differentiated radial integrand is
+
+`d/dt [t² F_(tx)(u,v)]`.
+
+Consequently, whenever the displayed derivative and integrability hypotheses
+hold, the antisymmetrization of the integrated derivative candidate equals
+`F_x(u,v)`. At a single point every alternating `F` has a potential jet, and
+two jets with the same curvature differ by a symmetric jet. At field level,
+two differentiable potentials with equal curvature obey `A'-A=dχ` locally,
+with `χ` unique up to a constant. Moreover the Kaluza expressions `dz+cA` and
+`u g+v(dz+cA)²` are invariant under the paired connection/fiber gauge shift;
+the full bilinear block is symmetric and nondegenerate whenever the base
+metric is symmetric and nondegenerate and the two warp factors are nonzero.
+
+Status: the radial operator, radial gauge, dominated differentiation
+interface, fundamental-calculus identity, pointwise and field-level gauge
+orbits, and symmetric nondegenerate Kaluza block assembly with gauge invariance
+are verified in
+`RadialGaugePotential.lean`. The remaining
+field-level splice is to discharge the dominated differentiation hypotheses
+from a concise regularity package for `F`, identifying the verified derivative
+candidate with `dA`. The pointwise jet result is explicitly not a substitute
+for this analytic step.
 
 ## Target Theorem H — local generalized Rainich–Kaluza reconstruction
 

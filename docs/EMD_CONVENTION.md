@@ -113,13 +113,21 @@ allowed. The non-null denominator is an explicit branch restriction.
 
 `DifferentialCoupling.lean` formalizes the abstract compatibility equations,
 coupling uniqueness on a nonzero channel, probe formulas for `a` and `a²`, and
-the `(v,a)↦(-v,-a)` orientation symmetry. It does not yet formalize exterior
-differentiation or reconstruct the entries of (E9)--(E10) from curvature.
+the `(v,a)↦(-v,-a)` orientation symmetry. `ExteriorComplexion.lean`,
+`LocalExteriorSeed.lean`, `PhaseIVReadiness.lean`, and
+`RadialGaugePotential.lean` now formalize the local
+exterior product rules, explicit seed-channel obstruction forms, scalar
+integration, exponential unweighting, and closure of the physical Maxwell
+field for every accepted generic local branch, followed by the radial
+potential candidate and its convention-independent Kaluza gauge algebra.
 
 ## Scope boundary
 
 This note fixes the field-equation provenance and derives the rescaled
-differential identities. It does not prove that curvature reconstructs forms
-satisfying those identities, the scalar equation, closure of a reconstructed
-one-form, or five-dimensional local uplift. Those remain differential closure
-obligations for the larger project.
+differential identities. The repository now gives an exact conditional local
+decision for those identities and integrates any accepted closed scalar
+branch. It does not prove that every pointwise curvature candidate supplies a
+closed scalar branch, cover degenerate branches, finish the uniform analytic
+splice identifying the radial derivative candidate with `dA`, or prove the
+five-dimensional local uplift. Those are the remaining sufficiency and
+Phase-IV obligations.

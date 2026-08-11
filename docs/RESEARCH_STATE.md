@@ -104,7 +104,7 @@ nonzero scalar amplitudes are rationally reconstructed from characteristic and
 root derivatives. Combining these results into smooth one-form derivatives
 and antisymmetrizing into `dα,dβ` remains open.
 
-Phase III has now begun. For `S=𝓡-V`, the reconstruction equation is
+Phase III has reached its generic local decision interface. For `S=𝓡-V`, the reconstruction equation is
 Lean-verified to be equivalent to `S²=q²I` once the scalar square law is
 imposed, and matching traces make `S` tracefree. On the non-null branch,
 `S/q` yields two orthogonal polynomial projectors `½(I±S/q)` resolving the
@@ -117,9 +117,8 @@ and unique. Its derivative contains exactly one complexion rate. Moreover, a
 two-probe system with determinant `Δ=z₁y₂-z₂y₁≠0` uniquely recovers that rate
 and the signed EMD coupling simultaneously. This exposes a new explicit
 degenerate locus `Δ=0` where those two differential responses cannot be
-separated by the chosen probes. The remaining obligations are smooth
-exterior-form assembly, differential closure, and construction of the probe
-data from exterior derivatives.
+separated by the chosen probes. The candidate recovered from those probes is
+now validated by exact local exterior obstruction forms.
 
 The canonical square-root clause itself is no longer merely schematic. Lean
 now represents `𝓕=Ee⁰∧e¹+Be²∧e³` as an explicit antisymmetric `4×4` tensor,
@@ -127,18 +126,16 @@ raises indices with the `(-,+,+,+)` metric, and evaluates the Maxwell stress
 definition component by component. It obtains the tracefree
 `diag(-ρ,-ρ,ρ,ρ)` form, square law, nonnegative energy density, Hodge action,
 and duality invariance. Every `q>0` canonical residual has the explicit real
-seed `E=√(2q),B=0`. The remaining geometric issue is transporting and patching
-this canonical construction over smooth oriented principal-plane bundles—not
-existence of a canonical algebraic square root.
+seed `E=√(2q),B=0`. Its local transport and patching algebra is now complete
+on a fixed-probe principal-frame patch.
 
 The coordinate dependence of that calculation has now also been removed at
 the finite-dimensional level. For any supplied Lorentz frame and inverse,
 Lean proves that congruence transport preserves antisymmetry and carries the
 matrix Maxwell stress by similarity. The square identity and complementary
 principal-projector splitting transport with it, and the positive-`q` seed
-realizes the transported residual. What remains is no longer a frame-algebra
-calculation: it is the smooth bundle theorem producing local oriented Lorentz
-frames from the projector fields and describing their transition functions.
+realizes the transported residual. The following fixed-probe construction
+produces the required local Lorentz frames explicitly.
 
 An explicit principal-frame construction has now reduced that theorem further.
 Lean verifies Lorentzian and spacelike two-plane Gram--Schmidt, proves that the
@@ -158,8 +155,8 @@ their scalar functions are continuous. On such a patch, Lean now proves that
 the fixed-probe tetrad, its matrix, and the transported positive-`q` seed are
 `C^n`. Its transpose is a Lorentz coframe, `K=G LᵀG` is a smooth two-sided
 inverse, and the seed has the transported residual as its Maxwell stress. The
-remaining geometric connector is intrinsic bundle orientation/connection and
-exterior-form assembly.
+evaluated first-jet connection and exterior-form assembly are now complete in
+that local trivialization.
 
 For the Maxwell seed overlaps, the transition algebra is now verified beyond
 the constant case. Unit duality parameters have an associative composition,
@@ -167,9 +164,9 @@ identity, inverse, and action cocycle. Applying the product rule to a variable
 transition of rate `τ` gives the exact Lean-checked law `ω↦ω+τ`. A local
 connection coefficient transforming as `A↦A+τ` therefore makes `ω-A`
 overlap-invariant. The evaluated two-channel reconstruction obeys the same
-law, while its recovered EMD coupling is invariant. The remaining problem is
-to instantiate this algebra with smooth transition maps, connection one-forms,
-and curvature-derived exterior-form channels on the principal-plane bundles.
+law, while its recovered EMD coupling is invariant. This supplies the local
+overlap law; global transition topology is not part of the generic local
+claim.
 
 At the exterior-algebra level, the duality product rule and both EMD closure
 equations are now formalized with one-, two-, and three-form types. The exact
@@ -178,6 +175,40 @@ with an active source channel breaks constant duality from a circle to the
 overall sign. Lean also verifies the complementary exceptional cases: the
 full circle survives at zero coupling or when both scalar-source wedge
 channels vanish.
+
+The transported seed has now also been differentiated explicitly. With
+`Ω=(dL)L⁻¹`, Lean separates the derivative into the amplitude term
+`(dq/2q)𝓕can` and the Lorentz-frame terms
+`Ωᵀ𝓕can+𝓕canΩ`, and proves that the differentiated Lorentz constraint puts
+`Ω` in the Lorentz Lie algebra. Exteriorizing four such directional
+derivatives produces alternating seed and Hodge-seed three-forms. Two explicit
+obstruction forms vanish if and only if the full local EMD closure equations
+hold. Together with channel recovery and the constant-orbit theorem, this
+completes the conditional generic local Phase-III output: either a certified
+empty list or the accepted `(v,𝓕,a)` orbit, with only overall sign on the
+active nonzero-coupling locus.
+
+The local scalar and weighting handoff is now in place as well. For actual
+differentiable one-form fields on an open convex patch, Lean proves the
+relative-sign closure theorem and integrates the unique generic closed branch
+to `v=dφ` using Mathlib's Poincare lemma. The potential is unique up to an
+additive constant. Lean differentiates `exp(∓aφ/2)` and proves directly that
+accepted Phase-III data give a closed physical Maxwell two-form and a closed
+weighted Hodge flux. The orientation-independent condition `a²=3` always
+permits one scalar orientation with `a=√3`. Phase IV now has a constructive
+radial homotopy operator for the two-form. Lean proves radial gauge and proves,
+from the cyclic closedness identity and the fundamental theorem of calculus,
+that the integrated derivative candidate has curvature exactly `F`. A
+specialization of Mathlib's dominated parametric-integral theorem records the
+honest analytic conditions needed to identify that candidate with the
+derivative of the potential. Lean also verifies the pointwise gauge-jet orbit,
+proves the field-level local relation `A'-A=dχ` and uniqueness of `χ` up to a
+constant, and proves invariance of `dz+cA` and the warped Kaluza metric under
+the compensating fifth-coordinate shift. The full bilinear block is also
+proved symmetric and nondegenerate under the expected base hypotheses. The
+immediate open splice is to discharge the
+domination hypotheses from a practical smoothness package; metric coefficient
+derivation and Ricci-flatness follow after it.
 
 ## Evidence inherited from earlier conversations
 

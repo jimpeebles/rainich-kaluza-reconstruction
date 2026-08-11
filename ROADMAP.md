@@ -48,7 +48,9 @@ nondegeneracy hypothesis.
   a closed relative-sign branch makes that branch unique. **Complete in Lean
   as an abstract linear differential theorem; geometric existence remains
   open.**
-- State and prove the closure condition implying local exactness.
+- State and prove the closure condition implying local exactness. **Complete
+  on open convex coordinate patches using Mathlib's one-form Poincare lemma;
+  the potential is unique up to an additive constant.**
 - Apply Maxwell–Rainich algebraic and differential conditions to `S = R - V`.
 - Add the Kaluza scalar equation and duality-complexion datum.
 - Derive the rescaled Maxwell differential channels and prove abstract
@@ -78,22 +80,24 @@ nondegeneracy hypothesis.
   obeying the Maxwell square identity. **Complete in Lean under the explicit
   scalar square and trace hypotheses.**
 - Normalize the non-null Maxwell residual and reconstruct its two principal
-  projectors without eigenvectors. **Complete in Lean; real two-form square
-  root and complexion reconstruction remain open.**
+  projectors without eigenvectors. **Complete in Lean; the real two-form
+  square root and complexion reconstruction are completed below.**
 - Classify the non-null canonical Maxwell square roots as a duality orbit.
   **Complete in Lean at the principal-frame amplitude level, including a
-  constructive and unique duality parameter; geometric two-form lift open.**
+  constructive and unique duality parameter; the geometric local lift is
+  completed below.**
 - Differentiate the duality orbit and solve simultaneously for the complexion
   rate and EMD coupling. **Unique unit-circle rate and nondegenerate two-probe
-  recovery are complete in Lean; exterior-form channel identification open.**
+  recovery are complete in Lean; exterior-form channel identification and
+  full obstruction validation are completed below.**
 - Realize the canonical amplitudes as a Lorentzian two-form and verify its
   stress tensor, Rainich square, energy sign, Hodge action, and positive-`q`
-  seed. **Complete in Lean in an explicit orthonormal frame; smooth transport
-  and frame-independent patching remain open.**
+  seed. **Complete in Lean in an explicit orthonormal frame, with smooth local
+  transport and patching completed below.**
 - Prove Lorentz-frame covariance of the two-form seed, Maxwell stress, square
   law, and principal projectors. **Complete in Lean for supplied mutually
-  inverse Lorentz matrices; smooth local-frame construction and overlap
-  topology remain open.**
+  inverse Lorentz matrices; smooth local-frame construction and local overlap
+  algebra are completed below.**
 - Construct principal-plane frames from the curvature-polynomial projectors.
   **Explicit Lorentzian/spacelike Gram--Schmidt, projector-range preservation,
   cross-plane orthogonality, and the projected-probe pseudo-orthonormal tetrad
@@ -104,20 +108,32 @@ nondegeneracy hypothesis.
   exactly the residual. Strict Gram signs persist locally for continuous data.
   The fixed-probe tetrad, frame matrix, and transported seed are now proved
   `C^n` on each strict sign patch. The Lorentz coframe, explicit smooth
-  inverse, and transported stress equality are also complete. Intrinsic bundle
-  orientation/connection and exterior-form assembly remain.**
+  inverse, transported stress equality, evaluated connection, and local
+  exterior-form assembly are also complete.**
 - Formalize local-seed overlap transitions and complexion patching. **The
   duality group law, inverse, cocycle, and full variable-transition rate law
   `ω↦ω+τ` are complete in Lean. The corrected quantity `ω-A` and the recovered
-  coupling are overlap invariant when `A↦A+τ`; realizing these coefficients
-  as smooth differential forms on projector subbundles remains open.**
+  coupling are overlap invariant when `A↦A+τ`; this supplies the local
+  transition law, while global bundle topology is deferred.**
 - Substitute the duality rotation into the exterior equations. **The exact
   `±ω∧` product-rule terms and an iff reduction to two seed-channel equations
   are complete in Lean. For nonzero coupling with an active scalar-source
   channel, constant duality freedom collapses to overall sign; the full circle
   survives precisely on the proved zero-coupling/inactive-source exceptional
-  loci. Curvature construction of the seed derivative forms remains open.**
-- Prove a local necessary-and-sufficient theorem.
+  loci. The transported seed/Hodge-seed first jets now exteriorize to explicit
+  alternating three-forms.**
+- Prove a local necessary-and-sufficient theorem. **Complete on the generic
+  local branch: two explicit obstruction three-forms vanish iff the EMD
+  equations close, and the accepted constant orbit is classified.**
+- Build the Phase-IV handoff. **Complete conditionally on the accepted scalar
+  branch: the unique closed relative-sign branch has a local scalar potential,
+  the exponential unweighting derivatives are exact, the physical Maxwell
+  field and weighted dual flux are closed, and `a²=3` can be oriented to
+  `a=√3`. Phase IV now defines the radial gauge potential, proves its radial
+  gauge condition, verifies the closedness-to-curvature fundamental-calculus
+  identity for its derivative candidate, and proves Kaluza gauge invariance.
+  The remaining IV.1 splice is uniform differentiation of the radial integral
+  under a usable regularity package.**
 
 Exit criterion: Paper I candidate with manuscript-to-Lean claim translation.
 

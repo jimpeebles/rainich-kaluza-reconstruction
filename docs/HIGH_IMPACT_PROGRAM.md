@@ -106,9 +106,8 @@ not from a chosen eigenbasis. For candidates `v₊=α+β` and `v₋=α-β`, the
 repository already proves abstractly that both can be closed only if
 `dα=dβ=0`.
 
-The remaining work is to:
+The remaining curvature work is to:
 
-- instantiate `d` as exterior differentiation on the smooth one-form bundle;
 - express `dα` and `dβ` through curvature and derivatives of the projectors;
 - prove whether generically zero, one, or two branches satisfy closure and
   (HC1);
@@ -138,12 +137,15 @@ the identity, Lean now assembles these blocks into the complete formula
 
 `dp = Σ_{j≠i}(aᵢ-aⱼ)⁻¹[Pⱼ(dR)Pᵢ + Pᵢ(dR)Pⱼ]`.
 
-The branch-selection layer now also proves: outside the locus where the two
-spectral covector components are separately closed, existence of one closed
-relative-sign branch implies that exactly one branch is closed. Instantiating
-the projector identities for smooth Ricci-projector fields, differentiating
-the scalar amplitudes, and antisymmetrizing to obtain the exterior derivatives
-of those covector components are the next geometric steps.
+The branch-selection layer now proves this both abstractly and for genuine
+differentiable one-form fields on an open convex coordinate patch: outside the
+locus where the two spectral covector components are separately closed,
+existence of one closed relative-sign branch implies that exactly one branch
+is closed. Mathlib's Poincare lemma then produces a scalar potential for that
+branch, unique up to an additive constant. Instantiating the projector
+identities for smooth Ricci-projector fields, differentiating the scalar
+amplitudes, and proving that at least one resulting branch is closed remain
+the next curvature steps.
 
 The scalar-amplitude part of that task is now verified at the evaluated
 algebraic level: Lean gives explicit directional derivatives of `q²`, both
@@ -170,7 +172,8 @@ This phase must distinguish:
 - Bianchi and Maxwell differential closure;
 - residual constant duality and orientation freedoms.
 
-Current status: Phase III has begun at the algebraic residual layer. With
+Current status: Phase III is complete at its generic local decision interface,
+conditional on an upstream admissible scalar branch and its first jet. With
 `S=𝓡-V` and `V²=tr(V)V`, Lean proves that the reconstruction equation is
 equivalent to `S²=q²I`; matching traces make `S` tracefree. For `q≠0`, the
 normalized residual `S/q` is Lean-verified to be an involution, and its
@@ -183,27 +186,24 @@ one duality orbit, with a unique constructively recovered unit parameter.
 Differentiating that orbit gives a unique complexion rate. A nondegenerate
 two-probe system then reconstructs the complexion rate and signed EMD coupling
 simultaneously, with determinant `Δ=z₁y₂-z₂y₁`; scalar-orientation reversal
-fixes the complexion rate and reverses the coupling. Smooth exterior-form
-assembly, differential closure, and identification of the probe channels with
-curvature-derived forms remain open; see
+fixes the complexion rate and reverses the coupling. The recovered candidate
+is now checked against explicit local exterior obstructions; see
 `docs/PHASE_III_MAXWELL_RECONSTRUCTION.md`.
 
 The canonical amplitudes have also been lifted to an explicit antisymmetric
 four-dimensional tensor. Lean directly computes its Lorentzian Maxwell stress,
 trace, square, energy sign, Hodge-square, and duality invariance. In particular,
 every `q>0` canonical residual `diag(-q,-q,q,q)` has the real seed
-`𝓕=√(2q)e⁰∧e¹`. The remaining square-root gap is therefore geometric rather
-than algebraic: construct smooth oriented orthonormal frames for the two
-principal projector bundles and prove frame-independent patching of the local
-duality orbit.
+`𝓕=√(2q)e⁰∧e¹`. The subsequent results construct the required smooth local
+principal frame and its duality orbit, so the square-root step is complete on
+the stated generic patch.
 
 Finite-dimensional frame covariance is now complete in Lean: congruence
 transport preserves two-form antisymmetry, the Maxwell stress transforms by
 similarity, and the square law plus principal-projector relations survive.
 The explicit positive-`q` seed therefore works in any supplied Lorentz frame.
-The unresolved step is differential topology and smooth geometry—constructing
-those frames locally from the projector subbundles and controlling transition
-functions on overlaps.
+The subsequent fixed-probe and overlap results construct those frames locally
+and control the required transition algebra.
 
 The frame construction is now explicit on a fixed local probe patch. Lean
 proves indefinite Gram--Schmidt for a Lorentzian principal plane, ordinary
@@ -223,8 +223,8 @@ associated scalar Gram functions are continuous. It now also proves that one
 fixed probe quadruple produces a `C^n` tetrad, frame matrix, and transported
 positive-`q` seed throughout that patch. The transpose coframe is proved
 Lorentz, `K=G LᵀG` is its smooth two-sided inverse, and the seed stress is the
-transported residual. The remaining connector is intrinsic bundle
-orientation/connection and exterior-form assembly.
+transported residual. The evaluated connection and exterior-form connector is
+now complete in the same local trivialization.
 
 The overlap group law is now formalized as well: duality parameters compose
 associatively with explicit identity and inverse, and their action satisfies
@@ -232,9 +232,9 @@ the seed-transition cocycle. For a variable transition with rate `τ`, Lean now
 proves the exact inhomogeneous law `ω↦ω+τ`. Consequently `ω-A` is invariant
 when a local duality connection transforms as `A↦A+τ`; the nondegenerate
 two-probe reconstruction transforms in precisely this way while the recovered
-EMD coupling remains fixed. The remaining patching issue is geometric rather
-than algebraic: realize the transition parameters and connection as smooth
-objects derived from the principal-plane bundles.
+EMD coupling remains fixed. This is the local overlap law required by the
+obstruction interface; global bundle topology is outside the local Phase-III
+exit criterion.
 
 The exterior product rule is no longer schematic. Lean now treats `dc,ds,ω,v`
 as one-forms, the seed as two-forms, and their wedges as three-forms. It proves
@@ -244,10 +244,27 @@ explicit seed-channel equations. A notable orbit theorem follows: for
 preserving the same equations reduce to overall sign. The full circle remains
 only on the verified zero-coupling or inactive-source exceptional loci.
 
+The last local connector is now verified. For `K=L⁻¹` and `Ω=(dL)K`, Lean
+differentiates the transported seed as
+
+`d𝓕₀=Lᵀ(Ωᵀ𝓕can+(dq/2q)𝓕can+𝓕canΩ)L`
+
+and proves `ΩG+GΩᵀ=0` from the differentiated Lorentz equation. In a coordinate
+trivialization with the local coframe orientation matched to the spacetime
+Hodge convention, the four directional derivatives of the seed and Hodge seed
+exteriorize to alternating three-forms. Substitution into the EMD equations yields two explicit
+curvature-jet obstruction forms with a necessary-and-sufficient simultaneous
+vanishing theorem. Hence every generic local scalar branch now returns either
+an empty list certified by an obstruction or a Maxwell/coupling orbit; on the
+active nonzero-coupling locus that orbit is exactly the two overall signs.
+
 ### Phase-III exit criterion
 
 A complete local list of reconstructed `(v,𝓕,a)` orbits determined by the
-metric on the generic branch.
+metric on the generic branch. **Reached conditionally on the Phase-II scalar
+branch/first-jet input:** the Phase-III output is the exact pair of local
+obstructions and the classified accepted orbit. Null, repeated-root, and
+global topological branches remain explicitly excluded.
 
 ## Phase IV — constructive five-dimensional uplift
 
@@ -259,6 +276,27 @@ local potential `A`, and assemble the convention-fixed Kaluza metric
 with all constants derived from the chosen normalization. Prove directly that
 the reconstructed five-dimensional metric is Ricci-flat and prove the
 converse reduction statement.
+
+Entry status: the scalar integration and Maxwell unweighting steps are now
+Lean-verified on the accepted generic patch. A differentiable closed scalar
+branch has `v=dφ`, uniquely up to the expected additive constant and scalar
+orientation. The actual exponentials `exp(∓aφ/2)` have the required derivative
+jets, and vanishing of the Phase-III obstruction pair implies closure of both
+the physical Maxwell field and its weighted dual flux. The test `a²=3` is
+orientation invariant and permits a choice with convention-fixed `a=√3`.
+Phase IV has now begun with the radial homotopy construction for the closed
+physical two-form. Lean proves radial gauge, exposes an honest dominated
+differentiation-under-the-integral interface, and proves that closedness plus
+the one-variable fundamental theorem makes the integrated derivative candidate
+have curvature `F`. It also proves the pointwise gauge-jet classification, the
+field-level local theorem `A'-A=dχ` with uniqueness up to a constant, and gauge
+invariance of `dz+cA` and the warped Kaluza metric expression. The full
+convention-independent block pairing is now constructed and proved symmetric
+and nondegenerate under the expected base hypotheses. The next
+analytic task is to discharge the domination hypotheses from a concise
+regularity package for `F`, thereby identifying the candidate with `dA`.
+Convention derivation, full metric assembly, and the Ricci-flatness/converse
+calculations then follow.
 
 ### Phase-IV exit criterion
 

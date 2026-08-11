@@ -73,6 +73,28 @@ candidate Ricci fingerprint and the generic pointwise reconstruction layer:
   two-form whose Maxwell stress is exactly the supplied residual;
 - a `C^n` fixed-probe theorem producing a smooth tetrad, frame matrix, and
   transported Maxwell seed on every strict Gram-sign patch;
+- an exact first-jet formula for the transported seed and Hodge seed,
+  separating the `dq/(2q)` amplitude channel from a Lorentz-connection
+  channel `Ω=(dL)L⁻¹`, with `ΩG+GΩᵀ=0`;
+- a local exteriorization theorem producing alternating seed-channel
+  three-forms and two explicit obstructions whose simultaneous vanishing is
+  equivalent to the full EMD Bianchi/Maxwell closure equations;
+- a genuine local scalar integration theorem on open convex patches, including
+  analytic relative-sign branch selection and uniqueness of the scalar
+  potential up to an additive constant;
+- an audited Phase-IV handoff: the actual exponential weights have their
+  required derivatives, accepted Phase-III data give a closed physical
+  Maxwell field and weighted dual flux, and `a²=3` admits the positive
+  `a=√3` scalar orientation;
+- a constructive Phase-IV radial homotopy operator for the closed physical
+  two-form, including radial gauge, an honest dominated
+  differentiation-under-the-integral interface, the fundamental-calculus
+  curvature identity for its derivative candidate, exact pointwise gauge
+  freedom, and the field-level theorem that equal-curvature potentials differ
+  by `dχ` with `χ` unique up to a constant;
+- convention-independent Kaluza block-metric assembly, including symmetry,
+  nondegeneracy from the base metric and nonzero warp factors, gauge invariance
+  of both `dz+cA` and `u g+v(dz+cA)²`, and additive composition of gauge shifts;
 - an exterior-form complexion theorem reducing both EMD equations to explicit
   seed channels, together with the generic collapse of constant duality to
   overall sign and its zero-coupling/inactive-source exceptions;
@@ -88,10 +110,16 @@ candidate Ricci fingerprint and the generic pointwise reconstruction layer:
 - a coordinate-free, noncommutative derivation of the Sylvester reconstruction
   equation, together with its invariance under Ricci-centralizing involutions.
 
-These statements are necessary algebraic groundwork. They do **not** yet prove
-that the fingerprint is sufficient, that a scalar gradient exists, that the
-smooth seed satisfies the curvature-derived differential closure conditions,
-or that a metric uplifts to a five-dimensional Ricci-flat geometry.
+These statements now complete the conditional generic local Phase-III Maxwell
+decision interface: once an admissible scalar branch and its first jet are
+supplied, the exact obstruction pair either rejects it or returns the local
+Maxwell/coupling orbit. Phase IV has begun constructively, but the radial
+derivative candidate still has to be spliced to the radial potential under a
+single usable regularity package before the full two-form Poincare theorem is
+closed. The development also does **not** yet prove that the original
+fingerprint always supplies a closed scalar-gradient branch, cover the null or
+repeated-root cases, settle global bundle topology, or prove that an accepted
+metric uplifts to a five-dimensional Ricci-flat geometry.
 
 The current result also corrects an earlier uniqueness expectation: on the
 genuinely two-component generic branch, curvature algebra determines the
@@ -147,7 +175,10 @@ forbidding `sorryAx`.
 - `docs/HIGH_IMPACT_PROGRAM.md`: north-star local uplift theorem, phased proof
   program, exact-solution tests, and kill criteria.
 - `docs/PHASE_III_MAXWELL_RECONSTRUCTION.md`: proved residual entry point and
-  the remaining two-form/complexion work packages.
+  the completed generic local two-form/complexion obstruction interface.
+- `docs/PHASE_IV_UPLIFT.md`: verified Phase-IV entry contract and the
+  two-form integration, convention, metric-assembly, and Ricci-flatness work
+  packages.
 - `docs/EMD_CONVENTION.md`: convention-fixed field-equation provenance.
 - `docs/GENERIC_RECONSTRUCTION.md`: derivation and boundary of the current
   generic eigenbasis result.

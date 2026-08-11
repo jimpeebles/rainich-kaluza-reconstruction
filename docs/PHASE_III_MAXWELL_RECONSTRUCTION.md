@@ -110,7 +110,7 @@ Maxwell stress, computed in the adapted Lorentz basis and transported back to
 the abstract space, is exactly the original residual `S`. The physical sign assignment is
 important: for `diag(-q,-q,q,q)`, the timelike plane is the `-1` eigenspace.
 
-The fixed-probe smooth-family theorem is now complete in a normed local
+The fixed-probe smooth-family theorem is complete in a normed local
 trivialization. Lean proves compositionally that smooth metric and projector
 fields make the projected probes, both Gram--Schmidt frames, the tetrad matrix,
 and the transported positive-`q` Maxwell seed `C^n` on every strict sign
@@ -118,9 +118,18 @@ patch. Together with local persistence of the signs, one successful pointwise
 probe choice therefore supplies a smooth seed on a sufficiently small patch;
 no further pointwise choice is made. Lean also proves that the transpose
 coframe is Lorentz, that `K=G LᵀG` is its smooth two-sided inverse, and that
-the resulting smooth seed has the transported residual as its stress. The
-remaining connector is intrinsic tangent-bundle/exterior-derivative
-instantiation and identification of its derivatives with curvature forms.
+the resulting smooth seed has the transported residual as its stress.
+
+The first-jet connector is now explicit. In one evaluated tangent direction,
+write `K=L⁻¹` and `Ω=(dL)K`. Lean proves
+
+`d𝓕₀ = Lᵀ(Ωᵀ𝓕can + (dq/2q)𝓕can + 𝓕canΩ)L`.
+
+It also proves that differentiation preserves skewness and that the
+differentiated Lorentz equation forces `ΩG+GΩᵀ=0`. The seed derivative
+therefore splits into a curvature-magnitude channel `dq/2q` and a
+principal-frame Lorentz-connection channel. The same formula is proved for
+the transported canonical Hodge partner.
 
 The remaining overlap algebra is also explicit. Lean proves that unit duality
 parameters compose associatively, have an identity and inverse, and satisfy
@@ -170,6 +179,21 @@ the same EMD equations must have `(c,s)=(±1,0)`. The full constant circle
 survives on the exceptional zero-coupling or inactive-source locus. Thus the
 dilaton generically collapses the algebraic duality circle to overall sign.
 
+Finally, after choosing the local Lorentz coframe orientation to agree with
+the spacetime Hodge convention, the four directional seed derivatives are
+cyclically antisymmetrized in a coordinate trivialization. Lean proves that
+the resulting seed and Hodge-seed tensors are alternating three-forms, and it
+instantiates the abstract EMD reduction with these concrete forms. This gives
+two explicit obstruction tensors `𝓞_F,𝓞_G`, built from
+`L,dL,q,dq,ω,v,a`, with the exact criterion
+
+`EMD closure ↔ 𝓞_F=0 ∧ 𝓞_G=0`.
+
+Consequently Phase III now has a complete generic local decision interface:
+each upstream scalar branch either fails one of these curvature-jet
+obstructions or returns a local Maxwell two-form and coupling orbit; on the
+active nonzero-coupling branch that orbit contains only the two overall signs.
+
 ## Proof work packages
 
 1. **Geometric algebraic Rainich lemma.** Instantiate self-adjointness,
@@ -178,8 +202,8 @@ dilaton generically collapses the algebraic duality circle to overall sign.
    theorem is Lean-verified in finite dimension: rank two follows from trace,
    the energy-sign witness selects the Lorentzian principal plane, and an
    adapted basis carries an explicit real skew positive-`q` seed whose Maxwell
-   stress is exactly the supplied residual. Smooth exterior-form realization
-   remains.**
+   stress is exactly the supplied residual. Smooth local exterior-form
+   realization is supplied by packages 3 and 4.**
 2. **Duality-orbit theorem.** The canonical amplitude-level orbit and its
    uniqueness are complete in Lean. Lift this statement to actual Lorentzian
    two-forms constructed from the principal planes.
@@ -190,27 +214,30 @@ dilaton generically collapses the algebraic duality circle to overall sign.
    continuous persistence of the strict sign patch are complete in Lean. The
    fixed-probe tetrad, frame matrix, and transported seed are now proved
    `C^n` in a normed local trivialization. The Lorentz coframe, its explicit
-   smooth inverse, and the stress equality are complete. Intrinsic bundle
-   orientation and the manifold exterior-form connector remain. The
-   pointwise overlap cocycle and variable-transition connection law are
+   smooth inverse, stress equality, evaluated first-jet formula, Lorentz
+   connection constraint, and local exteriorization are complete. The
+   pointwise overlap cocycle and variable-transition connection law are also
    complete.**
 4. **Complexion equation.** The unit-circle derivative and nondegenerate
    two-probe solution for `(ω,a)` are complete in Lean. Substitute the actual
    `𝓕_θ` into the rescaled Bianchi/Maxwell equations and identify the geometric
-   channel data `x,z,y`. **The abstract exterior-form product rule and exact
-   iff reduction to two seed-channel equations are complete; construction of
-   those forms from the curvature seed remains.**
+   channel data `x,z,y`. **The abstract exterior-form product rule, exact iff
+   reduction, explicit transported-seed first jets, and local three-form
+   construction are complete. Nondegenerate evaluated probes recover the
+   candidate `(ω,a)`, and the full obstruction forms validate it.**
 5. **Integrability and orbit list.** Give necessary and sufficient closure
    conditions, classify residual constant duality freedom, and combine with
    the scalar relative-sign branches. **The duality overlap group, cocycle,
    variable-rate gauge law, corrected overlap invariant, and gauge invariance
    of the recovered coupling are complete in Lean. The constant-duality orbit
    is now classified: generically only overall sign survives, while the full
-   circle remains for zero coupling or inactive scalar-source channels.**
+   circle remains for zero coupling or inactive scalar-source channels. The
+   concrete local obstruction theorem supplies the required necessary-and-
+   sufficient closure decision.**
 
 ## Exit condition
 
-For every admissible metric branch, produce the complete local list of
+For every admissible generic metric branch, produce the complete local list of
 `(v,𝓕,a)` orbits or a curvature-derived obstruction showing that the list is
 empty. The current repository has completed the residual square identity,
 trace cancellation, principal involution/projectors, canonical Lorentzian
@@ -218,7 +245,20 @@ two-form seed, pointwise adapted principal basis, and Lorentz-frame transport,
 canonical duality orbit,
 infinitesimal complexion, and evaluated two-channel `(ω,a)` recovery. It has
 now has a smooth fixed-probe tetrad, Lorentz coframe/inverse, and seed in local
-trivializations and the
-exact exterior product-rule reduction. It has not yet constructed the
-intrinsic bundle connection/exterior derivatives or identified the
-seed-channel three-forms with curvature-derived exterior data.
+trivializations, the exact first-jet and exterior product-rule reductions, and
+two necessary-and-sufficient local obstruction three-forms. This meets the
+Phase-III exit condition on the generic local branch conditional on the
+upstream scalar branch and its first jet. Null/repeated-root branches, global
+bundle topology, and five-dimensional integration remain outside this phase
+and are not claimed.
+
+## Phase-IV handoff now available
+
+On an open convex coordinate patch, the selected differentiable closed scalar
+branch now has a Lean-verified potential `v=dφ`, unique up to an additive
+constant and the expected orientation reversal. The exponential weights
+`exp(∓aφ/2)` have their exact derivative jets. Consequently vanishing of the
+two Phase-III obstruction forms implies closure of the unscaled physical
+Maxwell field and the weighted dual flux. If `a²=3`, one scalar orientation has
+`a=√3`. The next theorem belongs genuinely to Phase IV: integrate the closed
+physical two-form to a local gauge potential.

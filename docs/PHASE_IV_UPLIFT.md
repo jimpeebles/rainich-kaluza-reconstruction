@@ -5,7 +5,8 @@
 Phase IV now begins with an accepted generic local branch carrying:
 
 - an open convex coordinate patch `U`;
-- the unique generic closed relative-sign scalar branch `v`;
+- one of the relative-sign scalar branches `v` returned by the exact
+  zero/one/two-potential classifier;
 - a local scalar potential `φ`, with `v=dφ`, unique up to an additive
   constant and the global orientation reversal;
 - a reconstructed rescaled Maxwell orbit `(𝓕,*𝓕)` and coupling `a` whose two
@@ -16,6 +17,7 @@ Phase IV now begins with an accepted generic local branch carrying:
 - the Kaluza test `a²=3`, with one scalar orientation giving `a=√3`.
 
 The Lean entry theorems are
+`exhaustive_local_scalarPotential_classification`,
 `relativeSign_scalarPotential_exists_unique_branch`,
 `exists_scalarPotential_of_closed`,
 `hasFDerivAt_negativeEMDWeight`,
@@ -23,9 +25,13 @@ The Lean entry theorems are
 `localPositiveQ_obstructions_give_closed_exponentialWeightJets`, and
 `kaluzaCoupling_has_positive_orientation`.
 
-This is conditional on the upstream curvature construction producing at least
-one closed scalar branch. Null, repeated-root, and global topological cases
-remain outside the generic local claim.
+The local integration theorem does not assume that the upstream curvature
+construction produces a branch: it may return the exact no-potential case.
+Entering Phase IV is conditional on selecting one of the surviving branches
+and discharging the remaining Phase-III accepted-data conditions. Direct
+construction of the realized Frechet-jet certificate from the smooth
+curvature fields, and null, repeated-root, and global topological cases,
+remain outside this entry theorem.
 
 ## IV.1 — integrate the closed two-form
 

@@ -22,7 +22,9 @@ Intrinsic chart-independent local Kaluza Ricci-flatness is now complete in
 orbit is complete in `KaluzaUpliftOrbit.lean`. The conditional
 forward/converse module is assembled in `ConditionalKaluzaUplift.lean` behind
 an explicit accepted-data bridge. The live work now splits between the
-Phase-V harness and the upstream Phase-II curvature/closure gate.
+Phase-V harness and the final curvature-field realization/composition seam.
+The branch obstruction is already equivalent to genuine scalar-potential
+existence for every realized curvature patch.
 
 The V-T1 harness is now operational: `validation/` contains a pinned exact
 tensor engine, a provenance-and-residual artifact format, drift detection, and
@@ -113,8 +115,13 @@ nondegeneracy hypothesis.
   smooth metric-dual eigen-one-forms, and `CurvatureScalarBranchJet4`
   assembles explicit product-rule `dα,dβ` and the two tests `dα±dβ`. Branch
   outcomes are now exhaustively classified, including an iff no-branch
-  obstruction and patch-level finite rejection witnesses. Determining which
-  class is forced by the full curvature hypotheses remains the next theorem.**
+  obstruction and patch-level finite rejection witnesses. For any realized
+  curvature patch whose displayed jets are the actual Frechet derivatives,
+  those tests are now equivalent to genuine closedness and, on an open convex
+  patch, to scalar-potential existence. The exact zero/one/two-potential
+  classification and finite no-potential certificate are complete. Directly
+  instantiating the realization certificate from the smooth construction is
+  the remaining curvature-entry seam.**
 - Prove that every accepted scalar candidate leaves a tracefree residual
   obeying the Maxwell square identity. **Complete in Lean under the explicit
   scalar square and trace hypotheses.**

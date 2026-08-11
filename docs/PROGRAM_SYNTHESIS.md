@@ -75,7 +75,7 @@ spectral problem are independently secured.
 | Coupled pointwise block reconstruction and its two-branch ambiguity | Lean-checked in this repository | present core result |
 | Protected `±q` directions under the scalar rank-one perturbation | Lean-checked from the four-dimensional tracefree square-law hypotheses | completed algebraic entrance |
 | Full characteristic factorization from four-dimensional Maxwell algebra | Lean-checked for `S+V` with square-law `S` and rank-one `V` | necessary pointwise theorem; not sufficient for reconstruction |
-| Differential selection/identification of pointwise partners | open | decisive local-reconstruction target |
+| Differential selection/identification of pointwise partners | exact obstruction and local-potential classifier complete for realized curvature jets; direct smooth-field realization seam open | decisive local-reconstruction target |
 | Maxwell two-form recovery and scalar/Maxwell field equations | open | required for sufficiency and for identifying `a=√3` |
 | Exact-solution scalar multipoles and binary hierarchy | promising inherited derivation, unreproduced here | strongest physics validation track |
 | Laboratory critical amplifier | conditional and speculative | downstream falsifiable application only |
@@ -90,9 +90,10 @@ the information that pointwise curvature necessarily loses.
 
 The two pointwise partners have now been promoted, on explicit
 simple-spectrum/strict-sign patches, to smooth spectral one-form jets with
-machine-checked obstruction matrices `dα±dβ`. The next theorem should
-determine what those two obstruction matrices do. There are three
-possibilities, each scientifically useful:
+machine-checked obstruction matrices `dα±dβ`. For every realized patch, Lean
+now proves that those matrices determine genuine local scalar-potential
+existence exactly. There are three scientifically useful nonempty patterns,
+plus the sharp empty-list outcome:
 
 1. only one branch generically admits a closed covector factor, yielding local
    selection;
@@ -100,7 +101,10 @@ possibilities, each scientifically useful:
 3. neither does without an additional curvature condition, identifying the
    missing differential invariant.
 
-Any of these outcomes improves our understanding of the inverse problem.
+The realized classifier returns these outcomes exhaustively rather than
+assuming that one branch exists. The remaining bridge is to construct its
+Frechet-derivative realization certificate directly from the smooth
+curvature-derived fields.
 
 ## Research sequence now adopted
 
@@ -109,8 +113,9 @@ Any of these outcomes improves our understanding of the inverse problem.
    **Complete on the explicit generic coordinate patch.**
 2. Formulate differential closure at the tensor level without prematurely
    choosing a scalar sign; classify the reflection-related branches.
-   **The four-way exact obstruction classifier is complete; deriving its
-   realized class from the full metric hypotheses remains open.**
+   **The four-way exact obstruction classifier and its zero/one/two local
+   scalar-potential interpretation are complete for realized curvature
+   fields; direct construction of the realization certificate remains.**
 3. Reconstruct the residual Maxwell stress and impose classical Rainich
    differential closure.
 4. Use the scalar and Maxwell equations to identify the EMD coupling, then

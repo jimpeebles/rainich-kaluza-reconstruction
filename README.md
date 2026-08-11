@@ -74,6 +74,12 @@ candidate Ricci fingerprint and the generic pointwise reconstruction layer:
   `dα=-dβ≠0`, minus only iff `dα=dβ≠0`, both iff `dα=dβ=0`, and neither iff
   `dα` is neither equal nor opposite to `dβ`, including patch-level finite
   witnesses that reject both local branches;
+- a field-level realization of that classifier: when the displayed
+  curvature jets are the actual Frechet derivatives of the reconstructed
+  spectral one-forms, obstruction vanishing is equivalent to genuine
+  closedness, and on an open convex patch it is equivalent to existence of a
+  local scalar potential; the resulting zero/one/two-potential list is
+  exhaustive, while two finite witnesses rule out both potentials;
 - an exact Phase-III equivalence between the scalar reconstruction equation
   and the residual Maxwell square law, followed by eigenvector-free Maxwell
   principal-plane projectors on the non-null branch;
@@ -228,12 +234,15 @@ cylindrical and pure-gauge Kaluza coordinates and passes eight exact checks.
 This is computational evidence, deliberately separated from the Lean proof
 surface; the rotating dyonic benchmark remains to be independently rebuilt.
 The smooth curvature-projector and scalar-branch-form gate is now closed on
-the stated simple-spectrum, strict-sign local patches. The north-star theorem
-still requires the upstream scalar-branch existence-or-obstruction
-classification for actual curvature fields. The exact jet and patch decision
-is now machine checked—including the sharp no-branch certificate—but the next
-step must determine which class the metric hypotheses force, then feed every
-accepted branch into the completed uplift module. See the
+the stated simple-spectrum, strict-sign local patches. The exact jet and patch
+decision is machine checked, and `CurvatureBranchIntegration.lean` proves its
+precise analytic meaning for realized curvature fields: each candidate has a
+local scalar potential exactly when its obstruction vanishes. This yields the
+complete zero/one/two local potential list and a sharp no-potential
+certificate without assuming that some branch exists. The next north-star
+step is to instantiate the realization certificate directly from the smooth
+projector/amplitude construction, then feed every surviving branch through
+the completed Phase-III and uplift modules. See the
 [`realigned execution plan`](docs/REALIGNED_EXECUTION_PLAN.md) for the ordered
 proof obligations and publication decision points.
 

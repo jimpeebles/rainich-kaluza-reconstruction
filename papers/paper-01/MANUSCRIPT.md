@@ -301,9 +301,7 @@ The scalar amplitude derivatives combine with the eigen-one-form jets by
 The resulting `CurvatureScalarBranchJet4` has explicit obstruction matrices
 `dα,dβ`, and Lean verifies that the exterior derivatives of the two candidates
 are exactly `dα+dβ` and `dα-dβ`. Thus smooth assembly is no longer an open
-interface. The remaining differential theorem is to decide which obstruction
-vanishes from the curvature hypotheses, or to state their nonvanishing as the
-sharp obstruction.
+interface.
 
 More precisely, the formal classifier proves four mutually exhaustive cases:
 
@@ -319,6 +317,21 @@ For a local patch, nonzero witnesses for `dα+dβ` and `dα-dβ` may occur at
 different points and still reject both global candidates. Equation (6.9) is
 an exact decision interface, not a claim that the intended metric hypotheses
 force a particular class.
+
+The formal development also supplies the analytic realization of this
+decision. A `RealizedCurvatureScalarBranchPatch4` records that the displayed
+coordinate jets are the actual Frechet derivatives of the displayed spectral
+one-form fields. For such a patch, Lean proves
+
+`dα±dβ=0 ⇔ the corresponding one-form is closed`.            (6.10)
+
+On an open convex patch, the Poincare lemma and symmetry of second derivatives
+upgrade (6.10) to an iff with existence of a local scalar potential. Hence
+(6.9) is exactly an exhaustive zero/one/two-potential classification. The
+separate finite witnesses give a sharp proof that neither potential exists;
+no universal branch-existence assumption is present. Direct construction of
+the realization certificate from the smooth curvature fields is the remaining
+composition seam.
 
 ## 7. Polynomial obstruction and false positives
 

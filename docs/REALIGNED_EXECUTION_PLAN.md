@@ -169,7 +169,9 @@ proves intrinsic Ricci-flatness in every nonlinear chart, retains the converse
 Ricci-flatness/EMD iff, and returns the complete additive scalar, exact gauge,
 coupling-orientation, and product-presentation orbits. The certificate does
 not assert that curvature supplies the bridge; constructing an accepted
-closed branch remains the upstream II-G3 obligation.
+closed branch remains the upstream curvature-entry obligation. RK-R2o now
+settles the scalar-potential part once the smooth curvature jet is realized as
+the actual Frechet derivative of its spectral one-form field.
 
 ## Upstream curvature gate for the official Phase-IV exit
 
@@ -224,21 +226,29 @@ obstructions. Prove one of the outcomes demanded by the Phase-II gate:
 - a genuine two-uplift exceptional locus; or
 - a sharp curvature obstruction proving that neither branch closes.
 
-**Status: exact obstruction classifier complete; metric forcing in
-progress.** `CurvatureBranchObstruction.lean` proves the exhaustive four-way
-decision from the explicit II-G2 matrices. Unique plus, unique minus,
-two-branch, and no-branch outcomes have necessary-and-sufficient equations;
-the no-branch case is `dα≠dβ` and `dα≠-dβ`. At patch level, one nonzero
-`dα+dβ` witness and one nonzero `dα-dβ` witness—possibly at different
-points—reject both local branches. The remaining II-G3 obligation is to use
-the complete curvature/HC1 hypotheses, and the V-T2 oracle where useful, to
-show which outcome is realized rather than assume existence.
+**Status: exact obstruction and local integration classifier complete at the
+realized-field interface.** `CurvatureBranchObstruction.lean` proves the
+exhaustive four-way decision from the explicit II-G2 matrices. Unique plus,
+unique minus, two-branch, and no-branch outcomes have
+necessary-and-sufficient equations; the no-branch case is `dα≠dβ` and
+`dα≠-dβ`. At patch level, one nonzero `dα+dβ` witness and one nonzero
+`dα-dβ` witness—possibly at different points—reject both local branches.
+`CurvatureBranchIntegration.lean` then identifies those coordinate matrices
+with Mathlib closedness for genuine differentiable one-form fields whose
+displayed jets are their actual Frechet derivatives. On every open convex
+patch, obstruction vanishing is iff local scalar-potential existence, all
+zero/one/two-potential outcomes are exhaustive, and the two witnesses rule
+out both potentials. No existence assumption is made. The remaining
+curvature-entry seam is to instantiate the explicit realization certificate
+directly from the II-G2 smooth projector and amplitude fields; downstream HC1
+then tests each surviving branch rather than deciding scalar integrability.
 
 ### IV-N1 — north-star composition
 
-Compose II-G1--II-G3, the completed Phase-III decision interface, and IV-C1
-into the finite-order curvature-only local recognition theorem. Every null,
-repeated-root, zero-trace, and topological exclusion remains explicit.
+Instantiate the RK-R2o realization from the II-G2 smooth curvature fields,
+then compose II-G1--II-G3, the completed Phase-III decision interface, and
+IV-C1 into the finite-order curvature-only local recognition theorem. Every
+null, repeated-root, zero-trace, and topological exclusion remains explicit.
 
 **Official Phase-IV gate:** IV-G1, IV-G2, IV-O1, IV-C1, and IV-N1 are all
 complete. A conditional uplift theorem alone does not close this gate.
@@ -310,14 +320,15 @@ research result.
 
 ## Immediate execution order
 
-1. Analyze the two explicit `CurvatureScalarBranchJet4` obstruction matrices
-   and close II-G3 by uniqueness, a genuine two-branch locus, or a sharp
-   no-branch curvature obstruction.
+1. Instantiate `RealizedCurvatureScalarBranchPatch4` from the existing smooth
+   projector/amplitude fields and their computed first jets; then pass every
+   scalar-potential branch returned by the exact classifier to Phase III.
 2. In parallel, use the operational V-T1 harness to recover the V-T2 rotating
    source and convention map; feed its exact jets through the same obstruction
    interface.
-3. Compose IV-N1 once II-G3 has returned its classification; report a sharp
-   obstruction or no-go theorem as a result, not as a failed proof.
+3. Compose IV-N1 once the realized branch list and downstream accepted/rejected
+   orbits are connected; report a sharp obstruction or no-go theorem as a
+   result, not as a failed proof.
 
 No phase label advances merely because later infrastructure has started.
 Claims advance only when their stated gate is proved and recorded in the

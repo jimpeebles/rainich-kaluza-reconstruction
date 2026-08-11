@@ -107,17 +107,29 @@ product rules are proved to become the corresponding mixed-tensor
 Levi--Civita identities, yielding the same four-block formula for `∇Pᵢ`.
 The evaluated scalar-amplitude formulas are assembled directionwise into
 one-forms, and `CurvatureScalarBranchJet4` now supplies explicit
-product-rule `dα,dβ` and branch obstructions `dα±dβ`. What remains is not a
-smoothness seam: it is the substantive II-G3 question of which obstruction
-vanishes, including the separately integrable exceptional locus.
+product-rule `dα,dβ` and branch obstructions `dα±dβ`.
 
 The logical branch decision itself is now exact and exhaustive. Lean proves
 that plus only, minus only, both, and neither correspond respectively to
 `dα=-dβ≠0`, `dα=dβ≠0`, `dα=dβ=0`, and `dα≠±dβ`. The patch version permits
 separate finite witnesses for the two failures and therefore returns a sharp
-no-branch certificate without a universal existence assumption. What remains
-is to derive one of these relations from—or exhibit its failure under—the
-full curvature and HC1 equations of the intended metric class.
+no-branch certificate without a universal existence assumption. The intended
+recognition theorem need not force a preferred case: returning the complete
+surviving list or a sharp empty-list obstruction is the correct output.
+
+The classifier is now connected to actual local analysis.
+`CurvatureBranchIntegration.lean` represents the coordinate one-forms as
+continuous linear maps and proves that the displayed exterior matrix vanishes
+exactly when the corresponding genuine field is closed, provided the
+displayed jet is its actual Frechet derivative. On an open convex patch this
+is equivalent to local scalar-potential existence. Hence the plus-only,
+minus-only, both, and neither cases give an exact exhaustive one/one/two/zero
+potential classification, and the two finite witnesses prohibit either
+potential. The remaining curvature-entry seam is constructive rather than
+logical: build the realization certificate directly from the smooth
+projector/amplitude fields already supplied by II-G2, then send every
+surviving branch to the Phase-III obstruction interface. HC1 is downstream of
+this scalar integration decision.
 
 Phase III has reached its generic local decision interface. For `S=𝓡-V`, the reconstruction equation is
 Lean-verified to be equivalent to `S²=q²I` once the scalar square law is

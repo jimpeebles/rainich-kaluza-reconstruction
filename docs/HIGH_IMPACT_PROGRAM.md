@@ -113,9 +113,10 @@ repository already proves abstractly that both can be closed only if
 
 The remaining curvature work is now to:
 
-- prove whether generically zero, one, or two branches satisfy closure and
-  (HC1);
-- classify the exceptional separately integrable locus.
+- instantiate the computed first jets as the actual Frechet derivatives of
+  the smooth curvature-derived spectral one-form fields;
+- send the exact zero/one/two list of locally integrable branches through
+  (HC1), keeping the separately integrable locus explicit.
 
 Current status: the upstream algebraic entrance is now complete. Dimension
 four, trace zero, and the non-null square law force two rank-two Maxwell
@@ -162,18 +163,18 @@ unique exactly when `dα=-dβ≠0`, the difference branch is unique exactly when
 `dα=dβ≠0`, both survive exactly when `dα=dβ=0`, and neither survives exactly
 when `dα` is neither equal nor opposite to `dβ`. Patch-level nonzero witnesses
 give a finite no-branch certificate. This removes any hidden branch-existence
-assumption from the decision interface; the remaining scientific question is
-which class is forced by the full curvature/HC1 hypotheses.
+assumption from the decision interface.
 
-The branch-selection layer now proves this both abstractly and for genuine
-differentiable one-form fields on an open convex coordinate patch: outside the
-locus where the two spectral covector components are separately closed,
-existence of one closed relative-sign branch implies that exactly one branch
-is closed. Mathlib's Poincare lemma then produces a scalar potential for that
-branch, unique up to an additive constant. The remaining Phase-II gap is now
-the substantive existence-or-obstruction theorem: prove which, if any, of the
-two explicit curvature obstruction matrices vanishes, and classify the locus
-where both vanish.
+The branch-selection layer now proves more than conditional uniqueness.
+`CurvatureBranchIntegration.lean` identifies the displayed coordinate jets
+with genuine Frechet derivatives through an explicit realization structure,
+and proves that each obstruction vanishes iff the corresponding one-form is
+closed. On an open convex patch this is iff a local scalar potential exists.
+Thus the four obstruction cases are exactly an exhaustive one/one/two/zero
+potential classification, and the finite no-branch witnesses rule out both
+potentials. The remaining Phase-II curvature seam is to construct that
+realization structure directly from the smooth projector/amplitude fields;
+HC1 is a downstream test of every surviving scalar branch.
 
 ### Phase-II exit criterion
 
@@ -377,8 +378,10 @@ stated gauge/discrete freedoms.
 This exit has two necessary layers. The **uplift-module layer** is complete
 for the explicit accepted-data certificate: intrinsic chart-independent
 packaging, exhaustive IV.4 orbit classification, and the conditional
-forward/converse assembly are proved. The **curvature-entry layer** closes the upstream Phase-II smooth
-projector/antisymmetrization and scalar-branch existence-or-obstruction gap.
+forward/converse assembly are proved. The **curvature-entry layer** must
+instantiate the realized Frechet-jet certificate from the upstream Phase-II
+smooth projector/amplitude fields and compose the resulting exact branch list
+with the Phase-III decision interface.
 The first layer may be completed and used by exact-metric tests without
 claiming that Phase IV itself has exited. The canonical dependency order is
 specified in `REALIGNED_EXECUTION_PLAN.md`.

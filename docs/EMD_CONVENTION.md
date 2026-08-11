@@ -129,12 +129,11 @@ potential candidate and its convention-independent Kaluza gauge algebra.
 
 This note fixes the field-equation provenance and derives the rescaled
 differential identities. The repository now gives an exact conditional local
-decision for those identities and integrates any accepted closed scalar
-branch. It does not prove that every pointwise curvature candidate supplies a
-closed scalar branch, cover degenerate branches, or prove the
-five-dimensional local uplift. The uniform analytic splice identifying the
-radial derivative candidate with `dA` is complete
-(`RadialPotentialSplice.lean`), and the uplift constants are derived in
-`docs/UPLIFT_CONVENTION.md`; the remaining sufficiency and Phase-IV
-obligations are closed-branch existence and the block Ricci-flatness and
-converse calculations.
+decision for those identities. For every realized curvature patch it also
+classifies exactly which of the two scalar candidates admit local potentials,
+including the no-potential case. It does not yet construct that Frechet-jet
+realization certificate directly from every smooth metric-derived candidate
+or cover degenerate branches. The uniform analytic splice identifying the
+radial derivative candidate with `dA`, the uplift constants, and the
+conditional intrinsic forward/converse five-dimensional uplift are complete;
+the remaining sufficiency obligation is their curvature-only composition.

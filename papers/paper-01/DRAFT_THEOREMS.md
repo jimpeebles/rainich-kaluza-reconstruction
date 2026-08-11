@@ -189,7 +189,8 @@ Status: verified by `both_relativeSign_branches_closed_iff` and
 verified by `relativeSign_closed_branch_unique_of_exists`. The theorem is
 abstractly linear, while `CurvatureScalarBranchJet4.both_branches_closed_iff`
 now gives its coordinate exterior instantiation for the reconstructed jets.
-Neither theorem proves the existence of a closed branch.
+These two theorems alone do not prove the existence of a closed branch; the
+realized-field existence/obstruction classification is Proposition G13.
 
 ## Proposition G2 — full simple-spectrum projector derivative
 
@@ -487,10 +488,15 @@ Status: verified by `both_relativeSign_scalarOneForms_closed_iff`,
 `relativeSign_scalarPotential_exists_unique_branch`,
 `exists_scalarPotential_of_closed`,
 `scalarPotential_unique_up_to_constant`, and
-`neg_isScalarPotentialOn`. The potential theorem specializes Mathlib's
-Poincare lemma for one-forms on convex sets. The theorem is conditional on the
-existence of a closed relative-sign branch; deriving that existence from the
-curvature conditions remains part of the overall sufficiency problem.
+`neg_isScalarPotentialOn`. For the explicit curvature jets, the stronger
+realized-field theorem is verified by
+`plusScalarPotentialExists_iff_curvatureBranchCloses`,
+`minusScalarPotentialExists_iff_curvatureBranchCloses`,
+`exhaustive_local_scalarPotential_classification`, and
+`no_local_scalarPotentialBranch_of_witnesses`. It returns exactly zero, one,
+or two local potentials without assuming that a branch exists. Directly
+building the Frechet-jet realization certificate from the smooth curvature
+fields remains part of the overall composition problem.
 
 ## Proposition G14 — closed physical fields and the uplift handoff
 

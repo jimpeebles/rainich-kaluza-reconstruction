@@ -79,8 +79,10 @@ if and only if `dα=dβ=0`. Thus differential closure generically removes the
 pointwise ambiguity; it fails to do so precisely on the separately closed
 locus. Lean also proves the sharp existence-to-uniqueness statement: away
 from that locus, if either branch is closed, exactly one branch is closed.
-This does not prove that either candidate is closed, nor does it yet
-instantiate `d` as the exterior derivative on a Lorentzian manifold.
+This does not prove that either candidate is closed. The coordinate-local
+exterior instantiation is now supplied by `CurvatureScalarBranchJet4`; what is
+still missing is a theorem forcing one of its two explicit obstruction
+matrices to vanish.
 
 The differential-coupling layer now goes one step farther. For the rescaled
 Maxwell equations `2d𝓕=a(v∧𝓕)` and
@@ -97,12 +99,17 @@ eigenbasis. At the differentiated-algebra level it further proves
 `dPᵢ = Σ_{j≠i}(aᵢ-aⱼ)⁻¹[Pⱼ(dR)Pᵢ + Pᵢ(dR)Pⱼ]`.
 
 Thus the full projector derivative is fixed by the Ricci derivative and
-spectral gaps; eigenvalue derivatives cancel. The outstanding geometric step
-is smooth Levi-Civita instantiation. The evaluated scalar-amplitude layer is
-also now explicit: derivatives of `q²`, both forced scalar diagonals, and both
-nonzero scalar amplitudes are rationally reconstructed from characteristic and
-root derivatives. Combining these results into smooth one-form derivatives
-and antisymmetrizing into `dα,dβ` remains open.
+spectral gaps; eigenvalue derivatives cancel. The coordinate-local geometric
+instantiation is now complete. The Lagrange matrices are `C^n` wherever their
+three labeled gaps stay nonzero; fixed projected probes and strict-sign
+normalization give smooth metric-dual eigen-one-forms. Ordinary coordinate
+product rules are proved to become the corresponding mixed-tensor
+Levi--Civita identities, yielding the same four-block formula for `∇Pᵢ`.
+The evaluated scalar-amplitude formulas are assembled directionwise into
+one-forms, and `CurvatureScalarBranchJet4` now supplies explicit
+product-rule `dα,dβ` and branch obstructions `dα±dβ`. What remains is not a
+smoothness seam: it is the substantive II-G3 question of which obstruction
+vanishes, including the separately integrable exceptional locus.
 
 Phase III has reached its generic local decision interface. For `S=𝓡-V`, the reconstruction equation is
 Lean-verified to be equivalent to `S²=q²I` once the scalar square law is

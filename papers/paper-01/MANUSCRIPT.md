@@ -278,6 +278,33 @@ This does not establish that either candidate is closed. It does show that the
 pointwise ambiguity is generically visible to first-order differential data:
 both branches survive only under the stronger pair of conditions `dα=dβ=0`.
 
+### 6.4 Smooth curvature-field realization
+
+On a coordinate patch carrying four smooth labeled roots with nonvanishing
+spectral gaps, define the four Lagrange projectors by the same cubic
+polynomials in the mixed Ricci matrix. Lean now proves these matrix fields are
+`C^n`, pointwise idempotent, and resolve the identity under the stated
+four-eigenspace decomposition. Fixed probes, strict causal-sign normalization,
+and metric duality then give smooth eigen-one-forms without choosing a moving
+eigenbasis.
+
+The mixed-tensor Levi--Civita derivative satisfies the connection product
+rule. Therefore the coordinate derivatives of the projector and eigenvalue
+equations imply
+
+`∇Pᵢ=Σ_{j≠i}(aᵢ-aⱼ)⁻¹[Pⱼ(∇R)Pᵢ+Pᵢ(∇R)Pⱼ]`.             (6.7)
+
+The scalar amplitude derivatives combine with the eigen-one-form jets by
+
+`d(xθ)=dx∧θ+x dθ`.                                       (6.8)
+
+The resulting `CurvatureScalarBranchJet4` has explicit obstruction matrices
+`dα,dβ`, and Lean verifies that the exterior derivatives of the two candidates
+are exactly `dα+dβ` and `dα-dβ`. Thus smooth assembly is no longer an open
+interface. The remaining differential theorem is to decide which obstruction
+vanishes from the curvature hypotheses, or to state their nonvanishing as the
+sharp obstruction.
+
 ## 7. Polynomial obstruction and false positives
 
 The proposed characteristic factorization
@@ -318,8 +345,8 @@ excludes additional eigenvalue-sum resonances. It does not yet:
 2. assemble every spectral block on the full Lorentzian tangent space;
 3. classify zero-trace, null-Maxwell, null-scalar, or repeated-eigenvalue
    branches;
-4. select or identify the two pointwise scalar partners by smooth differential
-   data;
+4. prove existence, uniqueness, or nonexistence for the two explicit smooth
+   scalar-branch obstruction matrices;
 5. reconstruct a Maxwell two-form or impose Maxwell and scalar equations;
 6. prove a local necessary-and-sufficient Kaluza uplift theorem.
 

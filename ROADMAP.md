@@ -73,11 +73,12 @@ nondegeneracy hypothesis.
   pointwise relative-sign partners.
 - Prove that both relative-sign branches can be closed only on the locus where
   their two spectral components are separately closed. **Complete in Lean as
-  an abstract linear differential lemma.**
+  an abstract linear differential lemma and as the concrete coordinate
+  exterior theorem `CurvatureScalarBranchJet4.both_branches_closed_iff`.**
 - Prove that away from the separately closed exceptional locus, existence of
   a closed relative-sign branch makes that branch unique. **Complete in Lean
-  as an abstract linear differential theorem; geometric existence remains
-  open.**
+  abstractly and for differentiable one-form fields; geometric existence
+  remains open.**
 - State and prove the closure condition implying local exactness. **Complete
   on open convex coordinate patches using Mathlib's one-form Poincare lemma;
   the potential is unique up to an additive constant.**
@@ -95,17 +96,23 @@ nondegeneracy hypothesis.
 - Construct the full four-root Lagrange projectors, prove their action,
   idempotence, Ricci commutation, and resolution of the identity without a
   chosen eigenbasis. **Complete in Lean under an explicit simple-spectrum
-  decomposition hypothesis; smooth tensor-field promotion and differentiation
-  remain open.**
+  decomposition hypothesis. Their coordinate matrix fields are now proved
+  `C^n` wherever the labeled spectral gaps stay nonzero, with pointwise
+  idempotence and resolution transported from the basis-free theorem.**
 - Differentiate the full projector formula on the constant-gap branch and
   express `∇Pᵢ` using `R`, `∇R`, and derivatives of the four curvature roots.
   **The complete four-block formula, its universal off-diagonal identities,
   and vanishing target block are complete in Lean; eigenvalue derivatives
-  cancel. Smooth-bundle instantiation remains open.**
+  cancel. Its coordinate Levi--Civita instantiation is now complete, and raw
+  differentiated spectral identities are proved to promote automatically to
+  the covariant ones.**
 - Differentiate the scalar amplitudes, combine them with `∇Pᵢ`, and
   antisymmetrize to obtain curvature-derived formulas for `dα` and `dβ`.
-  **Amplitude and `q²` derivative formulas are complete in Lean at the
-  evaluated algebraic level; smooth assembly and antisymmetrization remain.**
+  **Complete in Lean on the explicit simple-spectrum/strict-sign patch:
+  forced diagonals and amplitudes are smooth, fixed projector probes give
+  smooth metric-dual eigen-one-forms, and `CurvatureScalarBranchJet4`
+  assembles explicit product-rule `dα,dβ` and the two tests `dα±dβ`. Branch
+  existence or obstruction remains the next theorem.**
 - Prove that every accepted scalar candidate leaves a tracefree residual
   obeying the Maxwell square identity. **Complete in Lean under the explicit
   scalar square and trace hypotheses.**

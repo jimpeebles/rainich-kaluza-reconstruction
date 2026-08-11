@@ -60,6 +60,16 @@ candidate Ricci fingerprint and the generic pointwise reconstruction layer:
   eigenvalue derivatives;
 - explicit evaluated derivatives for the curvature-derived `q²`, scalar
   diagonals, and nonzero scalar amplitudes;
+- smooth coordinate Lagrange-projector fields on every explicit
+  simple-spectrum patch, with pointwise idempotence and four-projector
+  resolution inherited from the basis-free construction;
+- a coordinate Levi--Civita specialization of the complete spectral-projector
+  derivative, including the proof that ordinary differentiated
+  idempotence/eigen-equations automatically become the required covariant
+  identities;
+- smooth fixed-probe curvature eigen-one-forms, smooth reconstructed scalar
+  amplitudes, and a concrete scalar branch jet whose exterior obstructions are
+  the explicit product-rule forms `dα,dβ`, with branch tests `dα±dβ`;
 - an exact Phase-III equivalence between the scalar reconstruction equation
   and the residual Maxwell square law, followed by eigenvector-free Maxwell
   principal-plane projectors on the non-null branch;
@@ -213,8 +223,11 @@ Its seed oracle places flat four- and five-dimensional geometry in nonlinear
 cylindrical and pure-gauge Kaluza coordinates and passes eight exact checks.
 This is computational evidence, deliberately separated from the Lean proof
 surface; the rotating dyonic benchmark remains to be independently rebuilt.
-The north-star theorem still requires the upstream smooth
-curvature-projector and scalar-branch existence-or-obstruction gate. See the
+The smooth curvature-projector and scalar-branch-form gate is now closed on
+the stated simple-spectrum, strict-sign local patches. The north-star theorem
+still requires the upstream scalar-branch existence-or-obstruction
+classification: determine whether `dα+dβ`, `dα-dβ`, both, or neither vanish,
+then feed every accepted branch into the completed uplift module. See the
 [`realigned execution plan`](docs/REALIGNED_EXECUTION_PLAN.md) for the ordered
 proof obligations and publication decision points.
 

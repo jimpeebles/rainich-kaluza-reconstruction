@@ -111,9 +111,8 @@ not from a chosen eigenbasis. For candidates `v₊=α+β` and `v₋=α-β`, the
 repository already proves abstractly that both can be closed only if
 `dα=dβ=0`.
 
-The remaining curvature work is to:
+The remaining curvature work is now to:
 
-- express `dα` and `dβ` through curvature and derivatives of the projectors;
 - prove whether generically zero, one, or two branches satisfy closure and
   (HC1);
 - classify the exceptional separately integrable locus.
@@ -133,8 +132,11 @@ is now Lean-verified to act as identity on its target eigenspace, vanish on
 the other three, commute with `R`, be idempotent under an explicit four-space
 spectral-decomposition hypothesis, and participate in a four-projector
 resolution of the identity. No eigenbasis or eigenspace orientation is
-chosen. The next geometric step is to promote the pointwise projectors to
-smooth tensor fields. The universal derivative algebra is already in place:
+chosen. That pointwise construction is now promoted to entrywise `C^n`
+coordinate matrix fields wherever the labeled gaps remain nonzero. Fixed
+projector probes, strict-sign normalization, and metric duality produce smooth
+eigen-one-forms on the same explicit patch. The universal derivative algebra
+then gives:
 if `p` is the projector for root `a`, `q` is a complementary projector for
 root `b`, and `dR,dp` denote a directional evaluation of `∇R,∇p`, Lean proves
 
@@ -146,21 +148,24 @@ the identity, Lean now assembles these blocks into the complete formula
 
 `dp = Σ_{j≠i}(aᵢ-aⱼ)⁻¹[Pⱼ(dR)Pᵢ + Pᵢ(dR)Pⱼ]`.
 
+The coordinate Levi--Civita instantiation is also complete. The
+mixed-tensor connection is proved to obey the product rule, so ordinary
+differentiated idempotence and eigen-equations automatically provide the
+covariant hypotheses of the four-block formula. The scalar amplitude
+derivatives are assembled into coordinate one-forms, and
+`CurvatureScalarBranchJet4` combines them with the eigen-one-form jets to give
+explicit product-rule formulas for `dα,dβ`; the two branch obstructions are
+exactly `dα+dβ` and `dα-dβ`.
+
 The branch-selection layer now proves this both abstractly and for genuine
 differentiable one-form fields on an open convex coordinate patch: outside the
 locus where the two spectral covector components are separately closed,
 existence of one closed relative-sign branch implies that exactly one branch
 is closed. Mathlib's Poincare lemma then produces a scalar potential for that
-branch, unique up to an additive constant. Instantiating the projector
-identities for smooth Ricci-projector fields, differentiating the scalar
-amplitudes, and proving that at least one resulting branch is closed remain
-the next curvature steps.
-
-The scalar-amplitude part of that task is now verified at the evaluated
-algebraic level: Lean gives explicit directional derivatives of `q²`, both
-forced scalar diagonals, and both nonzero scalar amplitudes from derivatives
-of the characteristic data and complementary roots. Smooth Levi-Civita
-instantiation and antisymmetrization remain the Phase-II geometric gap.
+branch, unique up to an additive constant. The remaining Phase-II gap is now
+the substantive existence-or-obstruction theorem: prove which, if any, of the
+two explicit curvature obstruction matrices vanishes, and classify the locus
+where both vanish.
 
 ### Phase-II exit criterion
 

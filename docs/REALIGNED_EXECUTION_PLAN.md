@@ -18,11 +18,12 @@ longer be conflated:
    supplies those accepted data through intrinsic curvature conditions, so the
    full curvature-only local if-and-only-if theorem follows.
 
-The first milestone is complete. The second still crosses the genuine
-Phase-II geometric seam: smooth curvature-projector realization and
-scalar-branch closedness or obstruction. The former Maxwell principal-plane
-input has now been discharged algebraically from dimension four, trace zero,
-and the non-null square law.
+The first milestone is complete. The smooth curvature-projector realization
+part of the Phase-II seam is now complete on the explicit generic local patch.
+The second milestone still crosses the substantive scalar-branch closedness
+or obstruction problem. The former Maxwell principal-plane input has also
+been discharged algebraically from dimension four, trace zero, and the
+non-null square law.
 Exact metrics may enter a labeled Phase-V validation track after the uplift
 module is complete, but Phase IV is not marked complete until the upstream
 curvature gate and the uplift theorem are both closed.
@@ -63,6 +64,11 @@ curvature gate and the uplift theorem are both closed.
   rank two, rank-one scalar perturbations retain actual `±q` characteristic
   roots, and the canonical endomorphism coefficients obey the advertised
   quadratic factorization and obstruction.
+- The II-G2 geometric instantiation is complete on explicit labeled
+  simple-spectrum and strict fixed-probe patches. The Lagrange projectors are
+  smooth matrix fields, their coordinate derivatives satisfy the full
+  Levi--Civita four-block formula, and the reconstructed spectral one-forms
+  have explicit obstruction matrices `dα,dβ`.
 - The Phase-II existence/closure problem remains the principal mathematical
   risk of the north-star theorem.
 
@@ -162,8 +168,8 @@ chooses the radial Maxwell potential, constructs the Lorentzian product germ,
 proves intrinsic Ricci-flatness in every nonlinear chart, retains the converse
 Ricci-flatness/EMD iff, and returns the complete additive scalar, exact gauge,
 coupling-orientation, and product-presentation orbits. The certificate does
-not assert that curvature supplies the bridge; constructing it remains the
-upstream II-G2--II-G3 obligation.
+not assert that curvature supplies the bridge; constructing an accepted
+closed branch remains the upstream II-G3 obligation.
 
 ## Upstream curvature gate for the official Phase-IV exit
 
@@ -193,6 +199,21 @@ Promote the evaluated Lagrange-projector and scalar-amplitude derivative
 formulas to smooth Ricci tensor fields with their Levi--Civita derivatives.
 Assemble curvature-derived one-forms `α,β` and explicit formulas for
 `dα,dβ`.
+
+**Status: complete on the explicit generic local patch.**
+`SmoothCurvatureProjector.lean` realizes every four-root Lagrange polynomial
+as an entrywise `C^n` matrix field wherever its three labeled target gaps are
+nonzero, transports the basis-free idempotence and four-projector resolution
+to those matrices, and turns fixed projected probes into smooth normalized
+metric-dual eigen-one-forms on strict Gram-sign patches. The mixed-tensor
+coordinate connection is proved to be a derivation; consequently ordinary
+differentiated projector and eigen-equations yield the complete
+Levi--Civita formula in
+`leviCivitaSpectralProjectorDerivative_fourBlock_of_coordinateJets`.
+The reconstructed amplitude derivatives are assembled directionwise, and
+`CurvatureScalarBranchJet4` supplies the explicit product-rule obstruction
+forms `dα,dβ` with relative-sign tests `dα±dβ`. No assertion that either test
+vanishes is made here; that is exactly II-G3.
 
 ### II-G3 — settle branch existence
 
@@ -279,10 +300,14 @@ research result.
 
 ## Immediate execution order
 
-1. Use the operational V-T1 harness to recover the V-T2 source and convention
-   map while returning the main proof effort to II-G2--II-G3.
-2. Attempt IV-N1; report an obstruction or no-go result as a result, not as a
-   failed proof.
+1. Analyze the two explicit `CurvatureScalarBranchJet4` obstruction matrices
+   and close II-G3 by uniqueness, a genuine two-branch locus, or a sharp
+   no-branch curvature obstruction.
+2. In parallel, use the operational V-T1 harness to recover the V-T2 rotating
+   source and convention map; feed its exact jets through the same obstruction
+   interface.
+3. Compose IV-N1 once II-G3 has returned its classification; report a sharp
+   obstruction or no-go theorem as a result, not as a failed proof.
 
 No phase label advances merely because later infrastructure has started.
 Claims advance only when their stated gate is proved and recorded in the

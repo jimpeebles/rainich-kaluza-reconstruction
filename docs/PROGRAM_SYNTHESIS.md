@@ -88,8 +88,10 @@ cannot choose between the reflection-related scalar tensors found in this
 repository. Derivatives are therefore not technical decoration; they contain
 the information that pointwise curvature necessarily loses.
 
-The next theorem should determine what happens to the two pointwise partners
-when they are promoted to smooth rank-one tensor fields. There are three
+The two pointwise partners have now been promoted, on explicit
+simple-spectrum/strict-sign patches, to smooth spectral one-form jets with
+machine-checked obstruction matrices `dα±dβ`. The next theorem should
+determine what those two obstruction matrices do. There are three
 possibilities, each scientifically useful:
 
 1. only one branch generically admits a closed covector factor, yielding local
@@ -104,6 +106,7 @@ Any of these outcomes improves our understanding of the inverse problem.
 
 1. Promote the pointwise spectral projectors and amplitude formulas to smooth
    curvature-derived tensor fields and compute the branch obstruction forms.
+   **Complete on the explicit generic coordinate patch.**
 2. Formulate differential closure at the tensor level without prematurely
    choosing a scalar sign; classify the reflection-related branches.
 3. Reconstruct the residual Maxwell stress and impose classical Rainich

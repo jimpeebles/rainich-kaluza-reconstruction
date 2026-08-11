@@ -187,8 +187,9 @@ two relative-sign branches is closed, exactly one is closed.
 Status: verified by `both_relativeSign_branches_closed_iff` and
 `reflected_branch_closed_iff_of_branch_closed`; the exact uniqueness clause is
 verified by `relativeSign_closed_branch_unique_of_exists`. The theorem is
-abstractly linear; it does not prove the existence of a closed branch or the
-manifold exterior-derivative hypotheses.
+abstractly linear, while `CurvatureScalarBranchJet4.both_branches_closed_iff`
+now gives its coordinate exterior instantiation for the reconstructed jets.
+Neither theorem proves the existence of a closed branch.
 
 ## Proposition G2 — full simple-spectrum projector derivative
 
@@ -203,9 +204,15 @@ In particular `Pᵢ(dPᵢ)Pᵢ=0`, and derivatives of the eigenvalues do not occ
 in the result.
 
 Status: verified algebraically by `spectralProjectorDerivative_fourBlock` and
-the `spectralProjectorDerivative_*_block` lemmas. The current Lean theorem
-takes the differentiated identities as hypotheses. Smooth vector-bundle and
-Levi-Civita instantiation remains open.
+the `spectralProjectorDerivative_*_block` lemmas. The matrix Lagrange fields
+are now proved `C^n` on every labeled simple-spectrum patch by
+`contDiffOn_matrixFourRootProjectorField`. The ordinary coordinate derivative
+identities are promoted to mixed-tensor covariant identities by the connection
+derivation lemmas, and
+`leviCivitaSpectralProjectorDerivative_fourBlock_of_coordinateJets` gives the
+full Levi--Civita formula. `CurvatureScalarBranchJet4` then assembles the
+amplitude derivatives and eigen-one-form jets into explicit `dα,dβ`. Whether
+either relative-sign obstruction vanishes remains open.
 
 ## Proposition G3 — Maxwell residual and principal splitting
 

@@ -20,6 +20,12 @@ candidate Ricci fingerprint and the generic pointwise reconstruction layer:
 
 - expansion of the proposed characteristic factorization;
 - existence of the protected `±q` polynomial roots;
+- a complete four-dimensional algebraic entrance theorem: trace zero and the
+  non-null Maxwell square law force two rank-two principal projector ranges,
+  any scalar rank-one perturbation retains `±q` eigenvectors, those vectors
+  are roots of the actual Mathlib characteristic polynomial, and its
+  canonically extracted coefficients have the proposed quadratic
+  factorization;
 - vanishing of `C_KK = e₁²e₄ - e₁e₂e₃ + e₃²` for factored data;
 - recovery of `q² = -e₃/e₁` on the nonzero-trace branch;
 - an exact perfect-fluid-spectrum adversarial check;

@@ -48,6 +48,9 @@ novelty statement is phrased comparatively.
   two-dimensional Maxwell principal plane. **Complete in Lean.**
 - Formalize the four-dimensional Maxwell principal-plane multiplicities and
   convert the protected eigenvectors into characteristic-polynomial factors.
+  **Complete in Lean:** the multiplicities follow from dimension four, trace
+  zero, and the non-null square law; `AlgebraicEntrance.lean` reaches the
+  actual endomorphism `charpoly` and canonical coefficient data.
 - Prove that nonzero opposite roots force the complete quadratic
   characteristic factorization. **Complete in Lean.**
 - Formalize the rank-one determinant identity in Lean.

@@ -35,14 +35,16 @@ ambiguity. The ambiguity is intrinsic: a Ricci-centralizing spectral
 reflection exchanges the two scalar tensors while preserving the curvature
 data.
 
-The new protected-eigenspace theorem closes part of the remaining gap. A
+The protected-eigenspace theorem and its new four-dimensional composition
+close the algebraic entrance. A
 rank-one perturbation cannot remove an eigenvalue carried by a two-dimensional
-eigenspace. Hence the two Maxwell principal planes protect one `+q` and one
-`-q` Ricci eigendirection. This supplies the geometric mechanism behind the
-candidate characteristic factorization. The polynomial converse is now also
-Lean-checked: nonzero opposite roots force the full `(x²-q²)` factor. The
-Maxwell principal-plane theorem remains to be joined formally to the
-finite-dimensional characteristic polynomial.
+eigenspace. Dimension four, trace zero, and `S²=q²I` now Lean-prove that both
+Maxwell polynomial projector ranges have rank two. Hence they protect one
+`+q` and one `-q` Ricci eigendirection, and these are machine-checked roots of
+the actual characteristic polynomial. Canonical coefficient extraction and
+the polynomial converse then force the full `(x²-q²)` factor and the
+necessary obstruction. Only the Maxwell square law remains an established
+algebraic input at this entrance.
 
 ### 2. Exact Kaluza solutions and scalar multipoles
 
@@ -71,8 +73,8 @@ spectral problem are independently secured.
 | Classical Maxwell and scalar Rainich theory | established literature | ingredients and comparison baseline |
 | `a=√3` EMD from five-dimensional vacuum gravity | established, convention-sensitive | selects the physical theory |
 | Coupled pointwise block reconstruction and its two-branch ambiguity | Lean-checked in this repository | present core result |
-| Protected `±q` directions under the scalar rank-one perturbation | Lean-checked given two-dimensional Maxwell eigenspaces | bridge toward full tangent-space theorem |
-| Full characteristic factorization from four-dimensional Maxwell algebra | partially closed | immediate algebraic target |
+| Protected `±q` directions under the scalar rank-one perturbation | Lean-checked from the four-dimensional tracefree square-law hypotheses | completed algebraic entrance |
+| Full characteristic factorization from four-dimensional Maxwell algebra | Lean-checked for `S+V` with square-law `S` and rank-one `V` | necessary pointwise theorem; not sufficient for reconstruction |
 | Differential selection/identification of pointwise partners | open | decisive local-reconstruction target |
 | Maxwell two-form recovery and scalar/Maxwell field equations | open | required for sufficiency and for identifying `a=√3` |
 | Exact-solution scalar multipoles and binary hierarchy | promising inherited derivation, unreproduced here | strongest physics validation track |
@@ -100,9 +102,8 @@ Any of these outcomes improves our understanding of the inverse problem.
 
 ## Research sequence now adopted
 
-1. Derive the protected characteristic pair from four-dimensional Maxwell
-   principal-plane algebra and complete the full tangent-space pointwise
-   theorem.
+1. Promote the pointwise spectral projectors and amplitude formulas to smooth
+   curvature-derived tensor fields and compute the branch obstruction forms.
 2. Formulate differential closure at the tensor level without prematurely
    choosing a scalar sign; classify the reflection-related branches.
 3. Reconstruct the residual Maxwell stress and impose classical Rainich

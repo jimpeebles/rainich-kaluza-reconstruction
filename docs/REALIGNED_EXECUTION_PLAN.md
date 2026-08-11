@@ -18,9 +18,11 @@ longer be conflated:
    supplies those accepted data through intrinsic curvature conditions, so the
    full curvature-only local if-and-only-if theorem follows.
 
-The first milestone is close. The second still crosses the genuine Phase-II
-geometric seam: smooth curvature-projector realization, scalar-branch
-closedness or obstruction, and the remaining Maxwell principal-plane input.
+The first milestone is complete. The second still crosses the genuine
+Phase-II geometric seam: smooth curvature-projector realization and
+scalar-branch closedness or obstruction. The former Maxwell principal-plane
+input has now been discharged algebraically from dimension four, trace zero,
+and the non-null square law.
 Exact metrics may enter a labeled Phase-V validation track after the uplift
 module is complete, but Phase IV is not marked complete until the upstream
 curvature gate and the uplift theorem are both closed.
@@ -57,6 +59,10 @@ curvature gate and the uplift theorem are both closed.
   normal-gauge `C²` EMD fields; one theorem then performs scalar integration,
   radial potential recovery, intrinsic uplift, converse reduction, and orbit
   closure.
+- The II-G1 algebraic entrance is complete. Both Maxwell projector ranges have
+  rank two, rank-one scalar perturbations retain actual `±q` characteristic
+  roots, and the canonical endomorphism coefficients obey the advertised
+  quadratic factorization and obstruction.
 - The Phase-II existence/closure problem remains the principal mathematical
   risk of the north-star theorem.
 
@@ -168,6 +174,19 @@ upstream II-G2--II-G3 obligation.
 - complete the protected-eigenvector-to-characteristic-root assembly;
 - keep algebraic false positives visibly rejected.
 
+**Status: complete.** `AlgebraicEntrance.lean` reuses the already proved
+rank-two theorem `maxwellProjectors_finrank_range_eq_two`, extracts independent
+pairs in both polynomial projector ranges, and composes them with rank-one
+protection. `protected_opposite_isRoot_charpoly_of_maxwellResidual` converts
+the surviving vectors to roots of the actual Mathlib characteristic
+polynomial. `CharacteristicData.ofEndomorphism` fixes the coefficient signs,
+and `charpoly_factorization_of_maxwellResidual_add_rankOne_canonical` plus
+`kaluzaObstruction_of_maxwellResidual_add_rankOne` close the factorization and
+necessary-obstruction chain. The obstruction-zero false positive remains a
+separate explicit rejection theorem. The square law itself remains the named
+four-dimensional Maxwell input RK-A1; no additional principal-plane
+multiplicity input is needed.
+
 ### II-G2 — instantiate smooth curvature projectors
 
 Promote the evaluated Lagrange-projector and scalar-amplitude derivative
@@ -261,7 +280,7 @@ research result.
 ## Immediate execution order
 
 1. Use the operational V-T1 harness to recover the V-T2 source and convention
-   map while returning the main proof effort to II-G1--II-G3.
+   map while returning the main proof effort to II-G2--II-G3.
 2. Attempt IV-N1; report an obstruction or no-go result as a result, not as a
    failed proof.
 

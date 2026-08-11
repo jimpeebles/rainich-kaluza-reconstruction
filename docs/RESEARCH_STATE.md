@@ -33,16 +33,16 @@ This implies:
 The Lean project verifies these coefficient consequences and the later generic
 block results. It now also proves the basis-independent mechanism protecting
 an eigenvalue under a rank-one perturbation whenever the original eigenspace
-contains two linearly independent vectors. Applying this separately to the
-two non-null Maxwell principal planes produces nonzero `+q` and `-q`
-eigenvectors of the full Ricci endomorphism. The exterior-algebra proof that
-the Maxwell eigenspaces have the required multiplicities remains open. Lean
-now also proves the converse polynomial step: any monic quartic with nonzero
-roots `+q` and `-q` necessarily factors by `x²-q²`, with the complementary
-quadratic fixed by the first two characteristic coefficients. Thus the only
-remaining bridge to the proposed characteristic factorization is the formal
-four-dimensional passage from the Maxwell principal planes, through the
-protected eigenvectors, to roots of the Ricci characteristic polynomial.
+contains two linearly independent vectors. The formerly open principal-plane
+seam is now closed without a separate exterior-algebra multiplicity theorem:
+in dimension four, trace zero and `S²=q²I` with `q≠0` force both polynomial
+projector ranges to have rank two. Lean extracts independent pairs, proves
+they are `±q` eigenvectors of `S`, protects one of each under the scalar
+rank-one perturbation, and converts them to roots of the actual Mathlib
+characteristic polynomial. The canonical coefficient extraction then gives
+the complete `(x²-q²)` factorization, the necessary obstruction `C_KK=0`, and
+recovery of the actual `q²` when the Ricci trace is nonzero. The Maxwell square
+law itself remains the named four-dimensional algebraic input.
 
 ## Candidate reconstruction step
 

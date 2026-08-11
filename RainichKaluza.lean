@@ -3,6 +3,7 @@ import RainichKaluza.AlgebraicFingerprint
 import RainichKaluza.RankOneEndomorphism
 import RainichKaluza.ProtectedEigenspaces
 import RainichKaluza.ProtectedFactorization
+import RainichKaluza.AlgebraicEntrance
 import RainichKaluza.GenericReconstruction
 import RainichKaluza.LorentzianScalarBlock
 import RainichKaluza.RelativeSignAmbiguity

@@ -107,11 +107,13 @@ kernel vector `y`. Hence `Vy=0` and
 The Lean theorem `exists_protected_eigenvector_of_pair` proves this over an
 arbitrary real module. Its paired corollary
 `exists_protected_opposite_eigenvectors` applies it to `+q` and `-q`
-eigenplanes. Thus, once the standard four-dimensional non-null Maxwell
-principal-plane multiplicities are supplied, the full Ricci endomorphism
-necessarily retains nonzero `+q` and `-q` eigenvectors. Formalizing that
-exterior-algebra multiplicity result and the finite-dimensional
-eigenvector-to-characteristic-root bridge remain open.
+eigenplanes. The new four-dimensional assembly removes their multiplicities
+as an extra input: trace zero and `S²=q²I`, `q≠0`, force both polynomial
+projector ranges to have rank two. Theorems
+`exists_maxwellResidual_principal_eigenpairs` and
+`protected_opposite_isRoot_charpoly_of_maxwellResidual` then produce protected
+nonzero `±q` vectors and prove that they are roots of the actual endomorphism
+characteristic polynomial.
 
 The remaining polynomial step is now exact. For a monic quartic in the sign
 convention of Section 7, nonzero roots `+q` and `-q` force
@@ -124,10 +126,12 @@ and hence
 
 This converse is verified by
 `monicQuartic_factorization_of_opposite_roots` and
-`characteristicData_eq_fromFactorization_of_opposite_roots`. Consequently the
-proposed factorization is no longer an independent coefficient ansatz once
-the geometric protected pair has been connected to the characteristic
-polynomial.
+`characteristicData_eq_fromFactorization_of_opposite_roots`. The canonical
+coefficient bridge and end-to-end statement are
+`CharacteristicData.ofEndomorphism` and
+`charpoly_factorization_of_maxwellResidual_add_rankOne_canonical`.
+Consequently the proposed factorization is no longer an independent
+coefficient ansatz on the stated square-law plus rank-one entrance package.
 
 ## 4. Generic complementary block
 

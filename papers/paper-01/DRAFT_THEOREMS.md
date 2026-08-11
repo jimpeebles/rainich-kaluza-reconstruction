@@ -6,6 +6,19 @@ does not transfer unstated geometric assumptions into Lean.
 
 ## Proposition A — characteristic factorization consequences
 
+Let `S` be a tracefree endomorphism of a four-dimensional real vector space,
+let `q≠0`, and assume `S²=q²I`. For every rank-one endomorphism `V=x⊗f`, the
+endomorphism `S+V` has nonzero eigenvectors with eigenvalues `+q` and `-q`.
+Both are roots of its actual characteristic polynomial, which therefore has
+the factorization
+
+`p(x)=(x²-q²)(x²-e₁x+e₂+q²)`.
+
+Status: verified by the `AlgebraicEntrance.lean` theorem chain ending in
+`charpoly_factorization_of_maxwellResidual_add_rankOne_canonical`. No separate
+principal-plane multiplicity premise remains; the Maxwell square law itself
+is still the named algebraic input.
+
 Let a mixed Ricci endomorphism have characteristic polynomial
 
 `p(λ)=(λ²-q²)(λ²-Rλ-c)`.

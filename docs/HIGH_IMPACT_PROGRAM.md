@@ -118,7 +118,11 @@ The remaining curvature work is to:
   (HC1);
 - classify the exceptional separately integrable locus.
 
-Current status: on any invariant block obeying `(R-aI)(R-bI)=0`, the
+Current status: the upstream algebraic entrance is now complete. Dimension
+four, trace zero, and the non-null square law force two rank-two Maxwell
+projector ranges; rank-one protection yields actual `±q` characteristic
+roots and the canonical characteristic factorization. On any invariant block
+obeying `(R-aI)(R-bI)=0`, the
 eigenvector-free polynomial `Pₐ=(R-bI)/(a-b)` is Lean-verified to be an
 idempotent commuting with `R` and to generate the corresponding involutive
 reflection. More importantly, the full simple-spectrum Lagrange projector

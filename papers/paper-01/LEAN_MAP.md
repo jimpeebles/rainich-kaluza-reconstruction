@@ -7,13 +7,14 @@ than its machine-checked counterpart.
 |---|---|---|
 | Quartic factorization expansion | `monicQuartic_fromFactorization` | complete coefficient algebra |
 | Protected `±q` roots | `protected_positive_root`, `protected_negative_root` | complete polynomial statement |
-| Candidate obstruction is necessary | `kaluzaObstruction_fromFactorization` | complete conditional on encoded factorization |
-| Curvature formula for `q²` | `reconstructedQSq_fromFactorization` | complete for nonzero trace |
+| Candidate obstruction is necessary | `kaluzaObstruction_fromFactorization`, `kaluzaObstruction_of_maxwellResidual_add_rankOne` | complete for encoded factorization and for the actual four-dimensional square-law plus rank-one entrance package |
+| Curvature formula for `q²` | `reconstructedQSq_fromFactorization`, `reconstructedQSq_of_maxwellResidual_add_rankOne` | complete for nonzero trace and connected to the actual protected magnitude |
 | Obstruction alone is insufficient | `algebraicFalsePositive_has_no_real_protected_pair` | complete explicit counterexample |
 | Basis-independent rank-one square law | `rankOneEndomorphism_sq`, `rankOneEndomorphism_sq_eq_trace_smul` | complete for finite free real modules; no basis chosen |
 | Rank-one perturbation protects an eigenvalue carried by a two-dimensional eigenspace | `exists_protected_eigenvector_of_pair` | complete basis-independent theorem |
-| Two Maxwell principal planes protect a `+q/-q` pair | `exists_protected_opposite_eigenvectors` | complete conditional theorem; Maxwell principal-plane multiplicity remains to be formalized |
+| Four-dimensional Maxwell principal planes protect a `+q/-q` characteristic pair | `maxwellProjectors_finrank_range_eq_two`, `exists_maxwellResidual_principal_eigenpairs`, `exists_protected_opposite_eigenvectors_of_maxwellResidual`, `protected_opposite_isRoot_charpoly_of_maxwellResidual` | complete from dimension four, trace zero, the non-null square law, and rank-one perturbation |
 | Nonzero opposite roots force the quadratic factorization | `monicQuartic_factorization_of_opposite_roots`, `characteristicData_eq_fromFactorization_of_opposite_roots` | complete polynomial converse |
+| Actual endomorphism characteristic factorization | `CharacteristicData.ofEndomorphism`, `hasCharacteristicData_ofEndomorphism`, `charpoly_factorization_of_maxwellResidual_add_rankOne_canonical`, `characteristicData_ofEndomorphism_eq_from_maxwellResidual_add_rankOne` | complete algebraic entrance for a tracefree square-law residual plus arbitrary rank-one perturbation |
 | Coordinate-free reconstruction equation | `reconstructionEquation_of_decomposition`, `reconstructionEquation_of_eq_add` | complete in any associative real algebra, conditional on the two square laws |
 | Centralizer invariance of reconstruction | `reconstructionEquation_conjugation_invariant` | complete for involutions commuting with the Ricci-like algebra element |
 | Basis-independent spectral reflection | `reflectionOfIdempotent_sq`, `reflectionOfIdempotent_commutes`, `reconstructionEquation_reflectionOfIdempotent` | complete for commuting idempotents in any associative real algebra |
@@ -59,7 +60,7 @@ than its machine-checked counterpart.
 | Duality overlap and connection law | `dualityCompose_assoc`, `dualityCompose_identity_left`, `dualityCompose_identity_right`, `dualityCompose_inverse_left`, `duality_overlap_cocycle`, `complexionRate_constant_duality_invariant`, `complexionRate_variable_duality_add`, `complexionRate_dualityComposeDerivative`, `complexionRate_dualityInverseDerivative`, `gaugeCorrectedComplexionRate_invariant` | complete pointwise group/cocycle and variable-transition gauge algebra, including differentiated composition/inversion laws; smooth bundle realization open |
 | Exterior complexion and constant-duality orbit | `ExteriorDualityJet.rotatedDF_eq`, `ExteriorDualityJet.rotatedDG_eq`, `emdExteriorClosure_iff_seedChannels`, `constantDuality_eq_sign_of_emd`, `constantDuality_emd_of_zero_coupling`, `constantDuality_emd_of_inactive_source` | complete exterior product-rule reduction; generic constant orbit is overall sign, with full-circle exceptional loci classified |
 | Convention-fixed EMD decomposition | `docs/EMD_CONVENTION.md`; `rankOneEndomorphism_sq_eq_trace_smul` | field-equation derivation documented; scalar square formalized; Maxwell square is a named literature input |
-| Full tangent-space spectral assembly | `exists_protected_opposite_eigenvectors`, `fourRootProjectors_sum_eq_one` | protected pair complete under plane hypotheses and abstract four-root splitting complete; derivation of the full decomposition from the geometric hypotheses remains open |
+| Full tangent-space spectral assembly | `protected_opposite_isRoot_charpoly_of_maxwellResidual`, `charpoly_factorization_of_maxwellResidual_add_rankOne_canonical`, `fourRootProjectors_sum_eq_one` | protected factor complete from the square-law/rank-one package; the generic complementary-root splitting and smooth curvature-field realization remain explicit downstream hypotheses |
 | Differential closure and local sufficiency | `both_relativeSign_branches_closed_iff` | simultaneous-branch obstruction complete; existence, exactness, and local sufficiency open |
 
 The paper must not call the first five rows a geometric reconstruction theorem.

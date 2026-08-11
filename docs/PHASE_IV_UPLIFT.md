@@ -246,13 +246,13 @@ be precisely those jets, its point inverse is certified, and
 `localProductCoordinateRicciFlat_iff_emd` gives the resulting geometric
 coordinate-germ equivalence.
 
-The first chart-independence seam is now closed for arbitrary invertible
+The first chart-independence seam was closed for arbitrary invertible
 affine changes of all five coordinates. `AffineCoordinateRicci.lean` derives
 the inverse-jet, connection, differentiated-connection, and Ricci
 transformation laws and proves the covariant pullback injective. Thus the
 Ricci-flatness/EMD equivalence survives every constant Jacobian, including
-ones mixing base and circle directions. The remaining seam is specifically
-nonlinear and intrinsic. The universal inhomogeneous cancellation is now
+ones mixing base and circle directions. The nonlinear seam is also closed.
+The universal inhomogeneous cancellation is
 proved in `NonlinearCoordinateRicci.lean`: nonlinear coordinate two-jets give
 the inhomogeneous Christoffel law, coordinate three-jets give the differentiated
 connection, and its Ricci contraction has the exact covariant law with a
@@ -261,11 +261,18 @@ terms independently. A transformed metric second jet is also constructed,
 with its differentiated first-kind cancellation proved. Lean now additionally
 checks the transformed inverse-metric derivative, the four-term first-kind
 product rule, and the undifferentiated raising into the nonlinear connection
-bracket. The remaining chart identity is the differentiated-bracket
-contraction producing the certified product-rule connection jet; it
-immediately unlocks the coordinate-Ricci and Kaluza specializations. Mathlib does not currently
-provide a ready-made Lorentzian Ricci API for the later intrinsic layer.
-IV.4 then supplies the orbit classification.
+bracket. The affine and inhomogeneous differentiated contractions are proved
+separately and assemble into the certified product-rule connection jet.
+Coordinate Ricci covariance, two-sided flatness, and the nonlinear-coordinate
+Kaluza specialization are unconditional. `IntrinsicKaluzaLocal.lean` now
+packages this finite-jet overlap law into a chart-independent local theorem.
+It extracts a symmetric nondegenerate pseudo-Riemannian two-jet from the
+actual componentwise `C²` Kaluza metric on `BaseCoordinateSpace × ℝ`, records
+circle invariance and the displayed `(-,+,+,+,+)` normal-frame signature, and
+proves that Ricci-flatness in any two invertible nonlinear overlap jets is
+equivalent. The intrinsic local predicate is equivalent to the EMD equations.
+The wrapper is deliberately local; no global circle quotient or global
+manifold topology is asserted.
 
 ## IV.4 — uniqueness and exit condition
 
@@ -281,9 +288,20 @@ Phase IV exits only when the forward and converse Ricci-flatness theorems and
 this orbit classification are all proved. Exact-solution tests belong to
 Phase V and do not substitute for these identities.
 
+**Status: complete at the local product-preserving level.**
+`KaluzaUpliftOrbit.lean` proves that a nonzero-scale fiber-coordinate jet
+identifies two Kaluza presentations if and only if the warped base blocks,
+fiber radii, and connection one-forms satisfy the forced compatibility laws.
+This exhausts the admissible local fiber-coordinate class and yields the
+gauge/fiber-shift, dilaton/radius-rescaling, and sign/fiber-reversal laws as
+corollaries. Equal local curvatures give the exact gauge-coordinate change on
+an open convex patch. Scalar orientation is exactly `a=±√3`; active constant
+duality is exactly overall sign, with the zero-coupling and inactive-source
+full-circle loci kept separate.
+
 ## Realigned completion order
 
-The Phase-IV uplift module now proceeds in four audited gates:
+The Phase-IV uplift module was organized into four audited gates:
 
 1. prove the remaining metric-second-jet raising/product-rule identity and
    derive unconditional nonlinear `coordinateRicci` covariance;
@@ -292,7 +310,15 @@ The Phase-IV uplift module now proceeds in four audited gates:
 3. prove the IV.4 orbit list exhaustive, including exceptional duality loci;
 4. assemble the single conditional forward/converse uplift theorem.
 
-Completing these gates closes the uplift module for accepted Phase-III data.
+All four gates are complete for the explicit accepted-data interface.
+`ConditionalKaluzaUplift.lean` states that interface as a closed scalar
+one-form with a chosen point normalization, a post-unweighting `C¹` closed
+Maxwell field, `a²=3`, and a normal-gauge realizer connecting chosen potentials
+to actual `C²` EMD fields. Its assembly theorem performs normalized scalar
+integration, radial potential recovery,
+intrinsic Ricci-flat uplift, converse reduction, and the full scalar/gauge/
+presentation orbit closure. This closes the conditional uplift module for
+accepted Phase-III data.
 The official high-impact Phase-IV exit additionally requires the upstream
 curvature construction to produce or reject the scalar branch intrinsically.
 That dependency and the permitted Phase-V validation track are detailed in

@@ -27,10 +27,13 @@ import RainichKaluza.CoordinateRicci
 import RainichKaluza.AffineCoordinateRicci
 import RainichKaluza.NonlinearCoordinateRicci
 import RainichKaluza.KaluzaFieldReduction
+import RainichKaluza.IntrinsicKaluzaLocal
 import RainichKaluza.MaxwellDualityOrbit
 import RainichKaluza.DualityComplexionDerivative
 import RainichKaluza.ComplexionCouplingSystem
 import RainichKaluza.ExteriorComplexion
+import RainichKaluza.KaluzaUpliftOrbit
+import RainichKaluza.ConditionalKaluzaUplift
 import RainichKaluza.CanonicalMaxwellTwoForm
 import RainichKaluza.LorentzFrameTransport
 import RainichKaluza.SpectralReflection

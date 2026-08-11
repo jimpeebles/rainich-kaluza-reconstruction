@@ -38,13 +38,25 @@ curvature gate and the uplift theorem are both closed.
   Levi--Civita Ricci.
 - Affine coordinate covariance and universal nonlinear connection-level Ricci
   covariance are complete.
-- The remaining metric realization has been decomposed. Lean verifies the
-  nonlinear inverse-metric jet product rule, the full differentiated
-  first-kind pullback, its undifferentiated raised contraction, both
-  differentiated inverse-Jacobian identities, and the product-rule derivative
-  of the retained-old-upper-index raising factor. The remaining endpoint is
-  the differentiated-bracket contraction assembling them into the certified
-  connection jet.
+- Nonlinear metric realization is complete. Lean verifies the transformed
+  inverse-metric jet, both differentiated raising contractions, the induced
+  product-rule Christoffel jet, unconditional coordinate-Ricci covariance and
+  two-sided Ricci-flatness equivalence, and the nonlinear-coordinate Kaluza
+  specialization.
+- Intrinsic local packaging is complete. The actual componentwise `C²`
+  Lorentzian Kaluza metric on the circle-invariant product patch supplies a
+  symmetric nondegenerate coordinate two-jet, and Ricci-flatness is proved
+  independent of every invertible nonlinear chart-overlap three-jet.
+- The local uplift orbit is classified exhaustively inside the
+  product-preserving circle-coordinate class. Gauge shifts, radius rescaling,
+  and fiber reversal are named instances of a single necessary-and-sufficient
+  presentation theorem; the active and exceptional duality branches remain
+  explicit.
+- The conditional uplift module is assembled. An explicit accepted-branch
+  certificate bridges the post-unweighting `C¹` field package to actual
+  normal-gauge `C²` EMD fields; one theorem then performs scalar integration,
+  radial potential recovery, intrinsic uplift, converse reduction, and orbit
+  closure.
 - The Phase-II existence/closure problem remains the principal mathematical
   risk of the north-star theorem.
 
@@ -64,16 +76,13 @@ second-kind connection jet. Derive as immediate corollaries:
 **Gate:** no conditional Christoffel-jet equality remains in the advertised
 coordinate-Ricci surface.
 
-**Current substatus:** the transformed inverse-metric derivative, explicit
-first-kind derivative, undifferentiated raising/bracket contraction, and the
-raising-factor derivative are complete. The latter proves the cancellation of
-the derivative of the first inverse-Jacobian factor and reduces the endpoint
-to two coupled contractions: the affine first-kind product rule and the
-inhomogeneous metric-Hessian/third-derivative product rule. The actual metric
-theorem must explicitly assume symmetry of the first metric jet
-`dg R A B = dg R B A`; Lean now records the inverse-metric contraction where
-that hypothesis first becomes essential. Prove those two contractions, then
-assemble the unconditional theorem.
+**Status: complete.** The affine first-kind product rule and the inhomogeneous
+metric-Hessian/third-derivative product rule are proved separately and
+assembled into `transformedFirstKindJet_raise_eq_connectionBracketJet`.
+`coordinateChristoffelJet_transformConnectionJet` closes the second-kind
+metric realization, with first-metric-jet symmetry
+`dg R A B = dg R B A` explicit. Its Ricci covariance, two-sided flatness
+corollary, and nonlinear-coordinate Kaluza specialization are machine checked.
 
 ### IV-G2 — intrinsic local packaging
 
@@ -85,6 +94,16 @@ circle-invariance hypotheses explicitly.
 
 **Gate:** Ricci-flatness of the constructed local product is independent of
 the normal/radial-gauge chart used to prove it.
+
+**Status: complete.** `IntrinsicKaluzaLocal.lean` packages a symmetric,
+nondegenerate pseudo-Riemannian coordinate two-jet and defines
+Ricci-flatness after an arbitrary invertible nonlinear overlap three-jet.
+The already-proved nonlinear tensor law gives a two-sided chart-independence
+theorem. Its Kaluza specialization starts from the actual componentwise `C²`
+metric on `BaseCoordinateSpace × ℝ`, records circle invariance and the
+displayed `(-,+,+,+,+)` signature explicitly, and proves both pairwise chart
+independence and `intrinsicRicciFlatAt_iff_emd`. The theorem is local and does
+not assert a global circle quotient or global manifold topology.
 
 ### IV-O1 — complete uplift-orbit classification
 
@@ -103,6 +122,20 @@ separate from the generic active branch.
 **Gate:** two local uplifts of the same accepted branch are equivalent exactly
 by the stated continuous, gauge, and discrete freedoms.
 
+**Status: complete.** `KaluzaUpliftOrbit.lean` defines the first-order datum of
+an admissible product-preserving circle-coordinate change and proves
+`equivalentUnder_iff_compatible`: equality of two Kaluza block presentations
+holds exactly when their warped base blocks, fiber radii, and connection
+one-forms obey the three forced compatibility laws. Gauge plus fiber shift,
+constant dilaton plus circle-radius/base rescaling, and Maxwell sign plus
+fiber reversal are proved instances. The field-level gauge theorem turns
+equal curvature into an exact local coordinate shift on an open convex patch.
+The Kaluza coupling locus is exactly `a=±√3`; on the active nonzero-coupling
+branch the duality orbit is iff the overall sign, while the already-certified
+zero-coupling and inactive-source loci retain the full circle. Circle
+translations are invisible to the tangent pairing and are covered by the
+circle-invariant local metric.
+
 ### IV-C1 — assemble the conditional uplift theorem
 
 Compose scalar integration, Maxwell unweighting, radial potential recovery,
@@ -111,6 +144,20 @@ the `a²=3` detector, intrinsic Ricci-flatness, converse reduction, and IV-O1.
 **Gate:** a single theorem takes an accepted generic Phase-III orbit to the
 complete local Ricci-flat uplift orbit and proves the converse, without an
 unlisted chart or gauge choice.
+
+**Status: complete, conditional on the explicit accepted-data bridge.**
+`ConditionalKaluzaUplift.lean` defines `AcceptedKaluzaBranchAt`, whose fields
+state the exact seam between the existing abstractions: a closed scalar
+one-form with a chosen point normalization, the post-unweighting `C¹` closed
+Maxwell field, `a²=3`, and a normal-gauge realizer that identifies chosen
+potentials with actual `C²` EMD fields.
+`exists_completeConditionalKaluzaUplift` integrates and normalizes the scalar,
+chooses the radial Maxwell potential, constructs the Lorentzian product germ,
+proves intrinsic Ricci-flatness in every nonlinear chart, retains the converse
+Ricci-flatness/EMD iff, and returns the complete additive scalar, exact gauge,
+coupling-orientation, and product-presentation orbits. The certificate does
+not assert that curvature supplies the bridge; constructing it remains the
+upstream II-G2--II-G3 obligation.
 
 ## Upstream curvature gate for the official Phase-IV exit
 
@@ -202,13 +249,8 @@ research result.
 
 ## Immediate execution order
 
-1. IV-G1: the remaining nonlinear metric-second-jet identity.
-2. IV-G1 corollaries and axiom audit.
-3. IV-G2: chart-independent local-product packaging.
-4. IV-O1: exhaustive uplift-orbit theorem.
-5. IV-C1: assembled conditional forward/converse theorem.
-6. Begin V-T1 while returning the main proof effort to II-G1--II-G3.
-7. Attempt IV-N1; report an obstruction or no-go result as a result, not as a
+1. Begin V-T1 while returning the main proof effort to II-G1--II-G3.
+2. Attempt IV-N1; report an obstruction or no-go result as a result, not as a
    failed proof.
 
 No phase label advances merely because later infrastructure has started.

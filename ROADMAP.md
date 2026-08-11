@@ -12,14 +12,17 @@ not a competing phase numbering scheme. The current audited execution order
 is maintained in
 [`docs/REALIGNED_EXECUTION_PLAN.md`](docs/REALIGNED_EXECUTION_PLAN.md):
 
-1. close the nonlinear metric-second-jet realization identity;
-2. derive intrinsic chart-independent Kaluza Ricci-flatness;
-3. complete the exhaustive Phase-IV uplift-orbit classification;
-4. assemble the conditional forward/converse uplift theorem;
-5. begin the reproducible Phase-V exact-metric harness while returning the
+1. begin the reproducible Phase-V exact-metric harness while returning the
    main theorem effort to the Phase-II curvature/closure gate;
-6. compose the north-star theorem only after both the curvature-entry and
+2. compose the north-star theorem only after both the curvature-entry and
    uplift-module gates are proved.
+
+Intrinsic chart-independent local Kaluza Ricci-flatness is now complete in
+`IntrinsicKaluzaLocal.lean`, and the exhaustive product-preserving uplift
+orbit is complete in `KaluzaUpliftOrbit.lean`. The conditional
+forward/converse module is assembled in `ConditionalKaluzaUplift.lean` behind
+an explicit accepted-data bridge. The live work now splits between the
+Phase-V harness and the upstream Phase-II curvature/closure gate.
 
 Starting the Phase-V harness does not mark Phase IV complete.
 
@@ -177,8 +180,16 @@ nondegeneracy hypothesis.
   three-jets. The transformed metric second jet and its first-kind derivative
   law are constructed. The inverse-metric derivative product rule, explicit
   four-term first-kind derivative, and undifferentiated raised bracket are now
-  complete; the differentiated-bracket contraction is the remaining
-  second-kind identity before intrinsic pseudo-Riemannian packaging.**
+  complete. The affine and inhomogeneous differentiated contractions now
+  assemble into the exact second-kind Christoffel-jet law, unconditional
+  coordinate-Ricci covariance, and the nonlinear-coordinate Kaluza
+  specialization. Intrinsic local pseudo-Riemannian packaging now extracts the
+  actual `C²` Lorentzian product-metric germ and proves Ricci-flatness
+  independent of nonlinear overlap jets. The complete product-preserving
+  circle-coordinate orbit is now classified by necessary-and-sufficient base,
+  radius, and connection compatibility laws, with active and exceptional
+  duality branches separate. The conditional forward/converse module is now
+  assembled behind the explicit accepted-data certificate.**
 
 Exit criterion: Paper I candidate with manuscript-to-Lean claim translation.
 

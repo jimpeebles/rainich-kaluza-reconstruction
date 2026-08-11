@@ -268,8 +268,8 @@ of the upper five-dimensional Ricci block system is equivalent to the full
 convention-fixed four-dimensional Einstein--Maxwell--dilaton system.
 
 This is an exact forward-and-converse statement at the coordinate-jet layer;
-the remaining geometric task is to package it for smooth fields and normal
-coordinates on a local product with a circle. -/
+the downstream field and intrinsic-local layers package it for smooth fields,
+normal coordinates, and chart-independent local products with a circle. -/
 theorem conventionKaluzaRicciBlocksVanish_iff_emd
     (phi0 : ℝ) (d : Fin 4 → ℝ) (phi1 : OneForm4)
     (phi2 : Fin 4 → Fin 4 → ℝ) (A1 : Fin 4 → Fin 4 → ℝ)

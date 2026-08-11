@@ -228,10 +228,8 @@ full normal-frame EMD system. The first smooth realization layer now extracts
 these arrays from actual `C²` fields, proves their Schwarz symmetries, extends
 the assembled metric circle-invariantly to a local product, and matches its
 point value, first derivative, and complete second derivative to the
-coordinate calculation. The remaining Phase-IV obligations are the intrinsic
-Ricci identification and the IV.4 uniqueness/orbit classification. The first
-of these has now been narrowed substantially: an ansatz-independent coordinate
-Levi--Civita/Ricci layer is proved equal both to the Kaluza contraction and to
+coordinate calculation. An ansatz-independent coordinate Levi--Civita/Ricci
+layer is proved equal both to the Kaluza contraction and to
 the curvature built from the actual local-product metric derivatives. The
 arbitrary invertible affine coordinate-change case is now also complete:
 Lean derives the transformed inverse jet, connection, differentiated
@@ -250,11 +248,34 @@ metric second jet is also constructed and its first-kind differentiated
 connection law is verified. The metric endpoint now separately proves the
 nonlinear product-rule derivative of the transformed inverse metric, the full
 four-term differentiated first-kind pullback, and the undifferentiated raised
-contraction into the inhomogeneous connection bracket. It remains to prove
-the differentiated-bracket contraction assembling these identities into the
-certified nonlinear differentiated connection. After that, the
-coordinate-Ricci specialization and pseudo-Riemannian manifold packaging—not
-the component curvature formula—remain.
+contraction into the inhomogeneous connection bracket. The affine and
+inhomogeneous differentiated raising contractions are now proved separately
+and assembled into the certified nonlinear Christoffel jet. Unconditional
+coordinate-Ricci covariance, two-sided Ricci-flatness, and the nonlinear
+Kaluza specialization follow. The remaining coordinate-independence seam is
+now closed at the intended local level in `IntrinsicKaluzaLocal.lean`. A
+symmetric nondegenerate coordinate two-jet is extracted from the actual
+componentwise `C²` Kaluza metric on the circle-invariant product patch, the
+normal frame displays signature `(-,+,+,+,+)`, and finite-jet overlap
+covariance proves pairwise chart independence. The resulting intrinsic local
+Ricci-flatness predicate is equivalent to EMD. This does not claim a global
+circle quotient or global pseudo-Riemannian manifold topology. The remaining
+local presentation freedom is now also classified in
+`KaluzaUpliftOrbit.lean`. Within the product-preserving circle-coordinate
+class, equivalence of two Kaluza block metrics is iff the warped-base,
+fiber-radius, and connection compatibility laws. Exact local gauge shifts,
+dilaton/radius rescaling, and sign/fiber reversal are instances. The active
+duality orbit is exactly overall sign, while zero coupling and inactive
+source channels retain the exceptional circle. The conditional uplift module
+is now assembled in `ConditionalKaluzaUplift.lean`. Its accepted-branch
+certificate makes the abstraction seam explicit: a scalar point
+normalization, post-unweighting `C¹` Maxwell closure, and a normal-gauge
+realizer are required. The theorem then integrates and normalizes the scalar,
+chooses the radial Maxwell potential, constructs the
+intrinsically Ricci-flat Lorentzian product germ, retains the converse EMD
+reduction, and returns all scalar, gauge, coupling, and presentation orbits.
+The remaining official Phase-IV obligation is upstream: construct this
+certificate from intrinsic curvature data or return the sharp obstruction.
 
 ## Evidence inherited from earlier conversations
 

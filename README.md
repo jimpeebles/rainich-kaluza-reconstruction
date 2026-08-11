@@ -167,20 +167,39 @@ affine coordinate seam is also closed for every invertible constant Jacobian,
 including changes mixing base and circle directions, with Ricci-flatness
 preserved and reflected. The universal inhomogeneous nonlinear connection and
 Ricci cancellation is now proved for arbitrary coordinate three-jets as well.
-The metric endpoint now proves the transformed inverse-metric derivative, the
-explicit four-term differentiated first-kind pullback, the undifferentiated
-raised connection bracket, and the product-rule derivative of its retained
-old-upper-index raising factor. The last theorem cancels the derivative of the
-first inverse Jacobian and records exactly where first-metric-jet symmetry is
-needed. The remaining chart seam is the affine plus inhomogeneous
-differentiated-bracket contraction into the certified connection jet,
-followed by intrinsic pseudo-Riemannian manifold packaging and the uniqueness
-classification of IV.4.
+The nonlinear metric endpoint is now complete: the affine first-kind and
+inhomogeneous metric-Hessian/third-derivative product rules are proved
+separately, assembled into the transformed Christoffel jet, and propagated to
+unconditional coordinate-Ricci covariance and two-sided Ricci-flatness.
+Consequently the genuine Kaluza local-product metric remains Ricci-flat iff
+EMD after every invertible nonlinear coordinate three-jet, including changes
+mixing base and circle directions. First-metric-jet symmetry is explicit where
+the inverse-metric contraction requires it. The intrinsic local chart seam is
+now closed in `IntrinsicKaluzaLocal.lean`: a symmetric nondegenerate
+pseudo-Riemannian coordinate two-jet is extracted from the actual
+componentwise `C²` product metric, the product-patch and circle-invariance
+statements are explicit, and the normal frame displays signature
+`(-,+,+,+,+)`. Ricci-flatness in any two invertible nonlinear overlap jets is
+equivalent, and intrinsic local Ricci-flatness is equivalent to EMD. This is a
+local product-germ theorem; it does not assert a global circle quotient or
+global manifold topology. `KaluzaUpliftOrbit.lean` now also closes the local
+uniqueness classification: equality under any product-preserving local fiber
+coordinate jet is equivalent to exactly the warped-base, fiber-radius, and
+connection compatibility laws. Gauge shifts, dilaton/radius rescaling, and
+fiber reversal are named instances; the active duality orbit is exactly the
+overall sign, while zero-coupling and inactive-source exceptional circles
+remain explicit. `ConditionalKaluzaUplift.lean` now assembles the single
+conditional forward/converse theorem. Its accepted-branch certificate states
+the real abstraction seam—a scalar point normalization, post-unweighting `C¹`
+closure, and a normal-gauge realizer—and the theorem performs normalized
+scalar integration, radial potential
+recovery, intrinsic uplift, converse reduction, and orbit closure without an
+unlisted chart or gauge choice.
 
 The current execution plan deliberately distinguishes completion of that
-uplift module from the official curvature-only Phase-IV exit. After the
-nonlinear metric identity, intrinsic packaging, and exhaustive uplift-orbit
-classification, exact metrics may enter a labeled Phase-V validation track.
+uplift module from the official curvature-only Phase-IV exit. The conditional
+module is now complete, so exact metrics may enter a labeled Phase-V validation
+track while the main theorem effort returns to the upstream curvature gate.
 The north-star theorem still requires the upstream smooth
 curvature-projector and scalar-branch existence-or-obstruction gate. See the
 [`realigned execution plan`](docs/REALIGNED_EXECUTION_PLAN.md) for the ordered

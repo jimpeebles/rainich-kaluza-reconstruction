@@ -1,4 +1,4 @@
-import RainichKaluza.AffineCoordinateRicci
+import RainichKaluza.NonlinearCoordinateRicci
 import Mathlib.Analysis.Calculus.FDeriv.Symmetric
 
 /-!
@@ -22,8 +22,8 @@ This remains a coordinate-germ theorem, but `CoordinateRicci.lean` now
 separates the standard coordinate Levi--Civita/Ricci construction from the
 Kaluza ansatz, and this file proves that the genuine five-coordinate
 derivatives of the actual local-product metric produce exactly that Ricci
-tensor.  The remaining intrinsic wrapper is chart-independence/manifold
-packaging; Mathlib currently has no ready-made Lorentzian Ricci API.
+tensor. `IntrinsicKaluzaLocal.lean` supplies the downstream chart-independent
+local product-germ wrapper without requiring a large manifold Ricci API.
 -/
 
 namespace RainichKaluza
@@ -935,6 +935,24 @@ noncomputable def AffineLocalProductCoordinateRicciFlat
       (C.transformCovariant3 (D.localProductMetricJet1 z))
       (C.transformCovariant4 (D.localProductMetricJet2 z)) N P = 0
 
+/-- Ricci-flatness of the genuine local-product metric jet after an arbitrary
+invertible nonlinear three-jet change of all five coordinates. -/
+noncomputable def NonlinearLocalProductCoordinateRicciFlat
+    (C : CoordinateChangeJet3 (Fin 4 ⊕ Unit)) (z : ℝ) : Prop :=
+  ∀ N P : Fin 4 ⊕ Unit,
+    coordinateRicci
+      (C.affine.transformContravariant2
+        (kaluzaNormalGaugePointInverse (kaluzaBaseWarp D.phi0)
+          (kaluzaFiberWarp D.phi0) D.diagonal))
+      (C.secondJet.transformMetricJet1
+        (kaluzaNormalGaugePointMetric (kaluzaBaseWarp D.phi0)
+          (kaluzaFiberWarp D.phi0) D.diagonal)
+        (D.localProductMetricJet1 z))
+      (C.transformMetricJet2
+        (kaluzaNormalGaugePointMetric (kaluzaBaseWarp D.phi0)
+          (kaluzaFiberWarp D.phi0) D.diagonal)
+        (D.localProductMetricJet1 z) (D.localProductMetricJet2 z)) N P = 0
+
 /-- The coordinate Ricci tensor extracted from the actual local-product
 metric is exactly the audited normal-gauge Kaluza Ricci tensor. -/
 theorem localProductCoordinateRicci_eq (z : ℝ) (N P : Fin 4 ⊕ Unit) :
@@ -1013,6 +1031,67 @@ theorem affineLocalProductCoordinateRicciFlat_iff_emd
     (kaluzaNormalGaugePointInverse (kaluzaBaseWarp D.phi0)
       (kaluzaFiberWarp D.phi0) D.diagonal)
     (D.localProductMetricJet1 z) (D.localProductMetricJet2 z)
+
+/-- **Nonlinear-coordinate geometric Kaluza reduction.** After any invertible
+nonlinear coordinate three-jet, including changes mixing base and circle
+directions, the completely transformed genuine metric jet is Ricci-flat
+exactly when the extracted four-dimensional EMD equations hold. -/
+theorem nonlinearLocalProductCoordinateRicciFlat_iff_emd
+    (C : CoordinateChangeJet3 (Fin 4 ⊕ Unit)) (z : ℝ) :
+    D.NonlinearLocalProductCoordinateRicciFlat C z ↔ D.EMDEquations := by
+  let u := kaluzaBaseWarp D.phi0
+  let v := kaluzaFiberWarp D.phi0
+  let g := kaluzaNormalGaugePointMetric u v D.diagonal
+  let gInv := kaluzaNormalGaugePointInverse u v D.diagonal
+  have hg (A B : Fin 4 ⊕ Unit) : g A B = g B A := by
+    rcases A with A | A <;> rcases B with B | B
+    · by_cases h : A = B
+      · subst B
+        rfl
+      · simp [g, kaluzaNormalGaugePointMetric, h, Ne.symm h]
+    · simp [g, kaluzaNormalGaugePointMetric]
+    · simp [g, kaluzaNormalGaugePointMetric]
+    · rfl
+  have hgInv (A B : Fin 4 ⊕ Unit) : gInv A B = gInv B A := by
+    rcases A with A | A <;> rcases B with B | B
+    · by_cases h : A = B
+      · subst B
+        rfl
+      · simp [gInv, kaluzaNormalGaugePointInverse, h, Ne.symm h]
+    · simp [gInv, kaluzaNormalGaugePointInverse]
+    · simp [gInv, kaluzaNormalGaugePointInverse]
+    · rfl
+  have hInv (A B : Fin 4 ⊕ Unit) :
+      (∑ E : Fin 4 ⊕ Unit, gInv A E * g E B) =
+        if A = B then 1 else 0 := by
+    calc
+      _ = ∑ E : Fin 4 ⊕ Unit, g B E * gInv E A := by
+        apply Finset.sum_congr rfl
+        intro E _
+        rw [hgInv A E, hg E B]
+        ring
+      _ = if B = A then 1 else 0 := by
+        exact kaluzaNormalGaugePointMetric_mul_inverse
+          u v D.diagonal (kaluzaBaseWarp_ne_zero D.phi0)
+          (kaluzaFiberWarp_ne_zero D.phi0) D.diagonal_ne_zero B A
+      _ = _ := by
+        by_cases h : A = B
+        · simp [h]
+        · have h' : B ≠ A := Ne.symm h
+          simp [h, h']
+  rw [← D.localProductCoordinateRicciFlat_iff_emd z]
+  unfold NonlinearLocalProductCoordinateRicciFlat
+    LocalProductCoordinateRicciFlat localProductCoordinateRicci
+  change
+    (∀ N P, coordinateRicci (C.affine.transformContravariant2 gInv)
+      (C.secondJet.transformMetricJet1 g (D.localProductMetricJet1 z))
+      (C.transformMetricJet2 g (D.localProductMetricJet1 z)
+        (D.localProductMetricJet2 z)) N P = 0) ↔
+    ∀ N P, coordinateRicci gInv (D.localProductMetricJet1 z)
+      (D.localProductMetricJet2 z) N P = 0
+  exact CoordinateChangeJet3.coordinateRicciFlat_transform_iff C
+    gInv g (D.localProductMetricJet1 z) (D.localProductMetricJet2 z)
+    hg hgInv (D.localProductMetricJet1_symm z) hInv
 
 /-- **Assembled smooth coordinate-germ reduction.** The actual `C²` uplift
 metric supplies the complete second jet used by the Ricci calculation, and

@@ -329,9 +329,8 @@ now closed for every invertible affine coordinate change. The inverse metric
 jet, connection, differentiated connection, and Ricci tensor obey their exact
 transformation laws, and inverse-Jacobian contraction proves that the Ricci
 pullback is injective. Thus Ricci-flatness is preserved and reflected even by
-affine changes mixing base and circle directions. The remaining bridge is the
-nonlinear chart law and intrinsic packaging. Most of its universal algebra is
-now complete in `NonlinearCoordinateRicci.lean`: a coordinate two-jet applied
+affine changes mixing base and circle directions. The nonlinear chart law is
+complete in `NonlinearCoordinateRicci.lean`: a coordinate two-jet applied
 to the metric first jet yields the exact inhomogeneous Christoffel law; a
 coordinate three-jet supplies the forced inverse-Jacobian derivative and full
 product-rule differentiated connection; and Lean proves that its Ricci
@@ -340,26 +339,28 @@ reflects Ricci-flatness. The proof separately checks the pure-coordinate
 third-derivative/quadratic cancellation and the mixed old-connection/Hessian
 cancellation. The complete transformed metric second jet is constructed and
 its differentiated first-kind cancellation is verified. The metric endpoint
-now also proves the nonlinear inverse-metric derivative product rule, expands
-the complete four-term differentiated first-kind pullback, recovers the
-undifferentiated inhomogeneous connection bracket by raising, and proves the
-product-rule derivative of that retained-index raising factor. This last step
-cancels the derivative of the first inverse Jacobian and makes the required
-first-metric-jet symmetry explicit. The remaining identity is the affine plus
-inhomogeneous differentiated-bracket contraction assembling those pieces into
-the certified product-rule connection jet. It immediately yields an
-unconditional coordinate-Ricci theorem for the actual Kaluza metric;
-intrinsic pseudo-Riemannian packaging follows.
+also proves the nonlinear inverse-metric derivative product rule, the affine
+first-kind raising contraction, and the inhomogeneous
+metric-Hessian/third-derivative contraction. These assemble into the certified
+product-rule Christoffel jet and yield unconditional coordinate-Ricci
+covariance, preservation and reflection of Ricci-flatness, and the nonlinear
+coordinate specialization of the actual Kaluza metric. The required
+first-metric-jet symmetry is explicit. `IntrinsicKaluzaLocal.lean` packages
+the overlap law as a chart-independent local pseudo-Riemannian theorem for the
+actual componentwise `C²`, circle-invariant Kaluza product metric, with
+nondegeneracy and displayed Lorentz signature explicit. Ricci-flatness in any
+two nonlinear overlap jets agrees, and the intrinsic local predicate is
+equivalent to EMD. Global circle topology is outside this local theorem.
 
 ### Phase-IV exit criterion
 
 The north-star local if-and-only-if theorem, including uniqueness and all
 stated gauge/discrete freedoms.
 
-This exit has two necessary layers. The **uplift-module layer** closes the
-remaining nonlinear metric identity, intrinsic chart-independent packaging,
-and exhaustive IV.4 orbit classification for already accepted Phase-III
-data. The **curvature-entry layer** closes the upstream Phase-II smooth
+This exit has two necessary layers. The **uplift-module layer** is complete
+for the explicit accepted-data certificate: intrinsic chart-independent
+packaging, exhaustive IV.4 orbit classification, and the conditional
+forward/converse assembly are proved. The **curvature-entry layer** closes the upstream Phase-II smooth
 projector/antisymmetrization and scalar-branch existence-or-obstruction gap.
 The first layer may be completed and used by exact-metric tests without
 claiming that Phase IV itself has exited. The canonical dependency order is

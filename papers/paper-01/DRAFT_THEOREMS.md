@@ -212,7 +212,12 @@ derivation lemmas, and
 `leviCivitaSpectralProjectorDerivative_fourBlock_of_coordinateJets` gives the
 full Levi--Civita formula. `CurvatureScalarBranchJet4` then assembles the
 amplitude derivatives and eigen-one-form jets into explicit `dα,dβ`. Whether
-either relative-sign obstruction vanishes remains open.
+either relative-sign obstruction is forced to vanish by the full metric
+hypotheses remains open. The decision itself is now exhaustive:
+`plusOnly_iff`, `minusOnly_iff`, `bothClosed_iff`, and `neitherClosed_iff`
+identify the unique-plus, unique-minus, two-branch, and no-branch loci, while
+`neither_curvatureBranch_closesOn_of_witnesses` supplies the patch-level
+finite rejection certificate.
 
 ## Proposition G3 — Maxwell residual and principal splitting
 

@@ -70,6 +70,10 @@ candidate Ricci fingerprint and the generic pointwise reconstruction layer:
 - smooth fixed-probe curvature eigen-one-forms, smooth reconstructed scalar
   amplitudes, and a concrete scalar branch jet whose exterior obstructions are
   the explicit product-rule forms `dα,dβ`, with branch tests `dα±dβ`;
+- an exhaustive four-way branch classifier: plus only iff
+  `dα=-dβ≠0`, minus only iff `dα=dβ≠0`, both iff `dα=dβ=0`, and neither iff
+  `dα` is neither equal nor opposite to `dβ`, including patch-level finite
+  witnesses that reject both local branches;
 - an exact Phase-III equivalence between the scalar reconstruction equation
   and the residual Maxwell square law, followed by eigenvector-free Maxwell
   principal-plane projectors on the non-null branch;
@@ -226,8 +230,10 @@ surface; the rotating dyonic benchmark remains to be independently rebuilt.
 The smooth curvature-projector and scalar-branch-form gate is now closed on
 the stated simple-spectrum, strict-sign local patches. The north-star theorem
 still requires the upstream scalar-branch existence-or-obstruction
-classification: determine whether `dα+dβ`, `dα-dβ`, both, or neither vanish,
-then feed every accepted branch into the completed uplift module. See the
+classification for actual curvature fields. The exact jet and patch decision
+is now machine checked—including the sharp no-branch certificate—but the next
+step must determine which class the metric hypotheses force, then feed every
+accepted branch into the completed uplift module. See the
 [`realigned execution plan`](docs/REALIGNED_EXECUTION_PLAN.md) for the ordered
 proof obligations and publication decision points.
 

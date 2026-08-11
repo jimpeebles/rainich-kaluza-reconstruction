@@ -439,6 +439,15 @@ the axiom dependencies of the current advertised theorem surface.
 #print axioms RainichKaluza.curvatureAlphaExteriorDerivative_eq
 #print axioms RainichKaluza.curvatureBetaExteriorDerivative_eq
 #print axioms RainichKaluza.CurvatureScalarBranchJet4.both_branches_closed_iff
+#print axioms RainichKaluza.CurvatureScalarBranchJet4.plusOnly_iff
+#print axioms RainichKaluza.CurvatureScalarBranchJet4.minusOnly_iff
+#print axioms RainichKaluza.CurvatureScalarBranchJet4.bothClosed_iff
+#print axioms RainichKaluza.CurvatureScalarBranchJet4.neitherClosed_iff
+#print axioms RainichKaluza.CurvatureScalarBranchJet4.exhaustive_closure_classification
+#print axioms RainichKaluza.CurvatureScalarBranchJet4.closureOutcome_eq_neither_iff
+#print axioms RainichKaluza.both_curvatureBranches_closeOn_iff
+#print axioms RainichKaluza.neither_curvatureBranch_closesOn_of_witnesses
+#print axioms RainichKaluza.exhaustive_patch_closure_classification
 #print axioms RainichKaluza.both_relativeSign_branches_closed_iff
 #print axioms RainichKaluza.reflected_branch_closed_iff_of_branch_closed
 #print axioms RainichKaluza.relativeSign_closed_branch_unique_of_exists

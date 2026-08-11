@@ -111,6 +111,14 @@ product-rule `dα,dβ` and branch obstructions `dα±dβ`. What remains is not a
 smoothness seam: it is the substantive II-G3 question of which obstruction
 vanishes, including the separately integrable exceptional locus.
 
+The logical branch decision itself is now exact and exhaustive. Lean proves
+that plus only, minus only, both, and neither correspond respectively to
+`dα=-dβ≠0`, `dα=dβ≠0`, `dα=dβ=0`, and `dα≠±dβ`. The patch version permits
+separate finite witnesses for the two failures and therefore returns a sharp
+no-branch certificate without a universal existence assumption. What remains
+is to derive one of these relations from—or exhibit its failure under—the
+full curvature and HC1 equations of the intended metric class.
+
 Phase III has reached its generic local decision interface. For `S=𝓡-V`, the reconstruction equation is
 Lean-verified to be equivalent to `S²=q²I` once the scalar square law is
 imposed, and matching traces make `S` tracefree. On the non-null branch,

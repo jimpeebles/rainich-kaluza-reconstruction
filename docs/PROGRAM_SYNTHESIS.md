@@ -109,6 +109,8 @@ Any of these outcomes improves our understanding of the inverse problem.
    **Complete on the explicit generic coordinate patch.**
 2. Formulate differential closure at the tensor level without prematurely
    choosing a scalar sign; classify the reflection-related branches.
+   **The four-way exact obstruction classifier is complete; deriving its
+   realized class from the full metric hypotheses remains open.**
 3. Reconstruct the residual Maxwell stress and impose classical Rainich
    differential closure.
 4. Use the scalar and Maxwell equations to identify the EMD coupling, then

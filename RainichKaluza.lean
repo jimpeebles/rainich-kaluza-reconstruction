@@ -43,6 +43,7 @@ import RainichKaluza.FullSpectralProjector
 import RainichKaluza.SpectralProjectorDerivative
 import RainichKaluza.ScalarAmplitudeDerivative
 import RainichKaluza.SmoothCurvatureProjector
+import RainichKaluza.CurvatureBranchObstruction
 import RainichKaluza.DifferentialBranchSelection
 import RainichKaluza.DifferentialCoupling
 import RainichKaluza.CouplingInvariant

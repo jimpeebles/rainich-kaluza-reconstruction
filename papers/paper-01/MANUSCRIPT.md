@@ -305,6 +305,21 @@ interface. The remaining differential theorem is to decide which obstruction
 vanishes from the curvature hypotheses, or to state their nonvanishing as the
 sharp obstruction.
 
+More precisely, the formal classifier proves four mutually exhaustive cases:
+
+`plus only ⇔ dα=-dβ and dα≠0`,
+
+`minus only ⇔ dα=dβ and dα≠0`,
+
+`both ⇔ dα=dβ=0`,
+
+`neither ⇔ dα≠dβ and dα≠-dβ`.                         (6.9)
+
+For a local patch, nonzero witnesses for `dα+dβ` and `dα-dβ` may occur at
+different points and still reject both global candidates. Equation (6.9) is
+an exact decision interface, not a claim that the intended metric hypotheses
+force a particular class.
+
 ## 7. Polynomial obstruction and false positives
 
 The proposed characteristic factorization

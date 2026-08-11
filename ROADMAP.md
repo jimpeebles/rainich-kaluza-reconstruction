@@ -112,7 +112,9 @@ nondegeneracy hypothesis.
   forced diagonals and amplitudes are smooth, fixed projector probes give
   smooth metric-dual eigen-one-forms, and `CurvatureScalarBranchJet4`
   assembles explicit product-rule `dα,dβ` and the two tests `dα±dβ`. Branch
-  existence or obstruction remains the next theorem.**
+  outcomes are now exhaustively classified, including an iff no-branch
+  obstruction and patch-level finite rejection witnesses. Determining which
+  class is forced by the full curvature hypotheses remains the next theorem.**
 - Prove that every accepted scalar candidate leaves a tracefree residual
   obeying the Maxwell square identity. **Complete in Lean under the explicit
   scalar square and trace hypotheses.**

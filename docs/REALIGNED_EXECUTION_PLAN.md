@@ -224,6 +224,16 @@ obstructions. Prove one of the outcomes demanded by the Phase-II gate:
 - a genuine two-uplift exceptional locus; or
 - a sharp curvature obstruction proving that neither branch closes.
 
+**Status: exact obstruction classifier complete; metric forcing in
+progress.** `CurvatureBranchObstruction.lean` proves the exhaustive four-way
+decision from the explicit II-G2 matrices. Unique plus, unique minus,
+two-branch, and no-branch outcomes have necessary-and-sufficient equations;
+the no-branch case is `dα≠dβ` and `dα≠-dβ`. At patch level, one nonzero
+`dα+dβ` witness and one nonzero `dα-dβ` witness—possibly at different
+points—reject both local branches. The remaining II-G3 obligation is to use
+the complete curvature/HC1 hypotheses, and the V-T2 oracle where useful, to
+show which outcome is realized rather than assume existence.
+
 ### IV-N1 — north-star composition
 
 Compose II-G1--II-G3, the completed Phase-III decision interface, and IV-C1

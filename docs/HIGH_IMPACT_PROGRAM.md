@@ -157,6 +157,14 @@ derivatives are assembled into coordinate one-forms, and
 explicit product-rule formulas for `dα,dβ`; the two branch obstructions are
 exactly `dα+dβ` and `dα-dβ`.
 
+Those obstructions now have an exhaustive exact classifier. The sum branch is
+unique exactly when `dα=-dβ≠0`, the difference branch is unique exactly when
+`dα=dβ≠0`, both survive exactly when `dα=dβ=0`, and neither survives exactly
+when `dα` is neither equal nor opposite to `dβ`. Patch-level nonzero witnesses
+give a finite no-branch certificate. This removes any hidden branch-existence
+assumption from the decision interface; the remaining scientific question is
+which class is forced by the full curvature/HC1 hypotheses.
+
 The branch-selection layer now proves this both abstractly and for genuine
 differentiable one-form fields on an open convex coordinate patch: outside the
 locus where the two spectral covector components are separately closed,

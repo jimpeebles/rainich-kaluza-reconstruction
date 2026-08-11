@@ -247,10 +247,14 @@ and proves full nonlinear covariance and flatness equivalence for the
 resulting connection Ricci contraction. Both the pure-coordinate and mixed
 Hessian/old-connection cancellations are explicit theorems. The transformed
 metric second jet is also constructed and its first-kind differentiated
-connection law is verified. It remains to prove that raising its first-kind
-jet gives exactly the certified nonlinear differentiated connection. After
-that, the coordinate-Ricci specialization and pseudo-Riemannian manifold
-packaging—not the component curvature formula—remain.
+connection law is verified. The metric endpoint now separately proves the
+nonlinear product-rule derivative of the transformed inverse metric, the full
+four-term differentiated first-kind pullback, and the undifferentiated raised
+contraction into the inhomogeneous connection bracket. It remains to prove
+the differentiated-bracket contraction assembling these identities into the
+certified nonlinear differentiated connection. After that, the
+coordinate-Ricci specialization and pseudo-Riemannian manifold packaging—not
+the component curvature formula—remain.
 
 ## Evidence inherited from earlier conversations
 

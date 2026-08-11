@@ -167,9 +167,12 @@ affine coordinate seam is also closed for every invertible constant Jacobian,
 including changes mixing base and circle directions, with Ricci-flatness
 preserved and reflected. The universal inhomogeneous nonlinear connection and
 Ricci cancellation is now proved for arbitrary coordinate three-jets as well.
-The remaining chart seam is one metric-second-jet raising/product-rule
-identity, followed by intrinsic pseudo-Riemannian manifold packaging and the
-uniqueness classification of IV.4.
+The metric endpoint now proves the transformed inverse-metric derivative, the
+explicit four-term differentiated first-kind pullback, and the
+undifferentiated raised connection bracket. The remaining chart seam is their
+differentiated-bracket contraction into the certified connection jet,
+followed by intrinsic pseudo-Riemannian manifold packaging and the uniqueness
+classification of IV.4.
 
 The current execution plan deliberately distinguishes completion of that
 uplift module from the official curvature-only Phase-IV exit. After the

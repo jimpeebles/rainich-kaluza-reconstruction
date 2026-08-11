@@ -445,6 +445,14 @@ private theorem sum3_first_last (f : I → I → I → ℝ) :
       intro b _
       exact Finset.sum_comm
 
+omit [DecidableEq I] in
+private theorem sum3_add3 (f g h : I → I → I → ℝ) :
+    (∑ a, ∑ b, ∑ c, (f a b c + g a b c + h a b c)) =
+      (∑ a, ∑ b, ∑ c, f a b c) +
+      (∑ a, ∑ b, ∑ c, g a b c) +
+      ∑ a, ∑ b, ∑ c, h a b c := by
+  simp only [Finset.sum_add_distrib]
+
 theorem jac_inverseJacobianJet_contract
     (C : CoordinateChangeJet3 I) (R M N : I) :
     (∑ A : I, C.affine.jac M A * C.inverseJacobianJet R A N) =
@@ -750,6 +758,426 @@ private theorem sum4_last2_first
           exact Finset.sum_comm
         _ = _ := Finset.sum_comm
 
+/-- Product-rule derivative of the transformed inverse metric.  The first
+two terms differentiate the inverse Jacobian factors; the last term is the
+affine transport of the old inverse-metric derivative. -/
+noncomputable def transformInverseMetricJet (C : CoordinateChangeJet3 I)
+    (gInv : I → I → ℝ) (dg : CoordinateMetricJet1 I)
+    (R M N : I) : ℝ :=
+  (∑ A : I, ∑ B : I,
+    C.inverseJacobianJet R A M * C.affine.invJac B N * gInv A B) +
+  (∑ A : I, ∑ B : I,
+    C.affine.invJac A M * C.inverseJacobianJet R B N * gInv A B) +
+  C.affine.transformContravariant2Jet
+    (coordinateInverseMetricJet gInv dg) R M N
+
+private theorem transformContravariant2_symm
+    (C : CoordinateChangeJet3 I) (gInv : I → I → ℝ)
+    (hgInv : ∀ A B, gInv A B = gInv B A) (M N : I) :
+    C.affine.transformContravariant2 gInv M N =
+      C.affine.transformContravariant2 gInv N M := by
+  unfold AffineCoordinateChange.transformContravariant2
+  calc
+    _ = ∑ B : I, ∑ A : I,
+        C.affine.invJac A M * C.affine.invJac B N * gInv A B :=
+      Finset.sum_comm
+    _ = _ := by
+      apply Finset.sum_congr rfl
+      intro A _
+      apply Finset.sum_congr rfl
+      intro B _
+      rw [hgInv B A]
+      ring
+
+private theorem metricJacobianTerm_transformedInverse_contract
+    (C : CoordinateChangeJet3 I) (gInv g : I → I → ℝ)
+    (hg : ∀ A B, g A B = g B A)
+    (hgInv : ∀ A B, gInv A B = gInv B A)
+    (hInv : ∀ A B, (∑ D : I, gInv A D * g D B) =
+      if A = B then 1 else 0)
+    (M N P : I) :
+    (∑ Q : I, C.secondJet.metricJacobianTerm g N P Q *
+      C.affine.transformContravariant2 gInv Q M) =
+      ∑ A : I, C.affine.invJac A M * C.secondJet.second N P A := by
+  calc
+    _ = ∑ Q : I, C.affine.transformContravariant2 gInv M Q *
+        C.secondJet.metricJacobianTerm g N P Q := by
+      apply Finset.sum_congr rfl
+      intro Q _
+      rw [C.transformContravariant2_symm gInv hgInv Q M]
+      ring
+    _ = _ := C.secondJet.transformedInverse_metricJacobianTerm_contract
+      gInv g hg hInv M N P
+
+private theorem coordinateInverseMetricJet_metricJacobianTerm
+    (C : CoordinateChangeJet3 I) (gInv g : I → I → ℝ)
+    (hg : ∀ A B, g A B = g B A)
+    (hgInv : ∀ A B, gInv A B = gInv B A)
+    (hInv : ∀ A B, (∑ D : I, gInv A D * g D B) =
+      if A = B then 1 else 0)
+    (R M N : I) :
+    coordinateInverseMetricJet
+        (C.affine.transformContravariant2 gInv)
+        (C.secondJet.metricJacobianTerm g) R M N =
+      ∑ A : I, ∑ B : I,
+        C.affine.invJac A M * C.inverseJacobianJet R B N * gInv A B := by
+  unfold coordinateInverseMetricJet
+  calc
+    _ = -∑ X : I, C.affine.transformContravariant2 gInv M X *
+        (∑ Y : I, C.secondJet.metricJacobianTerm g R X Y *
+          C.affine.transformContravariant2 gInv Y N) := by
+      apply congrArg Neg.neg
+      apply Finset.sum_congr rfl
+      intro X _
+      rw [Finset.mul_sum]
+      apply Finset.sum_congr rfl
+      intro Y _
+      ring
+    _ = -∑ X : I, C.affine.transformContravariant2 gInv M X *
+        (∑ A : I, C.affine.invJac A N *
+          C.secondJet.second R X A) := by
+      apply congrArg Neg.neg
+      apply Finset.sum_congr rfl
+      intro X _
+      rw [C.metricJacobianTerm_transformedInverse_contract
+        gInv g hg hgInv hInv N R X]
+    _ = -∑ X : I, ∑ A : I, ∑ B : I, ∑ D : I,
+        C.affine.invJac B M * C.affine.invJac D X * gInv B D *
+          (C.affine.invJac A N * C.secondJet.second R X A) := by
+      unfold AffineCoordinateChange.transformContravariant2
+      apply congrArg Neg.neg
+      apply Finset.sum_congr rfl
+      intro X _
+      rw [Finset.mul_sum]
+      apply Finset.sum_congr rfl
+      intro A _
+      simp only [Finset.sum_mul]
+    _ = -∑ B : I, ∑ D : I, ∑ A : I, ∑ X : I,
+        C.affine.invJac B M * C.affine.invJac D X * gInv B D *
+          (C.affine.invJac A N * C.secondJet.second R X A) := by
+      apply congrArg Neg.neg
+      calc
+        _ = ∑ B : I, ∑ D : I, ∑ X : I, ∑ A : I,
+            C.affine.invJac B M * C.affine.invJac D X * gInv B D *
+              (C.affine.invJac A N * C.secondJet.second R X A) :=
+          sum4_last2_first _
+        _ = _ := by
+          apply Finset.sum_congr rfl
+          intro B _
+          apply Finset.sum_congr rfl
+          intro D _
+          exact Finset.sum_comm
+    _ = _ := by
+      unfold inverseJacobianJet
+      simp only [mul_neg, neg_mul, Finset.sum_neg_distrib,
+        Finset.mul_sum, Finset.sum_mul]
+      apply congrArg Neg.neg
+      apply Finset.sum_congr rfl
+      intro B _
+      apply Finset.sum_congr rfl
+      intro D _
+      apply Finset.sum_congr rfl
+      intro A _
+      apply Finset.sum_congr rfl
+      intro X _
+      ring
+
+private theorem coordinateInverseMetricJet_metricJacobianTerm_swap
+    (C : CoordinateChangeJet3 I) (gInv g : I → I → ℝ)
+    (hg : ∀ A B, g A B = g B A)
+    (hInv : ∀ A B, (∑ D : I, gInv A D * g D B) =
+      if A = B then 1 else 0)
+    (R M N : I) :
+    coordinateInverseMetricJet
+        (C.affine.transformContravariant2 gInv)
+        (fun S X Y => C.secondJet.metricJacobianTerm g S Y X) R M N =
+      ∑ A : I, ∑ B : I,
+        C.inverseJacobianJet R A M * C.affine.invJac B N * gInv A B := by
+  unfold coordinateInverseMetricJet
+  calc
+    _ = -∑ Y : I,
+        (∑ X : I, C.affine.transformContravariant2 gInv M X *
+          C.secondJet.metricJacobianTerm g R Y X) *
+            C.affine.transformContravariant2 gInv Y N := by
+      apply congrArg Neg.neg
+      rw [Finset.sum_comm]
+      apply Finset.sum_congr rfl
+      intro Y _
+      rw [Finset.sum_mul]
+    _ = -∑ Y : I,
+        (∑ A : I, C.affine.invJac A M *
+          C.secondJet.second R Y A) *
+            C.affine.transformContravariant2 gInv Y N := by
+      apply congrArg Neg.neg
+      apply Finset.sum_congr rfl
+      intro Y _
+      rw [C.secondJet.transformedInverse_metricJacobianTerm_contract
+        gInv g hg hInv M R Y]
+    _ = -∑ Y : I, ∑ A : I, ∑ B : I, ∑ D : I,
+        (C.affine.invJac A M * C.secondJet.second R Y A) *
+          (C.affine.invJac B Y * C.affine.invJac D N * gInv B D) := by
+      unfold AffineCoordinateChange.transformContravariant2
+      apply congrArg Neg.neg
+      apply Finset.sum_congr rfl
+      intro Y _
+      rw [Finset.sum_mul]
+      apply Finset.sum_congr rfl
+      intro A _
+      simp only [Finset.mul_sum]
+    _ = -∑ B : I, ∑ D : I, ∑ A : I, ∑ Y : I,
+        (C.affine.invJac A M * C.secondJet.second R Y A) *
+          (C.affine.invJac B Y * C.affine.invJac D N * gInv B D) := by
+      apply congrArg Neg.neg
+      calc
+        _ = ∑ B : I, ∑ D : I, ∑ Y : I, ∑ A : I,
+            (C.affine.invJac A M * C.secondJet.second R Y A) *
+              (C.affine.invJac B Y * C.affine.invJac D N * gInv B D) :=
+          sum4_last2_first _
+        _ = _ := by
+          apply Finset.sum_congr rfl
+          intro B _
+          apply Finset.sum_congr rfl
+          intro D _
+          exact Finset.sum_comm
+    _ = _ := by
+      unfold inverseJacobianJet
+      simp only [neg_mul, Finset.sum_neg_distrib, Finset.sum_mul]
+      apply congrArg Neg.neg
+      apply Finset.sum_congr rfl
+      intro B _
+      apply Finset.sum_congr rfl
+      intro D _
+      apply Finset.sum_congr rfl
+      intro A _
+      apply Finset.sum_congr rfl
+      intro Y _
+      ring
+
+/-- Recomputing the inverse-metric derivative from the nonlinear transformed
+metric first jet gives the exact product-rule derivative of the transformed
+inverse metric. -/
+theorem coordinateInverseMetricJet_transformMetricJet1
+    (C : CoordinateChangeJet3 I) (gInv g : I → I → ℝ)
+    (dg : CoordinateMetricJet1 I)
+    (hg : ∀ A B, g A B = g B A)
+    (hgInv : ∀ A B, gInv A B = gInv B A)
+    (hInv : ∀ A B, (∑ D : I, gInv A D * g D B) =
+      if A = B then 1 else 0)
+    (R M N : I) :
+    coordinateInverseMetricJet
+        (C.affine.transformContravariant2 gInv)
+        (C.secondJet.transformMetricJet1 g dg) R M N =
+      C.transformInverseMetricJet gInv dg R M N := by
+  change coordinateInverseMetricJet
+      (C.affine.transformContravariant2 gInv)
+      (fun S X Y => C.affine.transformCovariant3 dg S X Y +
+        C.secondJet.metricJacobianTerm g S X Y +
+        C.secondJet.metricJacobianTerm g S Y X) R M N = _
+  calc
+    _ = coordinateInverseMetricJet
+          (C.affine.transformContravariant2 gInv)
+          (C.affine.transformCovariant3 dg) R M N +
+        coordinateInverseMetricJet
+          (C.affine.transformContravariant2 gInv)
+          (C.secondJet.metricJacobianTerm g) R M N +
+        coordinateInverseMetricJet
+          (C.affine.transformContravariant2 gInv)
+          (fun S X Y => C.secondJet.metricJacobianTerm g S Y X) R M N := by
+      unfold coordinateInverseMetricJet
+      simp only [mul_add, add_mul, Finset.sum_add_distrib]
+      ring
+    _ = _ := by
+      rw [C.affine.coordinateInverseMetricJet_transformContravariant2Jet
+        gInv dg R M N]
+      rw [C.coordinateInverseMetricJet_metricJacobianTerm
+        gInv g hg hgInv hInv R M N]
+      rw [C.coordinateInverseMetricJet_metricJacobianTerm_swap
+        gInv g hg hInv R M N]
+      unfold transformInverseMetricJet
+      ring
+
+/-- Product-rule transform of the derivative of a first-kind Christoffel
+symbol before the nonlinear metric-Hessian contribution is added. -/
+noncomputable def affineChristoffelFirstKindJet
+    (C : CoordinateChangeJet3 I) (dg : CoordinateMetricJet1 I)
+    (ddg : CoordinateMetricJet2 I) (R Q N P : I) : ℝ :=
+  C.affine.transformCovariant4
+      (fun E => coordinateChristoffelFirstKindJet ddg E) R Q N P +
+  (∑ A : I, ∑ B : I, ∑ D : I,
+    C.secondJet.second R Q A * C.affine.jac N B * C.affine.jac P D *
+      coordinateChristoffelFirstKind dg A B D) +
+  (∑ A : I, ∑ B : I, ∑ D : I,
+    C.affine.jac Q A * C.secondJet.second R N B * C.affine.jac P D *
+      coordinateChristoffelFirstKind dg A B D) +
+  ∑ A : I, ∑ B : I, ∑ D : I,
+    C.affine.jac Q A * C.affine.jac N B * C.secondJet.second R P D *
+      coordinateChristoffelFirstKind dg A B D
+
+set_option maxHeartbeats 800000 in
+/-- The `affineMetricJet1Jet` contribution to the differentiated first-kind
+symbols is the four-term product rule for its three covariant Jacobian slots
+and the old first-kind derivative. -/
+theorem coordinateChristoffelFirstKind_affineMetricJet1Jet
+    (C : CoordinateChangeJet3 I) (dg : CoordinateMetricJet1 I)
+    (ddg : CoordinateMetricJet2 I)
+    (R Q N P : I) :
+    coordinateChristoffelFirstKind (C.affineMetricJet1Jet dg ddg R)
+        Q N P = C.affineChristoffelFirstKindJet dg ddg R Q N P := by
+  let T1 : CoordinateMetricJet1 I := fun S M L =>
+    ∑ A : I, ∑ B : I, ∑ D : I,
+      C.secondJet.second R S A * C.affine.jac M B * C.affine.jac L D *
+        dg A B D
+  let T2 : CoordinateMetricJet1 I := fun S M L =>
+    ∑ A : I, ∑ B : I, ∑ D : I,
+      C.affine.jac S A * C.secondJet.second R M B * C.affine.jac L D *
+        dg A B D
+  let T3 : CoordinateMetricJet1 I := fun S M L =>
+    ∑ A : I, ∑ B : I, ∑ D : I,
+      C.affine.jac S A * C.affine.jac M B * C.secondJet.second R L D *
+        dg A B D
+  have h0 :
+      coordinateChristoffelFirstKind
+          (fun S M L => C.affine.transformCovariant4 ddg R S M L) Q N P =
+        C.affine.transformCovariant4
+          (fun E => coordinateChristoffelFirstKindJet ddg E) R Q N P := by
+    exact C.affine.coordinateChristoffelFirstKindJet_transform ddg R Q N P
+  have hA : T1 N Q P =
+      ∑ A : I, ∑ B : I, ∑ D : I,
+        C.affine.jac Q A * C.secondJet.second R N B * C.affine.jac P D *
+          dg B A D := by
+    dsimp [T1]
+    calc
+      _ = ∑ B : I, ∑ A : I, ∑ D : I,
+          C.secondJet.second R N A * C.affine.jac Q B * C.affine.jac P D *
+            dg A B D := Finset.sum_comm
+      _ = _ := by
+        apply Finset.sum_congr rfl
+        intro A _
+        apply Finset.sum_congr rfl
+        intro B _
+        apply Finset.sum_congr rfl
+        intro D _
+        ring
+  have hB : T2 N Q P =
+      ∑ A : I, ∑ B : I, ∑ D : I,
+        C.secondJet.second R Q A * C.affine.jac N B * C.affine.jac P D *
+          dg B A D := by
+    dsimp [T2]
+    calc
+      _ = ∑ B : I, ∑ A : I, ∑ D : I,
+          C.affine.jac N A * C.secondJet.second R Q B * C.affine.jac P D *
+            dg A B D := Finset.sum_comm
+      _ = _ := by
+        apply Finset.sum_congr rfl
+        intro A _
+        apply Finset.sum_congr rfl
+        intro B _
+        apply Finset.sum_congr rfl
+        intro D _
+        ring
+  have hC : T3 N Q P =
+      ∑ A : I, ∑ B : I, ∑ D : I,
+        C.affine.jac Q A * C.affine.jac N B * C.secondJet.second R P D *
+          dg B A D := by
+    dsimp [T3]
+    calc
+      _ = ∑ B : I, ∑ A : I, ∑ D : I,
+          C.affine.jac N A * C.affine.jac Q B * C.secondJet.second R P D *
+            dg A B D := Finset.sum_comm
+      _ = _ := by
+        apply Finset.sum_congr rfl
+        intro A _
+        apply Finset.sum_congr rfl
+        intro B _
+        apply Finset.sum_congr rfl
+        intro D _
+        ring
+  have hD : T1 P Q N =
+      ∑ A : I, ∑ B : I, ∑ D : I,
+        C.affine.jac Q A * C.affine.jac N B * C.secondJet.second R P D *
+          dg D A B := by
+    dsimp [T1]
+    calc
+      _ = ∑ B : I, ∑ D : I, ∑ A : I,
+          C.secondJet.second R P A * C.affine.jac Q B * C.affine.jac N D *
+            dg A B D := sum3_first_last _
+      _ = _ := by
+        apply Finset.sum_congr rfl
+        intro A _
+        apply Finset.sum_congr rfl
+        intro B _
+        apply Finset.sum_congr rfl
+        intro D _
+        ring
+  have hE : T2 P Q N =
+      ∑ A : I, ∑ B : I, ∑ D : I,
+        C.secondJet.second R Q A * C.affine.jac N B * C.affine.jac P D *
+          dg D A B := by
+    dsimp [T2]
+    calc
+      _ = ∑ B : I, ∑ D : I, ∑ A : I,
+          C.affine.jac P A * C.secondJet.second R Q B * C.affine.jac N D *
+            dg A B D := sum3_first_last _
+      _ = _ := by
+        apply Finset.sum_congr rfl
+        intro A _
+        apply Finset.sum_congr rfl
+        intro B _
+        apply Finset.sum_congr rfl
+        intro D _
+        ring
+  have hF : T3 P Q N =
+      ∑ A : I, ∑ B : I, ∑ D : I,
+        C.affine.jac Q A * C.secondJet.second R N B * C.affine.jac P D *
+          dg D A B := by
+    dsimp [T3]
+    calc
+      _ = ∑ B : I, ∑ D : I, ∑ A : I,
+          C.affine.jac P A * C.affine.jac Q B * C.secondJet.second R N D *
+            dg A B D := sum3_first_last _
+      _ = _ := by
+        apply Finset.sum_congr rfl
+        intro A _
+        apply Finset.sum_congr rfl
+        intro B _
+        apply Finset.sum_congr rfl
+        intro D _
+        ring
+  change coordinateChristoffelFirstKind
+      (fun S M L => C.affine.transformCovariant4 ddg R S M L +
+        T1 S M L + T2 S M L + T3 S M L) Q N P = _
+  calc
+    _ = coordinateChristoffelFirstKind
+          (fun S M L => C.affine.transformCovariant4 ddg R S M L) Q N P +
+        coordinateChristoffelFirstKind T1 Q N P +
+        coordinateChristoffelFirstKind T2 Q N P +
+        coordinateChristoffelFirstKind T3 Q N P := by
+      unfold coordinateChristoffelFirstKind
+      ring
+    _ = _ := by
+      rw [h0]
+      unfold affineChristoffelFirstKindJet coordinateChristoffelFirstKind
+      rw [hA, hB, hC, hD, hE, hF]
+      dsimp [T1, T2, T3]
+      ring_nf
+      rw [sum3_add3, sum3_add3, sum3_add3]
+      simp only [Finset.sum_mul]
+      ring
+
+/-- Fully explicit differentiated first-kind transformation law.  The first
+summand differentiates the affine three-Jacobian pullback; the second is the
+derivative of the inhomogeneous metric-Hessian term. -/
+theorem coordinateChristoffelFirstKindJet_transformMetricJet2_explicit
+    (C : CoordinateChangeJet3 I) (g : I → I → ℝ)
+    (dg : CoordinateMetricJet1 I) (ddg : CoordinateMetricJet2 I)
+    (R Q N P : I) :
+    coordinateChristoffelFirstKindJet (C.transformMetricJet2 g dg ddg)
+        R Q N P =
+      C.affineChristoffelFirstKindJet dg ddg R Q N P +
+        C.metricJacobianTermJet g dg R N P Q := by
+  rw [C.coordinateChristoffelFirstKindJet_transformMetricJet2]
+  rw [C.coordinateChristoffelFirstKind_affineMetricJet1Jet]
+
 private theorem pureCoordinate_inverseTrace_add_traceProduct
     (C : CoordinateChangeJet3 I) (N P : I) :
     (∑ M : I, ∑ A : I,
@@ -919,6 +1347,147 @@ theorem transformConnection_eq_bracket
   apply Finset.sum_congr rfl
   intro D _
   ring
+
+private theorem jac_transformContravariant2_contract
+    (C : CoordinateChangeJet3 I) (gInv : I → I → ℝ) (A Q : I) :
+    (∑ M : I, C.affine.jac M A *
+      C.affine.transformContravariant2 gInv M Q) =
+      ∑ B : I, C.affine.invJac B Q * gInv A B := by
+  unfold AffineCoordinateChange.transformContravariant2
+  calc
+    _ = ∑ B : I, ∑ D : I, ∑ M : I,
+        C.affine.invJac B M * C.affine.jac M A *
+          (C.affine.invJac D Q * gInv B D) := by
+      calc
+        _ = ∑ M : I, ∑ B : I, ∑ D : I,
+            C.affine.jac M A *
+              (C.affine.invJac B M * C.affine.invJac D Q * gInv B D) := by
+          apply Finset.sum_congr rfl
+          intro M _
+          simp only [Finset.mul_sum]
+        _ = ∑ B : I, ∑ D : I, ∑ M : I,
+            C.affine.jac M A *
+              (C.affine.invJac B M * C.affine.invJac D Q * gInv B D) :=
+          sum3_first_last _
+        _ = _ := by
+          apply Finset.sum_congr rfl
+          intro B _
+          apply Finset.sum_congr rfl
+          intro D _
+          apply Finset.sum_congr rfl
+          intro M _
+          ring
+    _ = ∑ B : I, ∑ D : I,
+        (∑ M : I, C.affine.invJac B M * C.affine.jac M A) *
+          (C.affine.invJac D Q * gInv B D) := by
+      apply Finset.sum_congr rfl
+      intro B _
+      apply Finset.sum_congr rfl
+      intro D _
+      rw [Finset.sum_mul]
+    _ = ∑ B : I, ∑ D : I, (if B = A then 1 else 0) *
+        (C.affine.invJac D Q * gInv B D) := by
+      apply Finset.sum_congr rfl
+      intro B _
+      apply Finset.sum_congr rfl
+      intro D _
+      rw [C.affine.inv_jac_contract]
+    _ = _ := by simp
+
+/-- Raising the nonlinearly transformed first-kind symbols while retaining
+the old upper index gives exactly `connectionBracket`.  This is the undifferentiated
+contraction used by the remaining second-kind product-rule proof. -/
+theorem transformedFirstKind_raise_eq_connectionBracket
+    (C : CoordinateChangeJet3 I) (gInv g : I → I → ℝ)
+    (dg : CoordinateMetricJet1 I)
+    (hg : ∀ A B, g A B = g B A)
+    (hInv : ∀ A B, (∑ D : I, gInv A D * g D B) =
+      if A = B then 1 else 0)
+    (A N P : I) :
+    (∑ Q : I, (∑ B : I, C.affine.invJac B Q * gInv A B) *
+      coordinateChristoffelFirstKind
+        (C.secondJet.transformMetricJet1 g dg) Q N P) =
+      C.connectionBracket (coordinateChristoffel gInv dg) A N P := by
+  let dg' := C.secondJet.transformMetricJet1 g dg
+  have hconn (M : I) :
+      coordinateChristoffel (C.affine.transformContravariant2 gInv)
+          dg' M N P =
+        C.secondJet.transformConnection (coordinateChristoffel gInv dg)
+          M N P := by
+    exact C.secondJet.coordinateChristoffel_transformConnection
+      gInv g dg hg hInv M N P
+  calc
+    _ = ∑ Q : I,
+        (∑ M : I, C.affine.jac M A *
+          C.affine.transformContravariant2 gInv M Q) *
+            coordinateChristoffelFirstKind dg' Q N P := by
+      apply Finset.sum_congr rfl
+      intro Q _
+      rw [C.jac_transformContravariant2_contract gInv A Q]
+    _ = ∑ M : I, C.affine.jac M A *
+        coordinateChristoffel (C.affine.transformContravariant2 gInv)
+          dg' M N P := by
+      unfold coordinateChristoffel
+      symm
+      calc
+        _ = ∑ M : I, ∑ E : I,
+            C.affine.jac M A *
+              (C.affine.transformContravariant2 gInv M E *
+                coordinateChristoffelFirstKind dg' E N P) := by
+          apply Finset.sum_congr rfl
+          intro M _
+          rw [Finset.mul_sum]
+        _ = ∑ E : I, ∑ M : I,
+            C.affine.jac M A *
+              (C.affine.transformContravariant2 gInv M E *
+                coordinateChristoffelFirstKind dg' E N P) :=
+          Finset.sum_comm
+        _ = _ := by
+          apply Finset.sum_congr rfl
+          intro E _
+          rw [Finset.sum_mul]
+          apply Finset.sum_congr rfl
+          intro M _
+          ring
+    _ = ∑ M : I, C.affine.jac M A *
+        C.secondJet.transformConnection (coordinateChristoffel gInv dg)
+          M N P := by
+      apply Finset.sum_congr rfl
+      intro M _
+      rw [hconn]
+    _ = _ := by
+      calc
+        _ = ∑ M : I, C.affine.jac M A *
+            (∑ E : I, C.affine.invJac E M *
+              C.connectionBracket (coordinateChristoffel gInv dg) E N P) := by
+          apply Finset.sum_congr rfl
+          intro M _
+          rw [C.transformConnection_eq_bracket]
+        _ = ∑ M : I, ∑ E : I,
+            C.affine.jac M A * C.affine.invJac E M *
+              C.connectionBracket (coordinateChristoffel gInv dg) E N P := by
+          apply Finset.sum_congr rfl
+          intro M _
+          rw [Finset.mul_sum]
+          apply Finset.sum_congr rfl
+          intro E _
+          ring
+        _ = ∑ E : I, (∑ M : I,
+            C.affine.invJac E M * C.affine.jac M A) *
+              C.connectionBracket (coordinateChristoffel gInv dg) E N P := by
+          rw [Finset.sum_comm]
+          apply Finset.sum_congr rfl
+          intro E _
+          rw [Finset.sum_mul]
+          apply Finset.sum_congr rfl
+          intro M _
+          ring
+        _ = ∑ E : I, (if E = A then 1 else 0) *
+              C.connectionBracket (coordinateChristoffel gInv dg) E N P := by
+          apply Finset.sum_congr rfl
+          intro E _
+          rw [C.affine.inv_jac_contract]
+        _ = _ := by simp
 
 theorem affineTransformConnection_eq_bracket
     (C : CoordinateChangeJet3 I) (G : I → I → I → ℝ) (M N P : I) :

@@ -38,8 +38,11 @@ curvature gate and the uplift theorem are both closed.
   Levi--Civita Ricci.
 - Affine coordinate covariance and universal nonlinear connection-level Ricci
   covariance are complete.
-- One metric-second-jet raising identity separates the coordinate theorem
-  from unconditional nonlinear covariance.
+- The remaining metric realization has been decomposed and three ingredients
+  are Lean-verified: the nonlinear inverse-metric jet product rule, the full
+  differentiated first-kind pullback, and its undifferentiated raised
+  contraction. The remaining endpoint is the differentiated-bracket
+  contraction assembling them into the certified connection jet.
 - The Phase-II existence/closure problem remains the principal mathematical
   risk of the north-star theorem.
 
@@ -58,6 +61,11 @@ second-kind connection jet. Derive as immediate corollaries:
 
 **Gate:** no conditional Christoffel-jet equality remains in the advertised
 coordinate-Ricci surface.
+
+**Current substatus:** the transformed inverse-metric derivative, explicit
+first-kind derivative, and undifferentiated raising/bracket contraction are
+complete. Next prove the differentiated-bracket contraction and assemble the
+unconditional theorem.
 
 ### IV-G2 — intrinsic local packaging
 

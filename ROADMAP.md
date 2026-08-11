@@ -175,8 +175,10 @@ nondegeneracy hypothesis.
   Ricci-flatness is preserved and reflected. The full inhomogeneous nonlinear
   connection/Ricci cancellation is now verified for arbitrary coordinate
   three-jets. The transformed metric second jet and its first-kind derivative
-  law are constructed; one second-kind raising/product-rule identity remains
-  before intrinsic pseudo-Riemannian manifold packaging.**
+  law are constructed. The inverse-metric derivative product rule, explicit
+  four-term first-kind derivative, and undifferentiated raised bracket are now
+  complete; the differentiated-bracket contraction is the remaining
+  second-kind identity before intrinsic pseudo-Riemannian packaging.**
 
 Exit criterion: Paper I candidate with manuscript-to-Lean claim translation.
 

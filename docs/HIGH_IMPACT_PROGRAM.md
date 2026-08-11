@@ -339,10 +339,14 @@ contraction transforms covariantly and that nonlinear pullback preserves and
 reflects Ricci-flatness. The proof separately checks the pure-coordinate
 third-derivative/quadratic cancellation and the mixed old-connection/Hessian
 cancellation. The complete transformed metric second jet is constructed and
-its differentiated first-kind cancellation is verified. One explicit
-second-kind raising/product-rule identity remains before this universal result
-becomes an unconditional coordinate-Ricci theorem for the actual Kaluza
-metric. Intrinsic pseudo-Riemannian packaging follows that identity.
+its differentiated first-kind cancellation is verified. The metric endpoint
+now also proves the nonlinear inverse-metric derivative product rule, expands
+the complete four-term differentiated first-kind pullback, and recovers the
+undifferentiated inhomogeneous connection bracket by raising. The remaining
+identity is the differentiated-bracket contraction assembling those pieces
+into the certified product-rule connection jet. It immediately yields an
+unconditional coordinate-Ricci theorem for the actual Kaluza metric;
+intrinsic pseudo-Riemannian packaging follows.
 
 ### Phase-IV exit criterion
 

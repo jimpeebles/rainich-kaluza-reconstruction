@@ -258,10 +258,12 @@ the inhomogeneous Christoffel law, coordinate three-jets give the differentiated
 connection, and its Ricci contraction has the exact covariant law with a
 two-sided flatness equivalence. The proof audits pure-coordinate and mixed
 terms independently. A transformed metric second jet is also constructed,
-with its differentiated first-kind cancellation proved. The remaining chart
-identity is precisely that raising this first-kind jet produces the certified
-product-rule differentiated connection; it immediately unlocks the
-coordinate-Ricci and Kaluza specializations. Mathlib does not currently
+with its differentiated first-kind cancellation proved. Lean now additionally
+checks the transformed inverse-metric derivative, the four-term first-kind
+product rule, and the undifferentiated raising into the nonlinear connection
+bracket. The remaining chart identity is the differentiated-bracket
+contraction producing the certified product-rule connection jet; it
+immediately unlocks the coordinate-Ricci and Kaluza specializations. Mathlib does not currently
 provide a ready-made Lorentzian Ricci API for the later intrinsic layer.
 IV.4 then supplies the orbit classification.
 

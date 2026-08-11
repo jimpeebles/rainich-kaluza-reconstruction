@@ -4,7 +4,26 @@ The high-impact theorem program and its phase exit criteria are specified in
 [`docs/HIGH_IMPACT_PROGRAM.md`](docs/HIGH_IMPACT_PROGRAM.md). This roadmap
 tracks the same program at repository-task granularity.
 
-## Phase 0 — Provenance and novelty audit
+## Canonical phase numbering and current critical path
+
+Roman numerals refer only to the six phases in
+`docs/HIGH_IMPACT_PROGRAM.md`. The task groups below are supporting tracks,
+not a competing phase numbering scheme. The current audited execution order
+is maintained in
+[`docs/REALIGNED_EXECUTION_PLAN.md`](docs/REALIGNED_EXECUTION_PLAN.md):
+
+1. close the nonlinear metric-second-jet realization identity;
+2. derive intrinsic chart-independent Kaluza Ricci-flatness;
+3. complete the exhaustive Phase-IV uplift-orbit classification;
+4. assemble the conditional forward/converse uplift theorem;
+5. begin the reproducible Phase-V exact-metric harness while returning the
+   main theorem effort to the Phase-II curvature/closure gate;
+6. compose the north-star theorem only after both the curvature-entry and
+   uplift-module gates are proved.
+
+Starting the Phase-V harness does not mark Phase IV complete.
+
+## Foundation track — provenance and novelty audit
 
 - Fix the exact `a = √3` EMD action, frame, signature, and normalizations.
 - Re-derive the Einstein, Maxwell, and scalar equations.
@@ -14,7 +33,7 @@ tracks the same program at repository-task granularity.
 Exit criterion: every starting equation has a source or derivation and every
 novelty statement is phrased comparatively.
 
-## Phase 1 — Generic algebraic reconstruction
+## Algebraic track — generic reconstruction
 
 - Derive the Ricci characteristic factorization from `R = S + V`.
 - Prove that rank-one scalar perturbations retain one direction in each
@@ -36,7 +55,7 @@ Exit criterion: a zero-placeholder theorem package for the generic algebraic
 step, including an honest existence/orbit classification and every
 nondegeneracy hypothesis.
 
-## Phase 2 — Differential closure and local sufficiency
+## Differential track — closure and local sufficiency
 
 - Factor the reconstructed rank-one tensor into a covector up to sign.
 - Determine which differential conditions select or identify the two
@@ -161,20 +180,20 @@ nondegeneracy hypothesis.
 
 Exit criterion: Paper I candidate with manuscript-to-Lean claim translation.
 
-## Phase 3 — Degenerate branches
+## Degenerate-branch track
 
 Treat `R = 0`, null Maxwell fields, null scalar gradients, `q = 0`, repeated
 eigenvalues, and eigenvalue collisions separately. Determine whether each has
 a reconstruction theorem, a no-go theorem, or unavoidable nonuniqueness.
 
-## Phase 4 — Exact and adversarial metrics
+## Exact/adversarial track — canonical Phase V
 
 - Validate on several exact Kaluza/EMD solutions.
 - Test non-Kaluza scalar, electrovacuum, perfect-fluid, and mixed-matter metrics.
 - Distinguish algebraic false positives from differential false positives.
 - Use exact arithmetic or certified residual bounds where possible.
 
-## Phase 5 — Applications
+## Applications track — canonical Phase VI
 
 Only after the reconstruction theorem is stable should the project reconnect
 to spin-induced scalar multipoles, binary signatures, or the scalar parametric

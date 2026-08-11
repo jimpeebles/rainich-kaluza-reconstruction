@@ -278,3 +278,20 @@ Classify the complete local uplift freedom:
 Phase IV exits only when the forward and converse Ricci-flatness theorems and
 this orbit classification are all proved. Exact-solution tests belong to
 Phase V and do not substitute for these identities.
+
+## Realigned completion order
+
+The Phase-IV uplift module now proceeds in four audited gates:
+
+1. prove the remaining metric-second-jet raising/product-rule identity and
+   derive unconditional nonlinear `coordinateRicci` covariance;
+2. package the local-product Ricci-flatness/EMD equivalence independently of
+   the normal/radial-gauge chart;
+3. prove the IV.4 orbit list exhaustive, including exceptional duality loci;
+4. assemble the single conditional forward/converse uplift theorem.
+
+Completing these gates closes the uplift module for accepted Phase-III data.
+The official high-impact Phase-IV exit additionally requires the upstream
+curvature construction to produce or reject the scalar branch intrinsically.
+That dependency and the permitted Phase-V validation track are detailed in
+[`REALIGNED_EXECUTION_PLAN.md`](REALIGNED_EXECUTION_PLAN.md).

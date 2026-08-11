@@ -171,6 +171,15 @@ The remaining chart seam is one metric-second-jet raising/product-rule
 identity, followed by intrinsic pseudo-Riemannian manifold packaging and the
 uniqueness classification of IV.4.
 
+The current execution plan deliberately distinguishes completion of that
+uplift module from the official curvature-only Phase-IV exit. After the
+nonlinear metric identity, intrinsic packaging, and exhaustive uplift-orbit
+classification, exact metrics may enter a labeled Phase-V validation track.
+The north-star theorem still requires the upstream smooth
+curvature-projector and scalar-branch existence-or-obstruction gate. See the
+[`realigned execution plan`](docs/REALIGNED_EXECUTION_PLAN.md) for the ordered
+proof obligations and publication decision points.
+
 The current result also corrects an earlier uniqueness expectation: on the
 genuinely two-component generic branch, curvature algebra determines the
 scalar tensor only up to a discrete spectral-centralizer action. Differential
@@ -224,6 +233,9 @@ forbidding `sorryAx`.
   physics-first sequence.
 - `docs/HIGH_IMPACT_PROGRAM.md`: north-star local uplift theorem, phased proof
   program, exact-solution tests, and kill criteria.
+- `docs/REALIGNED_EXECUTION_PLAN.md`: current critical path through the
+  Phase-IV uplift module, upstream curvature gate, and Phase-V validation
+  track.
 - `docs/PHASE_III_MAXWELL_RECONSTRUCTION.md`: proved residual entry point and
   the completed generic local two-form/complexion obstruction interface.
 - `docs/PHASE_IV_UPLIFT.md`: verified Phase-IV entry contract and the

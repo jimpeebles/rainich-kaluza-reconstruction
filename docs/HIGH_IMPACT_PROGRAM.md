@@ -2,6 +2,11 @@
 
 Date adopted: 2026-08-10
 
+Execution was realigned on 2026-08-11. The operational order, dependency
+gates, and the distinction between uplift-module completion and the official
+curvature-only Phase-IV exit are maintained in
+[`REALIGNED_EXECUTION_PLAN.md`](REALIGNED_EXECUTION_PLAN.md).
+
 ## North-star result
 
 The project now aims at a constructive local recognition theorem of the
@@ -344,7 +349,20 @@ metric. Intrinsic pseudo-Riemannian packaging follows that identity.
 The north-star local if-and-only-if theorem, including uniqueness and all
 stated gauge/discrete freedoms.
 
+This exit has two necessary layers. The **uplift-module layer** closes the
+remaining nonlinear metric identity, intrinsic chart-independent packaging,
+and exhaustive IV.4 orbit classification for already accepted Phase-III
+data. The **curvature-entry layer** closes the upstream Phase-II smooth
+projector/antisymmetrization and scalar-branch existence-or-obstruction gap.
+The first layer may be completed and used by exact-metric tests without
+claiming that Phase IV itself has exited. The canonical dependency order is
+specified in `REALIGNED_EXECUTION_PLAN.md`.
+
 ## Phase V — exact, adversarial, and generative tests
+
+A reproducible validation harness may begin once the conditional intrinsic
+uplift module is complete. This is an explicitly labeled validation track,
+not a substitute for the curvature-entry layer of the Phase-IV theorem.
 
 Minimum validation set:
 

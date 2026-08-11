@@ -207,6 +207,17 @@ the Phase-IV proof obligations.
   maps in the repository;
 - separate machine-generated evidence from Lean-proved claims.
 
+**Status: operational, source recovery still in progress.** `validation/`
+pins Python 3.12.13 and SymPy 1.14.0 with hashed package artifacts, implements
+the coordinate Christoffel/Ricci, convention-fixed EMD-residual, exterior
+derivative, and Kaluza-uplift formulas using exact symbolic arithmetic, and
+records canonical inputs, provenance, runtime versions, expected branch,
+residual hashes, and byte-for-byte artifact drift. The seed
+`vt1-flat-cylindrical-pure-gauge` passes eight exact checks in nonlinear base
+and fiber coordinates. It is an infrastructure oracle, not the inherited
+rotating solution; independent recovery of that source and normalization map
+is the remaining V-T1/V-T2 entrance task.
+
 ### V-T2 — positive Kaluza benchmark
 
 Rebuild the rotating dyonic `a=√3` example and verify the full pipeline:
@@ -249,7 +260,8 @@ research result.
 
 ## Immediate execution order
 
-1. Begin V-T1 while returning the main proof effort to II-G1--II-G3.
+1. Use the operational V-T1 harness to recover the V-T2 source and convention
+   map while returning the main proof effort to II-G1--II-G3.
 2. Attempt IV-N1; report an obstruction or no-go result as a result, not as a
    failed proof.
 

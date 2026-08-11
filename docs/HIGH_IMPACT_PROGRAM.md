@@ -372,6 +372,13 @@ A reproducible validation harness may begin once the conditional intrinsic
 uplift module is complete. This is an explicitly labeled validation track,
 not a substitute for the curvature-entry layer of the Phase-IV theorem.
 
+The V-T1 infrastructure is now operational in `validation/`: its interpreter
+and symbolic dependency are pinned, inputs and provenance are canonicalized,
+exact residuals are hashed, committed artifacts are checked byte-for-byte,
+and a nonlinear flat/pure-gauge Kaluza oracle passes. This establishes the
+testing contract but does not count as a nontrivial positive solution; the
+rotating dyonic reconstruction remains the first substantive benchmark.
+
 Minimum validation set:
 
 1. a rotating dyonic `a=√3` solution passes and reconstructs a Ricci-flat

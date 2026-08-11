@@ -24,6 +24,11 @@ forward/converse module is assembled in `ConditionalKaluzaUplift.lean` behind
 an explicit accepted-data bridge. The live work now splits between the
 Phase-V harness and the upstream Phase-II curvature/closure gate.
 
+The V-T1 harness is now operational: `validation/` contains a pinned exact
+tensor engine, a provenance-and-residual artifact format, drift detection, and
+a nonlinear flat/pure-gauge seed oracle. Recovering the inherited rotating
+solution and its full normalization map remains the next V-T1/V-T2 boundary.
+
 Starting the Phase-V harness does not mark Phase IV complete.
 
 ## Foundation track — provenance and novelty audit
@@ -201,6 +206,9 @@ a reconstruction theorem, a no-go theorem, or unavoidable nonuniqueness.
 
 ## Exact/adversarial track — canonical Phase V
 
+- Maintain the pinned exact-tensor harness and byte-for-byte artifact checks.
+- Rebuild the inherited rotating dyonic source and normalization map; the
+  nonlinear flat/pure-gauge seed oracle is complete.
 - Validate on several exact Kaluza/EMD solutions.
 - Test non-Kaluza scalar, electrovacuum, perfect-fluid, and mixed-matter metrics.
 - Distinguish algebraic false positives from differential false positives.

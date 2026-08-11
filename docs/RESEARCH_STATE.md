@@ -277,6 +277,24 @@ reduction, and returns all scalar, gauge, coupling, and presentation orbits.
 The remaining official Phase-IV obligation is upstream: construct this
 certificate from intrinsic curvature data or return the sharp obstruction.
 
+## Exact validation infrastructure
+
+Canonical Phase V has begun without advancing the Phase-IV gate. The pinned
+`validation/` environment implements transparent coordinate formulas for the
+Christoffel symbols, Ricci tensor, exterior derivative, convention-fixed EMD
+residuals, and five-dimensional Kaluza uplift using exact SymPy expressions.
+Every artifact records source provenance, canonical inputs, an expected
+classification, runtime versions, and component-residual hashes; the audit
+rejects byte-level drift.
+
+The seed oracle uses flat four-dimensional spacetime in cylindrical
+coordinates and the nonzero pure-gauge potential `A=d(r y)`. Its Kaluza metric
+is proved computationally equal componentwise to the coordinate pullback
+under `z' = z+r y`; both charts have nonzero Christoffel symbols while the
+four- and five-dimensional Ricci tensors and all EMD residuals vanish. These
+eight checks validate the harness contract and gauge-coordinate convention,
+not the generic reconstruction theorem.
+
 ## Evidence inherited from earlier conversations
 
 The candidate algebraic fingerprint was numerically reported to hold to

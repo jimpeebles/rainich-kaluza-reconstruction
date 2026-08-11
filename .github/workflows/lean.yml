@@ -16,4 +16,13 @@ jobs:
           nanoda-allow-sorry: false
       - name: Audit placeholders and theorem axioms
         run: bash scripts/audit.sh
-
+      - name: Install pinned uv
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.11.8"
+          working-directory: validation
+          enable-cache: true
+          cache-python: true
+      - name: Audit exact-metric validation artifacts
+        working-directory: validation
+        run: ./audit.sh

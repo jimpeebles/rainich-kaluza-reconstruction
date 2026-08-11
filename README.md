@@ -200,6 +200,13 @@ The current execution plan deliberately distinguishes completion of that
 uplift module from the official curvature-only Phase-IV exit. The conditional
 module is now complete, so exact metrics may enter a labeled Phase-V validation
 track while the main theorem effort returns to the upstream curvature gate.
+That validation track is now operational in `validation/`: a pinned
+Python/SymPy exact-tensor engine records canonical inputs, source provenance,
+runtime versions, residual hashes, and byte-for-byte checked JSON artifacts.
+Its seed oracle places flat four- and five-dimensional geometry in nonlinear
+cylindrical and pure-gauge Kaluza coordinates and passes eight exact checks.
+This is computational evidence, deliberately separated from the Lean proof
+surface; the rotating dyonic benchmark remains to be independently rebuilt.
 The north-star theorem still requires the upstream smooth
 curvature-projector and scalar-branch existence-or-obstruction gate. See the
 [`realigned execution plan`](docs/REALIGNED_EXECUTION_PLAN.md) for the ordered
@@ -247,12 +254,25 @@ bash scripts/audit.sh
 The audit builds with warnings treated as errors before printing the axiom
 surface.
 
+Run the separate exact-metric validation audit with:
+
+```sh
+cd validation
+./audit.sh
+```
+
+This uses the pinned interpreter and dependency lock, runs the tensor-engine
+tests, and rejects any drift from the committed exact artifact.
+
 GitHub CI additionally requests independent checking through `nanoda` while
-forbidding `sorryAx`.
+forbidding `sorryAx`, then reproduces the pinned exact-metric artifact and
+checks it for drift.
 
 ## Repository map
 
 - `RainichKaluza/`: machine-checked definitions and theorems.
+- `validation/`: pinned exact-symbolic Phase-V evidence and reproducibility
+  artifacts, explicitly outside the Lean proof surface.
 - `docs/RESEARCH_STATE.md`: inherited results, corrections, and open questions.
 - `docs/PROGRAM_SYNTHESIS.md`: cross-conversation research map and adopted
   physics-first sequence.

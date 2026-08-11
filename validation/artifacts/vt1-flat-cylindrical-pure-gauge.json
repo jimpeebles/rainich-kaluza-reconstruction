@@ -1,0 +1,80 @@
+{
+  "benchmark_id": "vt1-flat-cylindrical-pure-gauge",
+  "checks": [
+    {
+      "name": "derived-uplift-constant-residuals-vanish",
+      "passed": true,
+      "residual_sha256": "73e0ff30a3a09ca6ad3f00873cc0b040baf02c03aebb1510ec22cba69e825086"
+    },
+    {
+      "name": "pure-gauge-field-strength-vanishes",
+      "passed": true,
+      "residual_sha256": "cf25ebf4b786dc9974275ac49bb1343ff8bb41a7ec586fcfa7cfcb67bd40e4b3"
+    },
+    {
+      "name": "base-chart-is-nonlinear",
+      "passed": true,
+      "residual_sha256": "1a4590e9f9aab40226f7f6623d9a525b8fa23b4d6259f8b6677f10c7d2ae00ab"
+    },
+    {
+      "name": "base-ricci-vanishes",
+      "passed": true,
+      "residual_sha256": "cf25ebf4b786dc9974275ac49bb1343ff8bb41a7ec586fcfa7cfcb67bd40e4b3"
+    },
+    {
+      "name": "emd-residuals-vanish",
+      "passed": true,
+      "residual_sha256": "608c5567fbe26c0954cc921ff46cc83278ad969453ee47b55c7bc480ab247464"
+    },
+    {
+      "name": "uplift-equals-exact-coordinate-pullback",
+      "passed": true,
+      "residual_sha256": "608c5567fbe26c0954cc921ff46cc83278ad969453ee47b55c7bc480ab247464"
+    },
+    {
+      "name": "uplift-chart-is-nonlinear",
+      "passed": true,
+      "residual_sha256": "8541543c6ddbb5eb37df817712444020f0c75228752a69dd45615660a74d5019"
+    },
+    {
+      "name": "uplift-ricci-vanishes",
+      "passed": true,
+      "residual_sha256": "608c5567fbe26c0954cc921ff46cc83278ad969453ee47b55c7bc480ab247464"
+    }
+  ],
+  "evidence_class": "exact-symbolic-validation-not-lean-proof",
+  "input": {
+    "base_metric": "[[-1, 0, 0, 0], [0, 1, 0, 0], [0, 0, r**2, 0], [0, 0, 0, 1]]",
+    "coordinates": [
+      "t",
+      "r",
+      "theta",
+      "y",
+      "z"
+    ],
+    "coupling": "sqrt(3)",
+    "emd_convention": "docs/EMD_CONVENTION.md equations E1, E7 and scalar Euler-Lagrange equation",
+    "expected_classification": "accepted-kaluza-vacuum-orbit",
+    "gauge_function": "r*y",
+    "potential": [
+      "0",
+      "y",
+      "0",
+      "r"
+    ],
+    "scalar": "0",
+    "source": {
+      "external_source": null,
+      "kind": "constructed-exact-oracle",
+      "provenance": "Minkowski metric in cylindrical coordinates with an exact local Kaluza gauge transform"
+    },
+    "uplift_ansatz": "exp(-phi/sqrt(3))*g + exp(2*phi/sqrt(3))*(dz+A)^2"
+  },
+  "input_sha256": "cf5066e5b6b86a2c812abd483e584ca34c31d086b889e3339a007d747be12723",
+  "passed": true,
+  "runtime": {
+    "python": "3.12.13",
+    "sympy": "1.14.0"
+  },
+  "schema_version": 1
+}

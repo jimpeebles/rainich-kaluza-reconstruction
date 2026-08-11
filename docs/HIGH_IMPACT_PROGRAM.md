@@ -303,12 +303,15 @@ theorems. The IV.2 constants `c₁=-1/√3, c₂=2/√3, c₃=1` are derived in
 proves the block congruence assembly, explicit inverse-metric formulas,
 `det ĝ = u⁴·v·det g` with Lorentz-sign preservation, the orthogonal-family
 signature lift, and all six Christoffel blocks at a normal-gauge point (the
-Maxwell shear carrying exactly the weight `e^{√3φ}`). The second-jet layer and the
-fiber-fiber Ricci block are also complete: `R̂₅₅` is Lean-proved equal to
-`-(e^{√3φ}/√3)(□φ - (√3/4)e^{√3φ}F²)`, identifying the fifth Einstein
-equation with the convention-fixed scalar equation. The base-fiber and
-base-base Ricci blocks and the Ricci-flatness/converse calculations
-follow.
+Maxwell shear carrying exactly the weight `e^{√3φ}`). The second-jet layer
+and all Ricci blocks are complete. Lean identifies `R̂₅₅` with the scalar
+equation, `R̂_{n5}` with the weighted Maxwell equation, and `R̂_{np}` with
+the EMD Einstein residual plus `g_{np}/(2√3)` times the scalar residual. A
+named mixed-order symmetry theorem closes the opposite block, and a single
+forward-and-converse theorem now proves that the full `5×5` Ricci tensor
+vanishes exactly when the normal-frame EMD system holds. The remaining
+uplift step is the smooth local-product/normal-coordinate wrapper for this
+coordinate-jet theorem.
 
 ### Phase-IV exit criterion
 

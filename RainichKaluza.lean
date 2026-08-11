@@ -21,6 +21,8 @@ import RainichKaluza.UpliftConvention
 import RainichKaluza.KaluzaBlockAssembly
 import RainichKaluza.KaluzaChristoffel
 import RainichKaluza.KaluzaRicci
+import RainichKaluza.KaluzaRicciMixed
+import RainichKaluza.KaluzaRicciBase
 import RainichKaluza.MaxwellDualityOrbit
 import RainichKaluza.DualityComplexionDerivative
 import RainichKaluza.ComplexionCouplingSystem

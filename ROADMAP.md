@@ -137,14 +137,16 @@ nondegeneracy hypothesis.
   uniformly and the radial potential satisfies `dA=F`, with the local
   potential orbit exactly `A+dχ`. The IV.2 convention constants
   `c₁=-1/√3, c₂=2/√3, c₃=1` are derived in `docs/UPLIFT_CONVENTION.md` and
-  fixed as verified Lean definitions. The IV.3 coordinate layer is underway:
+  fixed as verified Lean definitions. The IV.3 coordinate layer is complete:
   block-metric congruence assembly, explicit inverse formulas, determinant
   and signature lift, and the six closed-form Christoffel blocks at a
-  normal-gauge point are complete in Lean, together with the second-jet
-  layer and the fiber-fiber Ricci block, which is proved equal to the
-  convention-fixed EMD scalar equation up to the factor `-e^{√3φ}/√3`. The
-  base-fiber and base-base Ricci blocks and the forward/converse
-  Ricci-flatness theorems are next.**
+  normal-gauge point are complete in Lean, together with the second-jet layer
+  and all three Ricci blocks. The fiber block is the scalar equation, the
+  mixed block is the weighted Maxwell equation, and the base block is the
+  Einstein residual plus its exact scalar trace correction. Mixed-order
+  symmetry is certified for genuine second jets, and vanishing of the full
+  `5×5` Ricci tensor is Lean-proved equivalent to the complete normal-frame EMD
+  system. The smooth local-product/normal-coordinate wrapper is next.**
 
 Exit criterion: Paper I candidate with manuscript-to-Lean claim translation.
 

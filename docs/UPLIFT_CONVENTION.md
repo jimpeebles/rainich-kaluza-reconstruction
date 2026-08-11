@@ -128,7 +128,8 @@ surviving constant-duality freedom already classified in Phase III
 
 ## What this note does not do
 
-It does not compute the five-dimensional Christoffel or Ricci blocks, prove
-`Ric(ĝ) = 0` from the EMD equations, or prove the converse reduction. Those
-are the IV.3 work packages; with `c₁, c₂, c₃` now derived and Lean-defined,
-IV.3 can proceed against fixed constants.
+This convention derivation itself does not compute the five-dimensional
+Christoffel or Ricci blocks. Those calculations are now carried out at the
+coordinate-jet level in `KaluzaChristoffel.lean`, `KaluzaRicci.lean`,
+`KaluzaRicciMixed.lean`, and `KaluzaRicciBase.lean`; the remaining step is
+their smooth local-product/normal-coordinate wrapper.

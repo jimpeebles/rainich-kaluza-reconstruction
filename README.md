@@ -117,10 +117,12 @@ candidate Ricci fingerprint and the generic pointwise reconstruction layer:
   the assembled block inverse;
 - the second-jet curvature layer: assembled second metric derivatives, the
   certified inverse-metric derivative, the product-rule Christoffel
-  derivative, the raw Ricci contraction, and the first Ricci block identity
-  `R̂₅₅ = -(k₂v/2u)[□φ + (k₁+k₂/2)(∂φ)²] + (v²c²/4u²)F²`, which at the
-  derived convention is exactly `-(e^{√3φ}/√3)(□φ - (√3/4)e^{√3φ}F²)`: the
-  fifth Einstein equation is the convention-fixed EMD scalar equation;
+  derivative, the raw Ricci contraction, and all three Ricci
+  blocks: `R̂₅₅` is the scalar equation, `R̂_{n5}` is the weighted Maxwell
+  equation, and `R̂_{np}` is the Einstein residual plus the exact scalar
+  trace correction. Mixed-order symmetry is proved for genuine second jets,
+  and vanishing of the full `5×5` Ricci tensor is Lean-proved equivalent in
+  both directions to the convention-fixed normal-frame EMD system;
 - an exterior-form complexion theorem reducing both EMD equations to explicit
   seed channels, together with the generic collapse of constant duality to
   overall sign and its zero-coupling/inactive-source exceptions;
@@ -146,12 +148,13 @@ orbit is exactly `A+dχ`. The IV.2 uplift constants are derived from the
 five-dimensional Einstein-Hilbert action and fixed as verified Lean
 definitions. The development also does **not** yet prove that the original
 fingerprint always supplies a closed scalar-gradient branch, cover the null or
-repeated-root cases, settle global bundle topology, or prove that an accepted
-metric uplifts to a five-dimensional Ricci-flat geometry; the IV.3
-base-fiber and base-base Ricci blocks (the Christoffel layer, second-jet
-layer, and fiber Ricci block are complete), the forward/converse
-Ricci-flatness theorems, and the uniqueness classification of IV.4 are the
-remaining Phase-IV obligations.
+repeated-root cases, or settle global bundle topology. The full IV.3
+coordinate-jet reduction is now complete: the full five-dimensional Ricci
+tensor vanishes if and only if the convention-fixed normal-frame EMD
+Einstein, weighted Maxwell, and scalar residuals vanish. What remains before
+claiming a local Ricci-flat uplift theorem is the smooth manifold/normal-
+coordinate wrapper for that audited calculation, followed by the uniqueness
+classification of IV.4.
 
 The current result also corrects an earlier uniqueness expectation: on the
 genuinely two-component generic branch, curvature algebra determines the

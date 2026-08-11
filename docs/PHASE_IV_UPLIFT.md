@@ -176,13 +176,14 @@ fiber-gradient force `-(k₂v/2u)φ₁^♯`, the symmetrized gauge jet
 torsion symmetry and a consistency identity against the assembled block
 inverse. Under the derived convention the Maxwell-shear prefactor is exactly
 the EMD weight: `v/u = e^{√3φ}` (`conventionKaluzaWarpRatio`), the geometric
-reappearance of the action's Maxwell exponential. The second-jet layer now exists as well. `KaluzaRicci.lean` assembles the
+reappearance of the action's Maxwell exponential. The second-jet layer now
+exists as well. `KaluzaRicci.lean` assembles the
 second derivative of the block metric from the chain rule (`phi2`, `A2`, and
 the curvature-carrying `g2` slots), defines the inverse-metric derivative by
 `∂ĝ⁻¹ = -ĝ⁻¹(∂ĝ)ĝ⁻¹` and certifies it against the point metric by the
 differentiated inverse identity, forms the product-rule Christoffel
 derivative, and writes the raw Ricci contraction with circle derivatives
-zero. The first Ricci block identity is proved
+zero. The fiber Ricci block identity is proved
 (`kaluzaNormalGaugeRicci_fiber_fiber`):
 
 `R̂_55 = -(k₂v/2u)[□φ + (k₁+k₂/2)(∂φ)²] + (v²c²/4u²)F²`,
@@ -194,13 +195,40 @@ and at the derived convention the Einstein-frame condition kills the
 `R̂_55 = -(e^{√3φ}/√3)(□φ - (√3/4)e^{√3φ}F²)`:
 
 the fifth Einstein equation is exactly the convention-fixed EMD scalar
-equation. The Christoffel-trace lemma
+equation. `KaluzaRicciMixed.lean` then proves
+
+`R̂_{n5} = (e^{√3φ}/2) M_n`,
+
+where `M_n` is the diagonal-normal-frame expansion of the weighted Maxwell
+divergence. Its zero-equivalence is explicit. A key audit finding is that the
+raw differentiated Christoffel symbol contains an extra second-jet term that
+would be lost by differentiating the already gauge-specialized closed form;
+retaining it is what produces the gauge-covariant Maxwell residual.
+
+Finally, `KaluzaRicciBase.lean` proves the generic base block and its
+convention specialization
+
+`R̂_{np} = E_{np} + g_{np} S/(2√3)`,
+
+where `E_{np}` is the trace-reversed EMD Einstein residual and `S` is the
+scalar residual. This triangular identity explains rather than hides the
+trace correction. The combined theorem
+`conventionKaluzaRicciBlocksVanish_iff_emd` proves the upper-block
+equivalence; `kaluzaNormalGaugeRicci_fiber_base_eq_base_fiber` closes the
+opposite mixed block for commuting gauge second jets. Consequently
+`conventionKaluzaRicciFlatAt_iff_emd` proves, in both directions, that the
+full `5×5` Ricci tensor vanishes exactly when the normal-frame EMD system
+holds. The Christoffel-trace lemma
 `kaluzaNormalGaugeChristoffel_trace_base` confirms
 `Γ̂^M_{Mq} = (2k₁+k₂/2)φ₁_q = ∂_q log√(u⁴v)`, consistent with the
-determinant of the assembly layer. The remaining IV.3 items are the
-base-fiber and base-base Ricci blocks — the Maxwell and Einstein equations —
-followed by the forward/converse theorems and the IV.4 orbit
-classification.
+determinant of the assembly layer.
+
+Thus the coordinate-algebra part of IV.3, including its forward/converse
+equivalence, is complete. The remaining geometric obligation is to package
+the jet arrays as derivatives of smooth fields in base normal coordinates
+and radial gauge on a local product with the circle. That wrapper must also
+relate the audited block condition to the intrinsic statement `Ric(ĝ)=0`;
+IV.4 then supplies the orbit classification.
 
 ## IV.4 — uniqueness and exit condition
 

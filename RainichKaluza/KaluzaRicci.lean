@@ -39,7 +39,8 @@ and the warp ratio is the EMD weight, so
 
 the fifth Einstein equation *is* the convention-fixed EMD scalar equation.
 The base-fiber and base-base Ricci blocks (Maxwell and Einstein equations)
-assemble from the same jet layer and are the remaining IV.3 items.
+are completed from this jet layer in `KaluzaRicciMixed.lean` and
+`KaluzaRicciBase.lean`.
 -/
 
 namespace RainichKaluza

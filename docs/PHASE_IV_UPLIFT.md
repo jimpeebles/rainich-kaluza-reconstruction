@@ -176,9 +176,31 @@ fiber-gradient force `-(k₂v/2u)φ₁^♯`, the symmetrized gauge jet
 torsion symmetry and a consistency identity against the assembled block
 inverse. Under the derived convention the Maxwell-shear prefactor is exactly
 the EMD weight: `v/u = e^{√3φ}` (`conventionKaluzaWarpRatio`), the geometric
-reappearance of the action's Maxwell exponential. The remaining half of item
-4 is the second-jet layer and the Ricci blocks; items 5 and 6 and the IV.4
-orbit classification then close the phase.
+reappearance of the action's Maxwell exponential. The second-jet layer now exists as well. `KaluzaRicci.lean` assembles the
+second derivative of the block metric from the chain rule (`phi2`, `A2`, and
+the curvature-carrying `g2` slots), defines the inverse-metric derivative by
+`∂ĝ⁻¹ = -ĝ⁻¹(∂ĝ)ĝ⁻¹` and certifies it against the point metric by the
+differentiated inverse identity, forms the product-rule Christoffel
+derivative, and writes the raw Ricci contraction with circle derivatives
+zero. The first Ricci block identity is proved
+(`kaluzaNormalGaugeRicci_fiber_fiber`):
+
+`R̂_55 = -(k₂v/2u)[□φ + (k₁+k₂/2)(∂φ)²] + (v²c²/4u²)F²`,
+
+and at the derived convention the Einstein-frame condition kills the
+`(∂φ)²` term while the warp ratio is the EMD weight, so
+(`conventionKaluzaRicci_fiber_fiber`)
+
+`R̂_55 = -(e^{√3φ}/√3)(□φ - (√3/4)e^{√3φ}F²)`:
+
+the fifth Einstein equation is exactly the convention-fixed EMD scalar
+equation. The Christoffel-trace lemma
+`kaluzaNormalGaugeChristoffel_trace_base` confirms
+`Γ̂^M_{Mq} = (2k₁+k₂/2)φ₁_q = ∂_q log√(u⁴v)`, consistent with the
+determinant of the assembly layer. The remaining IV.3 items are the
+base-fiber and base-base Ricci blocks — the Maxwell and Einstein equations —
+followed by the forward/converse theorems and the IV.4 orbit
+classification.
 
 ## IV.4 — uniqueness and exit condition
 

@@ -20,6 +20,7 @@ import RainichKaluza.RadialPotentialSplice
 import RainichKaluza.UpliftConvention
 import RainichKaluza.KaluzaBlockAssembly
 import RainichKaluza.KaluzaChristoffel
+import RainichKaluza.KaluzaRicci
 import RainichKaluza.MaxwellDualityOrbit
 import RainichKaluza.DualityComplexionDerivative
 import RainichKaluza.ComplexionCouplingSystem

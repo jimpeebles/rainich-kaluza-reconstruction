@@ -115,6 +115,12 @@ candidate Ricci fingerprint and the generic pointwise reconstruction layer:
   normal-gauge point, including the Maxwell shear whose prefactor is exactly
   the EMD weight `e^{√3φ}`, with torsion symmetry and consistency against
   the assembled block inverse;
+- the second-jet curvature layer: assembled second metric derivatives, the
+  certified inverse-metric derivative, the product-rule Christoffel
+  derivative, the raw Ricci contraction, and the first Ricci block identity
+  `R̂₅₅ = -(k₂v/2u)[□φ + (k₁+k₂/2)(∂φ)²] + (v²c²/4u²)F²`, which at the
+  derived convention is exactly `-(e^{√3φ}/√3)(□φ - (√3/4)e^{√3φ}F²)`: the
+  fifth Einstein equation is the convention-fixed EMD scalar equation;
 - an exterior-form complexion theorem reducing both EMD equations to explicit
   seed channels, together with the generic collapse of constant duality to
   overall sign and its zero-coupling/inactive-source exceptions;
@@ -142,8 +148,10 @@ definitions. The development also does **not** yet prove that the original
 fingerprint always supplies a closed scalar-gradient branch, cover the null or
 repeated-root cases, settle global bundle topology, or prove that an accepted
 metric uplifts to a five-dimensional Ricci-flat geometry; the IV.3
-second-jet/Ricci block identities (the Christoffel half is complete) and the
-uniqueness classification of IV.4 are the remaining Phase-IV obligations.
+base-fiber and base-base Ricci blocks (the Christoffel layer, second-jet
+layer, and fiber Ricci block are complete), the forward/converse
+Ricci-flatness theorems, and the uniqueness classification of IV.4 are the
+remaining Phase-IV obligations.
 
 The current result also corrects an earlier uniqueness expectation: on the
 genuinely two-component generic branch, curvature algebra determines the

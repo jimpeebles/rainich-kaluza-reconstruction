@@ -589,9 +589,43 @@ Status: verified in `KaluzaBlockAssembly.lean`
 `kaluzaNormalGaugeChristoffel_*` block family,
 `kaluzaNormalGaugeChristoffel_symm`,
 `kaluzaNormalGaugePointInverse_eq_blockInverse`, `conventionKaluzaWarpRatio`,
-and the convention corollaries). The second-derivative jet layer, the Ricci
-blocks, and the forward/converse Ricci-flatness theorems are the remaining
-IV.3 obligations.
+and the convention corollaries). The second-derivative jet layer is now
+complete; see Proposition G18. The base-fiber and base-base Ricci blocks and
+the forward/converse Ricci-flatness theorems are the remaining IV.3
+obligations.
+
+## Proposition G18 — the fifth Einstein equation is the scalar equation
+
+Extend the normal-gauge data by the scalar Hessian, the second gauge jet,
+and the second base-metric jet. Assemble the second derivative of the block
+metric by the chain rule, define the inverse-metric derivative by
+`∂ĝ⁻¹ = -ĝ⁻¹(∂ĝ)ĝ⁻¹` (certified against the point metric by the
+differentiated inverse identity), differentiate the raw Christoffel formula
+by the product rule, and form the raw Ricci contraction with circle
+derivatives zero. Then the fiber-fiber Ricci block evaluates in closed form
+to
+
+`R̂_55 = -(k₂v/2u)[□φ + (k₁ + k₂/2)(∂φ)²] + (v²c²/4u²)F²`,
+
+with `□φ`, `(∂φ)²`, `F²` the diagonal-frame contractions, and the
+Christoffel trace along a base direction is `(2k₁ + k₂/2)φ₁`, the logarithmic
+derivative of `√(u⁴v)`. At the derived convention the Einstein-frame
+condition eliminates the `(∂φ)²` term and the warp ratio is the EMD weight,
+giving
+
+`R̂_55 = -(e^{√3φ}/√3) · (□φ - (√3/4) e^{√3φ} F²)`.
+
+Hence `R̂_55 = 0` exactly when `□φ = (√3/4) e^{√3φ} F²`: the fifth Einstein
+equation of the uplift is the convention-fixed `a = √3` EMD scalar equation.
+
+Status: verified in `KaluzaRicci.lean` by
+`kaluzaNormalGaugeInverseJet_defining`, the inverse-jet entry lemmas,
+`kaluzaNormalGaugeChristoffel_trace_base`,
+`kaluzaNormalGaugeChristoffel_trace_fiber`,
+`kaluzaNormalGaugeRicci_fiber_traceTerm`,
+`kaluzaNormalGaugeRicci_fiber_squareTerm`,
+`kaluzaNormalGaugeRicci_fiber_fiber`, and
+`conventionKaluzaRicci_fiber_fiber`.
 
 ## Target Theorem H — local generalized Rainich–Kaluza reconstruction
 

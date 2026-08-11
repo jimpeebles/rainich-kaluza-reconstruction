@@ -140,8 +140,11 @@ nondegeneracy hypothesis.
   fixed as verified Lean definitions. The IV.3 coordinate layer is underway:
   block-metric congruence assembly, explicit inverse formulas, determinant
   and signature lift, and the six closed-form Christoffel blocks at a
-  normal-gauge point are complete in Lean; the Ricci blocks and the
-  forward/converse Ricci-flatness theorems are next.**
+  normal-gauge point are complete in Lean, together with the second-jet
+  layer and the fiber-fiber Ricci block, which is proved equal to the
+  convention-fixed EMD scalar equation up to the factor `-e^{√3φ}/√3`. The
+  base-fiber and base-base Ricci blocks and the forward/converse
+  Ricci-flatness theorems are next.**
 
 Exit criterion: Paper I candidate with manuscript-to-Lean claim translation.
 

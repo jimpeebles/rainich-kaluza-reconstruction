@@ -217,7 +217,11 @@ definitions whose three matching conditions are verified exactly, re-deriving
 block-metric congruence assembly with explicit two-sided inverse formulas and
 determinant `u⁴·v·det g`, the orthogonal-family signature lift, and the six
 closed-form Christoffel blocks at a normal-gauge point, whose Maxwell shear
-carries exactly the EMD weight `e^{√3φ}`. The second-jet Ricci blocks and the
+carries exactly the EMD weight `e^{√3φ}`. The second-jet layer is now
+in place with a certified inverse-metric derivative, and the first Ricci
+block is proved: `R̂₅₅` equals the convention-fixed EMD scalar equation up to
+the factor `-e^{√3φ}/√3`, so the fifth Einstein equation is the scalar field
+equation. The base-fiber and base-base Ricci blocks and the
 Ricci-flatness/converse calculations of IV.3-IV.4 are the remaining Phase-IV
 obligations.
 

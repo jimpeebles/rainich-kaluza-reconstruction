@@ -292,11 +292,19 @@ have curvature `F`. It also proves the pointwise gauge-jet classification, the
 field-level local theorem `A'-A=dχ` with uniqueness up to a constant, and gauge
 invariance of `dz+cA` and the warped Kaluza metric expression. The full
 convention-independent block pairing is now constructed and proved symmetric
-and nondegenerate under the expected base hypotheses. The next
-analytic task is to discharge the domination hypotheses from a concise
-regularity package for `F`, thereby identifying the candidate with `dA`.
-Convention derivation, full metric assembly, and the Ricci-flatness/converse
-calculations then follow.
+and nondegenerate under the expected base hypotheses. The IV.1
+analytic task is complete: `RadialPotentialSplice.lean` discharges the
+domination hypotheses from the concise `C¹` closed package on a star-shaped
+patch, identifying the candidate with `dA` uniformly in every evaluation
+direction, so `dF=0 → dA=F` and the potential orbit `A+dχ` are Lean
+theorems. The IV.2 constants `c₁=-1/√3, c₂=2/√3, c₃=1` are derived in
+`docs/UPLIFT_CONVENTION.md` and verified as Lean identities, re-deriving
+`a²=3` from the five-dimensional origin. The IV.3 coordinate layer now
+proves the block congruence assembly, explicit inverse-metric formulas,
+`det ĝ = u⁴·v·det g` with Lorentz-sign preservation, the orthogonal-family
+signature lift, and all six Christoffel blocks at a normal-gauge point (the
+Maxwell shear carrying exactly the weight `e^{√3φ}`). The second-jet Ricci
+blocks and the Ricci-flatness/converse calculations follow.
 
 ### Phase-IV exit criterion
 

@@ -206,9 +206,20 @@ proves the field-level local relation `A'-A=dχ` and uniqueness of `χ` up to a
 constant, and proves invariance of `dz+cA` and the warped Kaluza metric under
 the compensating fifth-coordinate shift. The full bilinear block is also
 proved symmetric and nondegenerate under the expected base hypotheses. The
-immediate open splice is to discharge the
-domination hypotheses from a practical smoothness package; metric coefficient
-derivation and Ricci-flatness follow after it.
+Phase-IV.1 splice is now discharged: the `C¹` closed regularity package on a
+star-shaped patch proves the radial potential Frechet differentiable with
+`dA=F`, uniformly in every evaluation direction, closing the generic local
+two-form Poincare theorem with potential orbit `A+dχ`. The IV.2 uplift
+constants `c₁=-1/√3, c₂=2/√3, c₃=1` are derived from the five-dimensional
+Einstein-Hilbert action in `docs/UPLIFT_CONVENTION.md` and fixed as Lean
+definitions whose three matching conditions are verified exactly, re-deriving
+`a²=3` from the five-dimensional origin. The IV.3 coordinate layer now contains the
+block-metric congruence assembly with explicit two-sided inverse formulas and
+determinant `u⁴·v·det g`, the orthogonal-family signature lift, and the six
+closed-form Christoffel blocks at a normal-gauge point, whose Maxwell shear
+carries exactly the EMD weight `e^{√3φ}`. The second-jet Ricci blocks and the
+Ricci-flatness/converse calculations of IV.3-IV.4 are the remaining Phase-IV
+obligations.
 
 ## Evidence inherited from earlier conversations
 

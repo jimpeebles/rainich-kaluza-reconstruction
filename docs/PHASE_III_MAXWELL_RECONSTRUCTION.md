@@ -260,5 +260,7 @@ constant and the expected orientation reversal. The exponential weights
 `exp(∓aφ/2)` have their exact derivative jets. Consequently vanishing of the
 two Phase-III obstruction forms implies closure of the unscaled physical
 Maxwell field and the weighted dual flux. If `a²=3`, one scalar orientation has
-`a=√3`. The next theorem belongs genuinely to Phase IV: integrate the closed
-physical two-form to a local gauge potential.
+`a=√3`. The first genuinely Phase-IV theorem — integrating the closed physical
+two-form to a local gauge potential — is now complete in
+`RadialPotentialSplice.lean`: `dF=0 → dA=F` on star-shaped patches under the
+`C¹` closed regularity package, with local potential orbit `A+dχ`.

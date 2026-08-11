@@ -92,9 +92,29 @@ candidate Ricci fingerprint and the generic pointwise reconstruction layer:
   curvature identity for its derivative candidate, exact pointwise gauge
   freedom, and the field-level theorem that equal-curvature potentials differ
   by `dχ` with `χ` unique up to a constant;
+- the closed Phase-IV.1 analytic splice: under a `C¹` closed regularity
+  package on a star-shaped patch, the radial gauge potential is a genuine
+  differentiable local potential with `dA=F`, every dominated
+  differentiation-under-the-integral obligation discharged uniformly for all
+  evaluation directions, and the complete local potential orbit is `A+dχ`;
 - convention-independent Kaluza block-metric assembly, including symmetry,
   nondegeneracy from the base metric and nonzero warp factors, gauge invariance
   of both `dz+cA` and `u g+v(dz+cA)²`, and additive composition of gauge shifts;
+- the uplift convention constants `c₁=-1/√3`, `c₂=2/√3`, `c₃=1` derived from
+  the five-dimensional Einstein-Hilbert action, with Lean-verified
+  Einstein-frame, scalar-normalization, and Maxwell-exponent conditions, a
+  re-derivation of `a²=3` from the five-dimensional origin, and the
+  convention-fixed block pairing inheriting symmetry, nondegeneracy, gauge
+  invariance, and the additive-constant modulus law;
+- the five-dimensional block-metric coordinate layer: the unipotent
+  congruence factorization `ĝ = Pᵀ(u g ⊕ v)P`, explicit two-sided
+  inverse-metric formulas, the determinant `det ĝ = u⁴·v·det g` with
+  Lorentz-sign preservation at the derived convention, and the orthogonal
+  family lift settling index-one signature at the trivialization level;
+- the six closed-form Christoffel blocks of the warped Kaluza metric at a
+  normal-gauge point, including the Maxwell shear whose prefactor is exactly
+  the EMD weight `e^{√3φ}`, with torsion symmetry and consistency against
+  the assembled block inverse;
 - an exterior-form complexion theorem reducing both EMD equations to explicit
   seed channels, together with the generic collapse of constant duality to
   overall sign and its zero-coupling/inactive-source exceptions;
@@ -113,13 +133,17 @@ candidate Ricci fingerprint and the generic pointwise reconstruction layer:
 These statements now complete the conditional generic local Phase-III Maxwell
 decision interface: once an admissible scalar branch and its first jet are
 supplied, the exact obstruction pair either rejects it or returns the local
-Maxwell/coupling orbit. Phase IV has begun constructively, but the radial
-derivative candidate still has to be spliced to the radial potential under a
-single usable regularity package before the full two-form Poincare theorem is
-closed. The development also does **not** yet prove that the original
+Maxwell/coupling orbit. Phase IV.1 is closed: on a star-shaped
+patch the `C¹` closed regularity package makes the radial gauge potential a
+genuine differentiable local potential with `dA=F`, and the local potential
+orbit is exactly `A+dχ`. The IV.2 uplift constants are derived from the
+five-dimensional Einstein-Hilbert action and fixed as verified Lean
+definitions. The development also does **not** yet prove that the original
 fingerprint always supplies a closed scalar-gradient branch, cover the null or
 repeated-root cases, settle global bundle topology, or prove that an accepted
-metric uplifts to a five-dimensional Ricci-flat geometry.
+metric uplifts to a five-dimensional Ricci-flat geometry; the IV.3
+second-jet/Ricci block identities (the Christoffel half is complete) and the
+uniqueness classification of IV.4 are the remaining Phase-IV obligations.
 
 The current result also corrects an earlier uniqueness expectation: on the
 genuinely two-component generic branch, curvature algebra determines the
@@ -179,6 +203,8 @@ forbidding `sorryAx`.
 - `docs/PHASE_IV_UPLIFT.md`: verified Phase-IV entry contract and the
   two-form integration, convention, metric-assembly, and Ricci-flatness work
   packages.
+- `docs/UPLIFT_CONVENTION.md`: derivation of the uplift constants
+  `c₁, c₂, c₃` from the five-dimensional Einstein-Hilbert action.
 - `docs/EMD_CONVENTION.md`: convention-fixed field-equation provenance.
 - `docs/GENERIC_RECONSTRUCTION.md`: derivation and boundary of the current
   generic eigenbasis result.

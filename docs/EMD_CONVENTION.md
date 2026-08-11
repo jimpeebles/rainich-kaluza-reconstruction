@@ -120,6 +120,10 @@ exterior product rules, explicit seed-channel obstruction forms, scalar
 integration, exponential unweighting, and closure of the physical Maxwell
 field for every accepted generic local branch, followed by the radial
 potential candidate and its convention-independent Kaluza gauge algebra.
+`RadialPotentialSplice.lean` completes the local two-form Poincare theorem
+`dF=0 → dA=F` under a `C¹` closed regularity package, and
+`UpliftConvention.lean` fixes the uplift constants derived in
+`docs/UPLIFT_CONVENTION.md`.
 
 ## Scope boundary
 
@@ -127,7 +131,10 @@ This note fixes the field-equation provenance and derives the rescaled
 differential identities. The repository now gives an exact conditional local
 decision for those identities and integrates any accepted closed scalar
 branch. It does not prove that every pointwise curvature candidate supplies a
-closed scalar branch, cover degenerate branches, finish the uniform analytic
-splice identifying the radial derivative candidate with `dA`, or prove the
-five-dimensional local uplift. Those are the remaining sufficiency and
-Phase-IV obligations.
+closed scalar branch, cover degenerate branches, or prove the
+five-dimensional local uplift. The uniform analytic splice identifying the
+radial derivative candidate with `dA` is complete
+(`RadialPotentialSplice.lean`), and the uplift constants are derived in
+`docs/UPLIFT_CONVENTION.md`; the remaining sufficiency and Phase-IV
+obligations are closed-branch existence and the block Ricci-flatness and
+converse calculations.

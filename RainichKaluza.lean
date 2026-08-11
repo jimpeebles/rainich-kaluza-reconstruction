@@ -16,6 +16,10 @@ import RainichKaluza.TransportedSeedDerivative
 import RainichKaluza.LocalExteriorSeed
 import RainichKaluza.PhaseIVReadiness
 import RainichKaluza.RadialGaugePotential
+import RainichKaluza.RadialPotentialSplice
+import RainichKaluza.UpliftConvention
+import RainichKaluza.KaluzaBlockAssembly
+import RainichKaluza.KaluzaChristoffel
 import RainichKaluza.MaxwellDualityOrbit
 import RainichKaluza.DualityComplexionDerivative
 import RainichKaluza.ComplexionCouplingSystem

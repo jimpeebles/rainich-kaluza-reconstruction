@@ -9,7 +9,11 @@ branches. It also begins the high-impact differential-coupling phase: the
 rescaled Maxwell channels determine the signed EMD coupling on a nondegenerate
 branch, while the squared coupling is invariant under scalar-orientation
 reversal. A reviewer-identified mixed-signature comparison error has been
-corrected and guarded by a Lean incomparability counterexample. The next
+corrected and guarded by a Lean incomparability counterexample. Development
+has since completed the conditional generic local Phase-III decision
+interface, closed the Phase-IV.1 two-form Poincare step (`dA=F` under a `C¹`
+closed package, with the full gauge orbit `A+dχ`), and derived and Lean-fixed
+the uplift convention constants `c₁=-1/√3, c₂=2/√3, c₃=1`. The next
 release candidate should complete more of the
 full-tangent-space and differential reconstruction rather than merely append
 these results to the existing partial submission.

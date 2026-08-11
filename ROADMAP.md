@@ -132,8 +132,16 @@ nondegeneracy hypothesis.
   `a=√3`. Phase IV now defines the radial gauge potential, proves its radial
   gauge condition, verifies the closedness-to-curvature fundamental-calculus
   identity for its derivative candidate, and proves Kaluza gauge invariance.
-  The remaining IV.1 splice is uniform differentiation of the radial integral
-  under a usable regularity package.**
+  The IV.1 splice is complete: under a `C¹` closed regularity package on a
+  star-shaped patch, the dominated differentiation hypotheses are discharged
+  uniformly and the radial potential satisfies `dA=F`, with the local
+  potential orbit exactly `A+dχ`. The IV.2 convention constants
+  `c₁=-1/√3, c₂=2/√3, c₃=1` are derived in `docs/UPLIFT_CONVENTION.md` and
+  fixed as verified Lean definitions. The IV.3 coordinate layer is underway:
+  block-metric congruence assembly, explicit inverse formulas, determinant
+  and signature lift, and the six closed-form Christoffel blocks at a
+  normal-gauge point are complete in Lean; the Ricci blocks and the
+  forward/converse Ricci-flatness theorems are next.**
 
 Exit criterion: Paper I candidate with manuscript-to-Lean claim translation.
 

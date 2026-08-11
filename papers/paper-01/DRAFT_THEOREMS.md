@@ -522,12 +522,76 @@ metric is symmetric and nondegenerate and the two warp factors are nonzero.
 Status: the radial operator, radial gauge, dominated differentiation
 interface, fundamental-calculus identity, pointwise and field-level gauge
 orbits, and symmetric nondegenerate Kaluza block assembly with gauge invariance
-are verified in
-`RadialGaugePotential.lean`. The remaining
-field-level splice is to discharge the dominated differentiation hypotheses
-from a concise regularity package for `F`, identifying the verified derivative
-candidate with `dA`. The pointwise jet result is explicitly not a substitute
-for this analytic step.
+are verified in `RadialGaugePotential.lean`. The field-level splice is now
+also complete: `RadialPotentialSplice.lean` discharges the dominated
+differentiation hypotheses from the `C¹` closed package `IsC1ClosedTwoFormOn`
+on a star-shaped patch and proves `dA=F` together with the local potential
+orbit; see Proposition G16.
+
+## Proposition G16 — local two-form exactness under the `C¹` package
+
+Let `U` be an open patch, star-shaped about the origin of its chart, and let
+`F` be an alternating two-form field on `U`, differentiable with continuous
+derivative field `DF` satisfying the cyclic closedness identity. Then the
+radial gauge potential `A` of Proposition G15 is Frechet differentiable at
+every point of `U`, its derivative is the integrated operator-valued
+candidate, and
+
+`dA = F`
+
+holds on all of `U`. In particular every such closed `C¹` two-form field has
+a differentiable local gauge potential, and on a convex patch the complete
+set of potentials is `A + dχ` with `χ` unique up to an additive constant. The
+uniform bound feeding the dominated differentiation theorem comes from a
+tube-lemma compactness argument on a neighborhood of the compact radial
+segment and requires no finite-dimensionality of the model space.
+
+Status: verified by `hasFDerivAt_radialGaugePotential`,
+`radialPotentialTotalDerivative_apply`, `radialGaugePotential_gaugeCurvature`,
+`radialGaugePotential_isGaugePotentialOn`,
+`exists_gaugePotentialOn_of_closed`, and
+`exists_gaugePotentialOn_orbit_of_closed` in `RadialPotentialSplice.lean`,
+with the package `IsC1ClosedTwoFormOn` and the derived slot alternation
+`IsC1ClosedTwoFormOn.deriv_alternating`. The uplift convention constants are
+derived in `docs/UPLIFT_CONVENTION.md` and verified in
+`UpliftConvention.lean`.
+
+## Proposition G17 — block assembly, inverse, determinant, and Christoffel
+blocks
+
+Over the five-dimensional index set `Fin 4 ⊕ Unit`, the Kaluza block metric
+is the unipotent congruence transform `ĝ = Pᵀ(u·g ⊕ v)P` with
+`P = [[1,0],[c·Aᵀ,1]]`. Consequently: the entry formulas
+`ĝ_{μν} = u g_{μν} + vc²A_μA_ν`, `ĝ_{μ5} = vcA_μ`, `ĝ_{55} = v` hold; the
+explicit inverse `ĝ^{μν} = u⁻¹g^{μν}`, `ĝ^{μ5} = -u⁻¹c(g⁻¹A)^μ`,
+`ĝ^{55} = v⁻¹ + u⁻¹c²A·g⁻¹A` is a two-sided inverse whenever `u, v ≠ 0` and
+`g⁻¹` inverts `g`; and `det ĝ = u⁴·v·det g`, so at the derived convention
+`det ĝ < 0` iff `det g < 0`. Any `g`-orthogonal family with diagonal values
+`eps` lifts, by the compensating fiber shifts `-c·A(e_i)` together with the
+pure fiber vector, to a `ĝ`-orthogonal family with diagonal values
+`(u·eps, v)`: positive warps preserve index one.
+
+At a normal-gauge point — base normal coordinates `g = diag d`, `∂g = 0`,
+radial gauge `A = 0`, both justified by verified freedoms — the raw
+Christoffel formula applied to the assembled first jet of the ansatz
+evaluates to exactly six blocks: the conformal-warp connection
+`(k₁/2)(δ^μ_ν φ₁_ρ + δ^μ_ρ φ₁_ν - g_{νρ}φ₁^μ)`, the Maxwell shear
+`(vc/2u)F_ν{}^μ`, the fiber-gradient force `-(k₂v/2u)φ₁^μ`, the symmetrized
+gauge jet `(c/2)(∂_νA_ρ + ∂_ρA_ν)`, the dilaton rate `(k₂/2)φ₁_ν`, and zero.
+Under the derived convention the Maxwell-shear prefactor is exactly the EMD
+weight `e^{√3φ}`.
+
+Status: verified in `KaluzaBlockAssembly.lean`
+(`kaluzaBlockMetric_eq_fromBlocks`, `kaluzaBlockMetricInverse_eq_fromBlocks`,
+`kaluzaBlockMetric_mul_inverse`, `kaluzaBlockMetricInverse_mul`,
+`kaluzaBlockMetric_det`, `conventionKaluzaBlockMetric_det_neg_iff`,
+`kaluzaMetricPairing_lift_orthogonal`) and `KaluzaChristoffel.lean` (the
+`kaluzaNormalGaugeChristoffel_*` block family,
+`kaluzaNormalGaugeChristoffel_symm`,
+`kaluzaNormalGaugePointInverse_eq_blockInverse`, `conventionKaluzaWarpRatio`,
+and the convention corollaries). The second-derivative jet layer, the Ricci
+blocks, and the forward/converse Ricci-flatness theorems are the remaining
+IV.3 obligations.
 
 ## Target Theorem H — local generalized Rainich–Kaluza reconstruction
 

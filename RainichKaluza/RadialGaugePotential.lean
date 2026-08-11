@@ -11,8 +11,10 @@ the still-missing two-form Poincare theorem.
 * It defines the standard radial homotopy candidate
   `A_x(v) = integral_0^1 t F_(t x)(x,v) dt` for a continuous two-form field,
   and proves its radial-gauge condition `A_x(x)=0` for alternating `F`.
-  Proving `dA=F` for closed `F` is deliberately left as the next analytic
-  theorem: it requires a justified derivative-under-the-integral argument.
+  The justified derivative-under-the-integral argument proving `dA=F` for
+  closed `C¹` fields is completed in `RadialPotentialSplice.lean`, which
+  discharges the dominated-differentiation interface below from an explicit
+  regularity package.
 * It separates pointwise first-jet reconstruction from that analytic theorem,
   proves the exact gauge freedom of the jet, and verifies gauge invariance of
   the Kaluza fiber one-form and metric evaluation.
@@ -150,7 +152,7 @@ theorem integral_radialCurvatureIntegrand_eq
     {F : E → ContinuousBilinForm E}
     {DF : E → E →L[ℝ] ContinuousBilinForm E}
     (x u v : E)
-    (hcurve : ∀ t : ℝ,
+    (hcurve : ∀ t ∈ Set.uIcc (0 : ℝ) 1,
       HasDerivAt (fun s : ℝ => F (s • x) u v) (DF (t • x) x u v) t)
     (hint : IntervalIntegrable
       (radialCurvatureIntegrand F DF x u v) volume 0 1) :
@@ -159,8 +161,8 @@ theorem integral_radialCurvatureIntegrand_eq
   have hprod : ∀ t ∈ Set.uIcc (0 : ℝ) 1,
       HasDerivAt (fun s : ℝ => s ^ 2 * F (s • x) u v)
         (radialCurvatureIntegrand F DF x u v t) t := by
-    intro t _
-    have h := ((hasDerivAt_id t).pow 2).mul (hcurve t)
+    intro t ht
+    have h := ((hasDerivAt_id t).pow 2).mul (hcurve t ht)
     refine (h.congr_of_eventuallyEq ?_).congr_deriv ?_
     · filter_upwards [] with s
       rfl
@@ -170,21 +172,23 @@ theorem integral_radialCurvatureIntegrand_eq
   simpa using hFTC
 
 /-- Closedness converts antisymmetrization of the formally differentiated
-radial potential into the one-variable fundamental-calculus integrand. -/
+radial potential into the one-variable fundamental-calculus integrand.  The
+hypotheses are pointwise at the segment point `t • x`, so the identity applies
+on star-shaped patches without global assumptions. -/
 theorem radialPotentialDerivativeIntegrand_antisymmetrize
     {F : E → ContinuousBilinForm E}
     {DF : E → E →L[ℝ] ContinuousBilinForm E}
-    (hFalt : ∀ y a b, F y a b = -F y b a)
-    (hDFalt : ∀ y w a b, DF y w a b = -DF y w b a)
-    (hclosed : ∀ y a b c,
-      DF y a b c + DF y b c a + DF y c a b = 0)
-    (x u v : E) (t : ℝ) :
+    (x u v : E) (t : ℝ)
+    (hFalt : ∀ a b, F (t • x) a b = -F (t • x) b a)
+    (hDFalt : ∀ w a b, DF (t • x) w a b = -DF (t • x) w b a)
+    (hclosed : ∀ a b c,
+      DF (t • x) a b c + DF (t • x) b c a + DF (t • x) c a b = 0) :
     radialPotentialDerivativeIntegrand F DF x u v t -
         radialPotentialDerivativeIntegrand F DF x v u t =
       radialCurvatureIntegrand F DF x u v t := by
-  have hF := hFalt (t • x) v u
-  have hDF := hDFalt (t • x) u x v
-  have hd := hclosed (t • x) u v x
+  have hF := hFalt v u
+  have hDF := hDFalt u x v
+  have hd := hclosed u v x
   unfold radialPotentialDerivativeIntegrand radialCurvatureIntegrand
   rw [hF, hDF]
   ring_nf at hd ⊢
@@ -193,16 +197,20 @@ theorem radialPotentialDerivativeIntegrand_antisymmetrize
 /-- **Curvature identity for the Phase-IV derivative candidate.** Under
 alternation, differential closedness, curve differentiation, and the stated
 integrability hypotheses, antisymmetrizing the integrated candidate gives
-the original two-form. -/
+the original two-form.  All hypotheses are required only on the closed radial
+segment `{t • x : t ∈ [0,1]}`, matching the star-shaped patches on which the
+radial potential is defined. -/
 theorem radialPotentialDerivativeCandidate_curvature
     {F : E → ContinuousBilinForm E}
     {DF : E → E →L[ℝ] ContinuousBilinForm E}
-    (hFalt : ∀ y a b, F y a b = -F y b a)
-    (hDFalt : ∀ y w a b, DF y w a b = -DF y w b a)
-    (hclosed : ∀ y a b c,
-      DF y a b c + DF y b c a + DF y c a b = 0)
     (x u v : E)
-    (hcurve : ∀ t : ℝ,
+    (hFalt : ∀ t ∈ Set.uIcc (0 : ℝ) 1, ∀ a b,
+      F (t • x) a b = -F (t • x) b a)
+    (hDFalt : ∀ t ∈ Set.uIcc (0 : ℝ) 1, ∀ w a b,
+      DF (t • x) w a b = -DF (t • x) w b a)
+    (hclosed : ∀ t ∈ Set.uIcc (0 : ℝ) 1, ∀ a b c,
+      DF (t • x) a b c + DF (t • x) b c a + DF (t • x) c a b = 0)
+    (hcurve : ∀ t ∈ Set.uIcc (0 : ℝ) 1,
       HasDerivAt (fun s : ℝ => F (s • x) u v) (DF (t • x) x u v) t)
     (hintDuv : IntervalIntegrable
       (radialPotentialDerivativeIntegrand F DF x u v) volume 0 1)
@@ -223,9 +231,9 @@ theorem radialPotentialDerivativeCandidate_curvature
               exact intervalIntegral.integral_sub hintDuv hintDvu
     _ = ∫ t in (0 : ℝ)..1, radialCurvatureIntegrand F DF x u v t := by
       apply intervalIntegral.integral_congr
-      intro t _
+      intro t ht
       exact radialPotentialDerivativeIntegrand_antisymmetrize
-        hFalt hDFalt hclosed x u v t
+        x u v t (hFalt t ht) (hDFalt t ht) (hclosed t ht)
     _ = F x u v :=
       integral_radialCurvatureIntegrand_eq x u v hcurve hintCurv
 

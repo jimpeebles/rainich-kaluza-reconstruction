@@ -29,8 +29,8 @@ remain outside the generic local claim.
 
 ## IV.1 — integrate the closed two-form
 
-Phase IV now contains the first verified part of a constructive Poincare
-argument for the physical two-form. The pinned Mathlib version contains the
+Phase IV now contains a complete constructive Poincare argument for the
+physical two-form. The pinned Mathlib version contains the
 needed one-form theorem but does not expose a directly reusable real two-form
 version in the current search surface. On a star-shaped coordinate patch the
 development defines the standard radial homotopy operator
@@ -56,12 +56,29 @@ The main Lean theorems are `radialGaugePotential_self_eq_zero`,
 `integral_radialCurvatureIntegrand_eq`, and
 `radialPotentialDerivativeCandidate_curvature`.
 
-The remaining analytic splice is to derive the displayed derivative candidate
-itself from a convenient regularity package for `F`, discharging the dominated
-differentiation hypotheses uniformly for every evaluation direction. Once
-that is connected, the result is the desired theorem
+That analytic splice is now discharged. `RadialPotentialSplice.lean`
+defines the single usable regularity package `IsC1ClosedTwoFormOn F DF U` —
+an open patch, star-shaped about the chart origin, on which `F` is
+alternating and differentiable with continuous derivative field `DF`
+satisfying the cyclic closedness identity — and proves:
+
+- a segment-tube compactness bound valid in any normed model space;
+- alternation of `DF` in its two form slots, derived rather than assumed;
+- `hasFDerivAt_radialGaugePotential`: the radial potential is Frechet
+  differentiable at every point of the patch, with the integrated
+  operator-valued derivative `radialPotentialTotalDerivative`, all
+  measurability, integrability, Lipschitz, and domination obligations being
+  discharged uniformly for every evaluation direction at once;
+- `radialPotentialTotalDerivative_apply`: the operator derivative evaluates
+  to the scalar derivative candidate;
+- `radialGaugePotential_gaugeCurvature`: the desired theorem
 
 `dF=0  →  dA=F`.
+
+Field-level existence and the orbit are packaged as
+`radialGaugePotential_isGaugePotentialOn`,
+`exists_gaugePotentialOn_of_closed`, and
+`exists_gaugePotentialOn_orbit_of_closed`.
 
 Then prove the local gauge orbit: if `dA=dA'=F`, there is a scalar `χ` with
 
@@ -90,6 +107,20 @@ four-dimensional action in `docs/EMD_CONVENTION.md`. In particular, record:
   rescaling.
 
 Only after this derivation should `c₁,c₂,c₃` become Lean definitions.
+
+This derivation is now carried out in `docs/UPLIFT_CONVENTION.md`, with the
+result `c₁ = -1/√3`, `c₂ = 2/√3`, `c₃ = 1` and all five convention items
+above recorded. The constants are Lean definitions in
+`UpliftConvention.lean`, where the Einstein-frame condition, the canonical
+scalar normalization, and the Maxwell-exponent condition are verified
+exactly; the Maxwell exponent re-derives the Kaluza test `a²=3` from the
+five-dimensional origin
+(`kaluzaUpliftMaxwellExponent_isKaluzaCoupling`). The convention-fixed block
+pairing `conventionKaluzaMetricPairing` inherits symmetry, nondegeneracy,
+and gauge invariance from the convention-independent layer, and the
+additive-constant modulus law `conventionKaluzaMetricPairing_addConstant`
+realizes the recorded trade between the constant of `φ`, a base homothety,
+and the circle rescaling.
 
 The convention-independent gauge algebra is already verified. Lean constructs
 the full bilinear block metric, proves it symmetric whenever `g` is symmetric,
@@ -120,6 +151,34 @@ The block Ricci calculation should first be proved in a coordinate algebra
 layer with named reusable identities. A later manifold wrapper can then state
 the coordinate-free local uplift theorem without hiding the computational
 core.
+
+That coordinate algebra layer has begun. `KaluzaBlockAssembly.lean` defines
+the five-dimensional block metric over `Fin 4 ⊕ Unit` as the unipotent
+congruence transform `ĝ = Pᵀ(u·g ⊕ v)P` of the diagonal core and proves: the
+classical entry formulas, symmetry, the explicit inverse-metric formulas
+`ĝ^{μν} = u⁻¹g^{μν}`, `ĝ^{μ5} = -u⁻¹c(g⁻¹A)^μ`,
+`ĝ^{55} = v⁻¹ + u⁻¹c²A·g⁻¹A` with two-sided inverse theorems, the
+unipotent-shear group law, and the determinant `det ĝ = u⁴·v·det g` — at the
+derived convention `det ĝ < 0 ↔ det g < 0`, the determinant form of item 1's
+signature statement. The pairing layer settles signature at the local
+trivialization level: `kaluzaMetricPairing_lift_orthogonal` lifts any
+`g`-orthogonal family with diagonal values `eps` to a `ĝ`-orthogonal family
+with diagonal values `(u·eps, v)`, so positive warps preserve index one.
+
+`KaluzaChristoffel.lean` completes the first half of item 4. At a
+normal-gauge point (base normal coordinates `g = diag d`, `∂g = 0`, radial
+gauge `A = 0` — both preparations justified by verified freedoms) the raw
+Christoffel formula applied to the assembled first jet evaluates in closed
+form to six named blocks: the conformal-warp connection
+`(k₁/2)(δφ₁ + δφ₁ - gφ₁^♯)`, the Maxwell shear `(vc/2u)F`, the
+fiber-gradient force `-(k₂v/2u)φ₁^♯`, the symmetrized gauge jet
+`(c/2)(∂A + ∂A)`, the dilaton rate `(k₂/2)φ₁`, and zero — together with
+torsion symmetry and a consistency identity against the assembled block
+inverse. Under the derived convention the Maxwell-shear prefactor is exactly
+the EMD weight: `v/u = e^{√3φ}` (`conventionKaluzaWarpRatio`), the geometric
+reappearance of the action's Maxwell exponential. The remaining half of item
+4 is the second-jet layer and the Ricci blocks; items 5 and 6 and the IV.4
+orbit classification then close the phase.
 
 ## IV.4 — uniqueness and exit condition
 

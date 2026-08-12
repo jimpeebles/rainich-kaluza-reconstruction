@@ -120,6 +120,11 @@ candidate Ricci fingerprint and the generic pointwise reconstruction layer:
   coordinate derivatives by definition, a `C¹` angle generates the unit
   cosine/sine complexion pair and its tangent equations, and smooth matrix
   projectors with strict fixed probes generate the smooth coframe candidate;
+- a concrete curvature-principal constructor: `S=R-V` inherits the Maxwell
+  square law from the scalar reconstruction equation, `q=sqrt(qSq)` is smooth
+  and positive, its two polynomial projector fields are smooth complementary
+  idempotents, and the fixed-probe tetrad is pointwise pseudo-orthonormal; in
+  a Minkowski orthonormal trivialization its coframe is exactly Lorentz;
 - a local exteriorization theorem producing alternating seed-channel
   three-forms and two explicit obstructions whose simultaneous vanishing is
   equivalent to the full EMD Bianchi/Maxwell closure equations;
@@ -289,9 +294,13 @@ electric/Hodge coordinate product rules from `C²` `L,q` and their displayed
 assembles the duality rotation, and feeds the closed-field theorem. Its
 actual-field constructor removes the remaining derivative bookkeeping: a
 local angle supplies the unit complexion and all its derivatives, while
-smooth fixed-probe matrix projectors supply the coframe candidate. The
-remaining seam is the geometric curvature selection and verification of those
-projectors, the positive magnitude, and the local angle, followed by the
+smooth fixed-probe matrix projectors supply the coframe candidate.
+`PhaseIIICurvaturePrincipalData.lean` now constructs those projectors directly
+from the curvature residual `S=R-V` and positive reconstructed `qSq`, proves
+their structural identities, verifies the tetrad and Lorentz coframe, and
+supplies a positive-cosine local angle chart. The remaining curvature seam is
+to identify the accepted branch's concrete residual/self-adjoint metric data
+and unit complexion coefficients with this certificate, then construct the
 compatible normal-gauge `C²` EMD realizer.
 See the
 [`realigned execution plan`](docs/REALIGNED_EXECUTION_PLAN.md) for the ordered

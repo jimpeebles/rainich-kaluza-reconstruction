@@ -402,8 +402,13 @@ through the closed physical field. RK-R2w removes the remaining derivative
 and complexion bookkeeping: actual coordinate derivatives define every jet, a
 `C¹` angle generates the unit cosine/sine complexion and tangent equations,
 and smooth matrix projectors with strict fixed probes generate the coframe
-candidate. What remains is the geometric selection and verification of those
-projectors, the positive magnitude, and the local angle from curvature.
+candidate. RK-R2x now makes that frame geometric: the accepted residual
+`S=R-V`, reconstruction equation, and `qSq>0` generate the smooth Maxwell
+projectors and positive magnitude; their algebra verifies the
+pseudo-orthonormal tetrad and Lorentz coframe. It also supplies an explicit
+positive-cosine local angle chart. What remains is to identify the accepted
+branch's concrete residual/self-adjoint metric data and unit complexion pair
+with this certificate, then construct the normal-gauge `C²` EMD realizer.
 The first layer may be completed and used by exact-metric tests without
 claiming that Phase IV itself has exited. The canonical dependency order is
 specified in `REALIGNED_EXECUTION_PLAN.md`.

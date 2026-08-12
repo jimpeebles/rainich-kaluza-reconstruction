@@ -173,8 +173,9 @@ closed branch remains the upstream curvature-entry obligation. RK-R2o now
 settles the scalar-potential part once the smooth curvature jet is realized as
 the actual Frechet derivative of its spectral one-form field, and RK-R2p
 reduces that realization to constituent coordinate-jet identities. RK-R2q
-now supplies the two normalized fixed-probe eigen-one-form identities, so the
-remaining curvature-entry pair is scalar-amplitude differentiation.
+supplies the two normalized fixed-probe eigen-one-form identities, and RK-R2r
+supplies the two reconstructed scalar-amplitude identities. The complete
+concrete constituent patch now has no derivative-identity inputs.
 
 ## Upstream curvature gate for the official Phase-IV exit
 
@@ -223,6 +224,10 @@ vanishes is made here; that is exactly II-G3.
 probe, metric contraction, reciprocal square-root normalization, normalized
 vector, and metric dual for both signatures. Its coordinate specializations
 identify the actual timelike and spacelike eigen-one-form jets.
+`CurvatureScalarAmplitudeFieldDerivative.lean` differentiates both rational
+spectral diagonals and the signature-adjusted square-root amplitude fields;
+their coordinate specializations are exactly the displayed reconstructed
+amplitude one-forms.
 
 ### II-G3 — settle branch existence
 
@@ -252,20 +257,20 @@ scalar and one-form Frechet derivatives, and
 builds the realized branch certificate and exact potential list from the
 constituent amplitude/eigen-one-form jets. RK-R2q further provides
 `ofFixedProbeCurvatureEigenCovectors`, which inserts the two actual normalized
-fixed-probe coordinate jets directly. The remaining curvature-entry seam is
-the two scalar-amplitude identities; these follow from the named amplitude
-theorems once the differentiated scalar-diagonal field equations are
-supplied.
-Downstream HC1 then tests each surviving branch rather than deciding scalar
-integrability.
+fixed-probe coordinate jets directly. RK-R2r differentiates the rational
+reconstructed diagonal fields and their signature-adjusted square roots,
+identifies both actual amplitude coordinate jets, and provides
+`ofConcreteFixedProbeCurvatureFields`. Thus all four RK-R2p constituent
+identities are discharged for the concrete smooth fields, and the exact
+zero/one/two-potential list is available automatically. Downstream HC1 now
+tests each surviving branch rather than deciding scalar integrability.
 
 ### IV-N1 — north-star composition
 
-Prove the remaining RK-R2p scalar-amplitude coordinate-jet pair for the II-G2
-smooth curvature fields, then compose II-G1--II-G3, the completed Phase-III
-decision interface, and IV-C1 into the finite-order curvature-only local
-recognition theorem. Every null, repeated-root, zero-trace, and topological
-exclusion remains explicit.
+Compose the concrete II-G2/RK-R2p--RK-R2r zero/one/two-potential branch list,
+the completed Phase-III decision interface, and IV-C1 into the finite-order
+curvature-only local recognition theorem. Every rejected branch and every
+null, repeated-root, zero-trace, and topological exclusion remains explicit.
 
 **Official Phase-IV gate:** IV-G1, IV-G2, IV-O1, IV-C1, and IV-N1 are all
 complete. A conditional uplift theorem alone does not close this gate.
@@ -337,17 +342,16 @@ research result.
 
 ## Immediate execution order
 
-1. Instantiate the remaining two scalar-amplitude coordinate-jet identities
-   from the differentiated scalar-diagonal fields. The normalized fixed-probe
-   eigen-one-form pair and its direct RK-R2p constructor are complete. Closing
-   the amplitude pair therefore constructs the realized patch and passes its
-   complete scalar-potential branch list to Phase III automatically.
+1. Compose the now-concrete zero/one/two-potential scalar branch list with the
+   Phase-III Maxwell obstruction interface. Preserve every rejected branch as
+   an explicit obstruction and map every survivor to the conditional uplift
+   accepted-data obligations.
 2. In parallel, use the operational V-T1 harness to recover the V-T2 rotating
    source and convention map; feed its exact jets through the same obstruction
    interface.
-3. Compose IV-N1 once the realized branch list and downstream accepted/rejected
-   orbits are connected; report a sharp obstruction or no-go theorem as a
-   result, not as a failed proof.
+3. Finish IV-N1 once the downstream accepted/rejected orbits and normal-gauge
+   realizer obligations are connected; report a sharp obstruction or no-go
+   theorem as a result, not as a failed proof.
 
 No phase label advances merely because later infrastructure has started.
 Claims advance only when their stated gate is proved and recorded in the

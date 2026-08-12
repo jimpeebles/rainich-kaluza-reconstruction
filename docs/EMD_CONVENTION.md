@@ -134,9 +134,10 @@ classifies exactly which of the two scalar candidates admit local potentials,
 including the no-potential case. It now constructs the Frechet-jet realization
 automatically from constituent amplitude/eigen-one-form coordinate jets. The
 two normalized fixed-probe eigen-one-form identities are proved by explicit
-matrix-probe, normalization, and metric-dual differentiation; the remaining
-curvature-entry seam is the two scalar-amplitude field identities. Degenerate
-branches are not covered. The uniform analytic
+matrix-probe, normalization, and metric-dual differentiation; exact rational
+and square-root differentiation also proves both scalar-amplitude identities.
+The concrete generic constituent seam is complete. Degenerate branches are
+not covered. The uniform analytic
 splice identifying the
 radial derivative candidate with `dA`, the uplift constants, and the
 conditional intrinsic forward/converse five-dimensional uplift are complete;

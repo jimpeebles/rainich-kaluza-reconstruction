@@ -340,8 +340,11 @@ eigen-one-form jets with the coordinate components of the concrete smooth
 II-G2 derivatives—are sufficient to construct the entire realized patch and
 (6.10) automatically. The two normalized fixed-probe eigen-one-form
 equalities are now proved by explicit matrix-probe, normalization, and
-metric-dual Frechet product rules. The two scalar-amplitude equalities are the
-remaining composition seam.
+metric-dual Frechet product rules. Exact quotient differentiation of the two
+rational spectral diagonals followed by the square-root chain rule now proves
+the two scalar-amplitude equalities. Thus the concrete constituent seam is
+closed, and the remaining composition is downstream through the Phase-III
+decision and accepted-uplift interfaces.
 
 ## 7. Polynomial obstruction and false positives
 

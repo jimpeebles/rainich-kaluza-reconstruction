@@ -178,9 +178,10 @@ no-branch witnesses rule out both potentials. Coordinate components now
 recover arbitrary scalar/one-form Frechet derivatives, and the product rule
 automatically constructs the realized branch from actual amplitude and
 eigen-one-form jets. The concrete normalized fixed-probe eigen-one-form pair
-now feeds that constructor directly. The remaining Phase-II curvature seam is
-the two scalar-amplitude coordinate-jet identities for the II-G2 smooth
-definitions; HC1 is a downstream test of every surviving scalar branch.
+feeds that constructor directly. The rational reconstructed diagonals and
+their signature-adjusted square-root amplitude fields are now differentiated
+as well, so the complete concrete constituent patch and exact branch list are
+automatic. HC1 is a downstream test of every surviving scalar branch.
 
 ### Phase-II exit criterion
 
@@ -384,11 +385,11 @@ stated gauge/discrete freedoms.
 This exit has two necessary layers. The **uplift-module layer** is complete
 for the explicit accepted-data certificate: intrinsic chart-independent
 packaging, exhaustive IV.4 orbit classification, and the conditional
-forward/converse assembly are proved. The **curvature-entry layer** must prove
-the two remaining II-G2 scalar-amplitude coordinate-jet identities; RK-R2p
-and the fixed-probe constructor then build the realized Frechet-jet
-certificate automatically and supply the exact branch list for composition
-with the Phase-III decision interface.
+forward/converse assembly are proved. The **curvature-entry constituent
+layer** is complete on the explicit generic fixed-probe patch: RK-R2p--RK-R2r
+build the realized Frechet-jet certificate automatically and supply the exact
+branch list. The remaining work is composition with the Phase-III decision
+and accepted-data interfaces.
 The first layer may be completed and used by exact-metric tests without
 claiming that Phase IV itself has exited. The canonical dependency order is
 specified in `REALIGNED_EXECUTION_PLAN.md`.

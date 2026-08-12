@@ -85,9 +85,10 @@ candidate Ricci fingerprint and the generic pointwise reconstruction layer:
   derivatives, while the product rule derives the full `d(xθ)` branch jet
   from the actual amplitude and eigen-one-form jets; the fixed-probe matrix
   derivative, timelike/spacelike normalization derivatives, and metric-dual
-  derivatives now generate both concrete eigen-one-form coordinate jets and
-  feed them directly into this constructor, leaving only the two scalar-
-  amplitude field identities before north-star composition;
+  derivatives generate both concrete eigen-one-form coordinate jets, while
+  exact quotient and square-root differentiation generates both reconstructed
+  scalar-amplitude jets; the resulting concrete fixed-probe constructor has
+  no constituent derivative identities left as inputs;
 - an exact Phase-III equivalence between the scalar reconstruction equation
   and the residual Maxwell square law, followed by eigenvector-free Maxwell
   principal-plane projectors on the non-null branch;
@@ -251,11 +252,14 @@ certificate without assuming that some branch exists. The normalized
 fixed-probe eigen-one-form derivative pair is now complete: the matrix probe,
 normalization scale, normalized vector, and metric dual are differentiated
 explicitly for both signatures, and their coordinate jets feed the branch
-constructor directly. The next north-star step is the remaining scalar-
-amplitude pair, already reduced to differentiated scalar-diagonal field
-identities. Once those are instantiated, the constructor generates the
-realization and complete potential list automatically, and every surviving
-branch can pass through the completed Phase-III and uplift modules. See the
+constructor directly. The scalar-amplitude pair is now complete as well:
+Lean differentiates the two rational reconstructed diagonals and their
+signature-adjusted square roots, then identifies both actual coordinate jets
+with the curvature formulas. The concrete smooth fields therefore generate
+the realization and complete potential list with no derivative-identity
+inputs. The next north-star step is downstream composition of every surviving
+or rejected scalar branch with the Phase-III decision and conditional uplift
+interfaces. See the
 [`realigned execution plan`](docs/REALIGNED_EXECUTION_PLAN.md) for the ordered
 proof obligations and publication decision points.
 

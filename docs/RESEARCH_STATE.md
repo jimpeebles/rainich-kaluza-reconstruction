@@ -136,11 +136,11 @@ full `xθ` derivative is exactly the displayed spectral-component jet.
 `CurvatureScalarBranchComponentPatch4.ofCoordinateFDerivs` packages this into
 the realized classifier without assuming the product rule, and
 `ofFixedProbeCurvatureEigenCovectors` now inserts the actual normalized
-timelike/spacelike eigen-one-form jets. The remaining curvature-entry seam is
-the two amplitude identities: their II-G2 jets must be identified with the
-coordinate components of the actual smooth scalar fields. Once these are
-supplied, every surviving branch goes directly to the Phase-III obstruction
-interface.
+timelike/spacelike eigen-one-form jets. Exact quotient and square-root
+differentiation now identifies both reconstructed scalar-amplitude coordinate
+jets as well, and `ofConcreteFixedProbeCurvatureFields` constructs the full
+component patch without derivative-identity inputs. Every surviving branch
+therefore goes directly to the Phase-III obstruction interface.
 HC1 is downstream of this scalar integration decision.
 
 Phase III has reached its generic local decision interface. For `S=𝓡-V`, the reconstruction equation is

@@ -75,7 +75,7 @@ spectral problem are independently secured.
 | Coupled pointwise block reconstruction and its two-branch ambiguity | Lean-checked in this repository | present core result |
 | Protected `±q` directions under the scalar rank-one perturbation | Lean-checked from the four-dimensional tracefree square-law hypotheses | completed algebraic entrance |
 | Full characteristic factorization from four-dimensional Maxwell algebra | Lean-checked for `S+V` with square-law `S` and rank-one `V` | necessary pointwise theorem; not sufficient for reconstruction |
-| Differential selection/identification of pointwise partners | exact obstruction and local-potential classifier complete; actual normalized fixed-probe eigen-one-form jets feed the realized branch constructor | two scalar-amplitude coordinate-jet identities remain before composition |
+| Differential selection/identification of pointwise partners | exact obstruction and local-potential classifier complete; actual fixed-probe eigen-one-form and reconstructed-amplitude jets generate the realized branch certificate | constituent seam complete on the explicit generic patch; downstream Phase-III composition remains |
 | Maxwell two-form recovery and scalar/Maxwell field equations | open | required for sufficiency and for identifying `a=√3` |
 | Exact-solution scalar multipoles and binary hierarchy | promising inherited derivation, unreproduced here | strongest physics validation track |
 | Laboratory critical amplifier | conditional and speculative | downstream falsifiable application only |
@@ -107,8 +107,9 @@ derives the realization by coordinate reconstruction and the Frechet product
 rule. The original bridge was reduced to four equality proofs matching the
 II-G2 displayed amplitude/eigen-one-form jets to the actual coordinate
 components of those smooth-field derivatives. The two normalized fixed-probe
-eigen-one-form equalities are now proved by explicit Frechet product rules, so
-only the scalar-amplitude pair remains.
+eigen-one-form equalities are proved by explicit Frechet product rules, and
+the rational-diagonal/square-root calculation now proves the scalar-amplitude
+pair. The four-identity constituent seam is therefore closed.
 
 ## Research sequence now adopted
 
@@ -119,8 +120,8 @@ only the scalar-amplitude pair remains.
    choosing a scalar sign; classify the reflection-related branches.
    **The four-way exact obstruction classifier, its zero/one/two local
    scalar-potential interpretation, and the constituent-field realization
-   constructor are complete; the fixed-probe eigen-one-form pair is complete,
-   and two scalar-amplitude coordinate-jet identities remain.**
+   constructor are complete; all four concrete fixed-probe/amplitude
+   coordinate-jet identities are now discharged.**
 3. Reconstruct the residual Maxwell stress and impose classical Rainich
    differential closure.
 4. Use the scalar and Maxwell equations to identify the EMD coupling, then

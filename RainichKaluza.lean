@@ -44,6 +44,7 @@ import RainichKaluza.SpectralProjectorDerivative
 import RainichKaluza.ScalarAmplitudeDerivative
 import RainichKaluza.SmoothCurvatureProjector
 import RainichKaluza.CurvatureEigenOneFormDerivative
+import RainichKaluza.CurvatureScalarAmplitudeFieldDerivative
 import RainichKaluza.CurvatureBranchObstruction
 import RainichKaluza.CurvatureBranchIntegration
 import RainichKaluza.DifferentialBranchSelection

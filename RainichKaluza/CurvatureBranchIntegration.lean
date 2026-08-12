@@ -1,5 +1,6 @@
 import RainichKaluza.CurvatureBranchObstruction
 import RainichKaluza.CurvatureEigenOneFormDerivative
+import RainichKaluza.CurvatureScalarAmplitudeFieldDerivative
 import RainichKaluza.PhaseIVReadiness
 import Mathlib.Topology.Algebra.Module.FiniteDimension
 
@@ -184,6 +185,54 @@ noncomputable def oneFormFieldCoordinateFDeriv
   fun k j => fderiv ℝ v x (curvatureCoordinateDirection k)
     (curvatureCoordinateDirection j)
 
+/-- The actual coordinate derivative of the first reconstructed square-root
+amplitude is its displayed curvature formula. -/
+theorem reconstructedScalarAmplitudeACoordinateFDeriv_eq
+    (epsilon : ℝ)
+    (a b qSq : CurvatureCoordinateSpace4 → ℝ)
+    (x : CurvatureCoordinateSpace4)
+    (ha : DifferentiableAt ℝ a x)
+    (hb : DifferentiableAt ℝ b x)
+    (hqSq : DifferentiableAt ℝ qSq x)
+    (hab : a x ≠ b x)
+    (hpos : 0 < 2 * epsilon * reconstructedDiagonalAField a b qSq x) :
+    scalarFieldCoordinateFDeriv
+        (reconstructedScalarAmplitudeA epsilon a b qSq) x =
+      reconstructedAmplitudeAOneForm epsilon
+        (reconstructedScalarAmplitudeA epsilon a b qSq x)
+        (a x) (b x) (qSq x)
+        (scalarFieldCoordinateFDeriv a x)
+        (scalarFieldCoordinateFDeriv b x)
+        (scalarFieldCoordinateFDeriv qSq x) := by
+  funext k
+  unfold scalarFieldCoordinateFDeriv reconstructedAmplitudeAOneForm
+  rw [reconstructedScalarAmplitudeA_fderiv_apply epsilon a b qSq x
+    (curvatureCoordinateDirection k) ha hb hqSq hab hpos]
+
+/-- The actual coordinate derivative of the second reconstructed square-root
+amplitude is its displayed curvature formula. -/
+theorem reconstructedScalarAmplitudeBCoordinateFDeriv_eq
+    (epsilon : ℝ)
+    (a b qSq : CurvatureCoordinateSpace4 → ℝ)
+    (x : CurvatureCoordinateSpace4)
+    (ha : DifferentiableAt ℝ a x)
+    (hb : DifferentiableAt ℝ b x)
+    (hqSq : DifferentiableAt ℝ qSq x)
+    (hab : a x ≠ b x)
+    (hpos : 0 < 2 * epsilon * reconstructedDiagonalBField a b qSq x) :
+    scalarFieldCoordinateFDeriv
+        (reconstructedScalarAmplitudeB epsilon a b qSq) x =
+      reconstructedAmplitudeBOneForm epsilon
+        (reconstructedScalarAmplitudeB epsilon a b qSq x)
+        (a x) (b x) (qSq x)
+        (scalarFieldCoordinateFDeriv a x)
+        (scalarFieldCoordinateFDeriv b x)
+        (scalarFieldCoordinateFDeriv qSq x) := by
+  funext k
+  unfold scalarFieldCoordinateFDeriv reconstructedAmplitudeBOneForm
+  rw [reconstructedScalarAmplitudeB_fderiv_apply epsilon a b qSq x
+    (curvatureCoordinateDirection k) ha hb hqSq hab hpos]
+
 /-- The displayed timelike fixed-probe jet is the actual coordinate Frechet
 derivative of the curvature eigen-one-form. -/
 theorem timelikeCurvatureEigenCovectorCoordinateJet_eq_fderiv
@@ -223,6 +272,35 @@ theorem spacelikeCurvatureEigenCovectorCoordinateJet_eq_fderiv
   rw [smoothSpacelikeCurvatureEigenCovector_fderiv_apply
     g P probe x (curvatureCoordinateDirection k) hg hP hsign]
   rfl
+
+/-- Canonical curvature branch jet assembled from the two reconstructed
+square-root amplitude fields and the two normalized fixed-probe curvature
+eigen-one-forms.  Every displayed first jet is defined by the explicit
+coordinate formulas proved above. -/
+noncomputable def concreteFixedProbeCurvatureScalarBranchJet4
+    (epsilonA epsilonB : ℝ)
+    (a b qSq : CurvatureCoordinateSpace4 → ℝ)
+    (g : CurvatureCoordinateSpace4 →
+      ContinuousBilinForm CurvatureCoordinateSpace4)
+    (PA PB : CurvatureCoordinateSpace4 → Matrix4)
+    (probeA probeB : CurvatureCoordinateSpace4)
+    (x : CurvatureCoordinateSpace4) : CurvatureScalarBranchJet4 where
+  epsilonA := epsilonA
+  epsilonB := epsilonB
+  x := reconstructedScalarAmplitudeA epsilonA a b qSq x
+  y := reconstructedScalarAmplitudeB epsilonB a b qSq x
+  a := a x
+  b := b x
+  qSq := qSq x
+  da := scalarFieldCoordinateFDeriv a x
+  db := scalarFieldCoordinateFDeriv b x
+  dqSq := scalarFieldCoordinateFDeriv qSq x
+  thetaA := continuousCovectorCoordinates
+    (smoothTimelikeCurvatureEigenCovector g PA probeA x)
+  thetaB := continuousCovectorCoordinates
+    (smoothSpacelikeCurvatureEigenCovector g PB probeB x)
+  dthetaA := timelikeCurvatureEigenCovectorCoordinateJet g PA probeA x
+  dthetaB := spacelikeCurvatureEigenCovectorCoordinateJet g PB probeB x
 
 /-- A scalar Frechet derivative is recovered from its four coordinate
 components. -/
@@ -584,6 +662,92 @@ noncomputable def ofFixedProbeCurvatureEigenCovectors
     rw [spacelikeCurvatureEigenCovectorCoordinateJet_eq_fderiv
       g PB probeB x hgAt hPAt (hspace x hx)]
     exact (hdthetaB x hx).symm
+
+/-- **Complete concrete constituent-field constructor.** On an open
+noncollision patch with positive scalar radicands and admissible fixed probes,
+the two reconstructed amplitude fields and two normalized curvature
+eigen-one-forms automatically generate the full branch component patch.  No
+constituent Frechet-derivative identity remains as an input. -/
+noncomputable def ofConcreteFixedProbeCurvatureFields
+    (epsilonA epsilonB : ℝ)
+    (a b qSq : CurvatureCoordinateSpace4 → ℝ)
+    (g : CurvatureCoordinateSpace4 →
+      ContinuousBilinForm CurvatureCoordinateSpace4)
+    (PA PB : CurvatureCoordinateSpace4 → Matrix4)
+    (probeA probeB : CurvatureCoordinateSpace4)
+    (hopen : IsOpen U)
+    (ha : ContDiffOn ℝ 1 a U)
+    (hb : ContDiffOn ℝ 1 b U)
+    (hqSq : ContDiffOn ℝ 1 qSq U)
+    (hg : ContDiffOn ℝ 1 g U)
+    (hPA : MatrixFieldContDiffOn 1 U PA)
+    (hPB : MatrixFieldContDiffOn 1 U PB)
+    (hab : ∀ x ∈ U, a x ≠ b x)
+    (hposA : ∀ x ∈ U,
+      0 < 2 * epsilonA * reconstructedDiagonalAField a b qSq x)
+    (hposB : ∀ x ∈ U,
+      0 < 2 * epsilonB * reconstructedDiagonalBField a b qSq x)
+    (htime : ∀ x ∈ U, smoothMetricPairing g
+      (smoothMatrixProjectedVector PA probeA)
+      (smoothMatrixProjectedVector PA probeA) x < 0)
+    (hspace : ∀ x ∈ U, 0 < smoothMetricPairing g
+      (smoothMatrixProjectedVector PB probeB)
+      (smoothMatrixProjectedVector PB probeB) x) :
+    CurvatureScalarBranchComponentPatch4 U := by
+  let J := concreteFixedProbeCurvatureScalarBranchJet4
+    epsilonA epsilonB a b qSq g PA PB probeA probeB
+  refine ofFixedProbeCurvatureEigenCovectors J g PA PB probeA probeB
+    hopen hg hPA hPB htime hspace ?_ ?_ ?_ ?_ ?_ ?_ ?_ ?_
+  · change DifferentiableOn ℝ
+      (reconstructedScalarAmplitudeA epsilonA a b qSq) U
+    exact (contDiffOn_reconstructedScalarAmplitudeA epsilonA
+      ha hb hqSq hab hposA).differentiableOn_one
+  · change DifferentiableOn ℝ
+      (reconstructedScalarAmplitudeB epsilonB a b qSq) U
+    exact (contDiffOn_reconstructedScalarAmplitudeB epsilonB
+      ha hb hqSq hab hposB).differentiableOn_one
+  · intro x hx
+    change scalarFieldCoordinateFDeriv
+        (reconstructedScalarAmplitudeA epsilonA a b qSq) x =
+      reconstructedAmplitudeAOneForm epsilonA
+        (reconstructedScalarAmplitudeA epsilonA a b qSq x)
+        (a x) (b x) (qSq x)
+        (scalarFieldCoordinateFDeriv a x)
+        (scalarFieldCoordinateFDeriv b x)
+        (scalarFieldCoordinateFDeriv qSq x)
+    have haAt := (ha.differentiableOn_one x hx).differentiableAt
+      (hopen.mem_nhds hx)
+    have hbAt := (hb.differentiableOn_one x hx).differentiableAt
+      (hopen.mem_nhds hx)
+    have hqAt := (hqSq.differentiableOn_one x hx).differentiableAt
+      (hopen.mem_nhds hx)
+    exact reconstructedScalarAmplitudeACoordinateFDeriv_eq
+      epsilonA a b qSq x haAt hbAt hqAt (hab x hx) (hposA x hx)
+  · intro x hx
+    change scalarFieldCoordinateFDeriv
+        (reconstructedScalarAmplitudeB epsilonB a b qSq) x =
+      reconstructedAmplitudeBOneForm epsilonB
+        (reconstructedScalarAmplitudeB epsilonB a b qSq x)
+        (a x) (b x) (qSq x)
+        (scalarFieldCoordinateFDeriv a x)
+        (scalarFieldCoordinateFDeriv b x)
+        (scalarFieldCoordinateFDeriv qSq x)
+    have haAt := (ha.differentiableOn_one x hx).differentiableAt
+      (hopen.mem_nhds hx)
+    have hbAt := (hb.differentiableOn_one x hx).differentiableAt
+      (hopen.mem_nhds hx)
+    have hqAt := (hqSq.differentiableOn_one x hx).differentiableAt
+      (hopen.mem_nhds hx)
+    exact reconstructedScalarAmplitudeBCoordinateFDeriv_eq
+      epsilonB a b qSq x haAt hbAt hqAt (hab x hx) (hposB x hx)
+  · intro x
+    rfl
+  · intro x
+    rfl
+  · intro x hx
+    rfl
+  · intro x hx
+    rfl
 
 /-- The actual first spectral component is differentiable by the constituent
 amplitude/eigen-one-form product rule. -/

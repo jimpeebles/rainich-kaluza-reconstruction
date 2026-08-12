@@ -313,8 +313,15 @@ realizer are required. The theorem then integrates and normalizes the scalar,
 chooses the radial Maxwell potential, constructs the
 intrinsically Ricci-flat Lorentzian product germ, retains the converse EMD
 reduction, and returns all scalar, gauge, coupling, and presentation orbits.
-The remaining official Phase-IV obligation is upstream: construct this
-certificate from intrinsic curvature data or return the sharp obstruction.
+`PhysicalMaxwellFieldRealization.lean` now fills the analytic Maxwell portion
+of that certificate. It converts coordinate first jets to actual
+continuous-bilinear Frechet derivatives, upgrades coordinate exterior
+closure to arbitrary-direction cyclic closure, and proves that an accepted
+branch with an actual matching rescaled first-jet realization yields the
+exact closed `C¹` unweighted physical field. The remaining official Phase-IV
+obligation is upstream: construct that rescaled realization and the
+compatible normal-gauge `C²` EMD realizer from intrinsic curvature data, or
+return the sharp obstruction.
 
 ## Exact validation infrastructure
 

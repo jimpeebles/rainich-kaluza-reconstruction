@@ -48,6 +48,7 @@ import RainichKaluza.CurvatureScalarAmplitudeFieldDerivative
 import RainichKaluza.CurvatureBranchObstruction
 import RainichKaluza.CurvatureBranchIntegration
 import RainichKaluza.CurvatureKaluzaComposition
+import RainichKaluza.PhysicalMaxwellFieldRealization
 import RainichKaluza.DifferentialBranchSelection
 import RainichKaluza.DifferentialCoupling
 import RainichKaluza.CouplingInvariant

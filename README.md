@@ -267,9 +267,16 @@ inputs. `CurvatureKaluzaComposition.lean` now carries that entire list through
 the Phase-III Maxwell test: scalar and Maxwell rejections have explicit point
 witnesses, while every accepted survivor has the two canonical exponential-
 weight closure identities and a typed route into the conditional uplift
-theorem. The remaining north-star seam is field-level: realize the unweighted
-seed as the matching `C¹` closed two-form and supply the compatible normal-
-gauge `C²` EMD fields. See the
+theorem. The remaining north-star seam is field-level and is now split
+cleanly. `PhysicalMaxwellFieldRealization.lean` closes the
+analytic promotion part of that seam: coordinate first jets become genuine
+continuous-bilinear Frechet derivatives, coordinate closure upgrades to full
+cyclic closure, and any actual rescaled `rotatedF` realization is
+exponentially unweighted to the exact matching closed `C¹` physical Maxwell
+package. It also reduces the downstream completion type to the Kaluza check
+and normal-gauge realizer. What remains is to construct the matching rescaled
+realization itself from the smooth curvature seed, then the compatible `C²`
+EMD fields. See the
 [`realigned execution plan`](docs/REALIGNED_EXECUTION_PLAN.md) for the ordered
 proof obligations and publication decision points.
 

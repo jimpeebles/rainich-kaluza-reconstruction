@@ -390,9 +390,12 @@ layer** is complete on the explicit generic fixed-probe patch: RK-R2p--RK-R2r
 build the realized Frechet-jet certificate automatically and supply the exact
 branch list. RK-R2s composes every branch with the Phase-III obstruction test,
 preserves scalar and Maxwell rejection witnesses, and maps accepted survivors
-to the conditional-uplift obligation type. The remaining work is the smooth
-post-unweighting `C¹` field realization and compatible normal-gauge `C²` EMD
-realizer required to discharge that type from curvature alone.
+to the conditional-uplift obligation type. RK-R2t now proves the complete
+analytic promotion theorem: an actual rescaled `rotatedF` first-jet
+realization yields the matching closed post-unweighting `C¹` physical Maxwell
+field and reduces the completion interface to the Kaluza check and compatible
+normal-gauge `C²` EMD realizer. The remaining work is to construct that
+rescaled realization and the `C²` realizer from curvature alone.
 The first layer may be completed and used by exact-metric tests without
 claiming that Phase IV itself has exited. The canonical dependency order is
 specified in `REALIGNED_EXECUTION_PLAN.md`.

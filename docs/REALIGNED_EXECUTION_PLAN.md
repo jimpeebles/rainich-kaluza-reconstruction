@@ -21,10 +21,12 @@ longer be conflated:
 The first milestone is complete. The smooth curvature-projector realization
 part of the Phase-II seam is now complete on the explicit generic local patch.
 The second milestone has crossed the scalar-branch and pointwise Maxwell
-decision seams. Its remaining substantive boundary is field realization:
-promoting the accepted unweighted seed jets to the matching `C¹` closed
-physical two-form and constructing the compatible normal-gauge `C²` EMD
-realizer. The former Maxwell principal-plane input has also been discharged
+decision seams. The analytic promotion layer for the Maxwell field is now
+complete: a genuinely realized rescaled first jet is canonically unweighted
+to the matching closed `C¹` physical two-form. The remaining substantive
+boundary is constructing that rescaled realization from the smooth curvature
+seed and then the compatible normal-gauge `C²` EMD realizer. The former
+Maxwell principal-plane input has also been discharged
 algebraically from dimension four, trace zero, and the non-null square law.
 Exact metrics may enter a labeled Phase-V validation track after the uplift
 module is complete, but Phase IV is not marked complete until the upstream
@@ -76,7 +78,15 @@ curvature gate and the uplift theorem are both closed.
   three-form-channel witness, or a Phase-III acceptance certificate; accepted
   branches also carry the exponential-unweighting closure identities and map
   to an explicit conditional-uplift completion type.
-- Smooth physical-field and normal-gauge realization is now the principal
+- The accepted-jet analytic bridge is complete.
+  `PhysicalMaxwellFieldRealization.lean` converts coordinate matrices and
+  first jets to continuous bilinear forms, upgrades coordinate exterior
+  closure to arbitrary directions, proves the exponential product-rule
+  derivative and its continuity, and constructs the exact matching closed
+  `C¹` physical Maxwell package. The downstream uplift interface is reduced
+  to the Kaluza coupling check and normal-gauge `C²` EMD realizer.
+- Constructing the genuine rescaled first-jet realization from the smooth
+  curvature seed, followed by the normal-gauge realizer, is now the principal
   mathematical risk of the north-star theorem.
 
 ## Critical path through Phase IV
@@ -286,12 +296,15 @@ null, repeated-root, zero-trace, and topological exclusion remains explicit.
 **Official Phase-IV gate:** IV-G1, IV-G2, IV-O1, IV-C1, and IV-N1 are all
 complete. A conditional uplift theorem alone does not close this gate.
 
-**Status: decision composition complete; field realization open.** RK-R2s
+**Status: decision composition and analytic Maxwell promotion complete;
+curvature-seed realization open.** RK-R2s
 now supplies the complete accepted/rejected branch tree from the concrete
 fixed-probe fields through the Phase-III obstruction pair and into the
-conditional-uplift interface. IV-N1 remains open because the matching `C¹`
-physical Maxwell field and normal-gauge `C²` EMD realizer have not yet been
-constructed from the curvature seed.
+conditional-uplift interface. RK-R2t proves that any actual matching rescaled
+first-jet realization produces the required closed `C¹` physical Maxwell
+field and reduces the remaining uplift interface accordingly. IV-N1 remains
+open because that rescaled realization and the normal-gauge `C²` EMD realizer
+have not yet been constructed from the curvature seed.
 
 ## Phase-V validation track
 
@@ -364,10 +377,13 @@ research result.
    Phase-III Maxwell obstruction interface, preserve every scalar/Maxwell
    rejection witness, and map every survivor to the conditional-uplift
    obligations (RK-R2s).
-2. Promote an accepted survivor's exponential-weight closure jets to the
-   matching post-unweighting `C¹` physical Maxwell field package; keep the
-   coordinate seed equality explicit.
-3. Construct the compatible normal-gauge `C²` EMD realizer and finish IV-N1;
+2. **Complete at the analytic promotion layer:** promote an accepted
+   survivor's realized rescaled first jet to the matching post-unweighting
+   `C¹` physical Maxwell field package, retaining the coordinate seed
+   equality (RK-R2t).
+3. Construct `PositiveQPhaseIIIRescaledMaxwellC1Realization` from the smooth
+   curvature seed, then construct the compatible normal-gauge `C²` EMD
+   realizer and finish IV-N1;
    report a sharp obstruction or no-go theorem as a result, not a failed proof.
 4. Use the operational V-T1 harness to recover the V-T2 rotating source and
    convention map, then feed its exact jets through the new paired classifier.

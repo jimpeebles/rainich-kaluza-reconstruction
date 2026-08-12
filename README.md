@@ -116,6 +116,10 @@ candidate Ricci fingerprint and the generic pointwise reconstruction layer:
   those electric/Hodge first derivatives, whose continuity is automatic;
   after the complexion product rule and exponential unweighting, every
   accepted branch yields the matching closed physical Maxwell field;
+- an actual-field Phase-III constructor: all displayed jets can be the actual
+  coordinate derivatives by definition, a `C¹` angle generates the unit
+  cosine/sine complexion pair and its tangent equations, and smooth matrix
+  projectors with strict fixed probes generate the smooth coframe candidate;
 - a local exteriorization theorem producing alternating seed-channel
   three-forms and two explicit obstructions whose simultaneous vanishing is
   equivalent to the full EMD Bianchi/Maxwell closure equations;
@@ -282,9 +286,12 @@ package. `PhaseIIITransportedSeedCalculus.lean` now closes the remaining
 analytic Maxwell step for actual smooth frame data: it proves both transported
 electric/Hodge coordinate product rules from `C²` `L,q` and their displayed
 `dL,dq` jets, derives jet continuity, constructs the rescaled realization,
-assembles the duality rotation, and feeds the closed-field theorem. What
-remains is to instantiate this certificate—including the complexion
-derivatives—from the concrete curvature-generated fields, then construct the
+assembles the duality rotation, and feeds the closed-field theorem. Its
+actual-field constructor removes the remaining derivative bookkeeping: a
+local angle supplies the unit complexion and all its derivatives, while
+smooth fixed-probe matrix projectors supply the coframe candidate. The
+remaining seam is the geometric curvature selection and verification of those
+projectors, the positive magnitude, and the local angle, followed by the
 compatible normal-gauge `C²` EMD realizer.
 See the
 [`realigned execution plan`](docs/REALIGNED_EXECUTION_PLAN.md) for the ordered

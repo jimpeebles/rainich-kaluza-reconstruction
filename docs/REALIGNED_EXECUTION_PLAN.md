@@ -94,10 +94,16 @@ curvature gate and the uplift theorem are both closed.
   `C²` regularity supplies jet continuity automatically; the duality rotation
   and exponential unweighting then produce the closed physical Maxwell field.
   No matrix norm or new Maxwell equation is assumed.
-- The next curvature-entry step is to instantiate this actual-frame
-  certificate from the concrete fixed-probe curvature fields, including the
-  complexion coefficient derivatives. The compatible normal-gauge realizer
-  remains the principal downstream geometric risk.
+- Actual-derivative and complexion bookkeeping are also complete. The patch
+  can define `dL,dq,dc,ds` as actual coordinate derivatives; a `C¹` angle
+  supplies `c=cos θ`, `s=sin θ`, `ω=dθ`, the unit-circle law, and both tangent
+  equations. Componentwise `C²` matrix projectors with strict fixed probes
+  supply the smooth tetrad/coframe candidate.
+- The next curvature-entry step is therefore geometric: identify the concrete
+  principal projector pair, positive magnitude, and local complexion angle
+  from the accepted curvature branch, and verify the principal-plane/Lorentz
+  identities. The compatible normal-gauge realizer remains the principal
+  downstream risk.
 
 ## Critical path through Phase IV
 
@@ -315,10 +321,13 @@ first-jet realization produces the required closed `C¹` physical Maxwell
 field and reduces the remaining uplift interface accordingly. RK-R2u reduces
 that realization to scalar seed calculus, and RK-R2v discharges the two
 transported-seed coordinate derivative identities and jet continuity from
-actual `C²` `L,q` fields and their displayed `dL,dq` coordinate jets. IV-N1
-remains open until this certificate—including the complexion derivatives—is
-instantiated from the concrete curvature fields and the normal-gauge `C²` EMD
-realizer is constructed.
+actual `C²` `L,q` fields and their displayed `dL,dq` coordinate jets. RK-R2w
+further makes every derivative array actual by construction, generates
+the unit complexion and tangent equations from a `C¹` angle, and obtains the
+smooth coframe candidate from componentwise `C²` matrix projectors and strict
+fixed probes. IV-N1 remains open until the concrete curvature branch supplies
+the verified principal projectors, positive magnitude, and local angle, and
+the normal-gauge `C²` EMD realizer is constructed.
 
 ## Phase-V validation track
 
@@ -398,11 +407,14 @@ research result.
 3. **Complete (RK-R2u--RK-R2v):** actual `C²` `L,q` fields and their `dL,dq`
    coordinate jets construct `PositiveQPhaseIIIRescaledMaxwellC1Realization`
    and the accepted branch's closed physical Maxwell field.
-4. Instantiate that certificate from the concrete curvature-generated frame,
-   magnitude, and complexion fields; then construct the compatible
+4. **Complete (RK-R2w):** actual derivative arrays, angle-generated unit
+   complexion data, and smooth fixed-probe coframe construction require no
+   further calculus hypotheses.
+5. Select and verify the concrete curvature principal projectors, positive
+   magnitude, and local complexion angle; then construct the compatible
    normal-gauge `C²` EMD realizer and finish IV-N1;
    report a sharp obstruction or no-go theorem as a result, not a failed proof.
-5. Use the operational V-T1 harness to recover the V-T2 rotating source and
+6. Use the operational V-T1 harness to recover the V-T2 rotating source and
    convention map, then feed its exact jets through the new paired classifier.
 
 No phase label advances merely because later infrastructure has started.

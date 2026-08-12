@@ -398,9 +398,12 @@ normal-gauge `C²` EMD realizer. RK-R2u reduces construction of that rescaled
 realization to scalar seed calculus, and RK-R2v now proves the actual
 transported electric/Hodge coordinate derivatives from `C²` `L,q` fields and
 their displayed `dL,dq` jets, derives jet continuity, and composes the result
-through the closed physical field. The remaining work is to instantiate this
-smooth-frame certificate from the concrete curvature fields and construct the
-`C²` normal-gauge realizer.
+through the closed physical field. RK-R2w removes the remaining derivative
+and complexion bookkeeping: actual coordinate derivatives define every jet, a
+`C¹` angle generates the unit cosine/sine complexion and tangent equations,
+and smooth matrix projectors with strict fixed probes generate the coframe
+candidate. What remains is the geometric selection and verification of those
+projectors, the positive magnitude, and the local angle from curvature.
 The first layer may be completed and used by exact-metric tests without
 claiming that Phase IV itself has exited. The canonical dependency order is
 specified in `REALIGNED_EXECUTION_PLAN.md`.

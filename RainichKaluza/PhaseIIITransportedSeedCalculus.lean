@@ -1,4 +1,5 @@
 import RainichKaluza.PhaseIIIRescaledSeedRealization
+import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
 
 set_option maxSynthPendingDepth 2
 
@@ -325,6 +326,170 @@ theorem smoothTransportedPositiveQHodgeSeed_coordinateFDeriv_eq
     transportedPositiveQHodgeSeedDerivative,
     smoothCanonicalPositiveQHodgeSeed] using happly
 
+/-- Full principal tetrad obtained from two fixed probes in each varying
+matrix-projector range.  This is the matrix-field version needed by the
+curvature Lagrange projectors. -/
+noncomputable def smoothMatrixProjectedPrincipalTetrad
+    (g : CurvatureCoordinateSpace4 →
+      ContinuousBilinForm CurvatureCoordinateSpace4)
+    (P Q : CurvatureCoordinateSpace4 → Matrix4)
+    (u0 u1 v0 v1 : CurvatureCoordinateSpace4)
+    (z : CurvatureCoordinateSpace4) :
+    (CurvatureCoordinateSpace4 × CurvatureCoordinateSpace4) ×
+      (CurvatureCoordinateSpace4 × CurvatureCoordinateSpace4) :=
+  (smoothLorentzianPlaneFrame g
+      (smoothMatrixProjectedVector P u0)
+      (smoothMatrixProjectedVector P u1) z,
+    smoothSpacelikePlaneFrame g
+      (smoothMatrixProjectedVector Q v0)
+      (smoothMatrixProjectedVector Q v1) z)
+
+/-- Componentwise smooth curvature projectors and one admissible fixed probe
+quadruple produce the smooth principal tetrad used by the Maxwell seed. -/
+theorem contDiffOn_smoothMatrixProjectedPrincipalTetrad
+    {n : WithTop ℕ∞} {U : Set CurvatureCoordinateSpace4}
+    {g : CurvatureCoordinateSpace4 →
+      ContinuousBilinForm CurvatureCoordinateSpace4}
+    {P Q : CurvatureCoordinateSpace4 → Matrix4}
+    (u0 u1 v0 v1 : CurvatureCoordinateSpace4)
+    (hg : ContDiffOn ℝ n g U)
+    (hP : MatrixFieldContDiffOn n U P)
+    (hQ : MatrixFieldContDiffOn n U Q)
+    (hL0 : ∀ z ∈ U, smoothMetricPairing g
+      (smoothMatrixProjectedVector P u0)
+      (smoothMatrixProjectedVector P u0) z < 0)
+    (hL1 : ∀ z ∈ U, 0 < smoothMetricPairing g
+      (smoothMetricOrthogonalizeSecond g
+        (smoothMatrixProjectedVector P u0)
+        (smoothMatrixProjectedVector P u1))
+      (smoothMetricOrthogonalizeSecond g
+        (smoothMatrixProjectedVector P u0)
+        (smoothMatrixProjectedVector P u1)) z)
+    (hS0 : ∀ z ∈ U, 0 < smoothMetricPairing g
+      (smoothMatrixProjectedVector Q v0)
+      (smoothMatrixProjectedVector Q v0) z)
+    (hS1 : ∀ z ∈ U, 0 < smoothMetricPairing g
+      (smoothMetricOrthogonalizeSecond g
+        (smoothMatrixProjectedVector Q v0)
+        (smoothMatrixProjectedVector Q v1))
+      (smoothMetricOrthogonalizeSecond g
+        (smoothMatrixProjectedVector Q v0)
+        (smoothMatrixProjectedVector Q v1)) z) :
+    ContDiffOn ℝ n
+      (smoothMatrixProjectedPrincipalTetrad g P Q u0 u1 v0 v1) U := by
+  have hPu0 := contDiffOn_smoothMatrixProjectedVector hP u0
+  have hPu1 := contDiffOn_smoothMatrixProjectedVector hP u1
+  have hQv0 := contDiffOn_smoothMatrixProjectedVector hQ v0
+  have hQv1 := contDiffOn_smoothMatrixProjectedVector hQ v1
+  exact (contDiffOn_smoothLorentzianPlaneFrame
+    hg hPu0 hPu1 hL0 hL1).prodMk
+      (contDiffOn_smoothSpacelikePlaneFrame
+        hg hQv0 hQv1 hS0 hS1)
+
+namespace PositiveQPhaseIIIPatch4
+
+variable {U : Set CurvatureCoordinateSpace4}
+
+/-- Build the Phase-III patch with all four displayed derivative arrays equal
+to the actual coordinate Fréchet derivatives by definition.  The only
+non-calculus inputs are the geometric complexion tangent equations. -/
+noncomputable def ofActualCoordinateFDerivs
+    (L : CurvatureCoordinateSpace4 → Matrix4)
+    (q : CurvatureCoordinateSpace4 → ℝ)
+    (omega : CurvatureCoordinateSpace4 → OneForm4)
+    (c s : CurvatureCoordinateSpace4 → ℝ) (coupling : ℝ)
+    (hdc : ∀ z ∈ U,
+      scalarFieldCoordinateFDeriv c z = (-(s z)) • omega z)
+    (hds : ∀ z ∈ U,
+      scalarFieldCoordinateFDeriv s z = c z • omega z) :
+    PositiveQPhaseIIIPatch4 U where
+  L := L
+  dL := fun z k i j =>
+    scalarFieldCoordinateFDeriv (fun y => L y i j) z k
+  q := q
+  dq := scalarFieldCoordinateFDeriv q
+  omega := omega
+  c := c
+  s := s
+  coupling := coupling
+  dc := scalarFieldCoordinateFDeriv c
+  ds := scalarFieldCoordinateFDeriv s
+  dc_eq := hdc
+  ds_eq := hds
+
+end PositiveQPhaseIIIPatch4
+
+/-- A `C¹` scalar field has a continuous field of actual coordinate Fréchet
+derivatives on an open patch. -/
+theorem continuousOn_scalarFieldCoordinateFDeriv
+    {U : Set CurvatureCoordinateSpace4}
+    (f : CurvatureCoordinateSpace4 → ℝ)
+    (hopen : IsOpen U) (hf : ContDiffOn ℝ 1 f U) :
+    ContinuousOn (scalarFieldCoordinateFDeriv f) U := by
+  rw [continuousOn_pi]
+  intro k
+  have hderiv : ContinuousOn (fderiv ℝ f) U :=
+    hf.continuousOn_fderiv_of_isOpen hopen (by norm_num)
+  simpa only [scalarFieldCoordinateFDeriv] using
+    (continuousOn_clm_apply.mp hderiv (curvatureCoordinateDirection k))
+
+/-- Coordinate Fréchet derivative of a cosine complexion coefficient. -/
+theorem scalarFieldCoordinateFDeriv_cos
+    (theta : CurvatureCoordinateSpace4 → ℝ)
+    (z : CurvatureCoordinateSpace4)
+    (htheta : DifferentiableAt ℝ theta z) :
+    scalarFieldCoordinateFDeriv (fun y => Real.cos (theta y)) z =
+      (-(Real.sin (theta z))) • scalarFieldCoordinateFDeriv theta z := by
+  funext k
+  unfold scalarFieldCoordinateFDeriv
+  rw [fderiv_cos htheta]
+  rfl
+
+/-- Coordinate Fréchet derivative of a sine complexion coefficient. -/
+theorem scalarFieldCoordinateFDeriv_sin
+    (theta : CurvatureCoordinateSpace4 → ℝ)
+    (z : CurvatureCoordinateSpace4)
+    (htheta : DifferentiableAt ℝ theta z) :
+    scalarFieldCoordinateFDeriv (fun y => Real.sin (theta y)) z =
+      Real.cos (theta z) • scalarFieldCoordinateFDeriv theta z := by
+  funext k
+  unfold scalarFieldCoordinateFDeriv
+  rw [fderiv_sin htheta]
+  rfl
+
+namespace PositiveQPhaseIIIPatch4
+
+variable {U : Set CurvatureCoordinateSpace4}
+
+/-- An actual smooth angle field gives the unit complexion pair and its
+infinitesimal rate with both tangent equations satisfied automatically. -/
+noncomputable def ofActualComplexionAngle
+    (L : CurvatureCoordinateSpace4 → Matrix4)
+    (q theta : CurvatureCoordinateSpace4 → ℝ) (coupling : ℝ)
+    (hopen : IsOpen U) (htheta : ContDiffOn ℝ 1 theta U) :
+    PositiveQPhaseIIIPatch4 U :=
+  ofActualCoordinateFDerivs L q (scalarFieldCoordinateFDeriv theta)
+    (fun z => Real.cos (theta z)) (fun z => Real.sin (theta z)) coupling
+    (fun z hz => scalarFieldCoordinateFDeriv_cos theta z
+      ((htheta.differentiableOn_one z hz).differentiableAt
+        (hopen.mem_nhds hz)))
+    (fun z hz => scalarFieldCoordinateFDeriv_sin theta z
+      ((htheta.differentiableOn_one z hz).differentiableAt
+        (hopen.mem_nhds hz)))
+
+/-- The angle-generated complexion coefficients lie on the unit circle. -/
+theorem ofActualComplexionAngle_unit
+    (L : CurvatureCoordinateSpace4 → Matrix4)
+    (q theta : CurvatureCoordinateSpace4 → ℝ) (coupling : ℝ)
+    (hopen : IsOpen U) (htheta : ContDiffOn ℝ 1 theta U)
+    (z : CurvatureCoordinateSpace4) :
+    let M := ofActualComplexionAngle L q theta coupling hopen htheta
+    M.c z ^ 2 + M.s z ^ 2 = 1 := by
+  simp [ofActualComplexionAngle, ofActualCoordinateFDerivs,
+    Real.cos_sq_add_sin_sq]
+
+end PositiveQPhaseIIIPatch4
+
 namespace PositiveQPhaseIIISeedPairC1Realization
 
 variable {U : Set CurvatureCoordinateSpace4}
@@ -442,6 +607,170 @@ noncomputable def rescaledOfSmoothFrameMagnitude
   (ofSmoothFrameMagnitude M hopen hL hq hqPos hdL hdq
     hc hs hdc hds).toRescaledMaxwellC1Realization
 
+/-- Actual smooth fields instantiate the entire constituent seed-pair
+realization automatically.  Only the complexion tangent equations used to
+build the patch remain as geometric hypotheses. -/
+noncomputable def ofActualSmoothFields
+    (L : CurvatureCoordinateSpace4 → Matrix4)
+    (q : CurvatureCoordinateSpace4 → ℝ)
+    (omega : CurvatureCoordinateSpace4 → OneForm4)
+    (c s : CurvatureCoordinateSpace4 → ℝ) (coupling : ℝ)
+    (hdcEq : ∀ z ∈ U,
+      scalarFieldCoordinateFDeriv c z = (-(s z)) • omega z)
+    (hdsEq : ∀ z ∈ U,
+      scalarFieldCoordinateFDeriv s z = c z • omega z)
+    (hopen : IsOpen U)
+    (hL : MatrixFieldContDiffOn 2 U L)
+    (hq : ContDiffOn ℝ 2 q U) (hqPos : ∀ z ∈ U, 0 < q z)
+    (hc : ContDiffOn ℝ 1 c U) (hs : ContDiffOn ℝ 1 s U) :
+    PositiveQPhaseIIISeedPairC1Realization
+      (PositiveQPhaseIIIPatch4.ofActualCoordinateFDerivs
+        L q omega c s coupling hdcEq hdsEq) := by
+  let M := PositiveQPhaseIIIPatch4.ofActualCoordinateFDerivs
+    L q omega c s coupling hdcEq hdsEq
+  apply ofSmoothFrameMagnitude M hopen hL hq hqPos
+  · intro z _ i j
+    rfl
+  · intro z _
+    rfl
+  · intro z hz
+    apply hasFDerivAt_of_coordinateFDeriv c
+      (scalarFieldCoordinateFDeriv c z) z
+    · exact ((hc.differentiableOn_one z hz).differentiableAt
+        (hopen.mem_nhds hz))
+    · rfl
+  · intro z hz
+    apply hasFDerivAt_of_coordinateFDeriv s
+      (scalarFieldCoordinateFDeriv s z) z
+    · exact ((hs.differentiableOn_one z hz).differentiableAt
+        (hopen.mem_nhds hz))
+    · rfl
+  · exact continuousOn_scalarFieldCoordinateFDeriv c hopen hc
+  · exact continuousOn_scalarFieldCoordinateFDeriv s hopen hs
+
+/-- A `C¹` complexion angle eliminates the two remaining tangent-equation
+hypotheses as well: cosine, sine, and the actual coordinate derivative of the
+angle generate the complete smooth Phase-III seed realization. -/
+noncomputable def ofActualSmoothComplexionAngle
+    (L : CurvatureCoordinateSpace4 → Matrix4)
+    (q theta : CurvatureCoordinateSpace4 → ℝ) (coupling : ℝ)
+    (hopen : IsOpen U)
+    (hL : MatrixFieldContDiffOn 2 U L)
+    (hq : ContDiffOn ℝ 2 q U) (hqPos : ∀ z ∈ U, 0 < q z)
+    (htheta : ContDiffOn ℝ 1 theta U) :
+    PositiveQPhaseIIISeedPairC1Realization
+      (PositiveQPhaseIIIPatch4.ofActualComplexionAngle
+        L q theta coupling hopen htheta) := by
+  unfold PositiveQPhaseIIIPatch4.ofActualComplexionAngle
+  exact ofActualSmoothFields
+    L q (scalarFieldCoordinateFDeriv theta)
+      (fun z => Real.cos (theta z)) (fun z => Real.sin (theta z)) coupling
+    (fun z hz => scalarFieldCoordinateFDeriv_cos theta z
+      ((htheta.differentiableOn_one z hz).differentiableAt
+        (hopen.mem_nhds hz)))
+    (fun z hz => scalarFieldCoordinateFDeriv_sin theta z
+      ((htheta.differentiableOn_one z hz).differentiableAt
+        (hopen.mem_nhds hz)))
+    hopen hL hq hqPos htheta.cos htheta.sin
+
+/-- A smooth principal tetrad and a smooth complexion angle now form the
+short, derivative-free entrance to the constituent Maxwell realization. -/
+noncomputable def ofActualSmoothPrincipalTetradComplexionAngle
+    (T : CurvatureCoordinateSpace4 →
+      ((Fin 4 → ℝ) × (Fin 4 → ℝ)) ×
+        ((Fin 4 → ℝ) × (Fin 4 → ℝ)))
+    (q theta : CurvatureCoordinateSpace4 → ℝ) (coupling : ℝ)
+    (hopen : IsOpen U)
+    (hT : ContDiffOn ℝ 2 T U)
+    (hq : ContDiffOn ℝ 2 q U) (hqPos : ∀ z ∈ U, 0 < q z)
+    (htheta : ContDiffOn ℝ 1 theta U) :
+    PositiveQPhaseIIISeedPairC1Realization
+      (PositiveQPhaseIIIPatch4.ofActualComplexionAngle
+        (smoothPrincipalCoframeMatrix T) q theta coupling hopen htheta) :=
+  ofActualSmoothComplexionAngle (smoothPrincipalCoframeMatrix T)
+    q theta coupling hopen (contDiffOn_smoothPrincipalCoframeMatrix hT)
+      hq hqPos htheta
+
+/-- The concrete fixed-probe projector construction supplies the `C²` coframe
+required by `ofActualSmoothFields`.  This closes the frame part of the
+curvature-to-Maxwell realization seam. -/
+noncomputable def ofFixedProbeActualSmoothFields
+    (g : CurvatureCoordinateSpace4 →
+      ContinuousBilinForm CurvatureCoordinateSpace4)
+    (P Q : CurvatureCoordinateSpace4 → Matrix4)
+    (u0 u1 v0 v1 : CurvatureCoordinateSpace4)
+    (q : CurvatureCoordinateSpace4 → ℝ)
+    (omega : CurvatureCoordinateSpace4 → OneForm4)
+    (c s : CurvatureCoordinateSpace4 → ℝ) (coupling : ℝ)
+    (hdcEq : ∀ z ∈ U,
+      scalarFieldCoordinateFDeriv c z = (-(s z)) • omega z)
+    (hdsEq : ∀ z ∈ U,
+      scalarFieldCoordinateFDeriv s z = c z • omega z)
+    (hopen : IsOpen U)
+    (hg : ContDiffOn ℝ 2 g U)
+    (hP : MatrixFieldContDiffOn 2 U P)
+    (hQ : MatrixFieldContDiffOn 2 U Q)
+    (hL0 : ∀ z ∈ U, smoothMetricPairing g
+      (smoothMatrixProjectedVector P u0)
+      (smoothMatrixProjectedVector P u0) z < 0)
+    (hL1 : ∀ z ∈ U, 0 < smoothMetricPairing g
+      (smoothMetricOrthogonalizeSecond g
+        (smoothMatrixProjectedVector P u0)
+        (smoothMatrixProjectedVector P u1))
+      (smoothMetricOrthogonalizeSecond g
+        (smoothMatrixProjectedVector P u0)
+        (smoothMatrixProjectedVector P u1)) z)
+    (hS0 : ∀ z ∈ U, 0 < smoothMetricPairing g
+      (smoothMatrixProjectedVector Q v0)
+      (smoothMatrixProjectedVector Q v0) z)
+    (hS1 : ∀ z ∈ U, 0 < smoothMetricPairing g
+      (smoothMetricOrthogonalizeSecond g
+        (smoothMatrixProjectedVector Q v0)
+        (smoothMatrixProjectedVector Q v1))
+      (smoothMetricOrthogonalizeSecond g
+        (smoothMatrixProjectedVector Q v0)
+        (smoothMatrixProjectedVector Q v1)) z)
+    (hq : ContDiffOn ℝ 2 q U) (hqPos : ∀ z ∈ U, 0 < q z)
+    (hc : ContDiffOn ℝ 1 c U) (hs : ContDiffOn ℝ 1 s U) :
+    PositiveQPhaseIIISeedPairC1Realization
+      (PositiveQPhaseIIIPatch4.ofActualCoordinateFDerivs
+        (smoothPrincipalCoframeMatrix
+          (smoothMatrixProjectedPrincipalTetrad g P Q u0 u1 v0 v1))
+        q omega c s coupling hdcEq hdsEq) := by
+  have hT : ContDiffOn ℝ 2
+      (smoothMatrixProjectedPrincipalTetrad g P Q u0 u1 v0 v1) U :=
+    contDiffOn_smoothMatrixProjectedPrincipalTetrad u0 u1 v0 v1
+      hg hP hQ hL0 hL1 hS0 hS1
+  have hcoframe : MatrixFieldContDiffOn 2 U
+      (smoothPrincipalCoframeMatrix
+        (smoothMatrixProjectedPrincipalTetrad g P Q u0 u1 v0 v1)) :=
+    contDiffOn_smoothPrincipalCoframeMatrix hT
+  exact ofActualSmoothFields
+    (smoothPrincipalCoframeMatrix
+      (smoothMatrixProjectedPrincipalTetrad g P Q u0 u1 v0 v1))
+    q omega c s coupling hdcEq hdsEq hopen hcoframe hq hqPos hc hs
+
+/-- The actual-field constructor followed by the duality product rule gives
+the accepted-branch rescaled Maxwell realization directly. -/
+noncomputable def rescaledOfActualSmoothFields
+    (L : CurvatureCoordinateSpace4 → Matrix4)
+    (q : CurvatureCoordinateSpace4 → ℝ)
+    (omega : CurvatureCoordinateSpace4 → OneForm4)
+    (c s : CurvatureCoordinateSpace4 → ℝ) (coupling : ℝ)
+    (hdcEq : ∀ z ∈ U,
+      scalarFieldCoordinateFDeriv c z = (-(s z)) • omega z)
+    (hdsEq : ∀ z ∈ U,
+      scalarFieldCoordinateFDeriv s z = c z • omega z)
+    (hopen : IsOpen U)
+    (hL : MatrixFieldContDiffOn 2 U L)
+    (hq : ContDiffOn ℝ 2 q U) (hqPos : ∀ z ∈ U, 0 < q z)
+    (hc : ContDiffOn ℝ 1 c U) (hs : ContDiffOn ℝ 1 s U) :
+    PositiveQPhaseIIIRescaledMaxwellC1Realization
+      (PositiveQPhaseIIIPatch4.ofActualCoordinateFDerivs
+        L q omega c s coupling hdcEq hdsEq) :=
+  (ofActualSmoothFields L q omega c s coupling hdcEq hdsEq
+    hopen hL hq hqPos hc hs).toRescaledMaxwellC1Realization
+
 end PositiveQPhaseIIISeedPairC1Realization
 
 namespace PhaseIIIAcceptedBranch
@@ -476,6 +805,34 @@ noncomputable def toPhysicalMaxwellC1Realization_ofSmoothFrameMagnitude
   A.toPhysicalMaxwellC1Realization
     (PositiveQPhaseIIISeedPairC1Realization.rescaledOfSmoothFrameMagnitude
       M hopen hL hq hqPos hdL hdq hc hs hdc hds)
+    hopen hstar
+
+/-- For an actual-derivative Phase-III patch, ordinary smoothness of the
+frame, magnitude, and complexion coefficients plus the two tangent equations
+already suffice to produce the accepted branch's closed physical Maxwell
+field. -/
+noncomputable def toPhysicalMaxwellC1Realization_ofActualSmoothFields
+    (L : CurvatureCoordinateSpace4 → Matrix4)
+    (q : CurvatureCoordinateSpace4 → ℝ)
+    (omega : CurvatureCoordinateSpace4 → OneForm4)
+    (c s : CurvatureCoordinateSpace4 → ℝ) (coupling : ℝ)
+    (hdcEq : ∀ z ∈ U,
+      scalarFieldCoordinateFDeriv c z = (-(s z)) • omega z)
+    (hdsEq : ∀ z ∈ U,
+      scalarFieldCoordinateFDeriv s z = c z • omega z)
+    (A : PhaseIIIAcceptedBranch C
+      (PositiveQPhaseIIIPatch4.ofActualCoordinateFDerivs
+        L q omega c s coupling hdcEq hdsEq) branch)
+    (hopen : IsOpen U) (hstar : StarConvex ℝ 0 U)
+    (hL : MatrixFieldContDiffOn 2 U L)
+    (hq : ContDiffOn ℝ 2 q U) (hqPos : ∀ z ∈ U, 0 < q z)
+    (hc : ContDiffOn ℝ 1 c U) (hs : ContDiffOn ℝ 1 s U) :
+    PhaseIIIPhysicalMaxwellC1Realization C
+      (PositiveQPhaseIIIPatch4.ofActualCoordinateFDerivs
+        L q omega c s coupling hdcEq hdsEq) branch :=
+  A.toPhysicalMaxwellC1Realization
+    (PositiveQPhaseIIISeedPairC1Realization.rescaledOfActualSmoothFields
+      L q omega c s coupling hdcEq hdsEq hopen hL hq hqPos hc hs)
     hopen hstar
 
 end PhaseIIIAcceptedBranch

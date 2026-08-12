@@ -111,6 +111,11 @@ candidate Ricci fingerprint and the generic pointwise reconstruction layer:
 - an exact first-jet formula for the transported seed and Hodge seed,
   separating the `dq/(2q)` amplitude channel from a Lorentz-connection
   channel `Ω=(dL)L⁻¹`, with `ΩG+GΩᵀ=0`;
+- an actual transported-seed calculus theorem: componentwise `C²` frame and
+  positive magnitude fields with their coordinate `dL,dq` jets have exactly
+  those electric/Hodge first derivatives, whose continuity is automatic;
+  after the complexion product rule and exponential unweighting, every
+  accepted branch yields the matching closed physical Maxwell field;
 - a local exteriorization theorem producing alternating seed-channel
   three-forms and two explicit obstructions whose simultaneous vanishing is
   equivalent to the full EMD Bianchi/Maxwell closure equations;
@@ -273,14 +278,14 @@ analytic promotion part of that seam: coordinate first jets become genuine
 continuous-bilinear Frechet derivatives, coordinate closure upgrades to full
 cyclic closure, and any actual rescaled `rotatedF` realization is
 exponentially unweighted to the exact matching closed `C¹` physical Maxwell
-package. It also reduces the downstream completion type to the Kaluza check
-and normal-gauge realizer. What remains is to construct the matching rescaled
-realization itself from the smooth curvature seed, then the compatible `C²`
-EMD fields. `PhaseIIIRescaledSeedRealization.lean` now reduces the former to
-two explicit coordinate product-rule checks: the actual derivatives of the
-transported electric and Hodge seeds must equal the displayed `dL,dq` jets.
-It proves that these component identities reconstruct the full Frechet
-derivative, assemble the duality rotation, and feed the closed-field theorem.
+package. `PhaseIIITransportedSeedCalculus.lean` now closes the remaining
+analytic Maxwell step for actual smooth frame data: it proves both transported
+electric/Hodge coordinate product rules from `C²` `L,q` and their displayed
+`dL,dq` jets, derives jet continuity, constructs the rescaled realization,
+assembles the duality rotation, and feeds the closed-field theorem. What
+remains is to instantiate this certificate—including the complexion
+derivatives—from the concrete curvature-generated fields, then construct the
+compatible normal-gauge `C²` EMD realizer.
 See the
 [`realigned execution plan`](docs/REALIGNED_EXECUTION_PLAN.md) for the ordered
 proof obligations and publication decision points.

@@ -299,8 +299,17 @@ smooth fixed-probe matrix projectors supply the coframe candidate.
 from the curvature residual `S=R-V` and positive reconstructed `qSq`, proves
 their structural identities, verifies the tetrad and Lorentz coframe, and
 supplies a positive-cosine local angle chart. The remaining curvature seam is
-to identify the accepted branch's concrete residual/self-adjoint metric data
-and unit complexion coefficients with this certificate, then construct the
+now narrower. `CurvatureScalarContribution.lean` constructs the selected
+branch's actual `V^i_j=(1/2)g^{ik}v_kv_j` from the inverse metric and proves
+its trace square law, smoothness, and metric self-adjointness, so the residual
+self-adjointness is automatic. In the generic canonical Ricci frame the same
+module now derives the full reconstruction equation from the two scalar
+amplitude identities and transports it through an arbitrary certified frame.
+The actual smooth seed handoff also retains
+the closed positively weighted Hodge channel alongside the physical Maxwell
+field. What remains is to identify the actual curvature and selected scalar
+fields with those transported canonical matrices, identify the
+curvature-selected complexion with the metric Hodge channel, and construct the
 compatible normal-gauge `C²` EMD realizer.
 See the
 [`realigned execution plan`](docs/REALIGNED_EXECUTION_PLAN.md) for the ordered

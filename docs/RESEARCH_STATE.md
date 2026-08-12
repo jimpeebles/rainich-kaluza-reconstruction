@@ -318,15 +318,26 @@ of that certificate. It converts coordinate first jets to actual
 continuous-bilinear Frechet derivatives, upgrades coordinate exterior
 closure to arbitrary-direction cyclic closure, and proves that an accepted
 branch with an actual matching rescaled first-jet realization yields the
-exact closed `C¹` unweighted physical field. The remaining official Phase-IV
-obligation is upstream. `PhaseIIIRescaledSeedRealization.lean` further proves
+exact closed `C¹` unweighted physical field. It now also carries the second
+Phase-III channel through the same analytic layer, producing the genuine
+closed positively weighted rotated Hodge flux instead of dropping it at the
+completion boundary. The remaining official Phase-IV obligation is upstream.
+`PhaseIIIRescaledSeedRealization.lean` further proves
 that the rescaled realization follows from the two explicit componentwise
 transported-seed derivative identities for the actual smooth `L,q` fields,
 their jet continuity, and the actual complexion derivatives; the full
 duality product rule and arbitrary-direction derivative reconstruction are
-automatic. Those coordinate identities and the compatible normal-gauge `C²`
-EMD realizer remain to be derived from intrinsic curvature data, or replaced
-by a sharp obstruction.
+automatic. `CurvatureScalarContribution.lean` now constructs the actual
+selected scalar mixed tensor `V=(1/2)v^sharp tensor v` from the inverse metric,
+proves its rank-one trace square law and smoothness, and derives both its
+metric self-adjointness and residual self-adjointness from certified metric
+inverse identities. In the generic canonical Ricci frame it also proves the
+full reconstruction equation from the two scalar amplitude identities and
+then transports that equation through an arbitrary certified frame. The open
+curvature seam is consequently the identification of the actual mixed
+Ricci/scalar fields with that transported canonical pair and the
+complexion/metric-Hodge identification, followed by the compatible
+normal-gauge `C²` EMD realizer or a sharp obstruction.
 
 ## Exact validation infrastructure
 

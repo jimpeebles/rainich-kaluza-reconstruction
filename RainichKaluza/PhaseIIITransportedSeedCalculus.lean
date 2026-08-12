@@ -607,6 +607,26 @@ noncomputable def rescaledOfSmoothFrameMagnitude
   (ofSmoothFrameMagnitude M hopen hL hq hqPos hdL hdq
     hc hs hdc hds).toRescaledMaxwellC1Realization
 
+/-- The same concrete calculus retains both rescaled `C¹` channels. -/
+noncomputable def rescaledPairOfSmoothFrameMagnitude
+    (M : PositiveQPhaseIIIPatch4 U)
+    (hopen : IsOpen U)
+    (hL : MatrixFieldContDiffOn 2 U M.L)
+    (hq : ContDiffOn ℝ 2 M.q U) (hqPos : ∀ z ∈ U, 0 < M.q z)
+    (hdL : ∀ z ∈ U, ∀ i j,
+      scalarFieldCoordinateFDeriv (fun y => M.L y i j) z =
+        fun k => M.dL z k i j)
+    (hdq : ∀ z ∈ U,
+      scalarFieldCoordinateFDeriv M.q z = M.dq z)
+    (hc : ∀ z ∈ U,
+      HasFDerivAt M.c (oneForm4ContinuousLinearMap (M.dc z)) z)
+    (hs : ∀ z ∈ U,
+      HasFDerivAt M.s (oneForm4ContinuousLinearMap (M.ds z)) z)
+    (hdc : ContinuousOn M.dc U) (hds : ContinuousOn M.ds U) :
+    PositiveQPhaseIIIRescaledMaxwellC1PairRealization M :=
+  (ofSmoothFrameMagnitude M hopen hL hq hqPos hdL hdq
+    hc hs hdc hds).toRescaledMaxwellC1PairRealization
+
 /-- Actual smooth fields instantiate the entire constituent seed-pair
 realization automatically.  Only the complexion tangent equations used to
 build the patch remain as geometric hypotheses. -/
@@ -771,6 +791,26 @@ noncomputable def rescaledOfActualSmoothFields
   (ofActualSmoothFields L q omega c s coupling hdcEq hdsEq
     hopen hL hq hqPos hc hs).toRescaledMaxwellC1Realization
 
+/-- Actual smooth fields directly produce the paired rescaled realization. -/
+noncomputable def rescaledPairOfActualSmoothFields
+    (L : CurvatureCoordinateSpace4 → Matrix4)
+    (q : CurvatureCoordinateSpace4 → ℝ)
+    (omega : CurvatureCoordinateSpace4 → OneForm4)
+    (c s : CurvatureCoordinateSpace4 → ℝ) (coupling : ℝ)
+    (hdcEq : ∀ z ∈ U,
+      scalarFieldCoordinateFDeriv c z = (-(s z)) • omega z)
+    (hdsEq : ∀ z ∈ U,
+      scalarFieldCoordinateFDeriv s z = c z • omega z)
+    (hopen : IsOpen U)
+    (hL : MatrixFieldContDiffOn 2 U L)
+    (hq : ContDiffOn ℝ 2 q U) (hqPos : ∀ z ∈ U, 0 < q z)
+    (hc : ContDiffOn ℝ 1 c U) (hs : ContDiffOn ℝ 1 s U) :
+    PositiveQPhaseIIIRescaledMaxwellC1PairRealization
+      (PositiveQPhaseIIIPatch4.ofActualCoordinateFDerivs
+        L q omega c s coupling hdcEq hdsEq) :=
+  (ofActualSmoothFields L q omega c s coupling hdcEq hdsEq
+    hopen hL hq hqPos hc hs).toRescaledMaxwellC1PairRealization
+
 end PositiveQPhaseIIISeedPairC1Realization
 
 namespace PhaseIIIAcceptedBranch
@@ -807,6 +847,30 @@ noncomputable def toPhysicalMaxwellC1Realization_ofSmoothFrameMagnitude
       M hopen hL hq hqPos hdL hdq hc hs hdc hds)
     hopen hstar
 
+/-- **Smooth paired Phase-III handoff.** The same actual `C²` frame and
+magnitude data now produce both the closed physical Maxwell field and the
+closed weighted Hodge flux. -/
+noncomputable def toPhysicalMaxwellC1PairRealization_ofSmoothFrameMagnitude
+    (A : PhaseIIIAcceptedBranch C M branch)
+    (hopen : IsOpen U) (hstar : StarConvex ℝ 0 U)
+    (hL : MatrixFieldContDiffOn 2 U M.L)
+    (hq : ContDiffOn ℝ 2 M.q U) (hqPos : ∀ z ∈ U, 0 < M.q z)
+    (hdL : ∀ z ∈ U, ∀ i j,
+      scalarFieldCoordinateFDeriv (fun y => M.L y i j) z =
+        fun k => M.dL z k i j)
+    (hdq : ∀ z ∈ U,
+      scalarFieldCoordinateFDeriv M.q z = M.dq z)
+    (hc : ∀ z ∈ U,
+      HasFDerivAt M.c (oneForm4ContinuousLinearMap (M.dc z)) z)
+    (hs : ∀ z ∈ U,
+      HasFDerivAt M.s (oneForm4ContinuousLinearMap (M.ds z)) z)
+    (hdc : ContinuousOn M.dc U) (hds : ContinuousOn M.ds U) :
+    PhaseIIIPhysicalMaxwellC1PairRealization C M branch :=
+  A.toPhysicalMaxwellC1PairRealization
+    (PositiveQPhaseIIISeedPairC1Realization.rescaledPairOfSmoothFrameMagnitude
+      M hopen hL hq hqPos hdL hdq hc hs hdc hds)
+    hopen hstar
+
 /-- For an actual-derivative Phase-III patch, ordinary smoothness of the
 frame, magnitude, and complexion coefficients plus the two tangent equations
 already suffice to produce the accepted branch's closed physical Maxwell
@@ -832,6 +896,32 @@ noncomputable def toPhysicalMaxwellC1Realization_ofActualSmoothFields
         L q omega c s coupling hdcEq hdsEq) branch :=
   A.toPhysicalMaxwellC1Realization
     (PositiveQPhaseIIISeedPairC1Realization.rescaledOfActualSmoothFields
+      L q omega c s coupling hdcEq hdsEq hopen hL hq hqPos hc hs)
+    hopen hstar
+
+/-- Actual smooth fields give the full paired physical handoff without an
+independent field-realization hypothesis in either exterior channel. -/
+noncomputable def toPhysicalMaxwellC1PairRealization_ofActualSmoothFields
+    (L : CurvatureCoordinateSpace4 → Matrix4)
+    (q : CurvatureCoordinateSpace4 → ℝ)
+    (omega : CurvatureCoordinateSpace4 → OneForm4)
+    (c s : CurvatureCoordinateSpace4 → ℝ) (coupling : ℝ)
+    (hdcEq : ∀ z ∈ U,
+      scalarFieldCoordinateFDeriv c z = (-(s z)) • omega z)
+    (hdsEq : ∀ z ∈ U,
+      scalarFieldCoordinateFDeriv s z = c z • omega z)
+    (A : PhaseIIIAcceptedBranch C
+      (PositiveQPhaseIIIPatch4.ofActualCoordinateFDerivs
+        L q omega c s coupling hdcEq hdsEq) branch)
+    (hopen : IsOpen U) (hstar : StarConvex ℝ 0 U)
+    (hL : MatrixFieldContDiffOn 2 U L)
+    (hq : ContDiffOn ℝ 2 q U) (hqPos : ∀ z ∈ U, 0 < q z)
+    (hc : ContDiffOn ℝ 1 c U) (hs : ContDiffOn ℝ 1 s U) :
+    PhaseIIIPhysicalMaxwellC1PairRealization C
+      (PositiveQPhaseIIIPatch4.ofActualCoordinateFDerivs
+        L q omega c s coupling hdcEq hdsEq) branch :=
+  A.toPhysicalMaxwellC1PairRealization
+    (PositiveQPhaseIIISeedPairC1Realization.rescaledPairOfActualSmoothFields
       L q omega c s coupling hdcEq hdsEq hopen hL hq hqPos hc hs)
     hopen hstar
 

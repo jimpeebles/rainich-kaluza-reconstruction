@@ -30,10 +30,15 @@ reconstruction equation, and positive `qSq` produce smooth complementary
 Maxwell projectors, the positive magnitude, and a verified
 pseudo-orthonormal/Lorentz fixed-probe frame. A positive-cosine chart
 constructs the local complexion angle from a unit coefficient pair. The
-remaining substantive boundary is identifying the accepted branch's actual
-residual/self-adjoint metric data and unit complexion pair with that
-certificate, then constructing the compatible normal-gauge `C²` EMD
-realizer. The former Maxwell principal-plane input has also been discharged
+canonical Ricci frame now proves the full scalar reconstruction equation and
+certified frame transport preserves it. The remaining substantive boundary is
+identifying the actual curvature/scalar fields with that transported canonical
+pair and identifying the curvature-selected unit complexion/Hodge relation
+with the residual certificate, then constructing the compatible normal-gauge
+`C²` EMD realizer. The selected branch covector now constructs its actual
+mixed scalar tensor and self-adjoint residual directly, and both exterior EMD
+channels survive the genuine `C¹` field handoff rather than being re-assumed
+downstream. The former Maxwell principal-plane input has also been discharged
 algebraically from dimension four, trace zero, and the non-null square law.
 Exact metrics may enter a labeled Phase-V validation track after the uplift
 module is complete, but Phase IV is not marked complete until the upstream
@@ -111,10 +116,23 @@ curvature gate and the uplift theorem are both closed.
   self-adjointness and strict fixed probes verify the pseudo-orthonormal
   tetrad, and a Minkowski orthonormal trivialization gives `L G Lᵀ=G`.
   The positive-cosine chart `θ=atan(s/c)` smoothly recovers every unit pair.
-- The next curvature-entry step is to identify the accepted branch's actual
-  mixed Ricci/scalar residual, self-adjoint orthonormal trivialization, and
-  curvature-selected unit complexion pair with those fields. The compatible
-  normal-gauge realizer remains the principal downstream risk.
+- The accepted scalar-contribution bridge is explicit. A certified inverse
+  metric raises the chosen branch covector and constructs
+  `V^i_j=(1/2)g^{ik}v_kv_j`; Lean proves its rank-one trace square law,
+  smoothness, metric self-adjointness, residual self-adjointness, and the
+  residual square theorem without a separately supplied scalar square law.
+- The generic canonical Ricci frame proves the full reconstruction equation
+  from the two forced scalar amplitudes and `qSq=q²`; a separate theorem
+  preserves it under every certified two-sided frame transport.
+- The actual field handoff retains both Phase-III exterior channels. The
+  unweighted physical Maxwell form and positively weighted rotated Hodge flux
+  are genuine closed `C¹` two-form fields with exact seed identities. The
+  remaining Maxwell seam is the metric-Hodge identification, not closure.
+- The next curvature-entry step is to identify the actual mixed Ricci and
+  selected scalar fields with the transported canonical pair, identify the
+  selected complexion and Hodge channel with the residual certificate, and
+  reduce the compatible normal-gauge realizer equation by equation. That
+  realizer remains the principal downstream risk.
 
 ## Critical path through Phase IV
 
@@ -323,9 +341,10 @@ null, repeated-root, zero-trace, and topological exclusion remains explicit.
 **Official Phase-IV gate:** IV-G1, IV-G2, IV-O1, IV-C1, and IV-N1 are all
 complete. A conditional uplift theorem alone does not close this gate.
 
-**Status: decision composition, smooth-frame Maxwell realization, and the
-residual principal-data layer complete; accepted-branch identification and
-normal-gauge realization open.** RK-R2s
+**Status: decision composition, smooth-frame paired Maxwell realization,
+residual principal data, and the actual branch scalar-contribution layer
+complete; reconstruction/Hodge identification and normal-gauge realization
+open.** RK-R2s
 now supplies the complete accepted/rejected branch tree from the concrete
 fixed-probe fields through the Phase-III obstruction pair and into the
 conditional-uplift interface. RK-R2t proves that any actual matching rescaled
@@ -340,9 +359,16 @@ smooth coframe candidate from componentwise `C²` matrix projectors and strict
 fixed probes. RK-R2x constructs the actual residual projectors and positive
 magnitude from `S=R-V` and `qSq`, verifies the pseudo-orthonormal and Lorentz
 frame identities, and supplies a positive-cosine local angle chart. IV-N1
-remains open until the accepted curvature branch is identified with this
-residual/self-adjoint/unit-complexion certificate and the normal-gauge `C²`
-EMD realizer is constructed.
+remains open. RK-R2y retains both closed exterior channels as actual `C¹`
+fields. RK-R2z constructs `V=(1/2)v^sharp tensor v` from the selected branch
+and a certified inverse metric, proving its square law, smoothness, and
+self-adjointness and hence residual self-adjointness automatically. The
+generic canonical Ricci frame now also supplies the full reconstruction
+equation from its two scalar amplitude identities, and arbitrary certified
+frame transport preserves that equation. The remaining steps are to identify
+the actual mixed Ricci and scalar fields with that transported canonical pair,
+identify the curvature-selected complexion/metric-Hodge channel, and construct
+the normal-gauge `C²` EMD realizer.
 
 ## Phase-V validation track
 
@@ -428,11 +454,19 @@ research result.
 5. **Complete at the residual principal-data layer (RK-R2x):** `S=R-V`,
    `q=√qSq`, the smooth complementary projectors, verified fixed-probe
    tetrad/Lorentz coframe, and positive-cosine local angle chart compose.
-6. Identify the accepted branch's actual residual, self-adjoint orthonormal
-   trivialization, and curvature-selected unit complexion pair; then construct
-   the compatible normal-gauge `C²` EMD realizer and finish IV-N1;
+6. **Complete (RK-R2y--RK-R2z):** retain both closed exterior channels as
+   genuine `C¹` fields; construct the selected branch's actual mixed scalar
+   tensor from `v` and the inverse metric; discharge its square law,
+   smoothness, and self-adjointness and the residual self-adjointness.
+7. **Complete at the canonical algebra/transport layer:** derive the full
+   reconstruction equation from the generic canonical Ricci roots and scalar
+   amplitudes and prove its invariance under a certified spectral frame.
+8. Identify the actual mixed Ricci and branch scalar fields with that
+   transported canonical pair, identify the curvature-selected unit
+   complexion/Hodge pair with the residual certificate, then reduce and
+   construct the compatible normal-gauge `C²` EMD realizer and finish IV-N1;
    report a sharp obstruction or no-go theorem as a result, not a failed proof.
-7. Use the operational V-T1 harness to recover the V-T2 rotating source and
+9. Use the operational V-T1 harness to recover the V-T2 rotating source and
    convention map, then feed its exact jets through the new paired classifier.
 
 No phase label advances merely because later infrastructure has started.

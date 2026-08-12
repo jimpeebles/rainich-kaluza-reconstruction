@@ -14,10 +14,11 @@ continuous bilinear forms.  This file supplies the exact finite-dimensional
 conversion between those two representations and proves that the conversion
 commutes with first jets and coordinate exterior differentiation.
 
-The final construction unweights a differentiable rescaled Maxwell field by
-`exp(-a phi/2)`.  Its Frechet derivative is the genuine product-rule
-derivative, and vanishing of the already-proved exponential-weight exterior
-jet makes the resulting physical two-form closed in the full
+The final constructions unweight a differentiable rescaled Maxwell field by
+`exp(-a phi/2)` and positively weight its rescaled Hodge partner by
+`exp(a phi/2)`. Their Frechet derivatives are the genuine product-rule
+derivatives, and the two already-proved exponential-weight exterior jets make
+the physical two-form and weighted dual flux closed in the full
 `IsC1ClosedTwoFormOn` sense.
 -/
 
@@ -657,6 +658,199 @@ theorem physicalField_isC1ClosedTwoFormOn
     rw [matrixExteriorDerivative_scaledTwoFormFirstJet]
     exact hclosure z hz
 
+/-- Positively weighted rescaled two-form matrix.  When the rescaled field is
+the Hodge partner of the Phase-III Maxwell seed, this is the physical weighted
+dual flux `exp(a phi / 2) G = exp(a phi) (*F)`. -/
+noncomputable def weightedDualMatrix
+    (S : RescaledMaxwellMatrixC1On U)
+    (coupling : ℝ) (phi : BaseCoordinateSpace → ℝ)
+    (z : BaseCoordinateSpace) : Matrix4 :=
+  positiveEMDWeight coupling phi z • S.field z
+
+/-- Product-rule coordinate first jet of the positively weighted dual
+flux. -/
+noncomputable def weightedDualFirstJet
+    (S : RescaledMaxwellMatrixC1On U)
+    (coupling : ℝ) (phi : BaseCoordinateSpace → ℝ)
+    (v : BaseCoordinateSpace → OneForm4)
+    (z : BaseCoordinateSpace) : Fin 4 → Matrix4 :=
+  scaledTwoFormFirstJet (positiveEMDWeight coupling phi z)
+    (positiveEMDWeightDerivative coupling
+      (positiveEMDWeight coupling phi z) (v z))
+    (S.field z) (S.firstJet z)
+
+/-- Actual continuous-bilinear positively weighted dual-flux field. -/
+noncomputable def weightedDualField
+    (S : RescaledMaxwellMatrixC1On U)
+    (coupling : ℝ) (phi : BaseCoordinateSpace → ℝ)
+    (z : BaseCoordinateSpace) :
+    ContinuousBilinForm BaseCoordinateSpace :=
+  matrixContinuousBilinForm4 (S.weightedDualMatrix coupling phi z)
+
+/-- Genuine Frechet derivative candidate of the weighted dual-flux field. -/
+noncomputable def weightedDualFDeriv
+    (S : RescaledMaxwellMatrixC1On U)
+    (coupling : ℝ) (phi : BaseCoordinateSpace → ℝ)
+    (v : BaseCoordinateSpace → OneForm4)
+    (z : BaseCoordinateSpace) :
+    BaseCoordinateSpace →L[ℝ]
+      ContinuousBilinForm BaseCoordinateSpace :=
+  matrixFirstJetBilinFDeriv (S.weightedDualFirstJet coupling phi v z)
+
+/-- Coordinate form of the derivative of the positive EMD weight. -/
+theorem oneForm4ContinuousLinearMap_positiveEMDWeightDerivative
+    (coupling r : ℝ) (v : OneForm4) :
+    oneForm4ContinuousLinearMap
+        (positiveEMDWeightDerivative coupling r v) =
+      ((coupling / 2) * r) • oneForm4ContinuousLinearMap v := by
+  rw [positiveEMDWeightDerivative,
+    oneForm4ContinuousLinearMap_smul]
+
+/-- The displayed positive-weight first jet is the actual Frechet derivative
+of the weighted dual-flux field. -/
+theorem hasFDerivAt_weightedDualField
+    (S : RescaledMaxwellMatrixC1On U)
+    (coupling : ℝ) (phi : BaseCoordinateSpace → ℝ)
+    (v : BaseCoordinateSpace → OneForm4)
+    (hphi : ∀ z ∈ U,
+      HasFDerivAt phi (oneForm4ContinuousLinearMap (v z)) z)
+    {z : BaseCoordinateSpace} (hz : z ∈ U) :
+    HasFDerivAt (S.weightedDualField coupling phi)
+      (S.weightedDualFDeriv coupling phi v z) z := by
+  have hweight :
+      HasFDerivAt (positiveEMDWeight coupling phi)
+        (((coupling / 2) * positiveEMDWeight coupling phi z) •
+          oneForm4ContinuousLinearMap (v z)) z :=
+    hasFDerivAt_positiveEMDWeight coupling (hphi z hz)
+  have hproduct :
+      HasFDerivAt
+        ((positiveEMDWeight coupling phi) •
+          (fun y => matrixContinuousBilinForm4 (S.field y)))
+        (positiveEMDWeight coupling phi z •
+            matrixFirstJetBilinFDeriv (S.firstJet z) +
+          (((coupling / 2) * positiveEMDWeight coupling phi z) •
+            oneForm4ContinuousLinearMap (v z)).smulRight
+              (matrixContinuousBilinForm4 (S.field z))) z :=
+    hweight.smul (S.differentiable z hz)
+  rw [show S.weightedDualField coupling phi =
+      (positiveEMDWeight coupling phi) •
+        (fun y => matrixContinuousBilinForm4 (S.field y)) by
+    funext y
+    change matrixContinuousBilinForm4
+      (positiveEMDWeight coupling phi y • S.field y) =
+        positiveEMDWeight coupling phi y •
+          matrixContinuousBilinForm4 (S.field y)
+    exact matrixContinuousBilinForm4_smul _ _]
+  change HasFDerivAt
+    ((positiveEMDWeight coupling phi) •
+      (fun y => matrixContinuousBilinForm4 (S.field y)))
+    (matrixFirstJetBilinFDeriv
+      (scaledTwoFormFirstJet
+        (positiveEMDWeight coupling phi z)
+        (positiveEMDWeightDerivative coupling
+          (positiveEMDWeight coupling phi z) (v z))
+        (S.field z) (S.firstJet z))) z
+  rw [matrixFirstJetBilinFDeriv_scaledTwoFormFirstJet]
+  simpa only [
+    oneForm4ContinuousLinearMap_positiveEMDWeightDerivative] using hproduct
+
+/-- Continuity of the scalar one-form and rescaled first jet makes the full
+weighted dual-flux derivative field continuous. -/
+theorem continuousOn_weightedDualFDeriv
+    (S : RescaledMaxwellMatrixC1On U)
+    (coupling : ℝ) (phi : BaseCoordinateSpace → ℝ)
+    (v : BaseCoordinateSpace → OneForm4)
+    (hphi : ∀ z ∈ U,
+      HasFDerivAt phi (oneForm4ContinuousLinearMap (v z)) z)
+    (hv : ContinuousOn v U) :
+    ContinuousOn (S.weightedDualFDeriv coupling phi v) U := by
+  have hphiContinuous : ContinuousOn phi U :=
+    fun z hz => ((hphi z hz).continuousAt).continuousWithinAt
+  have hweight : ContinuousOn (positiveEMDWeight coupling phi) U := by
+    change ContinuousOn (fun z => Real.exp ((coupling / 2) * phi z)) U
+    have hconstant : ContinuousOn
+        (fun _ : BaseCoordinateSpace => coupling / 2) U :=
+      continuousOn_const
+    exact (hconstant.mul hphiContinuous).rexp
+  have hfield : ContinuousOn
+      (fun z => matrixContinuousBilinForm4 (S.field z)) U :=
+    fun z hz => ((S.differentiable z hz).continuousAt).continuousWithinAt
+  have hdr : ContinuousOn
+      (fun z => positiveEMDWeightDerivative coupling
+        (positiveEMDWeight coupling phi z) (v z)) U := by
+    change ContinuousOn (fun z =>
+      ((coupling / 2) * positiveEMDWeight coupling phi z) • v z) U
+    exact ((continuousOn_const.mul hweight).smul hv)
+  have hweightedFDeriv : ContinuousOn
+      (fun z => matrixFirstJetBilinFDeriv
+        (S.weightedDualFirstJet coupling phi v z)) U := by
+    apply continuousOn_matrixFirstJetBilinFDeriv
+    intro k i j
+    change ContinuousOn (fun z =>
+      (positiveEMDWeightDerivative coupling
+          (positiveEMDWeight coupling phi z) (v z)) k *
+          S.field z i j +
+        positiveEMDWeight coupling phi z * S.firstJet z k i j) U
+    have hdrComponent : ContinuousOn (fun z =>
+        (positiveEMDWeightDerivative coupling
+          (positiveEMDWeight coupling phi z) (v z)) k) U :=
+      continuousOn_pi.mp hdr k
+    have hfieldComponent : ContinuousOn (fun z => S.field z i j) U := by
+      simpa only [matrixContinuousBilinForm4_coordinateDirection] using
+        (continuousOn_clm_apply.mp
+          (continuousOn_clm_apply.mp hfield (coordinateDirection i))
+          (coordinateDirection j))
+    have hfirstJetComponent : ContinuousOn
+        (fun z => S.firstJet z k i j) U :=
+      S.firstJet_continuous k i j
+    exact (hdrComponent.mul hfieldComponent).add
+      (hweight.mul hfirstJetComponent)
+  exact hweightedFDeriv
+
+/-- **Field-level weighted-dual theorem.** A genuine `C¹` realization of the
+rescaled Hodge channel whose positive-weight exterior jet vanishes produces
+an actual closed `C¹` weighted dual flux. -/
+theorem weightedDualField_isC1ClosedTwoFormOn
+    (S : RescaledMaxwellMatrixC1On U)
+    (coupling : ℝ) (phi : BaseCoordinateSpace → ℝ)
+    (v : BaseCoordinateSpace → OneForm4)
+    (hopen : IsOpen U) (hstar : StarConvex ℝ 0 U)
+    (hphi : ∀ z ∈ U,
+      HasFDerivAt phi (oneForm4ContinuousLinearMap (v z)) z)
+    (hv : ContinuousOn v U)
+    (hclosure : ∀ z ∈ U,
+      scaledTwoFormExteriorDerivative matrixOneWedgeTwo
+        (positiveEMDWeight coupling phi z)
+        (positiveEMDWeightDerivative coupling
+          (positiveEMDWeight coupling phi z) (v z))
+        (S.field z) (matrixExteriorDerivative (S.firstJet z)) = 0) :
+    IsC1ClosedTwoFormOn (S.weightedDualField coupling phi)
+      (S.weightedDualFDeriv coupling phi v) U where
+  isOpen := hopen
+  starShaped := hstar
+  alternating := by
+    intro z hz u w
+    apply matrixContinuousBilinForm4_alternating_of_transpose_eq_neg
+    simp only [weightedDualMatrix]
+    rw [Matrix.transpose_smul, S.alternating z hz]
+    simp only [smul_neg]
+  differentiable := by
+    intro z hz
+    exact S.hasFDerivAt_weightedDualField coupling phi v hphi hz
+  derivContinuousOn :=
+    S.continuousOn_weightedDualFDeriv coupling phi v hphi hv
+  closed := by
+    intro z hz a b c
+    apply matrixFirstJetBilinFDeriv_closed_of_exterior_zero
+    change matrixExteriorDerivative
+      (scaledTwoFormFirstJet
+        (positiveEMDWeight coupling phi z)
+        (positiveEMDWeightDerivative coupling
+          (positiveEMDWeight coupling phi z) (v z))
+        (S.field z) (S.firstJet z)) = 0
+    rw [matrixExteriorDerivative_scaledTwoFormFirstJet]
+    exact hclosure z hz
+
 end RescaledMaxwellMatrixC1On
 
 namespace CurvatureScalarBranchComponentPatch4
@@ -729,6 +923,20 @@ structure PositiveQPhaseIIIRescaledMaxwellC1Realization
     matrixExteriorDerivative (c1.firstJet z) =
       (M.exteriorJet z).rotatedDF matrixOneWedgeTwo
 
+/-- Actual `C¹` realizations of both rescaled Phase-III channels.  Keeping the
+Hodge channel here prevents the weighted Maxwell equation from being hidden
+inside the later normal-gauge EMD certificate. -/
+structure PositiveQPhaseIIIRescaledMaxwellC1PairRealization
+    {U : Set CurvatureCoordinateSpace4}
+    (M : PositiveQPhaseIIIPatch4 U) where
+  maxwell : PositiveQPhaseIIIRescaledMaxwellC1Realization M
+  hodge : RescaledMaxwellMatrixC1On U
+  hodge_field_eq : ∀ z ∈ U,
+    hodge.field z = (M.exteriorJet z).rotatedG
+  hodge_exteriorFirstJet_eq : ∀ z ∈ U,
+    matrixExteriorDerivative (hodge.firstJet z) =
+      (M.exteriorJet z).rotatedDG matrixOneWedgeTwo
+
 /-- Field-level output of an accepted curvature/Phase-III branch: a selected
 scalar representative and the matching genuine closed `C¹` physical Maxwell
 two-form required by radial potential recovery. -/
@@ -753,6 +961,30 @@ structure PhaseIIIPhysicalMaxwellC1Realization
       physicalMaxwell z (coordinateDirection i) (coordinateDirection j) =
         negativeEMDWeight M.coupling scalarRepresentative z *
           (M.exteriorJet z).rotatedF i j
+
+/-- Field-level output retaining both consequences of Phase-III acceptance:
+the closed physical Maxwell field and the closed positively weighted Hodge
+flux.  The final metric-Hodge identification remains an explicit downstream
+obligation. -/
+structure PhaseIIIPhysicalMaxwellC1PairRealization
+    {U : Set CurvatureCoordinateSpace4}
+    (C : CurvatureScalarBranchComponentPatch4 U)
+    (M : PositiveQPhaseIIIPatch4 U)
+    (branch : RelativeSignScalarBranch4) where
+  maxwell : PhaseIIIPhysicalMaxwellC1Realization C M branch
+  weightedHodgeFlux : CurvatureCoordinateSpace4 →
+    ContinuousBilinForm CurvatureCoordinateSpace4
+  weightedHodgeFluxDerivative :
+    CurvatureCoordinateSpace4 → CurvatureCoordinateSpace4 →L[ℝ]
+      ContinuousBilinForm CurvatureCoordinateSpace4
+  weightedHodgeFlux_closed :
+    IsC1ClosedTwoFormOn weightedHodgeFlux
+      weightedHodgeFluxDerivative U
+  weightedHodgeFlux_matches_seed :
+    ∀ z ∈ U, ∀ i j,
+      weightedHodgeFlux z (coordinateDirection i) (coordinateDirection j) =
+        positiveEMDWeight M.coupling maxwell.scalarRepresentative z *
+          (M.exteriorJet z).rotatedG i j
 
 /-- Obligations remaining after the physical Maxwell field has been produced:
 the convention-fixed Kaluza coupling and a compatible normal-gauge `C²` EMD

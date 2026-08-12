@@ -52,6 +52,7 @@ import RainichKaluza.PhysicalMaxwellFieldRealization
 import RainichKaluza.PhaseIIIRescaledSeedRealization
 import RainichKaluza.PhaseIIITransportedSeedCalculus
 import RainichKaluza.PhaseIIICurvaturePrincipalData
+import RainichKaluza.CurvatureScalarContribution
 import RainichKaluza.DifferentialBranchSelection
 import RainichKaluza.DifferentialCoupling
 import RainichKaluza.CouplingInvariant

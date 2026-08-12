@@ -406,9 +406,23 @@ candidate. RK-R2x now makes that frame geometric: the accepted residual
 `S=R-V`, reconstruction equation, and `qSq>0` generate the smooth Maxwell
 projectors and positive magnitude; their algebra verifies the
 pseudo-orthonormal tetrad and Lorentz coframe. It also supplies an explicit
-positive-cosine local angle chart. What remains is to identify the accepted
-branch's concrete residual/self-adjoint metric data and unit complexion pair
-with this certificate, then construct the normal-gauge `C²` EMD realizer.
+positive-cosine local angle chart. What remains is to identify the actual
+mixed Ricci/scalar fields with the transported canonical reconstruction pair
+and the unit complexion/Hodge pair with this certificate, then construct the
+normal-gauge `C²` EMD realizer. RK-R2y
+now retains both exterior equations through the actual `C¹` field layer: it
+constructs the closed physical Maxwell field and the closed positively
+weighted rotated Hodge flux. RK-R2z constructs the accepted branch's actual
+mixed scalar tensor from its covector and a certified inverse metric, proving
+the scalar square law, smoothness, and metric self-adjointness and hence the
+residual self-adjointness automatically. The remaining Maxwell obligation is
+the metric-Hodge identification, not a repeated closure hypothesis.
+The generic canonical Ricci frame now also proves the complete reconstruction
+equation from the two scalar amplitude identities, and a separate theorem
+transports that identity through every certified frame. The remaining
+curvature-algebra obligation is therefore the equality of the actual mixed
+Ricci/scalar fields with this transported canonical pair, not another abstract
+reconstruction assumption.
 The first layer may be completed and used by exact-metric tests without
 claiming that Phase IV itself has exited. The canonical dependency order is
 specified in `REALIGNED_EXECUTION_PLAN.md`.

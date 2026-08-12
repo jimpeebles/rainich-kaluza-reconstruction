@@ -132,9 +132,11 @@ differential identities. The repository now gives an exact conditional local
 decision for those identities. For every realized curvature patch it also
 classifies exactly which of the two scalar candidates admit local potentials,
 including the no-potential case. It now constructs the Frechet-jet realization
-automatically from constituent amplitude/eigen-one-form coordinate jets, but
-does not yet prove the four required jet identities for every concrete smooth
-metric-derived candidate or cover degenerate branches. The uniform analytic
+automatically from constituent amplitude/eigen-one-form coordinate jets. The
+two normalized fixed-probe eigen-one-form identities are proved by explicit
+matrix-probe, normalization, and metric-dual differentiation; the remaining
+curvature-entry seam is the two scalar-amplitude field identities. Degenerate
+branches are not covered. The uniform analytic
 splice identifying the
 radial derivative candidate with `dA`, the uplift constants, and the
 conditional intrinsic forward/converse five-dimensional uplift are complete;

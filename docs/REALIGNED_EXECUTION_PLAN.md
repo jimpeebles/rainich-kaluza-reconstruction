@@ -172,8 +172,9 @@ not assert that curvature supplies the bridge; constructing an accepted
 closed branch remains the upstream curvature-entry obligation. RK-R2o now
 settles the scalar-potential part once the smooth curvature jet is realized as
 the actual Frechet derivative of its spectral one-form field, and RK-R2p
-reduces that realization to four concrete constituent coordinate-jet
-identities.
+reduces that realization to constituent coordinate-jet identities. RK-R2q
+now supplies the two normalized fixed-probe eigen-one-form identities, so the
+remaining curvature-entry pair is scalar-amplitude differentiation.
 
 ## Upstream curvature gate for the official Phase-IV exit
 
@@ -218,6 +219,10 @@ The reconstructed amplitude derivatives are assembled directionwise, and
 `CurvatureScalarBranchJet4` supplies the explicit product-rule obstruction
 forms `dα,dβ` with relative-sign tests `dα±dβ`. No assertion that either test
 vanishes is made here; that is exactly II-G3.
+`CurvatureEigenOneFormDerivative.lean` now differentiates the fixed matrix
+probe, metric contraction, reciprocal square-root normalization, normalized
+vector, and metric dual for both signatures. Its coordinate specializations
+identify the actual timelike and spacelike eigen-one-form jets.
 
 ### II-G3 — settle branch existence
 
@@ -245,17 +250,18 @@ derived product-rule assumption: coordinate components reconstruct arbitrary
 scalar and one-form Frechet derivatives, and
 `CurvatureScalarBranchComponentPatch4.ofCoordinateFDerivs` automatically
 builds the realized branch certificate and exact potential list from the
-constituent amplitude/eigen-one-form jets. The remaining curvature-entry seam
-is exactly four concrete coordinate-jet identifications for the II-G2 smooth
-field definitions. The two amplitude identifications now follow from named
-theorems once the differentiated scalar-diagonal equations are supplied; the
-two eigen-one-form identifications are the remaining geometric pair.
+constituent amplitude/eigen-one-form jets. RK-R2q further provides
+`ofFixedProbeCurvatureEigenCovectors`, which inserts the two actual normalized
+fixed-probe coordinate jets directly. The remaining curvature-entry seam is
+the two scalar-amplitude identities; these follow from the named amplitude
+theorems once the differentiated scalar-diagonal field equations are
+supplied.
 Downstream HC1 then tests each surviving branch rather than deciding scalar
 integrability.
 
 ### IV-N1 — north-star composition
 
-Prove the four RK-R2p constituent coordinate-jet identities for the II-G2
+Prove the remaining RK-R2p scalar-amplitude coordinate-jet pair for the II-G2
 smooth curvature fields, then compose II-G1--II-G3, the completed Phase-III
 decision interface, and IV-C1 into the finite-order curvature-only local
 recognition theorem. Every null, repeated-root, zero-trace, and topological
@@ -331,12 +337,11 @@ research result.
 
 ## Immediate execution order
 
-1. Prove that the two reconstructed amplitude jets and two eigen-one-form jets
-   equal the coordinate components of the actual II-G2 Frechet derivatives.
-   The amplitude pair is reduced to the differentiated scalar-diagonal
-   identities, so prioritize the eigen-one-form derivative pair. RK-R2p then
-   constructs the realized patch and passes its complete scalar-potential
-   branch list to Phase III automatically.
+1. Instantiate the remaining two scalar-amplitude coordinate-jet identities
+   from the differentiated scalar-diagonal fields. The normalized fixed-probe
+   eigen-one-form pair and its direct RK-R2p constructor are complete. Closing
+   the amplitude pair therefore constructs the realized patch and passes its
+   complete scalar-potential branch list to Phase III automatically.
 2. In parallel, use the operational V-T1 harness to recover the V-T2 rotating
    source and convention map; feed its exact jets through the same obstruction
    interface.

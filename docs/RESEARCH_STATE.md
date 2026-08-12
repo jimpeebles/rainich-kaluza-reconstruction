@@ -105,6 +105,10 @@ three labeled gaps stay nonzero; fixed projected probes and strict-sign
 normalization give smooth metric-dual eigen-one-forms. Ordinary coordinate
 product rules are proved to become the corresponding mixed-tensor
 Levi--Civita identities, yielding the same four-block formula for `∇Pᵢ`.
+The fixed-probe fields themselves are now differentiated explicitly: the
+matrix action, metric contraction, reciprocal square-root scale, normalized
+vector, and metric dual give exact timelike/spacelike Frechet formulas and
+their actual coordinate jets.
 The evaluated scalar-amplitude formulas are assembled directionwise into
 one-forms, and `CurvatureScalarBranchJet4` now supplies explicit
 product-rule `dα,dβ` and branch obstructions `dα±dβ`.
@@ -130,11 +134,13 @@ level. Coordinate-basis components reconstruct scalar and one-form Frechet
 derivatives in arbitrary directions; the product rule then proves that the
 full `xθ` derivative is exactly the displayed spectral-component jet.
 `CurvatureScalarBranchComponentPatch4.ofCoordinateFDerivs` packages this into
-the realized classifier without assuming the product rule. The remaining
-curvature-entry seam is exactly four concrete identities: the two amplitude
-and two eigen-one-form jets from II-G2 must be identified with the coordinate
-components of their actual smooth-field derivatives. Once these are supplied,
-every surviving branch goes directly to the Phase-III obstruction interface.
+the realized classifier without assuming the product rule, and
+`ofFixedProbeCurvatureEigenCovectors` now inserts the actual normalized
+timelike/spacelike eigen-one-form jets. The remaining curvature-entry seam is
+the two amplitude identities: their II-G2 jets must be identified with the
+coordinate components of the actual smooth scalar fields. Once these are
+supplied, every surviving branch goes directly to the Phase-III obstruction
+interface.
 HC1 is downstream of this scalar integration decision.
 
 Phase III has reached its generic local decision interface. For `S=𝓡-V`, the reconstruction equation is

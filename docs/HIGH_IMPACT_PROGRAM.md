@@ -136,8 +136,11 @@ resolution of the identity. No eigenbasis or eigenspace orientation is
 chosen. That pointwise construction is now promoted to entrywise `C^n`
 coordinate matrix fields wherever the labeled gaps remain nonzero. Fixed
 projector probes, strict-sign normalization, and metric duality produce smooth
-eigen-one-forms on the same explicit patch. The universal derivative algebra
-then gives:
+eigen-one-forms on the same explicit patch. Their Frechet derivatives are now
+explicit as well: Lean checks the varying matrix probe, metric pairing,
+reciprocal square-root normalization, normalized vector, and metric-dual
+product rules for both timelike and spacelike signatures. The universal
+spectral-projector derivative algebra gives:
 if `p` is the projector for root `a`, `q` is a complementary projector for
 root `b`, and `dR,dp` denote a directional evaluation of `∇R,∇p`, Lean proves
 
@@ -174,9 +177,10 @@ an exhaustive one/one/two/zero potential classification, and the finite
 no-branch witnesses rule out both potentials. Coordinate components now
 recover arbitrary scalar/one-form Frechet derivatives, and the product rule
 automatically constructs the realized branch from actual amplitude and
-eigen-one-form jets. The remaining Phase-II curvature seam is four concrete
-coordinate-jet identities for the II-G2 smooth definitions; HC1 is a
-downstream test of every surviving scalar branch.
+eigen-one-form jets. The concrete normalized fixed-probe eigen-one-form pair
+now feeds that constructor directly. The remaining Phase-II curvature seam is
+the two scalar-amplitude coordinate-jet identities for the II-G2 smooth
+definitions; HC1 is a downstream test of every surviving scalar branch.
 
 ### Phase-II exit criterion
 
@@ -381,9 +385,10 @@ This exit has two necessary layers. The **uplift-module layer** is complete
 for the explicit accepted-data certificate: intrinsic chart-independent
 packaging, exhaustive IV.4 orbit classification, and the conditional
 forward/converse assembly are proved. The **curvature-entry layer** must prove
-the four remaining II-G2 constituent coordinate-jet identities; RK-R2p then
-constructs the realized Frechet-jet certificate automatically and supplies
-the exact branch list for composition with the Phase-III decision interface.
+the two remaining II-G2 scalar-amplitude coordinate-jet identities; RK-R2p
+and the fixed-probe constructor then build the realized Frechet-jet
+certificate automatically and supply the exact branch list for composition
+with the Phase-III decision interface.
 The first layer may be completed and used by exact-metric tests without
 claiming that Phase IV itself has exited. The canonical dependency order is
 specified in `REALIGNED_EXECUTION_PLAN.md`.

@@ -319,9 +319,14 @@ continuous-bilinear Frechet derivatives, upgrades coordinate exterior
 closure to arbitrary-direction cyclic closure, and proves that an accepted
 branch with an actual matching rescaled first-jet realization yields the
 exact closed `C¹` unweighted physical field. The remaining official Phase-IV
-obligation is upstream: construct that rescaled realization and the
-compatible normal-gauge `C²` EMD realizer from intrinsic curvature data, or
-return the sharp obstruction.
+obligation is upstream. `PhaseIIIRescaledSeedRealization.lean` further proves
+that the rescaled realization follows from the two explicit componentwise
+transported-seed derivative identities for the actual smooth `L,q` fields,
+their jet continuity, and the actual complexion derivatives; the full
+duality product rule and arbitrary-direction derivative reconstruction are
+automatic. Those coordinate identities and the compatible normal-gauge `C²`
+EMD realizer remain to be derived from intrinsic curvature data, or replaced
+by a sharp obstruction.
 
 ## Exact validation infrastructure
 

@@ -395,7 +395,10 @@ analytic promotion theorem: an actual rescaled `rotatedF` first-jet
 realization yields the matching closed post-unweighting `C¹` physical Maxwell
 field and reduces the completion interface to the Kaluza check and compatible
 normal-gauge `C²` EMD realizer. The remaining work is to construct that
-rescaled realization and the `C²` realizer from curvature alone.
+rescaled realization and the `C²` realizer from curvature alone. RK-R2u has
+now reduced the former construction to the explicit actual-coordinate-jet
+identities for the transported electric/Hodge seed pair and their continuity;
+their duality rotation and passage to the physical field are fully composed.
 The first layer may be completed and used by exact-metric tests without
 claiming that Phase IV itself has exited. The canonical dependency order is
 specified in `REALIGNED_EXECUTION_PLAN.md`.

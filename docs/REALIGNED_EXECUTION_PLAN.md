@@ -85,9 +85,16 @@ curvature gate and the uplift theorem are both closed.
   derivative and its continuity, and constructs the exact matching closed
   `C¹` physical Maxwell package. The downstream uplift interface is reduced
   to the Kaluza coupling check and normal-gauge `C²` EMD realizer.
+- The rescaled-seed realization is reduced to explicit scalar calculus.
+  `PhaseIIIRescaledSeedRealization.lean` proves the full duality-rotation
+  product rule, reconstructs arbitrary-direction matrix-field derivatives
+  from their sixteen scalar entry derivatives, and constructs the required
+  rescaled realization from the two transported-seed coordinate-jet
+  identities. No matrix norm or new Maxwell equation is assumed.
 - Constructing the genuine rescaled first-jet realization from the smooth
-  curvature seed, followed by the normal-gauge realizer, is now the principal
-  mathematical risk of the north-star theorem.
+  curvature seed now means discharging those two concrete `dL,dq` derivative
+  identities and their continuity; the normal-gauge realizer follows as the
+  principal remaining geometric risk.
 
 ## Critical path through Phase IV
 
@@ -302,9 +309,11 @@ now supplies the complete accepted/rejected branch tree from the concrete
 fixed-probe fields through the Phase-III obstruction pair and into the
 conditional-uplift interface. RK-R2t proves that any actual matching rescaled
 first-jet realization produces the required closed `C¹` physical Maxwell
-field and reduces the remaining uplift interface accordingly. IV-N1 remains
-open because that rescaled realization and the normal-gauge `C²` EMD realizer
-have not yet been constructed from the curvature seed.
+field and reduces the remaining uplift interface accordingly. RK-R2u reduces
+construction of that realization from smooth `L,q` data to the two explicit
+transported-seed coordinate derivative identities and jet continuity. IV-N1
+remains open until those identities and the normal-gauge `C²` EMD realizer are
+constructed from the curvature seed.
 
 ## Phase-V validation track
 
@@ -381,11 +390,13 @@ research result.
    survivor's realized rescaled first jet to the matching post-unweighting
    `C¹` physical Maxwell field package, retaining the coordinate seed
    equality (RK-R2t).
-3. Construct `PositiveQPhaseIIIRescaledMaxwellC1Realization` from the smooth
-   curvature seed, then construct the compatible normal-gauge `C²` EMD
-   realizer and finish IV-N1;
+3. **Reduction complete (RK-R2u):** smooth `L,q` data plus the explicit
+   electric/Hodge transported-seed coordinate-jet identities construct
+   `PositiveQPhaseIIIRescaledMaxwellC1Realization`. Discharge those identities
+   and their continuity from the actual `dL,dq` chart jets.
+4. Construct the compatible normal-gauge `C²` EMD realizer and finish IV-N1;
    report a sharp obstruction or no-go theorem as a result, not a failed proof.
-4. Use the operational V-T1 harness to recover the V-T2 rotating source and
+5. Use the operational V-T1 harness to recover the V-T2 rotating source and
    convention map, then feed its exact jets through the new paired classifier.
 
 No phase label advances merely because later infrastructure has started.

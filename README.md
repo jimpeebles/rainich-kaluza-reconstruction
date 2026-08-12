@@ -276,7 +276,12 @@ exponentially unweighted to the exact matching closed `C¹` physical Maxwell
 package. It also reduces the downstream completion type to the Kaluza check
 and normal-gauge realizer. What remains is to construct the matching rescaled
 realization itself from the smooth curvature seed, then the compatible `C²`
-EMD fields. See the
+EMD fields. `PhaseIIIRescaledSeedRealization.lean` now reduces the former to
+two explicit coordinate product-rule checks: the actual derivatives of the
+transported electric and Hodge seeds must equal the displayed `dL,dq` jets.
+It proves that these component identities reconstruct the full Frechet
+derivative, assemble the duality rotation, and feed the closed-field theorem.
+See the
 [`realigned execution plan`](docs/REALIGNED_EXECUTION_PLAN.md) for the ordered
 proof obligations and publication decision points.
 

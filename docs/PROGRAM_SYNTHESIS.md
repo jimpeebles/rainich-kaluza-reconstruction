@@ -75,8 +75,9 @@ spectral problem are independently secured.
 | Coupled pointwise block reconstruction and its two-branch ambiguity | Lean-checked in this repository | present core result |
 | Protected `±q` directions under the scalar rank-one perturbation | Lean-checked from the four-dimensional tracefree square-law hypotheses | completed algebraic entrance |
 | Full characteristic factorization from four-dimensional Maxwell algebra | Lean-checked for `S+V` with square-law `S` and rank-one `V` | necessary pointwise theorem; not sufficient for reconstruction |
-| Differential selection/identification of pointwise partners | exact obstruction and local-potential classifier complete; actual fixed-probe eigen-one-form and reconstructed-amplitude jets generate the realized branch certificate | constituent seam complete on the explicit generic patch; downstream Phase-III composition remains |
-| Maxwell two-form recovery and scalar/Maxwell field equations | open | required for sufficiency and for identifying `a=√3` |
+| Differential selection/identification of pointwise partners | exact obstruction and local-potential classifier complete; actual fixed-probe eigen-one-form and reconstructed-amplitude jets generate the realized branch certificate | constituent seam complete on the explicit generic patch |
+| Scalar/Maxwell branch composition | every concrete relative-sign branch reaches an exact scalar rejection, Maxwell rejection, or Phase-III acceptance result with point witnesses retained | decision seam complete; smooth physical-field and normal-gauge realization remains |
+| Maxwell two-form recovery and scalar/Maxwell field equations | pointwise transported seed and obstruction iff complete; field-level `C¹` unweighted realization and compatible `C²` realizer open | required for unconditional sufficiency and for identifying the accepted curvature branch with the uplift input |
 | Exact-solution scalar multipoles and binary hierarchy | promising inherited derivation, unreproduced here | strongest physics validation track |
 | Laboratory critical amplifier | conditional and speculative | downstream falsifiable application only |
 

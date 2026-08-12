@@ -47,6 +47,7 @@ import RainichKaluza.CurvatureEigenOneFormDerivative
 import RainichKaluza.CurvatureScalarAmplitudeFieldDerivative
 import RainichKaluza.CurvatureBranchObstruction
 import RainichKaluza.CurvatureBranchIntegration
+import RainichKaluza.CurvatureKaluzaComposition
 import RainichKaluza.DifferentialBranchSelection
 import RainichKaluza.DifferentialCoupling
 import RainichKaluza.CouplingInvariant

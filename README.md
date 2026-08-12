@@ -117,6 +117,12 @@ candidate Ricci fingerprint and the generic pointwise reconstruction layer:
 - a genuine local scalar integration theorem on open convex patches, including
   analytic relative-sign branch selection and uniqueness of the scalar
   potential up to an additive constant;
+- a paired curvature-to-Phase-III classifier: each concrete relative-sign
+  candidate is either rejected by a nonzero scalar curvature matrix, rejected
+  by a nonzero Maxwell `F`/`G` obstruction tensor, or accepted with both a
+  scalar potential and vanishing Maxwell obstructions; all rejections retain
+  explicit point witnesses and accepted branches expose the exact conditional
+  uplift obligations;
 - an audited Phase-IV handoff: the actual exponential weights have their
   required derivatives, accepted Phase-III data give a closed physical
   Maxwell field and weighted dual flux, and `a²=3` admits the positive
@@ -257,9 +263,13 @@ Lean differentiates the two rational reconstructed diagonals and their
 signature-adjusted square roots, then identifies both actual coordinate jets
 with the curvature formulas. The concrete smooth fields therefore generate
 the realization and complete potential list with no derivative-identity
-inputs. The next north-star step is downstream composition of every surviving
-or rejected scalar branch with the Phase-III decision and conditional uplift
-interfaces. See the
+inputs. `CurvatureKaluzaComposition.lean` now carries that entire list through
+the Phase-III Maxwell test: scalar and Maxwell rejections have explicit point
+witnesses, while every accepted survivor has the two canonical exponential-
+weight closure identities and a typed route into the conditional uplift
+theorem. The remaining north-star seam is field-level: realize the unweighted
+seed as the matching `C¹` closed two-form and supply the compatible normal-
+gauge `C²` EMD fields. See the
 [`realigned execution plan`](docs/REALIGNED_EXECUTION_PLAN.md) for the ordered
 proof obligations and publication decision points.
 

@@ -388,8 +388,11 @@ packaging, exhaustive IV.4 orbit classification, and the conditional
 forward/converse assembly are proved. The **curvature-entry constituent
 layer** is complete on the explicit generic fixed-probe patch: RK-R2p--RK-R2r
 build the realized Frechet-jet certificate automatically and supply the exact
-branch list. The remaining work is composition with the Phase-III decision
-and accepted-data interfaces.
+branch list. RK-R2s composes every branch with the Phase-III obstruction test,
+preserves scalar and Maxwell rejection witnesses, and maps accepted survivors
+to the conditional-uplift obligation type. The remaining work is the smooth
+post-unweighting `C¹` field realization and compatible normal-gauge `C²` EMD
+realizer required to discharge that type from curvature alone.
 The first layer may be completed and used by exact-metric tests without
 claiming that Phase IV itself has exited. The canonical dependency order is
 specified in `REALIGNED_EXECUTION_PLAN.md`.

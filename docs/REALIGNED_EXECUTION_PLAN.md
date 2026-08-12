@@ -20,10 +20,12 @@ longer be conflated:
 
 The first milestone is complete. The smooth curvature-projector realization
 part of the Phase-II seam is now complete on the explicit generic local patch.
-The second milestone still crosses the substantive scalar-branch closedness
-or obstruction problem. The former Maxwell principal-plane input has also
-been discharged algebraically from dimension four, trace zero, and the
-non-null square law.
+The second milestone has crossed the scalar-branch and pointwise Maxwell
+decision seams. Its remaining substantive boundary is field realization:
+promoting the accepted unweighted seed jets to the matching `C¹` closed
+physical two-form and constructing the compatible normal-gauge `C²` EMD
+realizer. The former Maxwell principal-plane input has also been discharged
+algebraically from dimension four, trace zero, and the non-null square law.
 Exact metrics may enter a labeled Phase-V validation track after the uplift
 module is complete, but Phase IV is not marked complete until the upstream
 curvature gate and the uplift theorem are both closed.
@@ -69,8 +71,13 @@ curvature gate and the uplift theorem are both closed.
   smooth matrix fields, their coordinate derivatives satisfy the full
   Levi--Civita four-block formula, and the reconstructed spectral one-forms
   have explicit obstruction matrices `dα,dβ`.
-- The Phase-II existence/closure problem remains the principal mathematical
-  risk of the north-star theorem.
+- The concrete scalar list is now composed with the Phase-III obstruction
+  test. Every branch carries either a scalar matrix witness, a Maxwell
+  three-form-channel witness, or a Phase-III acceptance certificate; accepted
+  branches also carry the exponential-unweighting closure identities and map
+  to an explicit conditional-uplift completion type.
+- Smooth physical-field and normal-gauge realization is now the principal
+  mathematical risk of the north-star theorem.
 
 ## Critical path through Phase IV
 
@@ -264,6 +271,10 @@ identifies both actual amplitude coordinate jets, and provides
 identities are discharged for the concrete smooth fields, and the exact
 zero/one/two-potential list is available automatically. Downstream HC1 now
 tests each surviving branch rather than deciding scalar integrability.
+`CurvatureKaluzaComposition.lean` performs that test for both branches,
+retains finite scalar/Maxwell rejection witnesses, proves the exponential-
+weight closure identities for accepted survivors, and maps each survivor to
+the precise remaining field-level obligations of `AcceptedKaluzaBranchAt`.
 
 ### IV-N1 — north-star composition
 
@@ -274,6 +285,13 @@ null, repeated-root, zero-trace, and topological exclusion remains explicit.
 
 **Official Phase-IV gate:** IV-G1, IV-G2, IV-O1, IV-C1, and IV-N1 are all
 complete. A conditional uplift theorem alone does not close this gate.
+
+**Status: decision composition complete; field realization open.** RK-R2s
+now supplies the complete accepted/rejected branch tree from the concrete
+fixed-probe fields through the Phase-III obstruction pair and into the
+conditional-uplift interface. IV-N1 remains open because the matching `C¹`
+physical Maxwell field and normal-gauge `C²` EMD realizer have not yet been
+constructed from the curvature seed.
 
 ## Phase-V validation track
 
@@ -342,16 +360,17 @@ research result.
 
 ## Immediate execution order
 
-1. Compose the now-concrete zero/one/two-potential scalar branch list with the
-   Phase-III Maxwell obstruction interface. Preserve every rejected branch as
-   an explicit obstruction and map every survivor to the conditional uplift
-   accepted-data obligations.
-2. In parallel, use the operational V-T1 harness to recover the V-T2 rotating
-   source and convention map; feed its exact jets through the same obstruction
-   interface.
-3. Finish IV-N1 once the downstream accepted/rejected orbits and normal-gauge
-   realizer obligations are connected; report a sharp obstruction or no-go
-   theorem as a result, not as a failed proof.
+1. **Complete:** compose the concrete zero/one/two-potential list with the
+   Phase-III Maxwell obstruction interface, preserve every scalar/Maxwell
+   rejection witness, and map every survivor to the conditional-uplift
+   obligations (RK-R2s).
+2. Promote an accepted survivor's exponential-weight closure jets to the
+   matching post-unweighting `C¹` physical Maxwell field package; keep the
+   coordinate seed equality explicit.
+3. Construct the compatible normal-gauge `C²` EMD realizer and finish IV-N1;
+   report a sharp obstruction or no-go theorem as a result, not a failed proof.
+4. Use the operational V-T1 harness to recover the V-T2 rotating source and
+   convention map, then feed its exact jets through the new paired classifier.
 
 No phase label advances merely because later infrastructure has started.
 Claims advance only when their stated gate is proved and recorded in the

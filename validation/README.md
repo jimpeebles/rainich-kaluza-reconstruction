@@ -28,10 +28,16 @@ uv run python -m benchmarks.vt2b_generic_near_miss --check
 
 The Python minor line and SymPy release are fixed in `pyproject.toml`; exact
 resolved package hashes are recorded in `uv.lock`. Benchmark artifacts record
-the runtime versions, canonicalized inputs, SHA-256 input identity, individual
-checks, and residual hashes. No benchmark uses floating-point arithmetic.
-The final `--check` command fails if fresh exact output differs byte-for-byte
-from the committed artifact. `./audit.sh` runs the entire validation sequence.
+the runtime versions, a SHA-256 identity for the declared human-readable input
+manifest, individual checks, and residual hashes.  That manifest hash is not a
+hash of the implementation or every symbolic expression.  The flagship route
+therefore also records separate hashes of its complete symbolic model, the
+relevant implementation sources and lockfiles, the source benchmark and its
+artifact, its quotient relations, and its coefficient payload. No benchmark
+uses floating-point scientific arithmetic. The final `--check` command fails
+if fresh exact output differs byte-for-byte from the committed artifact.
+`./audit.sh` also rejects floating-point literals and common approximate
+numerical APIs/imports before running the entire validation sequence.
 
 ## V-T1 seed benchmark
 
@@ -119,8 +125,15 @@ Finally, a convention-aligned physical Maxwell/Hodge calculation agrees with
 the detector residual and gives the choice-free active component
 `(omega wedge S^T dphi)_(1,2) = 1486879232 sqrt(3)/30795876033 != 0`.
 
-The last finite calculation is performed in an explicit 128-dimensional
-quadratic tower. It certifies the literal selected scalar and Maxwell-residual
+The last finite calculation is performed in an explicit 128-slot square-free
+quadratic quotient representation. Valid square-relation reductions certify
+its zero identities; the code does not claim that all 128 slots are linearly
+independent over the rationals. Direct ring-law regressions and committed
+relation/coefficient hashes protect the custom algebra implementation.
+The selected source and active component have independent exact
+positive-square certificates, avoiding any inference from slot-vector
+nonemptiness. Together with the physical-activity/invertible-channel bridge,
+the calculation certifies the literal selected scalar and Maxwell-residual
 one-jets, the selected frame/coframe one-jet, all 128 components of the two
 complete first-order seed channels, source component `0`, active wedge
 component `(0,3)`, and the literal cosine quotient

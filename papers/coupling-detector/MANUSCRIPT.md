@@ -51,7 +51,9 @@ quotient for \(B\), and hence \(a^2=A^2+B^2\).  On the explicit active formal
 family, the fixed fourth-order outputs for \(a\) and \(b\) agree if and only if
 \(a=\pm b\): the order-three \(\mathbb R\)-fiber collapses at order four to the
 orientation-free \(\mathbb Z_2\).  We also implement a finite
-coordinate detector using metric derivatives through order four.  Under its
+coordinate detector whose nested Fréchet-derivative definitions reach metric
+order four by dependency tracing.  We have not yet compiled a separate
+factorization through a packaged coordinate four-jet.  Under its
 explicit active-regular Ricci--exterior EMD hypotheses, its accepted set is
 nonempty and contains the physical value \(a^2\); with a certificate for every
 survivor on the unique scalar-closure locus, the complete output image is
@@ -277,8 +279,10 @@ The analytic EMD equations are put in the pure second-order potential
 variables \((g,A,\phi)\), with \(F=dA\).  Before invoking any formal-PDE
 result, the closed finite Maxwell data above are lifted by an explicit radial
 homotopy formula to a potential two-jet \(j^2A\).  The prescribed data are
-therefore actual finite jets in the variables used by the PDE, not a
-mixed-order \((g,F,\phi)\) surrogate.
+therefore compatible holonomic coefficient jets in the variables used by the
+PDE, not a mixed-order \((g,F,\phi)\) surrogate.  Lean does not yet package
+these coefficients as an explicit quadratic one-form field with nested
+Fréchet derivatives.
 
 Kruglikov proves involutivity of the gauge-degenerate source-free
 Einstein--Maxwell potential system
@@ -302,7 +306,7 @@ involutivity lemma, this yields a local analytic EMD germ for every \(a\).
 This is a short application argument pending specialist audit, not a quotation
 of a theorem in which
 Kruglikov names EMD.  In particular, we do not invoke his Theorem 4 directly.
-The finite-jet identities, explicit potential two-jet, and symmetric
+The finite-jet identities, explicit potential coefficient two-jet, and symmetric
 metric/Ricci first prolongation are checked in Lean.  The contracted-Bianchi
 contraction, Spencer-complex extension, and Cartan--Kähler application belong
 to the human proof and are not formalized in Lean.
@@ -433,7 +437,9 @@ inequalities.  For \(\chi\in\mathscr D_4(g,z)\), write
 for `actualMetricFourthOrderCouplingSqCandidateAt g z χ`.
 
 The definitions of \(\mathscr D_4\) and \(\widehat a^2\) take only the
-coordinate metric and its derivatives through order four.  Matter fields,
+coordinate metric.  Dependency tracing through the nested Fréchet
+derivatives reaches metric order four; explicit four-jet extensionality is
+not yet compiled.  Matter fields,
 the coupling, and an EMD equation package enter only as correctness witnesses
 in the theorem below.
 
@@ -483,7 +489,11 @@ This theorem is compiled in Lean.  The Kaluza statement is necessary, not a
 sufficient local Kaluza-uplift criterion.  The detector is local in a fixed
 coordinate trivialization: equal coordinate metric germs give identical
 accepted sets and raw-choice outputs.  Full nonlinear-coordinate covariance
-of the complete finite construction remains open.
+of the complete finite construction remains open.  The explicit raw search
+has \(6{,}291{,}456\) choices, a count now proved structurally in Lean.
+The correctness witness used here is a Ricci--exterior EMD package: it includes
+the stress/Hodge relation and both rescaled Maxwell exterior equations, but
+does not itself package the scalar wave equation.
 
 ## 7. Exact evidence
 
@@ -499,11 +509,14 @@ from the Lean theorem surface.
   finite detector's causal scalar entrance.
 - At the replacement point \(r=3/2,\theta=\pi/4\), the
   `vt2-complete-detector-route` artifact passes 21 exact checks.  Its
-  128-dimensional quadratic-tower calculation verifies the literal selected
+  128-slot exact quadratic quotient calculation verifies the literal selected
   scalar and residual one-jets, selected frame/coframe one-jet identities, all
   128 components of the two complete first-order channels, the exact cosine
   quotient \(A\), physical \(dA=d(\sqrt3\,C)\), the sine quotient \(B\), all
-  four next-order residual components, and \(A^2+B^2=3\).
+  four next-order residual components, and \(A^2+B^2=3\).  Valid square
+  relations certify the zero identities; no degree-128 number-field claim is
+  made.  Model, implementation, relation, and coefficient-payload hashes are
+  recorded separately.
 - A paired near miss preserves the point metric, first jet, Lorentz signature,
   and simple spectrum while failing a named algebraic obstruction.
 
@@ -528,11 +541,12 @@ No benchmark is a newly discovered exact solution.
 |---|---|---|
 | Exact complete-channel fiber classification | `canonicalFullComplexionCouplingChannels_eq_iff_shearOrbit`; `canonicalFirstOrderChannelShear_parameter_unique` | Lean |
 | Active common formal metric three-jet for every \(a\) | `activeAmbiguity_commonFormalMetricThreeJet_for_every_coupling` | Lean |
-| Matter-jet injectivity | `activeAmbiguityMaxwellFirstJet_injective` | Lean |
+| Rescaled and physical matter-jet injectivity | `activeAmbiguityMaxwellFirstJet_injective`; `activeAmbiguityPhysicalMaxwellFirstJet_injective` | Lean |
 | Four distinct real Ricci roots | `activeAmbiguityRicciSource_has_four_distinct_real_eigenpairs` | Lean |
 | Common Ricci first prolongation from the symmetric metric third jet | `activeAmbiguityFormalMetricJet3_einsteinFirstProlongation`; `coordinateRicciFirstJet_minkowski_zero` | Lean |
 | Polynomial metric-germ realization through order three | `activeAmbiguityPolynomialMetricGerm_realizes_threeJet` | Lean |
-| Explicit physical potential two-jet | `radialGaugePotentialTwoJet4_realizes` | Lean |
+| Active-family closed physical Maxwell jet and compatible potential coefficient two-jet | `matrixExteriorDerivative_activeAmbiguityPhysicalMaxwellFirstJet`; `activeAmbiguityPhysicalMaxwellPotentialTwoJet_realizes` | Lean |
+| Exact raw detector-choice count \(6{,}291{,}456\) | `allActualMetricDetectorChoices4_card` | Lean |
 | Analytic EMD involutivity/realization extension | Kruglikov Theorem 3 plus the scalar-wave symbol summand and Cartan--Kähler | human proof using external theorem |
 | Next-order equation, quotient, uniqueness | `nextOrderSineCouplingEquation_eq_zero`; `sineCouplingFromNextOrderComponent_eq`; `nextOrderSineCoupling_unique` | Lean |
 | Recovery of \(a^2\) | `couplingSqFromNextOrderComponent_eq`; `fourthOrderCouplingSqCandidate_eq_physical` | Lean |
@@ -579,7 +593,11 @@ Rainich theory, and EMD geometry is required before submission.
 
 The present work does not establish:
 
+- factorization of the complete construction through an explicit coordinate
+  four-jet (the compiled locality theorem assumes equality of metric germs);
 - full nonlinear-coordinate covariance of the complete finite accepted set;
+- a concrete Lean inhabitant of every physical-patch and per-survivor
+  certificate used by the abstract detector theorems;
 - detector confluence where both scalar branches close;
 - the inactive, null, zero-trace, repeated-root, or collision branches;
 - a converse turning every accepted metric branch into an EMD solution;
@@ -595,6 +613,9 @@ For the converse, after reconstructing \(B\) one must impose
 Directly differentiating the quotient for \(B\) may require a metric five-jet.
 Once the physical EMD realizer is reconstructed, the repository already
 contains the conditional local Ricci-flat Kaluza uplift, converse reduction,
-and presentation-orbit theorem.  That necessary-and-sufficient recognition
-theorem is the next paper-scale target; it is not folded into the result proved
-here.
+and presentation-orbit theorem.  Its current realizer interface explicitly
+assumes that the realized fields satisfy the complete EMD equations, and no
+concrete inhabitant of that full interface is compiled.  The convention-fixed
+warp constants are verified, not uniquely solved from a general warp ansatz.
+Removing those two conditional handoffs is part of the next paper-scale
+recognition theorem; it is not folded into the result proved here.

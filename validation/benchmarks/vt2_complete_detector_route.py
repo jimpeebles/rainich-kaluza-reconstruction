@@ -33,9 +33,10 @@ from rk_validation.helical_detector import (
 from rk_validation.helical_fourth_order import (
     replacement_fourth_order_tower_certificate,
 )
+from rk_validation.provenance import implementation_sha256, symbolic_model_sha256
 
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 BENCHMARK_ID = "vt2-complete-detector-route"
 RAW_CHOICE_COUNT = 4**9 * 6 * 2**2
 
@@ -404,17 +405,25 @@ def build_artifact() -> dict[str, object]:
             and bool(
                 fourth_order["literal_residual_one_jet_matches_physical"]
             ),
-            "tower_dimension": fourth_order["tower_dimension"],
+            "tower_slots": fourth_order["tower_slots"],
+            "tower_dimension_certified": fourth_order[
+                "tower_dimension_certified"
+            ],
             "residual_sha256": _digest(sp.S.Zero),
         },
         {
             "name": "replacement-point-selected-frame-one-jet-and-complete-channel-normal-form-pass",
             "passed": bool(fourth_order["selected_frame_orthonormal"])
             and bool(fourth_order["selected_coframe_inverse"])
+            and bool(fourth_order["tower_ring_laws_exact"])
             and fourth_order["complete_channel_residual_count"] == 0,
             "complete_channel_residual_count": fourth_order[
                 "complete_channel_residual_count"
             ],
+            "tower_relations_sha256": fourth_order[
+                "tower_relations_sha256"
+            ],
+            "tower_payload_sha256": fourth_order["tower_payload_sha256"],
             "residual_sha256": _digest(
                 sp.Integer(fourth_order["complete_channel_residual_count"])
             ),
@@ -426,6 +435,20 @@ def build_artifact() -> dict[str, object]:
             and bool(fourth_order["literal_cosine_quotient_exact"]),
             "source_component": fourth_order["source_component"],
             "wedge_component": list(fourth_order["wedge_component"]),
+            "source_nonzero_bridge": fourth_order["source_nonzero_bridge"],
+            "source_coefficients": fourth_order["source_coefficients"],
+            "source_square_coefficients": fourth_order[
+                "source_square_coefficients"
+            ],
+            "active_wedge_nonzero_bridge": fourth_order[
+                "active_wedge_nonzero_bridge"
+            ],
+            "active_wedge_coefficients": fourth_order[
+                "active_wedge_coefficients"
+            ],
+            "active_wedge_square_coefficients": fourth_order[
+                "active_wedge_square_coefficients"
+            ],
             "cosine_value": fourth_order["cosine_value"],
             "residual_sha256": _digest(sp.S.Zero),
         },
@@ -457,6 +480,12 @@ def build_artifact() -> dict[str, object]:
     ]
     input_spec = {
         "source_benchmark": "vt2-generic-helical-string",
+        "source_benchmark_sha256": implementation_sha256(
+            [
+                "benchmarks/vt2_generic_helical_string.py",
+                "artifacts/vt2-generic-helical-string.json",
+            ]
+        ),
         "committed_point": {"r": "3", "theta": "pi/4"},
         "replacement_point": {"r": "3/2", "theta": "pi/4"},
         "raw_choice_count": RAW_CHOICE_COUNT,
@@ -486,7 +515,7 @@ def build_artifact() -> dict[str, object]:
             {"gate": "choice-free physical active wedge", "status": "passed-exact-component-1-2"},
             {
                 "gate": "selected literal frame one-jet and complete first-order channels",
-                "status": "passed-exact-128-dimensional-quadratic-tower",
+                "status": "passed-exact-128-slot-quadratic-quotient-representation",
             },
             {
                 "gate": "literal quotient derivative equals physical dA",
@@ -505,6 +534,32 @@ def build_artifact() -> dict[str, object]:
         "runtime": {"python": platform.python_version(), "sympy": sp.__version__},
         "input": input_spec,
         "input_sha256": hashlib.sha256(_canonical_json(input_spec).encode("utf-8")).hexdigest(),
+        "input_sha256_scope": "declared-manifest-only",
+        "model_sha256": symbolic_model_sha256(
+            [
+                coordinates,
+                metric,
+                scalar,
+                potential,
+                sp.Integer(3),
+                sp.Rational(3, 2),
+                sp.pi / 4,
+            ]
+        ),
+        "implementation_sha256": implementation_sha256(
+            [
+                "benchmarks/vt2_complete_detector_route.py",
+                "rk_validation/exact.py",
+                "rk_validation/helical_detector.py",
+                "rk_validation/helical_fourth_order.py",
+                "rk_validation/provenance.py",
+                "rk_validation/no_approx.py",
+                "benchmarks/vt2_generic_helical_string.py",
+                "artifacts/vt2-generic-helical-string.json",
+                "pyproject.toml",
+                "uv.lock",
+            ]
+        ),
         "checks": checks,
         "route_manifest": route_manifest,
         "passed": all(bool(check["passed"]) for check in checks),

@@ -90,18 +90,24 @@ bundle theorem, or classification under every non-product presentation.
 ## 4. Reusable exact finite-jet realization layer
 
 The collision data are not merely formal arrays.  A cubic polynomial metric
-field realizes their symmetric metric three-jet, and every closed Maxwell
-one-jet has an explicit radial-gauge potential two-jet.  These constructions
-are reusable for finite-jet counterexamples and formal-PDE entrance data.
+field realizes their symmetric metric three-jet.  For the active family, the
+rescaled Maxwell jet is explicitly unweighted, the resulting physical
+one-jet is proved closed for every \(a\), and an explicit radial-gauge
+compatible potential coefficient two-jet realizes it.  These
+constructions are reusable for
+finite-jet counterexamples and formal-PDE entrance data.
 
 Lean anchors:
 
 - `activeAmbiguityPolynomialMetricGerm_realizes_threeJet` and
   `coordinateRicciFirstJet_minkowski_zero`;
-- `radialGaugePotentialTwoJet4_realizes`.
+- `matrixExteriorDerivative_activeAmbiguityPhysicalMaxwellFirstJet`;
+- `activeAmbiguityPhysicalMaxwellPotentialTwoJet_realizes`.
 
-Boundary: finite genuine field jets are not automatically all-order PDE
-solutions.  The active collision's analytic solution-germ promotion retains
+Boundary: the metric theorem realizes genuine derivatives of an actual cubic
+field; the potential theorem constructs holonomic coefficient arrays but not
+yet an actual quadratic one-form field.  Neither is automatically an
+all-order PDE solution.  The active collision's analytic solution-germ promotion retains
 the separate human-plus-external involutivity status in
 [`ANALYTIC_EMD_REALIZATION.md`](ANALYTIC_EMD_REALIZATION.md).
 

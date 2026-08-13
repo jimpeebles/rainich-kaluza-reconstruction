@@ -134,20 +134,63 @@
       "name": "replacement-point-literal-selected-scalar-and-residual-one-jets-match-physical",
       "passed": true,
       "residual_sha256": "9937a9eb6b34cd5953bb3d90a0353df5266b6568f4040558fb75e05b051f598c",
-      "tower_dimension": 128
+      "tower_dimension_certified": false,
+      "tower_slots": 128
     },
     {
       "complete_channel_residual_count": 0,
       "name": "replacement-point-selected-frame-one-jet-and-complete-channel-normal-form-pass",
       "passed": true,
-      "residual_sha256": "9937a9eb6b34cd5953bb3d90a0353df5266b6568f4040558fb75e05b051f598c"
+      "residual_sha256": "9937a9eb6b34cd5953bb3d90a0353df5266b6568f4040558fb75e05b051f598c",
+      "tower_payload_sha256": "ee1023ca67469b2bb5dcccfef3423a9cf75470065f0a1cceb4a52e956e0f1c3c",
+      "tower_relations_sha256": "97895e379cab63f397c1a619773a91cadae7821368fa21d06e0320b5cd412d87"
     },
     {
+      "active_wedge_coefficients": [
+        [
+          8,
+          -46464976,
+          26751747347
+        ]
+      ],
+      "active_wedge_nonzero_bridge": "positive-rational-square-plus-exact-physical/invertible-channel-bridge",
+      "active_wedge_square_coefficients": [
+        [
+          0,
+          2158993994680576,
+          39862751970017353
+        ]
+      ],
       "cosine_value": "5*sqrt(53859)/17953",
       "name": "replacement-point-selected-literal-cosine-quotient-and-generic-component-pass",
       "passed": true,
       "residual_sha256": "9937a9eb6b34cd5953bb3d90a0353df5266b6568f4040558fb75e05b051f598c",
+      "source_coefficients": [
+        [
+          21,
+          -644,
+          62001
+        ],
+        [
+          29,
+          4,
+          62001
+        ]
+      ],
       "source_component": 0,
+      "source_nonzero_bridge": "exact-positive-square-via-rational-sqrt17953-inequality",
+      "source_square_coefficients": [
+        [
+          7,
+          -8264,
+          5146083
+        ],
+        [
+          15,
+          1213640,
+          92387628099
+        ]
+      ],
       "wedge_component": [
         0,
         3
@@ -173,6 +216,7 @@
     }
   ],
   "evidence_class": "exact-symbolic-routing-certificate-not-lean-proof",
+  "implementation_sha256": "5b24a3302332fc1568b9b0d50a41f0edbb51a1100d0bf9ac3fd5c227a56c0506",
   "input": {
     "committed_point": {
       "r": "3",
@@ -196,9 +240,12 @@
       "scalarSpacelikeProbe": 2,
       "scalarTimelikeProbe": 1
     },
-    "source_benchmark": "vt2-generic-helical-string"
+    "source_benchmark": "vt2-generic-helical-string",
+    "source_benchmark_sha256": "6915df23453353ce1ea0763d8c28cbf340c601c34bba6efd133a93015116f300"
   },
-  "input_sha256": "4a9111dc2d3540bd2d7390f4e42f41bb07aa1adcf7b1ba9aca66dd8569bc36c5",
+  "input_sha256": "249b853c32bb8e67bdf41be756bac0af377483a5224598946cbb17e97784d1fa",
+  "input_sha256_scope": "declared-manifest-only",
+  "model_sha256": "4c790abac3bfee5f179d03cb3140b02ec5b0276724bac9d09838abb48f5406d4",
   "passed": true,
   "route_manifest": {
     "committed_point": [
@@ -258,7 +305,7 @@
       },
       {
         "gate": "selected literal frame one-jet and complete first-order channels",
-        "status": "passed-exact-128-dimensional-quadratic-tower"
+        "status": "passed-exact-128-slot-quadratic-quotient-representation"
       },
       {
         "gate": "literal quotient derivative equals physical dA",
@@ -274,5 +321,5 @@
     "python": "3.12.13",
     "sympy": "1.14.0"
   },
-  "schema_version": 1
+  "schema_version": 2
 }

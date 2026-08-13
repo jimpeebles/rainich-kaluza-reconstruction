@@ -30,7 +30,10 @@ classification, and every degenerate branch are not required for publication.
    specialist-audit lemma.**  For every real \(a\), the repository constructs a
    complete compatible active EMD jet with one common metric three-jet, matter
    first jet injective in \(a\), and common simple real Ricci spectrum.  The
-   written analytic realization argument uses the second-order potential
+   correctly unweighted physical Maxwell first jet is now proved closed and
+   is connected to explicit compatible radial-gauge potential two-jet
+   coefficients for every coupling.  The written analytic realization
+   argument uses the second-order potential
    variables \((g,A,\phi)\), Kruglikov's Theorem 3 plus Lemma 4, and EMD
    Noether/Bianchi compatibility.  Until its EMD involutivity lemma is audited,
    state the solution-germ theorem conditional on that lemma.
@@ -46,12 +49,15 @@ classification, and every degenerate branch are not required for publication.
    fourth-order outputs agree iff \(a=\pm b\): the order-three \(\mathbb R\)
    ambiguity collapses exactly to the orientation-free \(\mathbb Z_2\).
 4. **Finite detector -- proved in Lean with stated hypotheses.**  The
-   metric-only fourth-order accepted set is nonempty and contains the physical
-   \(a^2\) on the packaged active-regular EMD locus.  Every survivor equals the
+   exact raw search has \(6{,}291{,}456\) choices.  The metric-only
+   fourth-order accepted set is nonempty and contains the physical
+   \(a^2\) on the packaged active-regular Ricci--exterior EMD locus.  Every survivor equals the
    physical value only with the displayed realized-branch, regularity, probe,
    and unique scalar-closure certificates.
-5. **Kaluza selector -- necessary.**  Five-dimensional vacuum reduction fixes
-   \(a^2=3\).  Detector output \(3\) is not by itself a converse uplift theorem.
+5. **Kaluza selector -- necessary.**  For the convention-fixed warp constants,
+   five-dimensional vacuum reduction verifies \(a^2=3\).  Lean does not yet
+   prove those constants unique in a general warp family.  Detector output
+   \(3\) is not by itself a converse uplift theorem.
 
 ## Publication gates
 
@@ -71,7 +77,10 @@ classification, and every degenerate branch are not required for publication.
 - The replacement helical-string point passes 21 exact checks through the
   selected scalar/residual/frame one-jets, all 128 complete-channel
   components, \(A\), physical \(dA=d(\sqrt3 C)\), \(B\), the full next-order
-  residual, and output \(3\).
+  residual, and output \(3\).  The custom calculation uses a 128-slot exact
+  quadratic quotient representation; it does not claim a degree-128
+  number-field basis.  Model, implementation, relation, and coefficient
+  payload hashes are recorded separately.
 - The literal quotient-derivative equality is supplied by the compiled
   physical-germ bridge composed with the exact helical Kaluza EMD patch/open
   gates.  This is theorem-mediated exact evidence, not a brute-force
@@ -99,6 +108,12 @@ The next landmark is a converse on the reconstructed branch.  After recovering
 then integrate the scalar and Maxwell data and connect the accepted branch to
 the existing conditional Kaluza uplift module.  Directly differentiating the
 quotient for \(B\) may require a metric five-jet.
+
+The current uplift realizer already assumes the complete EMD equations, and
+the detector's strongest abstract physical/survivor packages have no concrete
+Lean inhabitant.  Replacing those handoffs with lower-level derived data,
+proving an explicit coordinate four-jet factorization, and then proving chart
+covariance are the next formalization gates.
 
 Only after that should the project broaden to repeated-root, null-Maxwell,
 null-scalar, or global/topological sectors.  Claims of genericity remain

@@ -2,9 +2,11 @@
 
 The selected frame introduces three nested square roots beyond the four
 quadratic radicals already present at the replacement point.  SymPy's
-generic simplifier is not a reliable zero oracle in that field, so this
-module evaluates the final channel in its explicit 128-dimensional
-quadratic-tower basis.
+generic simplifier is not a reliable zero oracle in that algebra, so this
+module evaluates the final channel in an explicit 128-slot square-free
+quadratic quotient representation.  The reduction rules certify zero
+identities.  They do not, by themselves, prove that all 128 slots are
+linearly independent over the rationals.
 
 The certificate deliberately distinguishes the literal point/frame/channel
 calculation from the last derivative.  ``physical_dA`` is the derivative
@@ -17,7 +19,9 @@ from __future__ import annotations
 
 from fractions import Fraction
 from functools import lru_cache
+import hashlib
 from itertools import product
+import json
 
 import sympy as sp
 
@@ -133,6 +137,53 @@ class _Tower:
     @property
     def is_zero(self) -> bool:
         return not self.coefficients
+
+
+def _tower_element_payload(value: _Tower) -> list[list[int]]:
+    """Canonical rational coefficient payload for one quotient element."""
+
+    return [
+        [mask, coefficient.numerator, coefficient.denominator]
+        for mask, coefficient in sorted(value.coefficients.items())
+    ]
+
+
+def _tower_payload_sha256(values) -> str:
+    """Bind an artifact to the actual quotient-algebra coefficient payload."""
+
+    payload = [_tower_element_payload(value) for value in values]
+    rendered = json.dumps(payload, separators=(",", ":"), ensure_ascii=True)
+    return hashlib.sha256(rendered.encode("utf-8")).hexdigest()
+
+
+def _tower_relations_sha256() -> str:
+    """Bind all four base and three extension square relations."""
+
+    payload = {
+        "base_squares": [
+            [index, square.numerator, square.denominator]
+            for index, square in enumerate(_Tower.base_squares)
+        ],
+        "extension_squares": [
+            [
+                [mask, coefficient.numerator, coefficient.denominator]
+                for mask, coefficient in sorted(relation.items())
+            ]
+            for relation in _Tower.extension_relations
+        ],
+    }
+    rendered = json.dumps(payload, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(rendered.encode("utf-8")).hexdigest()
+
+
+def _tower_square_is_positive_rational(value: _Tower) -> bool:
+    """Certify nonzero without assuming independence of all 128 slots."""
+
+    square = value * value
+    return (
+        set(square.coefficients) == {0}
+        and square.coefficients[0] > 0
+    )
 
 
 def _embed(expression: sp.Expr) -> _Tower:
@@ -519,6 +570,23 @@ def replacement_fourth_order_tower_certificate(
         raise AssertionError("second extension relation failed")
     if not (amplitude * amplitude - _embed(amplitude_squared[0])).is_zero:
         raise AssertionError("third extension relation failed")
+    base_generators = tuple(_Tower.generator(index) for index in range(4))
+    sample_left = root_zero + base_generators[0] * root_one + 2
+    sample_middle = root_one + base_generators[1] * amplitude - 3
+    sample_right = amplitude + base_generators[2] * base_generators[3] + 5
+    tower_ring_laws_exact = all(
+        value.is_zero
+        for value in (
+            sample_left * sample_middle - sample_middle * sample_left,
+            (sample_left * sample_middle) * sample_right
+            - sample_left * (sample_middle * sample_right),
+            sample_left * (sample_middle + sample_right)
+            - sample_left * sample_middle
+            - sample_left * sample_right,
+        )
+    )
+    if not tower_ring_laws_exact:
+        raise AssertionError("quadratic quotient regression law failed")
 
     def normalize(vector, norm, inverse_root):
         value = _convert(vector[0])
@@ -718,7 +786,18 @@ def replacement_fourth_order_tower_certificate(
         scalar_principal[2],
         scalar_principal[3],
     )
-    active_wedge = eta[0] * reflection[3] - eta[3] * reflection[0]
+    active_wedge_components = {
+        (left, right): eta[left] * reflection[right]
+        - eta[right] * reflection[left]
+        for left in range(4)
+        for right in range(left + 1, 4)
+    }
+    active_wedge = active_wedge_components[0, 3]
+    other_active_wedge_components_zero = all(
+        value.is_zero
+        for component, value in active_wedge_components.items()
+        if component != (0, 3)
+    )
 
     # This is the physical EMD derivative, not yet the independently derived
     # derivative of the literal curvature quotient field.
@@ -757,16 +836,75 @@ def replacement_fourth_order_tower_certificate(
     )
     output_residual = cosine * cosine + sine * sine - 3
 
+    coframe_inverse_exact = _zero_matrix(inverse_obstruction)
+    source_square = scalar_principal[0] * scalar_principal[0]
+    source_square_coefficients = source_square.coefficients
+    source_square_is_positive = (
+        set(source_square_coefficients) == {7, 15}
+        and source_square_coefficients[7] < 0
+        and source_square_coefficients[15] > 0
+        and source_square_coefficients[15] ** 2
+            * _Tower.base_squares[3]
+            > source_square_coefficients[7] ** 2
+    )
+    source_nonzero_from_positive_square = (
+        source_square_is_positive and coframe_inverse_exact
+    )
+    active_wedge_nonzero_from_physical_bridge = (
+        bool(physical_active["active"])
+        and coframe_inverse_exact
+        and not channel_residuals
+        and all(residual_jet_bridge)
+        and _tower_square_is_positive_rational(active_wedge)
+    )
+    tower_payload = [
+        *(entry for row in orthonormal_obstruction for entry in row),
+        *(entry for row in inverse_obstruction for entry in row),
+        *(channels[channel_index][component]
+          for channel_index in range(2)
+          for component in sorted(channels[channel_index])),
+        *scalar_principal,
+        *eta,
+        *reflection,
+        *active_wedge_components.values(),
+        cosine_quotient_residual,
+        sine_quotient_residual,
+        *next_order_residual,
+        output_residual,
+    ]
+
     return {
-        "tower_dimension": 128,
+        "tower_slots": 128,
+        "tower_dimension_certified": False,
+        "tower_ring_laws_exact": tower_ring_laws_exact,
+        "tower_relations_sha256": _tower_relations_sha256(),
+        "tower_payload_sha256": _tower_payload_sha256(tower_payload),
         "literal_selected_scalar_one_jet_matches_physical": True,
         "literal_residual_one_jet_matches_physical": all(residual_jet_bridge),
         "selected_frame_orthonormal": _zero_matrix(orthonormal_obstruction),
-        "selected_coframe_inverse": _zero_matrix(inverse_obstruction),
+        "selected_coframe_inverse": coframe_inverse_exact,
         "source_component": 0,
-        "source_nonzero": not scalar_principal[0].is_zero,
+        "source_nonzero": source_nonzero_from_positive_square,
+        "source_nonzero_bridge": (
+            "exact-positive-square-via-rational-sqrt17953-inequality"
+        ),
+        "source_coefficients": _tower_element_payload(scalar_principal[0]),
+        "source_square_coefficients": _tower_element_payload(
+            source_square
+        ),
         "wedge_component": (0, 3),
-        "active_wedge_nonzero": not active_wedge.is_zero,
+        "active_wedge_nonzero": active_wedge_nonzero_from_physical_bridge,
+        "active_wedge_nonzero_bridge": (
+            "positive-rational-square-plus-exact-physical/invertible-channel-bridge"
+        ),
+        "active_wedge_representation_nonzero": not active_wedge.is_zero,
+        "active_wedge_coefficients": _tower_element_payload(active_wedge),
+        "active_wedge_square_coefficients": _tower_element_payload(
+            active_wedge * active_wedge
+        ),
+        "other_active_wedge_components_zero": (
+            other_active_wedge_components_zero
+        ),
         "cosine_value": "5*sqrt(53859)/17953",
         "literal_cosine_quotient_exact": cosine_quotient_residual.is_zero,
         "complete_channel_residual_count": len(channel_residuals),

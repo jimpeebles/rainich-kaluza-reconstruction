@@ -6,7 +6,7 @@ Status: technical companion to the canonical manuscript
 
 > **Current boundary.**  The exact affine-shear fiber classification, common active metric
 > three-jet, simple Ricci spectrum, the symmetric Ricci first prolongation, explicit polynomial
-> metric germ, potential two-jet, fourth-order recovery, and finite detector
+> metric germ, compatible potential coefficient two-jet, fourth-order recovery, and finite detector
 > necessity/certified correctness are machine checked.  The promotion of the
 > compatible finite collision to local analytic EMD solution germs is a human
 > formal-PDE proof: in pure second-order potentials `(g,A,phi)`, extend
@@ -484,8 +484,16 @@ therefore not confined to a repeated-root algebraic stratum. This does not by
 itself establish every causal, projector, probe, or neighborhood gate of the
 actual detector entrance.
 
-**[Lean]** The closed physical Maxwell one-jet is lifted explicitly to a
-radial-gauge potential two-jet by `radialGaugePotentialTwoJet4_realizes`.
+**[Lean]** The rescaled active Maxwell jet is first unweighted with the exact
+product-rule term.  The family-specific theorem
+`matrixExteriorDerivative_activeAmbiguityPhysicalMaxwellFirstJet` proves
+closure for every \(a\), and
+`activeAmbiguityPhysicalMaxwellPotentialTwoJet_realizes` then supplies the
+explicit compatible radial-gauge physical potential coefficient two-jet.
+It does not yet package those coefficients as an actual quadratic one-form
+field with nested Fréchet derivatives.  This closes the premise
+that the generic theorem `radialGaugePotentialTwoJet4_realizes` previously
+left uninstantiated.
 The fully symmetric metric third jet and its common Ricci first prolongation
 are checked by `activeAmbiguityFormalMetricJet3_einsteinFirstProlongation` and
 `coordinateRicciFirstJet_minkowski_zero`.  Their contracted-Bianchi
@@ -743,9 +751,12 @@ local canonical channel, literal quotient derivative, active finite channel,
 and accepted output then follow from the existing theorems.
 
 The invariant physical composition is now closed too.
-`ChoiceIndependentActualMetricEMDPhysicalPatch4` packages the genuine physical
-`C¹` pair, stress, metric-Hodge relation, and exterior closure without any
-detector choice. The selected scalar-sign germ is intersected with the
+`ChoiceIndependentActualMetricEMDPhysicalPatch4` packages the physical
+`C¹` pair, Ricci/stress decomposition, metric-Hodge relation, and the two
+rescaled Maxwell exterior equations without any detector choice.  The
+structure does not itself contain the scalar wave equation, so in this
+supplement we call it the **Ricci--exterior EMD patch**. The selected
+scalar-sign germ is intersected with the
 upstream germ on one honest open patch. On the negative scalar branch the
 composition replaces `a` by `-a`, so both branches return the same `a²`.
 `InvariantEMDEndToEnd.lean` invokes the finite upstream selector and proves
@@ -873,12 +884,15 @@ These tests validate conventions and selectivity.  They do not replace the
 fourth-order theorem, and none is a newly discovered exact Kaluza spacetime;
 the helical example is a reduction of a known Ricci-flat seed.
 
-The `vt2-complete-detector-route` artifact's 128-dimensional exact quadratic
-tower verifies the selected scalar and residual one-jets, the selected
+The `vt2-complete-detector-route` artifact's 128-slot exact quadratic quotient
+representation verifies the selected scalar and residual one-jets, the selected
 frame/coframe one-jet identities, all 128 entries of both complete raw
 channels, the exact cosine quotient `A`, the physical derivative
 `dA=d(sqrt(3) C)`, the sine quotient `B`, every next-order residual, and final
-output `3`.
+output `3`.  Its square relations soundly certify zero identities, but no
+claim is made that the 128 slots are a linearly independent number-field
+basis.  The artifact separately records symbolic-model, implementation,
+relation, and coefficient-payload hashes.
 
 One boundary matters.  The equality of the literal detector's quotient
 derivative with physical `dA` is obtained by composing the compiled

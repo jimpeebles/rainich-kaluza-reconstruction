@@ -21,6 +21,12 @@ so that
 The Lean definitions and verified identities live in
 `RainichKaluza/UpliftConvention.lean`.
 
+Evidence boundary: the action-level coefficient matching in this note is a
+human derivation.  The Lean file instantiates
+(c_1=-1/sqrt3, c_2=2/sqrt3, c_3=1) and verifies the resulting identities;
+it does not quantify over a general warp triple and prove those constants
+unique from Ricci flatness.
+
 ## Inputs
 
 Both identities below are standard; they are stated with every sign so the

@@ -69,7 +69,12 @@ outputs for couplings \(a\) and \(b\) agree exactly when \(a=\pm b\): the
 continuous \(\mathbb R\)-ambiguity at order three collapses to the unavoidable
 orientation-free \(\mathbb Z_2\) ambiguity at order four.  The repository also
 constructs a finite
-coordinate detector whose only input is the metric through order four.  A
+coordinate detector whose only input is the metric.  Tracing its nested
+Fréchet-derivative definitions reaches metric derivative order four; an
+explicit factorization through a packaged coordinate four-jet is not yet
+compiled.  A
+structural Lean theorem proves that it filters exactly (6{,}291{,}456) raw
+choices.  A
 packaged physical Ricci--exterior EMD witness on the explicit active regular
 locus proves that its accepted set contains \(a^2\).  Every accepted survivor
 has that value only when its displayed realized-branch, probe, regularity, and
@@ -87,11 +92,19 @@ The following pieces are machine checked in Lean:
 - injectivity of the matter first jet, exact activity, simple real Ricci
   spectrum, and the common Ricci first prolongation from a fully symmetric
   metric third jet;
+- exact unweighting and closure of the active physical Maxwell first jet and
+  its family-specific compatible radial-gauge potential two-jet coefficients;
 - the next-order quotient, component independence, and recovery of \(a^2\);
 - the finite metric-only coordinate detector, physical nonemptiness, certified
   survivor correctness, and fixed-coordinate germ locality;
 - the conditional local Kaluza uplift and presentation orbit from an accepted
   EMD realizer.
+
+The detector's compiled locality theorem is germ-based; an explicit
+coordinate four-jet extensionality theorem and full chart covariance remain
+open.  The conditional uplift realizer already supplies complete EMD
+equations, and the fixed warp constants are verified rather than proved
+unique in a general ansatz.
 
 The promotion from compatible finite jets to local analytic EMD solution germs
 uses Cartan--Kähler theory and a short potential-variable symbol extension of
@@ -103,10 +116,13 @@ checks the EMD Noether/Bianchi compatibility.  That formal-PDE step is a human
 proof pending specialist audit, not a Lean theorem.
 
 The exact helical replacement benchmark now closes its final fourth-order
-route with 21 checks.  Its 128-dimensional quadratic-tower calculation
+route with 21 checks.  Its 128-slot exact quadratic quotient calculation
 verifies the selected scalar, residual, and frame one-jets, every component of
 both complete channels, \(A\), the physical derivative
 \(dA=d(\sqrt3\,C)\), \(B\), the next-order residual, and output \(3\).  The
+128 slots are a reduction representation, not a claimed proof of a
+degree-128 number field.  The artifact separately hashes its symbolic model,
+implementation sources, quotient relations, and coefficient payload.  The
 identification of the literal quotient derivative with physical \(dA\) uses
 the compiled physical-germ bridge together with the exact helical EMD
 patch/open gates; it is a theorem-mediated benchmark composition, not a
@@ -133,6 +149,8 @@ It contains no new closed-form exact spacetime.
   novelty boundary.
 - [Companion results](docs/COMPANION_RESULTS.md) -- ranked formal results that
   support future papers without enlarging this paper's headline claim.
+- [Adversarial review response](docs/ADVERSARIAL_REVIEW_RESPONSE.md) --
+  signature-level findings, completed repairs, and remaining gates.
 - [Validation guide](validation/README.md) -- exact symbolic evidence, kept
   separate from the Lean theorem surface.
 

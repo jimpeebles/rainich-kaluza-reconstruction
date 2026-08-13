@@ -54,8 +54,9 @@ not exclude every metric-three-jet rule.
 The explicit finite data have a common metric three-jet for every \(a\), an
 injectively varying Maxwell first jet, uniform activity, and four distinct real
 Ricci eigenvalues.  The polynomial metric germ, Hodge identities, explicit
-Ricci first prolongation, and radial-gauge potential two-jet are machine
-checked.  Contracted-Bianchi compatibility is the corresponding algebraic
+Ricci first prolongation, exact unweighting/closure of the physical Maxwell
+first jet, and its family-specific compatible radial-gauge potential two-jet
+coefficients are machine checked.  Contracted-Bianchi compatibility is the
 consequence of the fully symmetric metric third jet in the human realization
 argument.
 
@@ -106,7 +107,10 @@ for the complete finite accepted set.
 
 The finite constructor enumerates scalar probes, scalar relative sign,
 principal-frame probes, coframe pivots, orientation, and source/wedge
-components using metric derivatives through order four.
+components.  Dependency tracing through its nested Fréchet derivatives
+reaches metric order four; explicit extensionality through a packaged
+coordinate four-jet remains open.  Its raw search size is exactly
+\(6{,}291{,}456\), now proved structurally in Lean.
 
 - On the packaged active-regular Ricci--exterior EMD locus, at least one
   accepted choice returns physical \(a^2\).
@@ -122,12 +126,17 @@ bullet to an unconditional “every survivor” claim.
 The convention-fixed five-dimensional vacuum reduction selects \(a^2=3\).
 Thus the detector gives a necessary local Kaluza selector.  The repository's
 uplift result remains conditional on an accepted EMD field realizer; detector
-output \(3\) is not by itself a metric-only converse.
+output \(3\) is not by itself a metric-only converse.  In the current
+interface, `realize_emd` already supplies the complete EMD equations and no
+concrete inhabitant of that full realizer package is compiled.  The fixed
+warp constants are verified in Lean, not proved unique in a quantified
+general warp ansatz.
 
 ## 3. Evidence classes
 
 - **Lean:** finite algebra, jet identities, the symmetric metric/Ricci first
-  prolongation, polynomial metric-jet realization, potential two-jet, shear obstruction, physical
+  prolongation, polynomial metric-jet realization, active-family closed
+  physical Maxwell/potential two-jet, shear obstruction, physical
   fourth-order recovery, finite detector necessity/correctness, and stated
   conditional uplift modules.
 - **Human proof plus external theorem:** involutivity of analytic EMD in
@@ -135,8 +144,10 @@ output \(3\) is not by itself a metric-only converse.
 - **Exact symbolic evidence:** convention tests and physical benchmarks in
   `validation/`, including the 21-check helical fourth-order route; these are
   not Lean theorems.
-- **Open:** full detector chart covariance, metric-only converse, density of
-  the active locus, degenerate branches, and global reconstruction.
+- **Open:** explicit four-jet factorization (current locality is germ-based),
+  a concrete Lean inhabitant of the full physical/survivor packages, full
+  detector chart covariance, metric-only converse, density of the active
+  locus, degenerate branches, and global reconstruction.
 
 ## 4. Publication workstream
 
@@ -161,7 +172,10 @@ before submission.
 At the generic helical-string replacement point, 21 exact checks now verify
 the literal selected scalar/residual/frame one-jets, all 128 complete-channel
 components, \(A\), physical \(dA=d(\sqrt3 C)\), \(B\), the complete next-order
-residual, and output \(3\).  The final equality between the literal quotient
+residual, and output \(3\), using a 128-slot exact quadratic quotient
+representation rather than a claimed degree-128 number-field basis.  The
+artifact records separate model, implementation, relation, and coefficient
+payload hashes.  The final equality between the literal quotient
 derivative and physical \(dA\) is a theorem-mediated composition of the
 compiled physical-germ bridge and the exact helical Kaluza EMD patch/open
 gates.  It is not an independently expanded second-jet CAS identity or a

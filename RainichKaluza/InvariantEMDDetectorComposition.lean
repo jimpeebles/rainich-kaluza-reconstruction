@@ -7,12 +7,12 @@ import RainichKaluza.ActualMetricScalarIdentifiability
 This module separates the physical input of the necessity theorem from the
 finite detector choices.
 
-`ChoiceIndependentActualMetricEMDPhysicalPatch4` is a genuine physical EMD
-patch: it extends the choice-independent Ricci witness by a pair of actual
+`ChoiceIndependentActualMetricEMDPhysicalPatch4` is a choice-independent
+Ricci--exterior EMD patch: it extends the Ricci witness by a pair of actual
 `C¹` matrix two-form fields, their metric Hodge relation, the Maxwell stress
-identity, and exterior closure with the physical scalar covector.  It contains
-no detector probe, scalar sign, Maxwell frame, orientation bit, or quotient
-component.
+identity, and exterior closure with the physical scalar covector.  It does not
+package the scalar wave equation, and it contains no detector probe, scalar
+sign, Maxwell frame, orientation bit, or quotient component.
 
 `SelectedActualMetricEMDDetectorPatch4` records the still-explicit regular
 branch hypotheses after the finite upstream selector has returned one fixed
@@ -56,7 +56,7 @@ def restrict (S : RescaledMaxwellMatrixC1On U) (hVU : V ⊆ U) :
 
 end RescaledMaxwellMatrixC1On
 
-/-- **Detector-choice-free genuine EMD physical patch.**  Besides the Ricci
+/-- **Detector-choice-free Ricci--exterior EMD physical patch.**  Besides the Ricci
 witness used for scalar identifiability, this package supplies actual `C¹`
 rescaled Maxwell and Hodge fields.  Their coordinate Maxwell stress is the
 choice-independent Maxwell endomorphism in the Ricci decomposition, the
@@ -64,7 +64,8 @@ second field is the exact metric Hodge star of the first, and both obey EMD
 exterior closure with the physical scalar covector and one constant signed
 coupling.
 
-No member of `ActualMetricDetectorChoice4` occurs in this structure. -/
+The scalar wave equation is deliberately not a field of this structure.  No
+member of `ActualMetricDetectorChoice4` occurs in it. -/
 structure ChoiceIndependentActualMetricEMDPhysicalPatch4
     (g : CurvatureCoordinateSpace4 →
       ContinuousBilinForm CurvatureCoordinateSpace4)
@@ -331,8 +332,8 @@ theorem selectedScalarCandidate_continuousOn_of_orbit
       (actualMetricScalarOneFormCandidate_eq_neg_physical_of_selected_minus
         g W choice y (hminus y hy)) i)
 
-/-- **Invariant EMD necessity composed with the finite detector.**  A genuine
-choice-independent EMD physical patch and one explicitly regular selected
+/-- **Invariant EMD necessity composed with the finite detector.**  A
+choice-independent Ricci--exterior EMD physical patch and one explicitly regular selected
 metric branch imply that the finite metric-only detector is nonempty at `z`
 and returns the physical squared coupling.
 

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from fractions import Fraction
 import unittest
 
 import sympy as sp
@@ -28,9 +29,69 @@ from rk_validation.exact import (
     ricci_tensor_at,
     scalar_curvature,
 )
+from rk_validation.helical_fourth_order import _Tower, _embed
+from rk_validation.provenance import symbolic_model_sha256
 
 
 class ExactTensorTests(unittest.TestCase):
+    def test_quadratic_quotient_engine_ring_regression(self) -> None:
+        previous_relations = _Tower.extension_relations
+        try:
+            _Tower.extension_relations = (
+                {0: Fraction(5)},
+                {1: Fraction(1), 0: Fraction(7)},
+                {2: Fraction(1), 0: Fraction(11)},
+            )
+            _Tower._multiply_masks.cache_clear()
+            generators = tuple(_Tower.generator(index) for index in range(7))
+            for index, square in enumerate(_Tower.base_squares):
+                self.assertTrue(
+                    (
+                        generators[index] * generators[index]
+                        - _Tower.rational(square)
+                    ).is_zero
+                )
+            self.assertTrue(
+                (generators[4] * generators[4] - _Tower.rational(5)).is_zero
+            )
+            self.assertTrue(
+                (
+                    generators[5] * generators[5]
+                    - generators[0]
+                    - _Tower.rational(7)
+                ).is_zero
+            )
+            left = generators[4] + generators[0] * generators[5] + 2
+            middle = generators[5] + generators[1] * generators[6] - 3
+            right = generators[6] + generators[2] * generators[3] + 5
+            self.assertTrue((left * middle - middle * left).is_zero)
+            self.assertTrue(
+                ((left * middle) * right - left * (middle * right)).is_zero
+            )
+            self.assertTrue(
+                (
+                    left * (middle + right)
+                    - left * middle
+                    - left * right
+                ).is_zero
+            )
+            self.assertTrue(
+                (
+                    _embed(sp.sqrt(498))
+                    - generators[0] * generators[1] * generators[2]
+                ).is_zero
+            )
+        finally:
+            _Tower.extension_relations = previous_relations
+            _Tower._multiply_masks.cache_clear()
+
+    def test_symbolic_model_hash_is_deterministic_and_sensitive(self) -> None:
+        first = symbolic_model_sha256([sp.sqrt(2), sp.Matrix([[1, 2]])])
+        second = symbolic_model_sha256([sp.sqrt(2), sp.Matrix([[1, 2]])])
+        changed = symbolic_model_sha256([sp.sqrt(3), sp.Matrix([[1, 2]])])
+        self.assertEqual(first, second)
+        self.assertNotEqual(first, changed)
+
     def test_minkowski_ricci_is_zero(self) -> None:
         coordinates = sp.symbols("t x y z", real=True)
         metric = sp.diag(-1, 1, 1, 1)
@@ -146,7 +207,34 @@ class ExactTensorTests(unittest.TestCase):
     def test_vt2_complete_detector_route_passes(self) -> None:
         artifact = build_vt2_route_artifact()
         self.assertTrue(artifact["passed"])
+        self.assertEqual(artifact["schema_version"], 2)
         self.assertEqual(len(artifact["checks"]), 21)
+        self.assertEqual(artifact["input_sha256_scope"], "declared-manifest-only")
+        self.assertEqual(len(artifact["input"]["source_benchmark_sha256"]), 64)
+        self.assertEqual(len(artifact["model_sha256"]), 64)
+        self.assertEqual(len(artifact["implementation_sha256"]), 64)
+        tower_check = next(
+            check
+            for check in artifact["checks"]
+            if check["name"]
+            == "replacement-point-selected-frame-one-jet-and-complete-channel-normal-form-pass"
+        )
+        self.assertEqual(len(tower_check["tower_relations_sha256"]), 64)
+        self.assertEqual(len(tower_check["tower_payload_sha256"]), 64)
+        generic_check = next(
+            check
+            for check in artifact["checks"]
+            if check["name"]
+            == "replacement-point-selected-literal-cosine-quotient-and-generic-component-pass"
+        )
+        self.assertEqual(
+            generic_check["source_square_coefficients"],
+            [[7, -8264, 5146083], [15, 1213640, 92387628099]],
+        )
+        self.assertEqual(
+            generic_check["active_wedge_square_coefficients"],
+            [[0, 2158993994680576, 39862751970017353]],
+        )
 
     def test_vt2b_benchmark_passes(self) -> None:
         artifact = build_vt2b_artifact()

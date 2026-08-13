@@ -526,7 +526,9 @@ variable {U : Set CurvatureCoordinateSpace4}
   {x : CurvatureCoordinateSpace4}
 
 /-- Turn an accepted curvature/Phase-III branch plus exactly the remaining
-field-realization obligations into the established Phase-IV input. -/
+field-realization obligations into the established Phase-IV input.  In
+particular, `ConditionalUpliftCompletionAt.realize_emd` explicitly assumes the
+full `EMDEquations` package for the supplied local product germ. -/
 noncomputable def toAcceptedKaluzaBranchAt
     (A : PhaseIIIAcceptedBranch C M branch)
     (K : ConditionalUpliftCompletionAt C M branch x)
@@ -558,8 +560,9 @@ noncomputable def toAcceptedKaluzaBranchAt
   realize_emd := K.realize_emd
 
 /-- **Curvature-to-Kaluza composition theorem.** Once a branch has passed
-the concrete scalar and Phase-III obstruction classifiers, discharging the
-explicit remaining field-realization obligations produces the complete local
+the concrete scalar and Phase-III obstruction classifiers, supplying the
+remaining realization data--including the full EMD equations through
+`ConditionalUpliftCompletionAt.realize_emd`--produces the complete local
 Ricci-flat uplift and its full converse/orbit package. -/
 theorem exists_completeConditionalKaluzaUplift_of_phaseIIIAccepted
     (A : PhaseIIIAcceptedBranch C M branch)

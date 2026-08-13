@@ -130,8 +130,10 @@ field for every accepted generic local branch, followed by the radial
 potential candidate and its convention-independent Kaluza gauge algebra.
 `RadialPotentialSplice.lean` completes the local two-form Poincare theorem
 `dF=0 → dA=F` under a `C¹` closed regularity package, and
-`UpliftConvention.lean` fixes the uplift constants derived in
-`docs/UPLIFT_CONVENTION.md`.
+`docs/UPLIFT_CONVENTION.md` gives the human action-level derivation of the
+uplift constants.  `UpliftConvention.lean` fixes those constants and verifies
+their normalization and exponent-matching identities exactly; it does not
+formalize a uniqueness theorem for a general three-parameter warp ansatz.
 
 ### Metric-seed correction (2026-08-12)
 

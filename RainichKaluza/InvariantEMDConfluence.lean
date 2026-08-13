@@ -304,8 +304,8 @@ theorem
 
 /-- The sharp pointwise differential condition that eliminates the intrinsic
 relative-sign ambiguity: the two literal metric scalar branches are not both
-closed at the displayed curvature jet.  On a genuine EMD patch at least one
-branch is locally the closed physical scalar; this condition makes that
+closed at the displayed curvature jet.  On the Ricci--exterior EMD patch used
+here at least one branch is locally the closed physical scalar; this condition makes that
 branch unique. -/
 def IsActualMetricUniqueScalarClosureBranchAt4
     (g : CurvatureCoordinateSpace4 →

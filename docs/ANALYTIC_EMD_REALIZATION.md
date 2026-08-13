@@ -174,7 +174,8 @@ A direct substitution then gives
 A_n,mr - A_m,nr = (F1)_r,mn.
 ```
 
-Thus (2.2) is a genuine two-jet of a one-form potential with
+Thus (2.2) is a compatible holonomic coefficient two-jet of a one-form
+potential with
 `j^1(dA)=(F0,F1)`.  It is the quadratic Taylor coefficient obtained from the
 radial homotopy formula
 
@@ -182,8 +183,16 @@ radial homotopy formula
 A_n(x) = integral_0^1 t x^m F_mn(t x) dt.
 ```
 
-This explicit construction puts the data in the potential variables used by
-the formal-PDE argument below.
+This explicit construction puts the coefficient data in the potential
+variables used by the formal-PDE argument below.  It does not yet exhibit an
+actual quadratic one-form field and identify its nested Fréchet derivatives.
+
+The family-specific Lean handoff is now explicit:
+`matrixExteriorDerivative_activeAmbiguityPhysicalMaxwellFirstJet` proves
+that the correctly unweighted physical first jet is closed for every (a),
+and `activeAmbiguityPhysicalMaxwellPotentialTwoJet_realizes` instantiates
+the radial formula (2.2).  Thus closure is not merely an uninstantiated
+hypothesis of the generic potential-jet lemma.
 
 ## 3. Why the analytic EMD system is involutive
 

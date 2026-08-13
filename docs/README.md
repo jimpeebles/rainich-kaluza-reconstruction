@@ -19,6 +19,8 @@ history.
   boundary.
 - [`COMPANION_RESULTS.md`](COMPANION_RESULTS.md) — ranked compiled results and
   follow-up directions kept outside the active paper's headline claim.
+- [`ADVERSARIAL_REVIEW_RESPONSE.md`](ADVERSARIAL_REVIEW_RESPONSE.md) — the
+  signature-level audit response, repairs, and prioritized remaining gates.
 
 The detailed derivations and theorem-to-Lean map are in the
 [`technical supplement`](../papers/coupling-detector/TECHNICAL_SUPPLEMENT.md).

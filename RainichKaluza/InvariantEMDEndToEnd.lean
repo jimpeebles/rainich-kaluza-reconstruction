@@ -6,7 +6,7 @@ import RainichKaluza.InvariantEMDDetectorComposition
 This module closes the remaining composition seam between the finite upstream
 selector and the invariant physical EMD detector theorem.
 
-The input is a detector-choice-free genuine EMD physical patch, a realized
+The input is a detector-choice-free Ricci--exterior EMD physical patch, a realized
 scalar branch, and the explicit geometric hypotheses used by the upstream
 selector.  That selector existentially returns one fixed finite branch,
 together with its scalar `±` germ and an eventual upstream certificate.  A
@@ -15,7 +15,9 @@ active-wedge condition for precisely such a selected scalar-probe branch.
 Positive-magnitude `C²` regularity is stated separately because it is
 choice-independent.
 
-No hypothesis demands fourth-order genericity, acceptance, or an active wedge
+The physical patch used here packages the Ricci/stress/Hodge and exterior
+Maxwell equations, not the scalar wave equation.  No hypothesis demands
+fourth-order genericity, acceptance, or an active wedge
 for every raw detector channel.  The active condition is imposed only on the
 fixed branch produced by the finite upstream selection.
 -/
@@ -28,7 +30,7 @@ open Matrix Filter
 set_option maxHeartbeats 800000
 set_option linter.constructorNameAsVariable false
 
-/-- **End-to-end generic fourth-order necessity for a genuine invariant EMD
+/-- **End-to-end fourth-order necessity for an invariant Ricci--exterior EMD
 patch.**  The finite upstream selector chooses a single scalar sign, Maxwell
 frame, and orientation.  On that selected branch, the explicit regular-locus
 callback provides the two remaining choice-dependent analytic hypotheses:

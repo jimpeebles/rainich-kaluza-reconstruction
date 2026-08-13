@@ -20,6 +20,13 @@ The final constructions unweight a differentiable rescaled Maxwell field by
 derivatives, and the two already-proved exponential-weight exterior jets make
 the physical two-form and weighted dual flux closed in the full
 `IsC1ClosedTwoFormOn` sense.
+
+Normalization note (2026-08-12): the upstream canonical seed has amplitude
+`sqrt(2q)` and its ordinary Maxwell stress equals the Ricci residual. It is
+therefore `H=exp(a phi/2)F/sqrt(2)` in the convention registry. The legacy
+`physical*` definitions below unweight `H` and hence represent `F/sqrt(2)`.
+Their closure theorems are unchanged, but the eventual EMD/uplift matching
+interface must multiply them by the constant `sqrt(2)`.
 -/
 
 namespace RainichKaluza
@@ -176,6 +183,20 @@ theorem matrixFirstJetBilinFDeriv_coordinateDirection
   rw [matrixFirstJetBilinFDeriv, ContinuousLinearMap.comp_apply,
     matrixFirstJetCLM_coordinateDirection]
   exact matrixContinuousBilinForm4_coordinateDirection (D k) i j
+
+/-- The continuous-linear Frechet derivative representation remembers every
+coordinate component of the matrix first jet. -/
+theorem matrixFirstJetBilinFDeriv_injective :
+    Function.Injective matrixFirstJetBilinFDeriv := by
+  intro D D' h
+  funext k
+  ext i j
+  have hcomponent := congrArg
+    (fun A : BaseCoordinateSpace →L[ℝ]
+        ContinuousBilinForm BaseCoordinateSpace =>
+      A (coordinateDirection k) (coordinateDirection i)
+        (coordinateDirection j)) h
+  simpa only [matrixFirstJetBilinFDeriv_coordinateDirection] using hcomponent
 
 /-- Product-rule first jet of a scalar-weighted matrix two-form. -/
 def scaledTwoFormFirstJet
@@ -463,7 +484,29 @@ namespace RescaledMaxwellMatrixC1On
 
 variable {U : Set BaseCoordinateSpace}
 
-/-- Physical Maxwell matrix obtained by exponential unweighting. -/
+/-- Two genuine `C¹` matrix fields that agree on a neighborhood of a point
+have the same stored coordinate first jet there.  This follows from
+uniqueness of the Frechet derivative; the stored jet is not independent
+auxiliary data. -/
+theorem firstJet_eq_of_field_eventuallyEq
+    (S T : RescaledMaxwellMatrixC1On U)
+    (z : BaseCoordinateSpace) (hz : z ∈ U)
+    (hfield : S.field =ᶠ[nhds z] T.field) :
+    S.firstJet z = T.firstJet z := by
+  have hforms :
+      (fun y => matrixContinuousBilinForm4 (S.field y)) =ᶠ[nhds z]
+        (fun y => matrixContinuousBilinForm4 (T.field y)) := by
+    filter_upwards [hfield] with y hy
+    rw [hy]
+  have hTForS : HasFDerivAt
+      (fun y => matrixContinuousBilinForm4 (S.field y))
+      (matrixFirstJetBilinFDeriv (T.firstJet z)) z :=
+    (T.differentiable z hz).congr_of_eventuallyEq hforms
+  apply matrixFirstJetBilinFDeriv_injective
+  exact (S.differentiable z hz).unique hTForS
+
+/-- Exponentially unweighted curvature-normalized Maxwell matrix. Despite the
+legacy name, this is `F/sqrt(2)` in the convention-fixed EMD normalization. -/
 noncomputable def physicalMatrix
     (S : RescaledMaxwellMatrixC1On U)
     (coupling : ℝ) (phi : BaseCoordinateSpace → ℝ)

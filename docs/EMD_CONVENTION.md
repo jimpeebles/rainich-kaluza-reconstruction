@@ -80,9 +80,17 @@ The Bianchi and Maxwell equations in this convention are
 
 `dF=0`, `d(exp(aφ) *F)=0`.                              (E7)
 
-Define the scalar covector and stress-normalized Maxwell two-form
+Define the scalar covector and exponentially rescaled Maxwell two-form
 
 `v=dφ`, `𝓕=exp(aφ/2)F`.                                (E8)
+
+For direct comparison with the Ricci residual `S`, it is useful to introduce
+
+`H=𝓕/√2`.                                               (E8b)
+
+The ordinary Maxwell stress of `H` is exactly `S`. Equivalently, the ordinary
+Maxwell stress of `𝓕` is `2S`. The constant factor does not change either
+exterior equation or any coupling ratio.
 
 The product and chain rules give
 
@@ -124,6 +132,38 @@ potential candidate and its convention-independent Kaluza gauge algebra.
 `dF=0 → dA=F` under a `C¹` closed regularity package, and
 `UpliftConvention.lean` fixes the uplift constants derived in
 `docs/UPLIFT_CONVENTION.md`.
+
+### Metric-seed correction (2026-08-12)
+
+Formula (E11) uses the physical exponentially rescaled form `𝓕`. Curvature
+determines `S` and therefore directly constructs a canonical principal-plane
+seed `(F₀,*F₀)` for `H=𝓕/√2`, not the physical representative `H` itself.
+If
+
+`H=cos(θ)F₀+sin(θ)*F₀`,
+
+the complete first seed-derivative channels determine only
+
+`A=a cos(2θ)` and `η=dθ+(a sin(2θ)/2)Jv`.
+
+They have an exact shear kernel and cannot recover `a²` at metric order three.
+For constant `a`, one derivative later
+
+`dA+2Bη-B²Jv=0`, with `B=a sin(2θ)`,
+
+generically recovers `B` and hence `a²=A²+B²`. The proof and precise branch
+condition are in
+[`../papers/coupling-detector/HUMAN_PROOF.md`](../papers/coupling-detector/HUMAN_PROOF.md)
+and `GeometricCouplingDetector.lean`. Older evaluated two-probe theorems remain
+correct abstract linear algebra; their unknowns must not be interpreted as
+physical `(dθ,a)` before this seed-to-physical distinction is resolved.
+
+The scalar equation in the curvature-seed normalization is
+
+`□φ=(a/2)H²=-2qA`,
+
+because the canonical seed has amplitude `E=√(2q)` and `H²=-4q cos(2θ)`.
+Thus its independent cosine-channel check is `A=-□φ/(2q)`.
 
 ## Scope boundary
 

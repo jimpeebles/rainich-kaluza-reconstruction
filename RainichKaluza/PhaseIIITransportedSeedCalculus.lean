@@ -457,6 +457,167 @@ theorem scalarFieldCoordinateFDeriv_sin
   rw [fderiv_sin htheta]
   rfl
 
+/-- Differentiating a locally unit-circle pair gives the coordinate tangent
+equation needed for the complexion one-form. -/
+theorem scalarFieldCoordinateFDeriv_unitCircle_tangent
+    (c s : CurvatureCoordinateSpace4 → ℝ)
+    (z : CurvatureCoordinateSpace4)
+    (hc : DifferentiableAt ℝ c z) (hs : DifferentiableAt ℝ s z)
+    (hunit : (fun y => c y ^ 2 + s y ^ 2) =ᶠ[nhds z]
+      (fun _ => (1 : ℝ))) :
+    ∀ k,
+      c z * scalarFieldCoordinateFDeriv c z k +
+        s z * scalarFieldCoordinateFDeriv s z k = 0 := by
+  have hfd : fderiv ℝ (fun y => c y ^ 2 + s y ^ 2) z = 0 := by
+    rw [Filter.EventuallyEq.fderiv_eq hunit]
+    simp
+  have hfd' : fderiv ℝ (fun y => c y * c y + s y * s y) z = 0 := by
+    simpa [pow_two] using hfd
+  change fderiv ℝ (c * c + s * s) z = 0 at hfd'
+  intro k
+  have hk := congrArg
+    (fun D : CurvatureCoordinateSpace4 →L[ℝ] ℝ =>
+      D (curvatureCoordinateDirection k)) hfd'
+  rw [fderiv_add (hc.mul hc) (hs.mul hs),
+    fderiv_mul hc hc, fderiv_mul hs hs] at hk
+  unfold scalarFieldCoordinateFDeriv
+  simp at hk
+  nlinarith
+
+/-- **Smooth duality-coordinate jet theorem.** Every differentiable local
+unit-circle pair canonically supplies its complexion one-form
+`omega = c ds - s dc`, and both unit-circle derivative equations follow
+without an independently chosen angle. -/
+theorem exists_complexionOneForm_of_unitCircleFields
+    (c s : CurvatureCoordinateSpace4 → ℝ)
+    (z : CurvatureCoordinateSpace4)
+    (hc : DifferentiableAt ℝ c z) (hs : DifferentiableAt ℝ s z)
+    (hunitLocal : (fun y => c y ^ 2 + s y ^ 2) =ᶠ[nhds z]
+      (fun _ => (1 : ℝ))) :
+    ∃ omega : OneForm4,
+      scalarFieldCoordinateFDeriv c z = (-s z) • omega ∧
+        scalarFieldCoordinateFDeriv s z = c z • omega := by
+  have hunit : c z ^ 2 + s z ^ 2 = 1 := hunitLocal.self_of_nhds
+  have htangent := scalarFieldCoordinateFDeriv_unitCircle_tangent
+    c s z hc hs hunitLocal
+  let omega : OneForm4 := fun k =>
+    complexionRate (c z) (s z)
+      (scalarFieldCoordinateFDeriv c z k)
+      (scalarFieldCoordinateFDeriv s z k)
+  refine ⟨omega, ?_, ?_⟩ <;> funext k
+  · simpa [omega, mul_comm] using
+      (dualityParameter_derivative_eq_complexionRate
+      (c z) (s z)
+      (scalarFieldCoordinateFDeriv c z k)
+      (scalarFieldCoordinateFDeriv s z k)
+      hunit (htangent k)).1
+  · simpa [omega, mul_comm] using
+      (dualityParameter_derivative_eq_complexionRate
+      (c z) (s z)
+      (scalarFieldCoordinateFDeriv c z k)
+      (scalarFieldCoordinateFDeriv s z k)
+      hunit (htangent k)).2
+
+/-- **Smooth Maxwell stress-fibre to complexion-jet theorem.** On an open
+positive non-null patch, a `C¹` physical two-form with canonical Maxwell
+stress determines explicit `C¹` duality coordinates and, without choosing an
+angle, a canonical complexion one-form satisfying both derivative equations.
+This is the analytic half of the physical-channel splice. -/
+theorem exists_complexionOneForm_of_smoothCanonicalStressFiber
+    {U : Set CurvatureCoordinateSpace4}
+    (q : CurvatureCoordinateSpace4 → ℝ)
+    (F : CurvatureCoordinateSpace4 → Matrix4)
+    (z : CurvatureCoordinateSpace4)
+    (hopen : IsOpen U) (hz : z ∈ U)
+    (hqSmooth : ContDiffOn ℝ 1 q U)
+    (hFsmooth : MatrixFieldContDiffOn 1 U F)
+    (hq : ∀ y ∈ U, 0 < q y)
+    (hskew : ∀ y ∈ U, (F y)ᵀ = -F y)
+    (hstress : ∀ y ∈ U,
+      matrixMaxwellStress minkowskiMetric (F y) =
+        canonicalMaxwellResidual (q y)) :
+    let c := smoothCanonicalStressFiberCosine q F
+    let s := smoothCanonicalStressFiberSine q F
+    ContDiffOn ℝ 1 c U ∧ ContDiffOn ℝ 1 s U ∧
+      c z ^ 2 + s z ^ 2 = 1 ∧
+      F z = c z • canonicalMaxwellTwoForm (Real.sqrt (2 * q z)) 0 +
+        s z • canonicalHodgeStar (Real.sqrt (2 * q z)) 0 ∧
+      ∃ omega : OneForm4,
+        scalarFieldCoordinateFDeriv c z = (-s z) • omega ∧
+          scalarFieldCoordinateFDeriv s z = c z • omega := by
+  dsimp only
+  have H := smoothCanonicalStressFiber_coordinates
+    hqSmooth hFsmooth hq hskew hstress
+  refine ⟨H.1, H.2.1, H.2.2.1 z hz, H.2.2.2 z hz, ?_⟩
+  have hunitLocal :
+      (fun y => smoothCanonicalStressFiberCosine q F y ^ 2 +
+        smoothCanonicalStressFiberSine q F y ^ 2) =ᶠ[nhds z]
+        (fun _ => (1 : ℝ)) := by
+    filter_upwards [hopen.mem_nhds hz] with y hy
+    exact H.2.2.1 y hy
+  exact exists_complexionOneForm_of_unitCircleFields
+    (smoothCanonicalStressFiberCosine q F)
+    (smoothCanonicalStressFiberSine q F) z
+    ((H.1.differentiableOn_one z hz).differentiableAt
+      (hopen.mem_nhds hz))
+    ((H.2.1.differentiableOn_one z hz).differentiableAt
+      (hopen.mem_nhds hz)) hunitLocal
+
+/-- **Smooth adapted-frame stress fibre supplies the complexion jet.** A
+genuine smooth physical two-form need not be presented in canonical
+coordinates.  Mutual inverse frame fields carrying its inverse metric and
+stress to canonical Lorentz form give explicit smooth pulled duality
+coordinates; these reconstruct the field and canonically produce the local
+complexion one-form, without choosing an angle. -/
+theorem exists_complexionOneForm_of_smoothAdaptedMaxwellStressFiber
+    {U : Set CurvatureCoordinateSpace4}
+    (GInv L K F : CurvatureCoordinateSpace4 → Matrix4)
+    (q : CurvatureCoordinateSpace4 → ℝ)
+    (z : CurvatureCoordinateSpace4)
+    (hopen : IsOpen U) (hz : z ∈ U)
+    (hqSmooth : ContDiffOn ℝ 1 q U)
+    (hKSmooth : MatrixFieldContDiffOn 1 U K)
+    (hFSmooth : MatrixFieldContDiffOn 1 U F)
+    (hq : ∀ y ∈ U, 0 < q y)
+    (hKL : ∀ y ∈ U, K y * L y = 1)
+    (hLK : ∀ y ∈ U, L y * K y = 1)
+    (hmetric : ∀ y ∈ U,
+      L y * GInv y * (L y)ᵀ = minkowskiMetric)
+    (hskew : ∀ y ∈ U, (F y)ᵀ = -F y)
+    (hstress : ∀ y ∈ U,
+      transportMixed (L y) (matrixMaxwellStress (GInv y) (F y)) (K y) =
+        canonicalMaxwellResidual (q y)) :
+    let pulledF := fun y => transportTwoForm (K y) (F y)
+    let c := smoothCanonicalStressFiberCosine q pulledF
+    let s := smoothCanonicalStressFiberSine q pulledF
+    ContDiffOn ℝ 1 c U ∧ ContDiffOn ℝ 1 s U ∧
+      c z ^ 2 + s z ^ 2 = 1 ∧
+      pulledF z = c z • canonicalMaxwellTwoForm (Real.sqrt (2 * q z)) 0 +
+        s z • canonicalHodgeStar (Real.sqrt (2 * q z)) 0 ∧
+      ∃ omega : OneForm4,
+        scalarFieldCoordinateFDeriv c z = (-s z) • omega ∧
+          scalarFieldCoordinateFDeriv s z = c z • omega := by
+  dsimp only
+  let pulledF : CurvatureCoordinateSpace4 → Matrix4 := fun y =>
+    transportTwoForm (K y) (F y)
+  have hpulledSmooth : MatrixFieldContDiffOn 1 U pulledF :=
+    contDiffOn_transportTwoForm_fields hKSmooth hFSmooth
+  have hpulledSkew : ∀ y ∈ U, (pulledF y)ᵀ = -pulledF y := by
+    intro y hy
+    exact transportTwoForm_transpose (K y) (F y) (hskew y hy)
+  have hpulledStress : ∀ y ∈ U,
+      matrixMaxwellStress minkowskiMetric (pulledF y) =
+        canonicalMaxwellResidual (q y) := by
+    intro y hy
+    rw [← hmetric y hy]
+    exact (matrixMaxwellStress_changeBasis
+      (GInv y) (L y) (K y) (F y)
+      (hKL y hy) (hLK y hy)).trans (hstress y hy)
+  simpa [pulledF] using
+    exists_complexionOneForm_of_smoothCanonicalStressFiber
+      q pulledF z hopen hz hqSmooth hpulledSmooth hq
+      hpulledSkew hpulledStress
+
 namespace PositiveQPhaseIIIPatch4
 
 variable {U : Set CurvatureCoordinateSpace4}
@@ -493,6 +654,51 @@ end PositiveQPhaseIIIPatch4
 namespace PositiveQPhaseIIISeedPairC1Realization
 
 variable {U : Set CurvatureCoordinateSpace4}
+
+/-- **Physical-germ transfer of the exterior EMD equations.**  Let two
+genuine `C¹` matrix fields satisfy the exterior EMD system at `z`.  If their
+field germs agree there with the rotated Maxwell and Hodge channels
+reconstructed by a transported-seed realization, then the reconstructed
+Phase-III jet satisfies the same system.  Eventual field equality is enough:
+uniqueness of the Frechet derivative also identifies the stored first jets. -/
+theorem exteriorJet_emdExteriorClosure_of_physicalFields_eventuallyEq
+    {M : PositiveQPhaseIIIPatch4 U}
+    (S : PositiveQPhaseIIISeedPairC1Realization M)
+    (physicalF physicalG : RescaledMaxwellMatrixC1On U)
+    (z : CurvatureCoordinateSpace4) (hz : z ∈ U)
+    (v : OneForm4) (a : ℝ)
+    (hF : physicalF.field =ᶠ[nhds z] S.rotatedC1.field)
+    (hG : physicalG.field =ᶠ[nhds z] S.rotatedHodgeC1.field)
+    (hclosure : EMDExteriorClosure matrixOneWedgeTwo v a
+      (physicalF.field z) (physicalG.field z)
+      (matrixExteriorDerivative (physicalF.firstJet z))
+      (matrixExteriorDerivative (physicalG.firstJet z))) :
+    EMDExteriorClosure matrixOneWedgeTwo v a
+      (M.exteriorJet z).rotatedF (M.exteriorJet z).rotatedG
+      ((M.exteriorJet z).rotatedDF matrixOneWedgeTwo)
+      ((M.exteriorJet z).rotatedDG matrixOneWedgeTwo) := by
+  have hFJet : physicalF.firstJet z = S.rotatedC1.firstJet z :=
+    physicalF.firstJet_eq_of_field_eventuallyEq S.rotatedC1 z hz hF
+  have hGJet : physicalG.firstJet z = S.rotatedHodgeC1.firstJet z :=
+    physicalG.firstJet_eq_of_field_eventuallyEq S.rotatedHodgeC1 z hz hG
+  have hclosureRotated : EMDExteriorClosure matrixOneWedgeTwo v a
+      (S.rotatedC1.field z) (S.rotatedHodgeC1.field z)
+      (matrixExteriorDerivative (S.rotatedC1.firstJet z))
+      (matrixExteriorDerivative (S.rotatedHodgeC1.firstJet z)) := by
+    simpa only [hF.self_of_nhds, hG.self_of_nhds, hFJet, hGJet] using hclosure
+  have hFValue : S.rotatedC1.field z = (M.exteriorJet z).rotatedF :=
+    S.toRescaledMaxwellC1Realization.field_eq z hz
+  have hGValue : S.rotatedHodgeC1.field z = (M.exteriorJet z).rotatedG :=
+    S.toRescaledMaxwellC1PairRealization.hodge_field_eq z hz
+  have hFExterior :
+      matrixExteriorDerivative (S.rotatedC1.firstJet z) =
+        (M.exteriorJet z).rotatedDF matrixOneWedgeTwo :=
+    S.toRescaledMaxwellC1Realization.exteriorFirstJet_eq z hz
+  have hGExterior :
+      matrixExteriorDerivative (S.rotatedHodgeC1.firstJet z) =
+        (M.exteriorJet z).rotatedDG matrixOneWedgeTwo :=
+    S.toRescaledMaxwellC1PairRealization.hodge_exteriorFirstJet_eq z hz
+  simpa only [hFValue, hGValue, hFExterior, hGExterior] using hclosureRotated
 
 /-- **Concrete transported-seed realization.**  If `L,q` are `C²` and the
 stored arrays `dL,dq` are their actual coordinate derivatives, then both

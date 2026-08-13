@@ -1,4 +1,13 @@
-# Public-release checklist
+# Historical public-release checklist (superseded)
+
+> This checklist records the repository's earlier centralizer-only release
+> boundary. It is not the policy for the current coupling-detector paper.
+> Use [`RESEARCH_RESET.md`](RESEARCH_RESET.md),
+> [`CLAIM_LEDGER.md`](CLAIM_LEDGER.md), and
+> [`../papers/coupling-detector/MANUSCRIPT.md`](../papers/coupling-detector/MANUSCRIPT.md)
+> for current claims. In particular, differential coupling recovery is now
+> proved on the explicit active regular locus, while a converse and full
+> nonlinear-coordinate covariance remain open.
 
 The first public release is intended to support a VibeMathed **partial result**,
 not a claim that generalized Rainich--Kaluza reconstruction is solved.

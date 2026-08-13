@@ -1,0 +1,88 @@
+{
+  "benchmark_id": "vt1c-non-kaluza-dilaton",
+  "checks": [
+    {
+      "name": "scalar-gradient-is-nonzero",
+      "passed": true,
+      "residual_sha256": "89f763a23e5529fc9091df5b603f40f44052c98fcde3e5b128aa6edc35f1779a"
+    },
+    {
+      "name": "maxwell-field-is-nonzero",
+      "passed": true,
+      "residual_sha256": "28d6a1d6a9de88c933d88d60708f118e0151ab421008a2b178ff8b24f4dc68b9"
+    },
+    {
+      "name": "base-ricci-is-nonzero",
+      "passed": true,
+      "residual_sha256": "e0cdd7070ddead677dba345f93cfa66a2061a94b80d8bec289f6ffdf024107fc"
+    },
+    {
+      "name": "emd-residuals-vanish-at-coupling-one",
+      "passed": true,
+      "residual_sha256": "608c5567fbe26c0954cc921ff46cc83278ad969453ee47b55c7bc480ab247464"
+    },
+    {
+      "name": "dual-channel-reconstructs-coupling-squared-one",
+      "passed": true,
+      "residual_sha256": "9937a9eb6b34cd5953bb3d90a0353df5266b6568f4040558fb75e05b051f598c"
+    },
+    {
+      "name": "kaluza-coupling-selector-rejects",
+      "passed": true,
+      "residual_sha256": "4be68eac1f692ee3a0cc4504febd8e3b6dede72634393b3f8f273ac17fe5eb44"
+    },
+    {
+      "name": "necessary-algebraic-obstruction-still-vanishes",
+      "passed": true,
+      "residual_sha256": "9937a9eb6b34cd5953bb3d90a0353df5266b6568f4040558fb75e05b051f598c"
+    },
+    {
+      "name": "convention-kaluza-uplift-is-not-ricci-flat",
+      "passed": true,
+      "residual_sha256": "94173b85550ab50bafc2636543f5ce20b873cbde0544fa5a316649db710346f0"
+    },
+    {
+      "name": "ricci-spectrum-is-repeated-root-degenerate",
+      "passed": true,
+      "residual_sha256": "8268f8bfc8d75009b53c8d65274c9e0ccc395ec82bc35ff9aafdeb000e2a2d0e"
+    }
+  ],
+  "evidence_class": "exact-symbolic-validation-not-lean-proof",
+  "input": {
+    "base_metric": "[[-1 + 2/r, 0, 0, 0], [0, 1/(1 - 2/r), 0, 0], [0, 0, r**2*(1 - 1/r), 0], [0, 0, 0, r**2*(1 - 1/r)*sin(theta)**2]]",
+    "convention_map": "phi=-2*standard_phi; A=2*standard_A; a=1",
+    "coordinates": [
+      "t",
+      "r",
+      "theta",
+      "phi",
+      "z"
+    ],
+    "coupling": "1",
+    "expected_classification": "valid-emd-with-a-squared-one-but-rejected-as-kaluza-and-repeated-root",
+    "parameters": {
+      "r_minus": "1",
+      "r_plus": "2",
+      "standard_charge": "1"
+    },
+    "potential": [
+      "2/r",
+      "0",
+      "0",
+      "0"
+    ],
+    "scalar": "-log(1 - 1/r)",
+    "source": {
+      "external_source": "https://doi.org/10.1103/PhysRevD.43.3140",
+      "kind": "published-exact-solution-with-explicit-convention-map",
+      "provenance": "Gibbons--Maeda / Garfinkle--Horowitz--Strominger static electric dilaton black hole"
+    }
+  },
+  "input_sha256": "ca4cb14eb2bd2d2ab9a65c9f2d139cbf80611b6e2feb780a7fb0ffc42b5f3c54",
+  "passed": true,
+  "runtime": {
+    "python": "3.12.13",
+    "sympy": "1.14.0"
+  },
+  "schema_version": 1
+}

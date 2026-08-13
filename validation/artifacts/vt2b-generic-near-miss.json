@@ -1,0 +1,70 @@
+{
+  "benchmark_id": "vt2b-generic-near-miss",
+  "checks": [
+    {
+      "name": "perturbation-value-and-first-jet-vanish",
+      "passed": true,
+      "residual_sha256": "f0235552c78ee671e44c7e8f23bda5f47ec04ae459459635fe718e2a9ba74b7d"
+    },
+    {
+      "name": "perturbation-second-jet-is-nonzero",
+      "passed": true,
+      "residual_sha256": "cdb9ad32fde4b41cfa17eb36422f912e8239a4c78c791e935525b6fe4e3d1860"
+    },
+    {
+      "name": "point-metric-remains-lorentzian",
+      "passed": true,
+      "residual_sha256": "365f48b13023b57f269244bfdab53d26e9bac9aa100f7025f02552194de91820"
+    },
+    {
+      "name": "mixed-ricci-spectrum-remains-real-and-simple",
+      "passed": true,
+      "residual_sha256": "966d155713be8257af7d02d0a75f6ab1000a9faf86a20d3e980099a1e9bd16af"
+    },
+    {
+      "name": "characteristic-discriminant-remains-nonzero",
+      "passed": true,
+      "residual_sha256": "25eedc81d0c428a8493dada229166185344f1f4ff5998062991490888f481682"
+    },
+    {
+      "name": "kaluza-polynomial-obstruction-is-nonzero",
+      "passed": true,
+      "residual_sha256": "c6a9e21dabca0e5a2542b360fa985d27f35a49aa86615745d99d38f52b790e4a"
+    },
+    {
+      "name": "original-emd-fields-no-longer-solve-equations",
+      "passed": true,
+      "residual_sha256": "e977e897e5e18f99ab75231fbe584f3def4e5a02d0143fb9cba668f9ba9eaa5f"
+    }
+  ],
+  "evidence_class": "exact-symbolic-validation-not-lean-proof",
+  "input": {
+    "coordinates": [
+      "t",
+      "r",
+      "theta",
+      "phi",
+      "z"
+    ],
+    "exact_point": {
+      "phi": "0",
+      "r": "3",
+      "t": "0",
+      "theta": "pi/4"
+    },
+    "expected_classification": "generic-non-emd-rejected-by-kaluza-polynomial-obstruction",
+    "perturbation": "(r - 3)**2/100",
+    "source": {
+      "external_source": null,
+      "kind": "adversarial-exact-second-jet-perturbation",
+      "provenance": "tt component of vt2-generic-helical-string shifted by (r-3)^2/100"
+    }
+  },
+  "input_sha256": "5415408c1868f32bb1374121673e890f507ad2d34c416078531b058cec8b3432",
+  "passed": true,
+  "runtime": {
+    "python": "3.12.13",
+    "sympy": "1.14.0"
+  },
+  "schema_version": 1
+}

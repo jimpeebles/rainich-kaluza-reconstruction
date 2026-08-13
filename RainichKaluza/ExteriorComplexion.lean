@@ -99,6 +99,22 @@ def EMDExteriorClosure
   dF = (a / 2) • wedge v F ∧
     dG = -(a / 2) • wedge v G
 
+/-- Scalar-orientation covariance of the rescaled EMD exterior system.
+Reversing the reconstructed scalar covector reverses the signed coupling and
+leaves both physical closure equations unchanged. -/
+theorem emdExteriorClosure_neg_scalar_coupling
+    (wedge : OneWedgeTwo One Two Three) (v : One) (a : ℝ)
+    (F G : Two) (dF dG : Three) :
+    EMDExteriorClosure wedge (-v) (-a) F G dF dG ↔
+      EMDExteriorClosure wedge v a F G dF dG := by
+  unfold EMDExteriorClosure
+  simp only [map_neg, neg_div, neg_smul, neg_neg]
+  constructor <;> rintro ⟨hF, hG⟩ <;> constructor
+  · simpa only [LinearMap.neg_apply, smul_neg, neg_smul, neg_neg] using hF
+  · simpa only [LinearMap.neg_apply, smul_neg, neg_smul, neg_neg] using hG
+  · simpa only [LinearMap.neg_apply, smul_neg, neg_smul, neg_neg] using hF
+  · simpa only [LinearMap.neg_apply, smul_neg, neg_smul, neg_neg] using hG
+
 /-- **Exterior-form complexion/coupling reduction.** Once the unit-circle
 derivatives are written using their one-form complexion `omega`, the full EMD
 closure equations are equivalent to two explicit equations for the seed

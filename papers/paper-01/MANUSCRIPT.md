@@ -1,5 +1,11 @@
 # Pointwise Scalar Reconstruction and Its Discrete Ambiguity in the Generic Kaluza Einstein--Maxwell--Dilaton Sector
 
+> **Fallback manuscript track.** This manuscript isolates the already proved
+> pointwise centralizer/nonuniqueness result. It is not the current
+> metric-only coupling-detector manuscript, and some downstream status notes
+> intentionally remain outside its scope. See
+> [`../../docs/RESEARCH_RESET.md`](../../docs/RESEARCH_RESET.md).
+
 ## Abstract
 
 Rainich theory asks when matter fields can be recovered from spacetime

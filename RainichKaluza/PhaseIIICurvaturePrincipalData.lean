@@ -56,6 +56,374 @@ theorem continuousBilinFormToBilin_matrix_minkowski :
   simp [continuousBilinFormToBilin, matrixContinuousBilinForm4,
     minkowskiBilinForm, Matrix.toBilin'_apply, Pi.single_apply]
 
+/-- An idempotent real coordinate matrix with trace one has a rank-one
+linear-map range.  This turns the detector's directly checkable polynomial
+projector identities into the geometric rank certificate used by finite
+eigenline selection. -/
+theorem matrixProjector_finrank_range_eq_one_of_trace_one
+    (P : Matrix4) (hP : P * P = P) (htrace : Matrix.trace P = 1) :
+    Module.finrank ℝ (Matrix.toLin' P).range = 1 := by
+  have hidem : IsIdempotentElem (Matrix.toLin' P) := by
+    rw [isIdempotentElem_iff]
+    simpa only [Module.End.mul_eq_comp, Matrix.toLin'_mul] using
+      congrArg Matrix.toLin' hP
+  have hlinTrace :
+      LinearMap.trace ℝ CurvatureCoordinateSpace4 (Matrix.toLin' P) = 1 := by
+    rw [LinearMap.trace_eq_matrix_trace ℝ (Pi.basisFun ℝ (Fin 4))]
+    simpa using htrace
+  have hproj :=
+    LinearMap.IsIdempotentElem.isProj_range (Matrix.toLin' P) hidem
+  have hfinTrace :
+      LinearMap.trace ℝ CurvatureCoordinateSpace4 (Matrix.toLin' P) =
+        (Module.finrank ℝ (Matrix.toLin' P).range : ℝ) := hproj.trace
+  have hcast : (Module.finrank ℝ (Matrix.toLin' P).range : ℝ) = 1 := by
+    rw [← hfinTrace]
+    exact hlinTrace
+  exact_mod_cast hcast
+
+/-- Coordinate specialization of finite rank-one timelike-line selection.
+If the projector range is intrinsically timelike, one of the four projected
+coordinate directions has the strict negative sign required by scalar
+normalization. -/
+theorem exists_smoothMatrixProjectedBasisTimelikeScalarSignAt
+    (g : CurvatureCoordinateSpace4 →
+      ContinuousBilinForm CurvatureCoordinateSpace4)
+    (P : CurvatureCoordinateSpace4 → Matrix4)
+    (z : CurvatureCoordinateSpace4)
+    (hrank : Module.finrank ℝ (Matrix.toLin' (P z)).range = 1)
+    (htimelike : ∀ x : (Matrix.toLin' (P z)).range,
+      (x : CurvatureCoordinateSpace4) ≠ 0 →
+      continuousBilinFormToBilin (g z)
+        (x : CurvatureCoordinateSpace4) (x : CurvatureCoordinateSpace4) < 0) :
+    ∃ i : Fin 4,
+      smoothMetricPairing g
+        (smoothMatrixProjectedVector P (curvatureCoordinateDirection i))
+        (smoothMatrixProjectedVector P (curvatureCoordinateDirection i)) z < 0 := by
+  let gb := continuousBilinFormToBilin (g z)
+  let Plin := Matrix.toLin' (P z)
+  obtain ⟨i, hi⟩ :=
+    exists_projectedBasisTimelikeVector_of_rankOneRange gb
+      (Pi.basisFun ℝ (Fin 4)) Plin hrank htimelike
+  refine ⟨i, ?_⟩
+  have hcoord : curvatureCoordinateDirection i = Pi.single i 1 := by
+    funext k
+    simp [curvatureCoordinateDirection, Pi.single_apply]
+  have hx : smoothMatrixProjectedVector P
+      (curvatureCoordinateDirection i) z =
+      Plin ((Pi.basisFun ℝ (Fin 4)) i) := by
+    ext k
+    simp [Plin, smoothMatrixProjectedVector, hcoord,
+      Matrix.toLin'_apply, Pi.basisFun_apply]
+  change (g z)
+    (smoothMatrixProjectedVector P (curvatureCoordinateDirection i) z)
+    (smoothMatrixProjectedVector P (curvatureCoordinateDirection i) z) < 0
+  rw [hx]
+  exact hi
+
+/-- Coordinate specialization of finite rank-one spacelike-line selection. -/
+theorem exists_smoothMatrixProjectedBasisSpacelikeScalarSignAt
+    (g : CurvatureCoordinateSpace4 →
+      ContinuousBilinForm CurvatureCoordinateSpace4)
+    (P : CurvatureCoordinateSpace4 → Matrix4)
+    (z : CurvatureCoordinateSpace4)
+    (hrank : Module.finrank ℝ (Matrix.toLin' (P z)).range = 1)
+    (hspacelike : ∀ x : (Matrix.toLin' (P z)).range,
+      (x : CurvatureCoordinateSpace4) ≠ 0 →
+      0 < continuousBilinFormToBilin (g z)
+        (x : CurvatureCoordinateSpace4) (x : CurvatureCoordinateSpace4)) :
+    ∃ i : Fin 4,
+      0 < smoothMetricPairing g
+        (smoothMatrixProjectedVector P (curvatureCoordinateDirection i))
+        (smoothMatrixProjectedVector P (curvatureCoordinateDirection i)) z := by
+  let gb := continuousBilinFormToBilin (g z)
+  let Plin := Matrix.toLin' (P z)
+  obtain ⟨i, hi⟩ :=
+    exists_projectedBasisSpacelikeVector_of_rankOneRange gb
+      (Pi.basisFun ℝ (Fin 4)) Plin hrank hspacelike
+  refine ⟨i, ?_⟩
+  have hcoord : curvatureCoordinateDirection i = Pi.single i 1 := by
+    funext k
+    simp [curvatureCoordinateDirection, Pi.single_apply]
+  have hx : smoothMatrixProjectedVector P
+      (curvatureCoordinateDirection i) z =
+      Plin ((Pi.basisFun ℝ (Fin 4)) i) := by
+    ext k
+    simp [Plin, smoothMatrixProjectedVector, hcoord,
+      Matrix.toLin'_apply, Pi.basisFun_apply]
+  change 0 < (g z)
+    (smoothMatrixProjectedVector P (curvatureCoordinateDirection i) z)
+    (smoothMatrixProjectedVector P (curvatureCoordinateDirection i) z)
+  rw [hx]
+  exact hi
+
+/-- **Finite scalar-eigenline entrance.** Two intrinsic rank-one causal-line
+certificates select coordinate probes for both scalar Ricci eigenlines, and
+the two strict normalization signs persist simultaneously near the base
+point.  No preferred scalar probe occurs in the hypotheses. -/
+theorem exists_eventually_smoothMatrixProjectedBasisScalarEigenlineSignsAt
+    (g : CurvatureCoordinateSpace4 →
+      ContinuousBilinForm CurvatureCoordinateSpace4)
+    (PA PB : CurvatureCoordinateSpace4 → Matrix4)
+    (z : CurvatureCoordinateSpace4)
+    (hg : ContinuousAt g z)
+    (hPA : ∀ a b, ContinuousAt (fun w => PA w a b) z)
+    (hPB : ∀ a b, ContinuousAt (fun w => PB w a b) z)
+    (hPAidem : PA z * PA z = PA z)
+    (hPBidem : PB z * PB z = PB z)
+    (htraceA : Matrix.trace (PA z) = 1)
+    (htraceB : Matrix.trace (PB z) = 1)
+    (htimelike : ∀ x : (Matrix.toLin' (PA z)).range,
+      (x : CurvatureCoordinateSpace4) ≠ 0 →
+      continuousBilinFormToBilin (g z)
+        (x : CurvatureCoordinateSpace4) (x : CurvatureCoordinateSpace4) < 0)
+    (hspacelike : ∀ x : (Matrix.toLin' (PB z)).range,
+      (x : CurvatureCoordinateSpace4) ≠ 0 →
+      0 < continuousBilinFormToBilin (g z)
+        (x : CurvatureCoordinateSpace4) (x : CurvatureCoordinateSpace4)) :
+    ∃ i j : Fin 4,
+      ∀ᶠ w in 𝓝 z,
+        smoothMetricPairing g
+            (smoothMatrixProjectedVector PA (curvatureCoordinateDirection i))
+            (smoothMatrixProjectedVector PA (curvatureCoordinateDirection i)) w < 0 ∧
+          0 < smoothMetricPairing g
+            (smoothMatrixProjectedVector PB (curvatureCoordinateDirection j))
+            (smoothMatrixProjectedVector PB (curvatureCoordinateDirection j)) w := by
+  have hrankA : Module.finrank ℝ (Matrix.toLin' (PA z)).range = 1 :=
+    matrixProjector_finrank_range_eq_one_of_trace_one (PA z) hPAidem htraceA
+  have hrankB : Module.finrank ℝ (Matrix.toLin' (PB z)).range = 1 :=
+    matrixProjector_finrank_range_eq_one_of_trace_one (PB z) hPBidem htraceB
+  obtain ⟨i, hi⟩ :=
+    exists_smoothMatrixProjectedBasisTimelikeScalarSignAt
+      g PA z hrankA htimelike
+  obtain ⟨j, hj⟩ :=
+    exists_smoothMatrixProjectedBasisSpacelikeScalarSignAt
+      g PB z hrankB hspacelike
+  let x := smoothMatrixProjectedVector PA (curvatureCoordinateDirection i)
+  let y := smoothMatrixProjectedVector PB (curvatureCoordinateDirection j)
+  have hx : ContinuousAt x z := by
+    apply continuousAt_pi.mpr
+    intro k
+    simp only [x, smoothMatrixProjectedVector, Matrix.mulVec, dotProduct]
+    exact tendsto_finsetSum Finset.univ fun l _ =>
+      (hPA k l).mul continuousAt_const
+  have hy : ContinuousAt y z := by
+    apply continuousAt_pi.mpr
+    intro k
+    simp only [y, smoothMatrixProjectedVector, Matrix.mulVec, dotProduct]
+    exact tendsto_finsetSum Finset.univ fun l _ =>
+      (hPB k l).mul continuousAt_const
+  have hxx := continuousAt_smoothMetricPairing hg hx hx
+  have hyy := continuousAt_smoothMetricPairing hg hy hy
+  refine ⟨i, j, ?_⟩
+  filter_upwards
+    [hxx.eventually_lt continuousAt_const hi,
+      continuousAt_const.eventually_lt hyy hj] with w hwA hwB
+  exact ⟨hwA, hwB⟩
+
+/-- **Coordinate-matrix specialization of the arbitrary-basis Lorentzian
+entrance.** At any point where the matrix projector has rank-two range
+containing a timelike vector, the finite coordinate-basis/pivot-recipe search
+supplies exactly the two strict signs consumed by the field-driven
+Gram--Schmidt constructor. -/
+theorem exists_smoothMatrixProjectedBasisLorentzianFrameSignsAt
+    (g : CurvatureCoordinateSpace4 →
+      ContinuousBilinForm CurvatureCoordinateSpace4)
+    (P : CurvatureCoordinateSpace4 → Matrix4)
+    (z : CurvatureCoordinateSpace4)
+    (hgsymm : (continuousBilinFormToBilin (g z)).IsSymm)
+    (hindex : HasLorentzianIndexOne (continuousBilinFormToBilin (g z)))
+    (hrank : Module.finrank ℝ (Matrix.toLin' (P z)).range = 2)
+    (t : (Matrix.toLin' (P z)).range)
+    (ht : continuousBilinFormToBilin (g z) (t : CurvatureCoordinateSpace4)
+      (t : CurvatureCoordinateSpace4) < 0) :
+    ∃ i j : Fin 4, ∃ recipe : LorentzianPivotRecipe,
+      let x := smoothMatrixProjectedVector P (curvatureCoordinateDirection i)
+      let y := smoothMatrixProjectedVector P (curvatureCoordinateDirection j)
+      let pivot := smoothLorentzianPivotCandidate g x y recipe
+      let companion := smoothLorentzianPivotCompanion x y recipe
+      smoothMetricPairing g pivot pivot z < 0 ∧
+        0 < smoothMetricPairing g
+          (smoothMetricOrthogonalizeSecond g pivot companion)
+          (smoothMetricOrthogonalizeSecond g pivot companion) z := by
+  let gb := continuousBilinFormToBilin (g z)
+  let Plin := Matrix.toLin' (P z)
+  obtain ⟨i, j, recipe, htime, hrem⟩ :=
+    exists_projectedBasisLorentzianFrameSigns gb hgsymm hindex
+      (Pi.basisFun ℝ (Fin 4)) Plin hrank t ht
+  let x := smoothMatrixProjectedVector P (curvatureCoordinateDirection i)
+  let y := smoothMatrixProjectedVector P (curvatureCoordinateDirection j)
+  let pivot := smoothLorentzianPivotCandidate g x y recipe
+  let companion := smoothLorentzianPivotCompanion x y recipe
+  have hcoord (n : Fin 4) :
+      curvatureCoordinateDirection n = Pi.single n 1 := by
+    funext k
+    simp [curvatureCoordinateDirection, Pi.single_apply]
+  have hxz : x z = Plin ((Pi.basisFun ℝ (Fin 4)) i) := by
+    ext k
+    simp [x, Plin, smoothMatrixProjectedVector, hcoord,
+      Matrix.toLin'_apply, Pi.basisFun_apply]
+  have hyz : y z = Plin ((Pi.basisFun ℝ (Fin 4)) j) := by
+    ext k
+    simp [y, Plin, smoothMatrixProjectedVector, hcoord,
+      Matrix.toLin'_apply, Pi.basisFun_apply]
+  have hpivot : pivot z = lorentzianPivotCandidate gb
+      (Plin ((Pi.basisFun ℝ (Fin 4)) i))
+      (Plin ((Pi.basisFun ℝ (Fin 4)) j)) recipe := by
+    cases recipe <;>
+      simp [pivot, smoothLorentzianPivotCandidate,
+        smoothMetricPairing, gb, continuousBilinFormToBilin, hxz, hyz,
+        lorentzianPivotCandidate]
+  have hcompanion : companion z = lorentzianPivotCompanion
+      (Plin ((Pi.basisFun ℝ (Fin 4)) i))
+      (Plin ((Pi.basisFun ℝ (Fin 4)) j)) recipe := by
+    cases recipe <;>
+      simp [companion, smoothLorentzianPivotCompanion, hxz, hyz,
+        lorentzianPivotCompanion]
+  refine ⟨i, j, recipe, ?_, ?_⟩
+  · change (g z) (pivot z) (pivot z) < 0
+    rw [hpivot]
+    exact htime
+  · have horth : smoothMetricOrthogonalizeSecond g pivot companion z =
+        metricOrthogonalizeSecond gb
+          (lorentzianPivotCandidate gb
+            (Plin ((Pi.basisFun ℝ (Fin 4)) i))
+            (Plin ((Pi.basisFun ℝ (Fin 4)) j)) recipe)
+          (lorentzianPivotCompanion
+            (Plin ((Pi.basisFun ℝ (Fin 4)) i))
+            (Plin ((Pi.basisFun ℝ (Fin 4)) j)) recipe) := by
+      simp [smoothMetricOrthogonalizeSecond, metricOrthogonalizeSecond,
+        smoothMetricPairing, gb, continuousBilinFormToBilin,
+        hpivot, hcompanion]
+    change 0 < (g z)
+      (smoothMetricOrthogonalizeSecond g pivot companion z)
+      (smoothMetricOrthogonalizeSecond g pivot companion z)
+    rw [horth]
+    exact hrem
+
+/-- **Local coordinate-matrix Lorentzian entrance.** Under pointwise
+continuity of the actual metric and projector entries, the arbitrary-chart
+finite search selects one pair and one pivot recipe whose two strict
+Lorentzian frame signs persist on a neighborhood of the base point. -/
+theorem exists_eventually_smoothMatrixProjectedBasisLorentzianFrameSignsAt
+    (g : CurvatureCoordinateSpace4 →
+      ContinuousBilinForm CurvatureCoordinateSpace4)
+    (P : CurvatureCoordinateSpace4 → Matrix4)
+    (z : CurvatureCoordinateSpace4)
+    (hg : ContinuousAt g z)
+    (hP : ∀ a b, ContinuousAt (fun w => P w a b) z)
+    (hgsymm : (continuousBilinFormToBilin (g z)).IsSymm)
+    (hindex : HasLorentzianIndexOne (continuousBilinFormToBilin (g z)))
+    (hrank : Module.finrank ℝ (Matrix.toLin' (P z)).range = 2)
+    (t : (Matrix.toLin' (P z)).range)
+    (ht : continuousBilinFormToBilin (g z) (t : CurvatureCoordinateSpace4)
+      (t : CurvatureCoordinateSpace4) < 0) :
+    ∃ i j : Fin 4, ∃ recipe : LorentzianPivotRecipe,
+      let x := smoothMatrixProjectedVector P (curvatureCoordinateDirection i)
+      let y := smoothMatrixProjectedVector P (curvatureCoordinateDirection j)
+      let pivot := smoothLorentzianPivotCandidate g x y recipe
+      let companion := smoothLorentzianPivotCompanion x y recipe
+      ∀ᶠ w in 𝓝 z,
+        smoothMetricPairing g pivot pivot w < 0 ∧
+          0 < smoothMetricPairing g
+            (smoothMetricOrthogonalizeSecond g pivot companion)
+            (smoothMetricOrthogonalizeSecond g pivot companion) w := by
+  obtain ⟨i, j, recipe, htime, hrem⟩ :=
+    exists_smoothMatrixProjectedBasisLorentzianFrameSignsAt
+      g P z hgsymm hindex hrank t ht
+  let x := smoothMatrixProjectedVector P (curvatureCoordinateDirection i)
+  let y := smoothMatrixProjectedVector P (curvatureCoordinateDirection j)
+  have hx : ContinuousAt x z := by
+    apply continuousAt_pi.mpr
+    intro k
+    simp only [x, smoothMatrixProjectedVector, Matrix.mulVec, dotProduct]
+    exact tendsto_finsetSum Finset.univ fun l _ =>
+      (hP k l).mul continuousAt_const
+  have hy : ContinuousAt y z := by
+    apply continuousAt_pi.mpr
+    intro k
+    simp only [y, smoothMatrixProjectedVector, Matrix.mulVec, dotProduct]
+    exact tendsto_finsetSum Finset.univ fun l _ =>
+      (hP k l).mul continuousAt_const
+  exact ⟨i, j, recipe,
+    eventually_smoothLorentzianPivotFrameSigns recipe hg hx hy htime hrem⟩
+
+/-- Coordinate-matrix specialization of the arbitrary-basis positive-plane
+theorem, including persistence of one fixed projected coordinate pair on a
+neighborhood. -/
+theorem exists_eventually_smoothMatrixProjectedBasisSpacelikeFrameSignsAt
+    (g : CurvatureCoordinateSpace4 →
+      ContinuousBilinForm CurvatureCoordinateSpace4)
+    (Q : CurvatureCoordinateSpace4 → Matrix4)
+    (z : CurvatureCoordinateSpace4)
+    (hg : ContinuousAt g z)
+    (hQ : ∀ a b, ContinuousAt (fun w => Q w a b) z)
+    (hindex : HasLorentzianIndexOne (continuousBilinFormToBilin (g z)))
+    (hrank : Module.finrank ℝ (Matrix.toLin' (Q z)).range = 2)
+    (t : CurvatureCoordinateSpace4)
+    (ht : continuousBilinFormToBilin (g z) t t < 0)
+    (horth : ∀ v : (Matrix.toLin' (Q z)).range,
+      continuousBilinFormToBilin (g z) t
+        (v : CurvatureCoordinateSpace4) = 0) :
+    ∃ i j : Fin 4,
+      let x := smoothMatrixProjectedVector Q (curvatureCoordinateDirection i)
+      let y := smoothMatrixProjectedVector Q (curvatureCoordinateDirection j)
+      ∀ᶠ w in 𝓝 z,
+        0 < smoothMetricPairing g x x w ∧
+          0 < smoothMetricPairing g
+            (smoothMetricOrthogonalizeSecond g x y)
+            (smoothMetricOrthogonalizeSecond g x y) w := by
+  let gb := continuousBilinFormToBilin (g z)
+  let Qlin := Matrix.toLin' (Q z)
+  obtain ⟨i, j, hspace, hrem⟩ :=
+    exists_projectedBasisSpacelikeFrameSigns
+      gb hindex (Pi.basisFun ℝ (Fin 4)) Qlin hrank t ht horth
+  let x := smoothMatrixProjectedVector Q (curvatureCoordinateDirection i)
+  let y := smoothMatrixProjectedVector Q (curvatureCoordinateDirection j)
+  have hcoord (n : Fin 4) :
+      curvatureCoordinateDirection n = Pi.single n 1 := by
+    funext k
+    simp [curvatureCoordinateDirection, Pi.single_apply]
+  have hxz : x z = Qlin ((Pi.basisFun ℝ (Fin 4)) i) := by
+    ext k
+    simp [x, Qlin, smoothMatrixProjectedVector, hcoord,
+      Matrix.toLin'_apply, Pi.basisFun_apply]
+  have hyz : y z = Qlin ((Pi.basisFun ℝ (Fin 4)) j) := by
+    ext k
+    simp [y, Qlin, smoothMatrixProjectedVector, hcoord,
+      Matrix.toLin'_apply, Pi.basisFun_apply]
+  have hx : ContinuousAt x z := by
+    apply continuousAt_pi.mpr
+    intro k
+    simp only [x, smoothMatrixProjectedVector, Matrix.mulVec, dotProduct]
+    exact tendsto_finsetSum Finset.univ fun l _ =>
+      (hQ k l).mul continuousAt_const
+  have hy : ContinuousAt y z := by
+    apply continuousAt_pi.mpr
+    intro k
+    simp only [y, smoothMatrixProjectedVector, Matrix.mulVec, dotProduct]
+    exact tendsto_finsetSum Finset.univ fun l _ =>
+      (hQ k l).mul continuousAt_const
+  have hspaceSmooth : 0 < smoothMetricPairing g x x z := by
+    change 0 < (g z) (x z) (x z)
+    rw [hxz]
+    exact hspace
+  have horthEq : smoothMetricOrthogonalizeSecond g x y z =
+      metricOrthogonalizeSecond gb
+        (Qlin ((Pi.basisFun ℝ (Fin 4)) i))
+        (Qlin ((Pi.basisFun ℝ (Fin 4)) j)) := by
+    simp [smoothMetricOrthogonalizeSecond, metricOrthogonalizeSecond,
+      smoothMetricPairing, gb, continuousBilinFormToBilin, hxz, hyz]
+  have hremSmooth : 0 < smoothMetricPairing g
+      (smoothMetricOrthogonalizeSecond g x y)
+      (smoothMetricOrthogonalizeSecond g x y) z := by
+    change 0 < (g z)
+      (smoothMetricOrthogonalizeSecond g x y z)
+      (smoothMetricOrthogonalizeSecond g x y z)
+    rw [horthEq]
+    exact hrem
+  exact ⟨i, j,
+    eventually_smoothSpacelikeFrameSigns hg hx hy hspaceSmooth hremSmooth⟩
+
 /-- Metric-self-adjoint endomorphisms are closed under subtraction. -/
 theorem MetricSelfAdjoint.sub
     {V : Type*} [AddCommGroup V] [Module ℝ V]
@@ -66,6 +434,30 @@ theorem MetricSelfAdjoint.sub
   simp only [LinearMap.sub_apply, LinearMap.BilinForm.sub_left,
     LinearMap.BilinForm.sub_right]
   rw [hR x y, hS x y]
+
+/-- The coordinate matrix test `(G S)ᵀ = G S` is exactly the
+metric-self-adjointness condition for the endomorphism represented by `S`. -/
+theorem matrixMetricSelfAdjoint_of_mul_transpose_eq
+    (G S : Matrix4) (hG : Gᵀ = G)
+    (hself : (G * S)ᵀ = G * S) :
+    MetricSelfAdjoint (Matrix.toBilin' G) (Matrix.toLin' S) := by
+  have hmat : Sᵀ * G = G * S := by
+    calc
+      Sᵀ * G = Sᵀ * Gᵀ := by rw [hG]
+      _ = (G * S)ᵀ := by rw [Matrix.transpose_mul]
+      _ = G * S := hself
+  have hforms :
+      (Matrix.toBilin' G).compLeft (Matrix.toLin' S) =
+        (Matrix.toBilin' G).compRight (Matrix.toLin' S) := by
+    apply LinearMap.BilinForm.toMatrix'.injective
+    simp only [LinearMap.BilinForm.toMatrix'_compLeft,
+      LinearMap.BilinForm.toMatrix'_compRight,
+      LinearMap.BilinForm.toMatrix'_toBilin', LinearMap.toMatrix'_toLin']
+    exact hmat
+  intro x y
+  change ((Matrix.toBilin' G).compLeft (Matrix.toLin' S)) x y =
+    ((Matrix.toBilin' G).compRight (Matrix.toLin' S)) x y
+  rw [hforms]
 
 /-- Negative Maxwell principal projector as an actual matrix field. -/
 noncomputable def matrixMaxwellMinusProjectorField
@@ -307,6 +699,315 @@ theorem curvatureMaxwellPrincipalProjectorFields_structural
     positiveMaxwellMagnitudeFromSquare, q, add_comm] using
     And.intro hP (And.intro hQ (And.intro hPQ hsum))
 
+/-- **Choice-free physical Maxwell range theorem.** A positive reconstructed
+square, the Maxwell square law and trace, and the physical negative-energy
+eigendirection force the actual curvature negative-projector matrix to have
+rank two and contain a timelike vector.  No detector probe or coframe occurs
+in the hypotheses. -/
+theorem curvatureMaxwellMinusProjector_rank_two_and_timelike_of_energySign
+    (g : CurvatureCoordinateSpace4 →
+      ContinuousBilinForm CurvatureCoordinateSpace4)
+    (S : CurvatureCoordinateSpace4 → Matrix4)
+    (qSq : CurvatureCoordinateSpace4 → ℝ)
+    (z : CurvatureCoordinateSpace4)
+    (hpos : 0 < qSq z)
+    (hSq : S z * S z = qSq z • (1 : Matrix4))
+    (htrace : Matrix.trace (S z) = 0)
+    (henergy : HasPhysicalMaxwellEnergySign
+      (continuousBilinFormToBilin (g z))
+      (Matrix.toLin' (S z))
+      (positiveMaxwellMagnitudeFromSquare qSq z)) :
+    let P := curvatureMaxwellMinusProjectorField S qSq
+    Module.finrank ℝ (Matrix.toLin' (P z)).range = 2 ∧
+      ∃ t : (Matrix.toLin' (P z)).range,
+        continuousBilinFormToBilin (g z)
+          (t : CurvatureCoordinateSpace4)
+          (t : CurvatureCoordinateSpace4) < 0 := by
+  let q := positiveMaxwellMagnitudeFromSquare qSq z
+  let Slin := Matrix.toLin' (S z)
+  let P := curvatureMaxwellMinusProjectorField S qSq
+  have hqpos : 0 < q :=
+    positiveMaxwellMagnitudeFromSquare_pos qSq z hpos
+  have hqSq : q ^ 2 = qSq z :=
+    positiveMaxwellMagnitudeFromSquare_sq qSq z hpos
+  have hSlin : Slin * Slin =
+      q ^ 2 • (1 : Module.End ℝ CurvatureCoordinateSpace4) := by
+    have h' := congrArg Matrix.toLin' hSq
+    rw [Matrix.toLin'_mul] at h'
+    simpa [Slin, hqSq, map_smul, Matrix.toLin'_one,
+      Module.End.one_eq_id, Module.End.mul_eq_comp] using h'
+  have htraceLin : LinearMap.trace ℝ CurvatureCoordinateSpace4 Slin = 0 := by
+    simpa [Slin] using htrace
+  have hrankRaw : Module.finrank ℝ
+      (maxwellMinusProjector Slin q).range = 2 :=
+    (maxwellProjectors_finrank_range_eq_two Slin q (ne_of_gt hqpos)
+      hSlin (by simp) htraceLin).2
+  have hPtoLin : Matrix.toLin' (P z) = maxwellMinusProjector Slin q := by
+    simp [P, curvatureMaxwellMinusProjectorField,
+      matrixMaxwellMinusProjectorField, Slin, q,
+      matrixMaxwellMinusProjector_toLin']
+  obtain ⟨t, ht⟩ :=
+    exists_timelike_mem_maxwellMinusProjector_range_of_energySign
+      (continuousBilinFormToBilin (g z)) Slin q (ne_of_gt hqpos) henergy
+  let tP : (Matrix.toLin' (P z)).range :=
+    ⟨(t : CurvatureCoordinateSpace4), by
+      rw [hPtoLin]
+      exact t.property⟩
+  refine ⟨?_, tP, ?_⟩
+  · rw [hPtoLin]
+    exact hrankRaw
+  · exact ht
+
+/-- The choice-free physical Maxwell conditions therefore trigger the
+pointwise arbitrary-chart finite Lorentzian frame search. -/
+theorem exists_smoothMatrixProjectedMaxwellLorentzianFrameSignsAt_of_energySign
+    (g : CurvatureCoordinateSpace4 →
+      ContinuousBilinForm CurvatureCoordinateSpace4)
+    (S : CurvatureCoordinateSpace4 → Matrix4)
+    (qSq : CurvatureCoordinateSpace4 → ℝ)
+    (z : CurvatureCoordinateSpace4)
+    (hgsymm : (continuousBilinFormToBilin (g z)).IsSymm)
+    (hindex : HasLorentzianIndexOne (continuousBilinFormToBilin (g z)))
+    (hpos : 0 < qSq z)
+    (hSq : S z * S z = qSq z • (1 : Matrix4))
+    (htrace : Matrix.trace (S z) = 0)
+    (henergy : HasPhysicalMaxwellEnergySign
+      (continuousBilinFormToBilin (g z))
+      (Matrix.toLin' (S z))
+      (positiveMaxwellMagnitudeFromSquare qSq z)) :
+    ∃ i j : Fin 4, ∃ recipe : LorentzianPivotRecipe,
+      let P := curvatureMaxwellMinusProjectorField S qSq
+      let x := smoothMatrixProjectedVector P (curvatureCoordinateDirection i)
+      let y := smoothMatrixProjectedVector P (curvatureCoordinateDirection j)
+      let pivot := smoothLorentzianPivotCandidate g x y recipe
+      let companion := smoothLorentzianPivotCompanion x y recipe
+      smoothMetricPairing g pivot pivot z < 0 ∧
+        0 < smoothMetricPairing g
+          (smoothMetricOrthogonalizeSecond g pivot companion)
+          (smoothMetricOrthogonalizeSecond g pivot companion) z := by
+  obtain ⟨hrank, t, ht⟩ :=
+    curvatureMaxwellMinusProjector_rank_two_and_timelike_of_energySign
+      g S qSq z hpos hSq htrace henergy
+  exact exists_smoothMatrixProjectedBasisLorentzianFrameSignsAt
+    g (curvatureMaxwellMinusProjectorField S qSq) z
+    hgsymm hindex hrank t ht
+
+/-- Under pointwise continuity of the metric and the curvature projector,
+the same choice-free Maxwell hypotheses select one finite coordinate pair
+and pivot recipe that retain both strict Lorentzian signs on a neighborhood. -/
+theorem exists_eventually_smoothMatrixProjectedMaxwellLorentzianFrameSignsAt_of_energySign
+    (g : CurvatureCoordinateSpace4 →
+      ContinuousBilinForm CurvatureCoordinateSpace4)
+    (S : CurvatureCoordinateSpace4 → Matrix4)
+    (qSq : CurvatureCoordinateSpace4 → ℝ)
+    (z : CurvatureCoordinateSpace4)
+    (hg : ContinuousAt g z)
+    (hP : ∀ a b, ContinuousAt
+      (fun w => curvatureMaxwellMinusProjectorField S qSq w a b) z)
+    (hgsymm : (continuousBilinFormToBilin (g z)).IsSymm)
+    (hindex : HasLorentzianIndexOne (continuousBilinFormToBilin (g z)))
+    (hpos : 0 < qSq z)
+    (hSq : S z * S z = qSq z • (1 : Matrix4))
+    (htrace : Matrix.trace (S z) = 0)
+    (henergy : HasPhysicalMaxwellEnergySign
+      (continuousBilinFormToBilin (g z))
+      (Matrix.toLin' (S z))
+      (positiveMaxwellMagnitudeFromSquare qSq z)) :
+    ∃ i j : Fin 4, ∃ recipe : LorentzianPivotRecipe,
+      let P := curvatureMaxwellMinusProjectorField S qSq
+      let x := smoothMatrixProjectedVector P (curvatureCoordinateDirection i)
+      let y := smoothMatrixProjectedVector P (curvatureCoordinateDirection j)
+      let pivot := smoothLorentzianPivotCandidate g x y recipe
+      let companion := smoothLorentzianPivotCompanion x y recipe
+      ∀ᶠ w in 𝓝 z,
+        smoothMetricPairing g pivot pivot w < 0 ∧
+          0 < smoothMetricPairing g
+            (smoothMetricOrthogonalizeSecond g pivot companion)
+            (smoothMetricOrthogonalizeSecond g pivot companion) w := by
+  obtain ⟨hrank, t, ht⟩ :=
+    curvatureMaxwellMinusProjector_rank_two_and_timelike_of_energySign
+      g S qSq z hpos hSq htrace henergy
+  exact exists_eventually_smoothMatrixProjectedBasisLorentzianFrameSignsAt
+    g (curvatureMaxwellMinusProjectorField S qSq) z hg hP
+    hgsymm hindex hrank t ht
+
+/-- **Choice-free local Maxwell entrance from positive energy.** The
+observer-energy inequality, rather than a supplied eigendirection, selects
+the Lorentzian negative principal range.  The finite arbitrary-chart search
+then returns one coordinate pair and pivot recipe valid on a neighborhood. -/
+theorem exists_eventually_smoothMatrixProjectedMaxwellLorentzianFrameSignsAt_of_positiveEnergy
+    (g : CurvatureCoordinateSpace4 →
+      ContinuousBilinForm CurvatureCoordinateSpace4)
+    (S : CurvatureCoordinateSpace4 → Matrix4)
+    (qSq : CurvatureCoordinateSpace4 → ℝ)
+    (z : CurvatureCoordinateSpace4)
+    (hg : ContinuousAt g z)
+    (hP : ∀ a b, ContinuousAt
+      (fun w => curvatureMaxwellMinusProjectorField S qSq w a b) z)
+    (hgsymm : (continuousBilinFormToBilin (g z)).IsSymm)
+    (hindex : HasLorentzianIndexOne (continuousBilinFormToBilin (g z)))
+    (hpos : 0 < qSq z)
+    (hSq : S z * S z = qSq z • (1 : Matrix4))
+    (htrace : Matrix.trace (S z) = 0)
+    (hself : MetricSelfAdjoint
+      (continuousBilinFormToBilin (g z)) (Matrix.toLin' (S z)))
+    (henergy : HasPositiveMaxwellEnergyDensity
+      (continuousBilinFormToBilin (g z)) (Matrix.toLin' (S z))) :
+    ∃ i j : Fin 4, ∃ recipe : LorentzianPivotRecipe,
+      let P := curvatureMaxwellMinusProjectorField S qSq
+      let x := smoothMatrixProjectedVector P (curvatureCoordinateDirection i)
+      let y := smoothMatrixProjectedVector P (curvatureCoordinateDirection j)
+      let pivot := smoothLorentzianPivotCandidate g x y recipe
+      let companion := smoothLorentzianPivotCompanion x y recipe
+      ∀ᶠ w in 𝓝 z,
+        smoothMetricPairing g pivot pivot w < 0 ∧
+          0 < smoothMetricPairing g
+            (smoothMetricOrthogonalizeSecond g pivot companion)
+            (smoothMetricOrthogonalizeSecond g pivot companion) w := by
+  let q := positiveMaxwellMagnitudeFromSquare qSq z
+  let Slin := Matrix.toLin' (S z)
+  have hqpos : 0 < q :=
+    positiveMaxwellMagnitudeFromSquare_pos qSq z hpos
+  have hqSq : q ^ 2 = qSq z :=
+    positiveMaxwellMagnitudeFromSquare_sq qSq z hpos
+  have hSlin : Slin * Slin =
+      q ^ 2 • (1 : Module.End ℝ CurvatureCoordinateSpace4) := by
+    have h' := congrArg Matrix.toLin' hSq
+    rw [Matrix.toLin'_mul] at h'
+    simpa [Slin, hqSq, map_smul, Matrix.toLin'_one,
+      Module.End.one_eq_id, Module.End.mul_eq_comp] using h'
+  have hphysical : HasPhysicalMaxwellEnergySign
+      (continuousBilinFormToBilin (g z)) Slin q :=
+    hasPhysicalMaxwellEnergySign_of_positiveEnergyDensity
+      (continuousBilinFormToBilin (g z)) hgsymm Slin q hqpos
+      hSlin hself henergy
+  exact
+    exists_eventually_smoothMatrixProjectedMaxwellLorentzianFrameSignsAt_of_energySign
+      g S qSq z hg hP hgsymm hindex hpos hSq htrace hphysical
+
+/-- **Choice-free local Maxwell principal-frame entrance.** Positive observer
+energy selects the Lorentzian negative principal range; the complementary
+rank-two range is positive definite by index one.  A single finite
+coordinate-basis search therefore selects both principal-plane pairs and a
+negative-plane pivot recipe whose four strict Gram--Schmidt signs all persist
+on one neighborhood. -/
+theorem exists_eventually_smoothMatrixProjectedMaxwellPrincipalFrameSignsAt_of_positiveEnergy
+    (g : CurvatureCoordinateSpace4 →
+      ContinuousBilinForm CurvatureCoordinateSpace4)
+    (S : CurvatureCoordinateSpace4 → Matrix4)
+    (qSq : CurvatureCoordinateSpace4 → ℝ)
+    (z : CurvatureCoordinateSpace4)
+    (hg : ContinuousAt g z)
+    (hP : ∀ a b, ContinuousAt
+      (fun w => curvatureMaxwellMinusProjectorField S qSq w a b) z)
+    (hQ : ∀ a b, ContinuousAt
+      (fun w => curvatureMaxwellPlusProjectorField S qSq w a b) z)
+    (hgsymm : (continuousBilinFormToBilin (g z)).IsSymm)
+    (hindex : HasLorentzianIndexOne (continuousBilinFormToBilin (g z)))
+    (hpos : 0 < qSq z)
+    (hSq : S z * S z = qSq z • (1 : Matrix4))
+    (htrace : Matrix.trace (S z) = 0)
+    (hself : MetricSelfAdjoint
+      (continuousBilinFormToBilin (g z)) (Matrix.toLin' (S z)))
+    (henergy : HasPositiveMaxwellEnergyDensity
+      (continuousBilinFormToBilin (g z)) (Matrix.toLin' (S z))) :
+    ∃ i j : Fin 4, ∃ recipe : LorentzianPivotRecipe, ∃ k l : Fin 4,
+      let P := curvatureMaxwellMinusProjectorField S qSq
+      let Q := curvatureMaxwellPlusProjectorField S qSq
+      let x := smoothMatrixProjectedVector P (curvatureCoordinateDirection i)
+      let y := smoothMatrixProjectedVector P (curvatureCoordinateDirection j)
+      let pivot := smoothLorentzianPivotCandidate g x y recipe
+      let companion := smoothLorentzianPivotCompanion x y recipe
+      let u := smoothMatrixProjectedVector Q (curvatureCoordinateDirection k)
+      let v := smoothMatrixProjectedVector Q (curvatureCoordinateDirection l)
+      ∀ᶠ w in 𝓝 z,
+        smoothMetricPairing g pivot pivot w < 0 ∧
+          0 < smoothMetricPairing g
+            (smoothMetricOrthogonalizeSecond g pivot companion)
+            (smoothMetricOrthogonalizeSecond g pivot companion) w ∧
+          0 < smoothMetricPairing g u u w ∧
+          0 < smoothMetricPairing g
+            (smoothMetricOrthogonalizeSecond g u v)
+            (smoothMetricOrthogonalizeSecond g u v) w := by
+  let gb := continuousBilinFormToBilin (g z)
+  let q := positiveMaxwellMagnitudeFromSquare qSq z
+  let Slin := Matrix.toLin' (S z)
+  let P := curvatureMaxwellMinusProjectorField S qSq
+  let Q := curvatureMaxwellPlusProjectorField S qSq
+  have hqpos : 0 < q :=
+    positiveMaxwellMagnitudeFromSquare_pos qSq z hpos
+  have hqSq : q ^ 2 = qSq z :=
+    positiveMaxwellMagnitudeFromSquare_sq qSq z hpos
+  have hSlin : Slin * Slin =
+      q ^ 2 • (1 : Module.End ℝ CurvatureCoordinateSpace4) := by
+    have h' := congrArg Matrix.toLin' hSq
+    rw [Matrix.toLin'_mul] at h'
+    simpa [Slin, hqSq, map_smul, Matrix.toLin'_one,
+      Module.End.one_eq_id, Module.End.mul_eq_comp] using h'
+  have htraceLin : LinearMap.trace ℝ CurvatureCoordinateSpace4 Slin = 0 := by
+    simpa [Slin] using htrace
+  have hphysical : HasPhysicalMaxwellEnergySign gb Slin q :=
+    hasPhysicalMaxwellEnergySign_of_positiveEnergyDensity
+      gb hgsymm Slin q hqpos hSlin hself henergy
+  obtain ⟨hrankPlusRaw, hrankMinusRaw⟩ :=
+    maxwellProjectors_finrank_range_eq_two
+      Slin q (ne_of_gt hqpos) hSlin (by simp) htraceLin
+  have hPtoLin : Matrix.toLin' (P z) = maxwellMinusProjector Slin q := by
+    simp [P, curvatureMaxwellMinusProjectorField,
+      matrixMaxwellMinusProjectorField, Slin, q,
+      matrixMaxwellMinusProjector_toLin']
+  have hQtoLin : Matrix.toLin' (Q z) = maxwellPlusProjector Slin q := by
+    simp [Q, curvatureMaxwellPlusProjectorField,
+      matrixMaxwellPlusProjectorField, Slin, q,
+      matrixMaxwellPlusProjector_toLin']
+  have hrankPlus : Module.finrank ℝ (Matrix.toLin' (Q z)).range = 2 := by
+    rw [hQtoLin]
+    exact hrankPlusRaw
+  obtain ⟨tRaw, ht⟩ :=
+    exists_timelike_mem_maxwellMinusProjector_range_of_energySign
+      gb Slin q (ne_of_gt hqpos) hphysical
+  let t : (Matrix.toLin' (P z)).range :=
+    ⟨(tRaw : CurvatureCoordinateSpace4), by
+      rw [hPtoLin]
+      exact tRaw.property⟩
+  obtain ⟨i, j, recipe, hminus⟩ :=
+    exists_eventually_smoothMatrixProjectedBasisLorentzianFrameSignsAt
+      g P z hg hP hgsymm hindex
+      (by rw [hPtoLin]; exact hrankMinusRaw) t ht
+  have hPId : (maxwellMinusProjector Slin q).comp
+      (maxwellMinusProjector Slin q) = maxwellMinusProjector Slin q :=
+    maxwellMinusProjector_sq Slin q (ne_of_gt hqpos) hSlin
+  have hQId : (maxwellPlusProjector Slin q).comp
+      (maxwellPlusProjector Slin q) = maxwellPlusProjector Slin q :=
+    maxwellPlusProjector_sq Slin q (ne_of_gt hqpos) hSlin
+  have hPself : MetricSelfAdjoint gb (maxwellMinusProjector Slin q) :=
+    maxwellMinusProjector_metricSelfAdjoint gb hgsymm Slin q hself
+  have hPQ : (maxwellMinusProjector Slin q).comp
+      (maxwellPlusProjector Slin q) = 0 :=
+    maxwellProjectors_comp_zero_rev Slin q (ne_of_gt hqpos) hSlin
+  have htFixed : maxwellMinusProjector Slin q
+      (tRaw : CurvatureCoordinateSpace4) = tRaw :=
+    projector_fixed_of_mem_range _ hPId tRaw tRaw.property
+  have horth : ∀ v : (Matrix.toLin' (Q z)).range,
+      gb (tRaw : CurvatureCoordinateSpace4)
+        (v : CurvatureCoordinateSpace4) = 0 := by
+    intro v
+    have hvPlus : (v : CurvatureCoordinateSpace4) ∈
+        (maxwellPlusProjector Slin q).range := by
+      rw [← hQtoLin]
+      exact v.property
+    have hvFixed : maxwellPlusProjector Slin q
+        (v : CurvatureCoordinateSpace4) = v :=
+      projector_fixed_of_mem_range _ hQId v hvPlus
+    exact complementaryProjector_fixed_orthogonal
+      gb _ _ hPself hPQ tRaw v htFixed hvFixed
+  obtain ⟨k, l, hplus⟩ :=
+    exists_eventually_smoothMatrixProjectedBasisSpacelikeFrameSignsAt
+      g Q z hg hQ hindex hrankPlus tRaw ht horth
+  refine ⟨i, j, recipe, k, l, ?_⟩
+  filter_upwards [hminus, hplus] with w hwMinus hwPlus
+  exact ⟨hwMinus.1, hwMinus.2, hwPlus.1, hwPlus.2⟩
+
 /-- The accepted scalar reconstruction equation therefore supplies the
 complete concrete principal-projector algebra directly from `R-V`. -/
 theorem curvatureMaxwellPrincipalProjectorFields_structural_of_reconstruction
@@ -363,6 +1064,66 @@ theorem contDiffOn_curvatureMaxwellPrincipalProjectorFields_of_residual
         (curvatureMaxwellPlusProjectorField S qSq) := by
   exact contDiffOn_curvatureMaxwellPrincipalProjectorFields
     (contDiffOn_curvatureMaxwellResidualField hR hV) hqSq hpos
+
+/-- Field-driven version of principal-tetrad verification.  The four vector
+fields need only be fixed by the two complementary projectors at the point;
+in particular, the Lorentzian pair may be produced by a finite pivot recipe
+rather than by two raw projections. -/
+theorem smoothPrincipalTetradFromFields_pseudoOrthonormal_of_projectorFixed
+    (g : CurvatureCoordinateSpace4 →
+      ContinuousBilinForm CurvatureCoordinateSpace4)
+    (P Q : Matrix4)
+    (x y u v : CurvatureCoordinateSpace4 → CurvatureCoordinateSpace4)
+    (z : CurvatureCoordinateSpace4)
+    (hgsymm : (continuousBilinFormToBilin (g z)).IsSymm)
+    (hself : MetricSelfAdjoint (continuousBilinFormToBilin (g z))
+      (Matrix.toLin' P))
+    (hPQ : P * Q = 0)
+    (hPx : Matrix.toLin' P (x z) = x z)
+    (hPy : Matrix.toLin' P (y z) = y z)
+    (hQu : Matrix.toLin' Q (u z) = u z)
+    (hQv : Matrix.toLin' Q (v z) = v z)
+    (hx : smoothMetricPairing g x x z < 0)
+    (hy : 0 < smoothMetricPairing g
+      (smoothMetricOrthogonalizeSecond g x y)
+      (smoothMetricOrthogonalizeSecond g x y) z)
+    (hu : 0 < smoothMetricPairing g u u z)
+    (hv : 0 < smoothMetricPairing g
+      (smoothMetricOrthogonalizeSecond g u v)
+      (smoothMetricOrthogonalizeSecond g u v) z) :
+    IsPseudoOrthonormalPrincipalTetrad
+      (continuousBilinFormToBilin (g z))
+      (smoothPrincipalTetradFromFields g x y u v z).1
+      (smoothPrincipalTetradFromFields g x y u v z).2 := by
+  let gb := continuousBilinFormToBilin (g z)
+  have hPQlin : (Matrix.toLin' P).comp (Matrix.toLin' Q) = 0 := by
+    have h' := congrArg Matrix.toLin' hPQ
+    rw [Matrix.toLin'_mul] at h'
+    simpa using h'
+  have hx' : gb (x z) (x z) < 0 := by
+    exact hx
+  have hy' : 0 < gb (y z) (y z) -
+      (gb (x z) (y z)) ^ 2 / gb (x z) (x z) := by
+    rw [← metricOrthogonalizeSecond_norm gb hgsymm
+      (x z) (y z) (ne_of_lt hx')]
+    exact hy
+  have hu' : 0 < gb (u z) (u z) := by
+    exact hu
+  have hv' : 0 < gb (v z) (v z) -
+      (gb (u z) (v z)) ^ 2 / gb (u z) (u z) := by
+    rw [← metricOrthogonalizeSecond_norm gb hgsymm
+      (u z) (v z) (ne_of_gt hu')]
+    exact hv
+  have hframe := principalPlaneFrames_pseudoOrthonormal_of_fixed
+    gb hgsymm (Matrix.toLin' P) (Matrix.toLin' Q)
+    hself hPQlin (x z) (y z) (u z) (v z)
+    hPx hPy hQu hQv hx' hy' hu' hv'
+  simpa [smoothPrincipalTetradFromFields, smoothLorentzianPlaneFrame,
+    smoothSpacelikePlaneFrame, smoothNormalizeTimelike,
+    smoothNormalizeSpacelike, smoothMetricOrthogonalizeSecond,
+    smoothMetricPairing, lorentzianPlaneFrame, spacelikePlaneFrame,
+    normalizeTimelike, normalizeSpacelike, metricOrthogonalizeSecond,
+    gb, continuousBilinFormToBilin] using hframe
 
 /-- **Coordinate fixed-probe frame criterion.** Matrix idempotence,
 annihilation, and metric self-adjointness feed the basis-free principal-plane
@@ -530,6 +1291,62 @@ theorem smoothCurvatureMaxwellPrincipalTetrad_pseudoOrthonormal
     (curvatureMaxwellMinusProjectorField S qSq)
     (curvatureMaxwellPlusProjectorField S qSq)
     u0 u1 v0 v1 z hz hgsymm hP hQ hPself hPQ hL0 hL1 hS0 hS1
+
+/-- Curvature-Maxwell verification for the field-driven tetrad.  This is the
+finite-pivot counterpart of the fixed-probe theorem above. -/
+theorem smoothCurvatureMaxwellPrincipalTetradFromFields_pseudoOrthonormal
+    (g : CurvatureCoordinateSpace4 →
+      ContinuousBilinForm CurvatureCoordinateSpace4)
+    (S : CurvatureCoordinateSpace4 → Matrix4)
+    (qSq : CurvatureCoordinateSpace4 → ℝ)
+    (x y u v : CurvatureCoordinateSpace4 → CurvatureCoordinateSpace4)
+    (z : CurvatureCoordinateSpace4)
+    (hgsymm : (continuousBilinFormToBilin (g z)).IsSymm)
+    (hSq : S z * S z = qSq z • (1 : Matrix4))
+    (hself : MetricSelfAdjoint (continuousBilinFormToBilin (g z))
+      (Matrix.toLin' (S z)))
+    (hqSqPos : 0 < qSq z)
+    (hPx : Matrix.toLin'
+      (curvatureMaxwellMinusProjectorField S qSq z) (x z) = x z)
+    (hPy : Matrix.toLin'
+      (curvatureMaxwellMinusProjectorField S qSq z) (y z) = y z)
+    (hQu : Matrix.toLin'
+      (curvatureMaxwellPlusProjectorField S qSq z) (u z) = u z)
+    (hQv : Matrix.toLin'
+      (curvatureMaxwellPlusProjectorField S qSq z) (v z) = v z)
+    (hx : smoothMetricPairing g x x z < 0)
+    (hy : 0 < smoothMetricPairing g
+      (smoothMetricOrthogonalizeSecond g x y)
+      (smoothMetricOrthogonalizeSecond g x y) z)
+    (hu : 0 < smoothMetricPairing g u u z)
+    (hv : 0 < smoothMetricPairing g
+      (smoothMetricOrthogonalizeSecond g u v)
+      (smoothMetricOrthogonalizeSecond g u v) z) :
+    IsPseudoOrthonormalPrincipalTetrad
+      (continuousBilinFormToBilin (g z))
+      (smoothPrincipalTetradFromFields g x y u v z).1
+      (smoothPrincipalTetradFromFields g x y u v z).2 := by
+  obtain ⟨hP, hQ, hPQ, _⟩ :=
+    curvatureMaxwellPrincipalProjectorFields_structural
+      S qSq z hqSqPos hSq
+  let q := positiveMaxwellMagnitudeFromSquare qSq z
+  have hPself : MetricSelfAdjoint
+      (continuousBilinFormToBilin (g z))
+      (Matrix.toLin'
+        (curvatureMaxwellMinusProjectorField S qSq z)) := by
+    rw [show Matrix.toLin'
+        (curvatureMaxwellMinusProjectorField S qSq z) =
+          maxwellMinusProjector (Matrix.toLin' (S z)) q by
+      simpa [curvatureMaxwellMinusProjectorField,
+        matrixMaxwellMinusProjectorField, q] using
+        matrixMaxwellMinusProjector_toLin' (S z) q]
+    exact maxwellMinusProjector_metricSelfAdjoint
+      (continuousBilinFormToBilin (g z)) hgsymm
+      (Matrix.toLin' (S z)) q hself
+  exact smoothPrincipalTetradFromFields_pseudoOrthonormal_of_projectorFixed
+    g (curvatureMaxwellMinusProjectorField S qSq z)
+    (curvatureMaxwellPlusProjectorField S qSq z)
+    x y u v z hgsymm hPself hPQ hPx hPy hQu hQv hx hy hu hv
 
 /-- In an orthonormal trivialization whose metric is represented by the
 standard Minkowski form, the verified curvature tetrad has the exact Lorentz

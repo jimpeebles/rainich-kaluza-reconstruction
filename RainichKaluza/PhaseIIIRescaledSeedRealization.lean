@@ -248,6 +248,57 @@ namespace RescaledMaxwellMatrixC1On
 
 variable {U : Set BaseCoordinateSpace}
 
+/-- Each coordinate component of a genuine matrix `C¹` realization has the
+stored component jet as its actual Frechet derivative. -/
+theorem hasFDerivAt_field_component
+    (S : RescaledMaxwellMatrixC1On U) (z : BaseCoordinateSpace)
+    (hz : z ∈ U) (i j : Fin 4) :
+    HasFDerivAt (fun y ↦ S.field y i j)
+      (oneForm4ContinuousLinearMap (fun k ↦ S.firstJet z k i j)) z := by
+  have hi := (S.differentiable z hz).clm_apply
+    (hasFDerivAt_const (coordinateDirection i) z)
+  have hij := hi.clm_apply
+    (hasFDerivAt_const (coordinateDirection j) z)
+  have hderiv :
+      ((matrixContinuousBilinForm4 (S.field z)) (coordinateDirection i) ∘L 0) +
+        ((matrixContinuousBilinForm4 (S.field z) ∘L 0) +
+          (matrixFirstJetBilinFDeriv (S.firstJet z)).flip
+            (coordinateDirection i)).flip (coordinateDirection j) =
+      oneForm4ContinuousLinearMap (fun k ↦ S.firstJet z k i j) := by
+    ext u
+    simp only [ContinuousLinearMap.comp_apply, zero_apply, add_apply,
+      ContinuousLinearMap.flip_apply,
+      matrixFirstJetBilinFDeriv_apply,
+      oneForm4ContinuousLinearMap_apply, oneForm4Evaluate]
+    simp [coordinateDirection, Fin.sum_univ_succ]
+    ring
+  rw [hderiv] at hij
+  simpa only [matrixContinuousBilinForm4_coordinateDirection] using hij
+
+/-- A genuine matrix realization with continuous stored first jet is
+entrywise `C¹` on every open patch.  Consequently smooth stress-fibre
+theorems can consume the physical field directly; no redundant smoothness
+certificate is needed. -/
+theorem contDiffOn_field
+    (S : RescaledMaxwellMatrixC1On U) (hopen : IsOpen U) :
+    MatrixFieldContDiffOn 1 U S.field := by
+  intro i j
+  rw [show (1 : WithTop ℕ∞) = 0 + 1 by rfl,
+    contDiffOn_succ_iff_hasFDerivWithinAt_of_uniqueDiffOn
+      hopen.uniqueDiffOn]
+  refine ⟨by simp, fun z ↦ oneForm4ContinuousLinearMap
+    (fun k ↦ S.firstJet z k i j), ?_, ?_⟩
+  · rw [contDiffOn_zero]
+    apply continuousOn_clm_apply.mpr
+    intro y
+    change ContinuousOn
+      (fun z ↦ ∑ k, S.firstJet z k i j * y k) U
+    apply continuousOn_finsetSum Finset.univ
+    intro k _
+    exact (S.firstJet_continuous k i j).mul continuousOn_const
+  · intro z hz
+    exact (S.hasFDerivAt_field_component z hz i j).hasFDerivWithinAt
+
 /-- Every coordinate component of a realized matrix two-form is continuous.
 The proof uses the actual Frechet derivative after matrix-to-form conversion. -/
 theorem continuousOn_field_component

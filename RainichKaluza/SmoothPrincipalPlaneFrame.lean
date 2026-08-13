@@ -41,6 +41,15 @@ theorem contDiffOn_smoothMetricPairing
     ContDiffOn ℝ n (smoothMetricPairing g x y) U := by
   exact (hg.clm_apply hx).clm_apply hy
 
+omit [NormedSpace ℝ X] in
+/-- Pointwise continuity version of smooth metric contraction. -/
+theorem continuousAt_smoothMetricPairing
+    {g : X → ContinuousBilinForm V} {x y : X → V} {z : X}
+    (hg : ContinuousAt g z) (hx : ContinuousAt x z)
+    (hy : ContinuousAt y z) :
+    ContinuousAt (smoothMetricPairing g x y) z := by
+  exact (hg.clm_apply hx).clm_apply hy
+
 /-- Gram--Schmidt remainder for varying metric/vector fields. -/
 noncomputable def smoothMetricOrthogonalizeSecond
     (g : X → ContinuousBilinForm V) (x y : X → V) (z : X) : V :=
@@ -59,6 +68,19 @@ theorem contDiffOn_smoothMetricOrthogonalizeSecond
   have hxy := contDiffOn_smoothMetricPairing hg hx hy
   have hxxSmooth := contDiffOn_smoothMetricPairing hg hx hx
   exact hy.sub ((hxy.div hxxSmooth hxx).smul hx)
+
+omit [NormedSpace ℝ X] in
+/-- The varying Gram--Schmidt remainder is continuous at any point where its
+pivot is non-null. -/
+theorem continuousAt_smoothMetricOrthogonalizeSecond
+    {g : X → ContinuousBilinForm V} {x y : X → V} {z : X}
+    (hg : ContinuousAt g z) (hx : ContinuousAt x z)
+    (hy : ContinuousAt y z)
+    (hxx : smoothMetricPairing g x x z ≠ 0) :
+    ContinuousAt (smoothMetricOrthogonalizeSecond g x y) z := by
+  have hxy := continuousAt_smoothMetricPairing hg hx hy
+  have hxxContinuous := continuousAt_smoothMetricPairing hg hx hx
+  exact hy.sub ((hxy.div hxxContinuous hxx).smul hx)
 
 /-- Smooth timelike normalization in a varying metric. -/
 noncomputable def smoothNormalizeTimelike
@@ -151,6 +173,193 @@ theorem contDiffOn_smoothSpacelikePlaneFrame
   have horth := contDiffOn_smoothMetricOrthogonalizeSecond hg hx hy hxx
   exact (contDiffOn_smoothNormalizeSpacelike hg hx hspace).prodMk
     (contDiffOn_smoothNormalizeSpacelike hg horth hrem)
+
+/-- Varying version of the finite algebraic Lorentzian pivot candidates. -/
+noncomputable def smoothLorentzianPivotCandidate
+    (g : X → ContinuousBilinForm V) (x y : X → V)
+    (recipe : LorentzianPivotRecipe) (z : X) : V :=
+  match recipe with
+  | .first => x z
+  | .second => y z
+  | .firstWeighted =>
+      smoothMetricPairing g x y z • x z -
+        smoothMetricPairing g x x z • y z
+  | .secondWeighted =>
+      smoothMetricPairing g y y z • x z -
+        smoothMetricPairing g x y z • y z
+  | .sum => x z + y z
+  | .difference => x z - y z
+
+/-- Varying companion retained by the finite Lorentzian pivot recipe. -/
+def smoothLorentzianPivotCompanion
+    (x y : X → V) (recipe : LorentzianPivotRecipe) (z : X) : V :=
+  match recipe with
+  | .first => y z
+  | .second => x z
+  | .firstWeighted => x z
+  | .secondWeighted => y z
+  | .sum => x z
+  | .difference => x z
+
+/-- Every finite pivot candidate is smooth when the metric and original
+projected-vector fields are smooth. -/
+theorem contDiffOn_smoothLorentzianPivotCandidate
+    {n : WithTop ℕ∞} {U : Set X}
+    {g : X → ContinuousBilinForm V} {x y : X → V}
+    (recipe : LorentzianPivotRecipe)
+    (hg : ContDiffOn ℝ n g U) (hx : ContDiffOn ℝ n x U)
+    (hy : ContDiffOn ℝ n y U) :
+    ContDiffOn ℝ n (smoothLorentzianPivotCandidate g x y recipe) U := by
+  cases recipe
+  · exact hx
+  · exact hy
+  · exact ((contDiffOn_smoothMetricPairing hg hx hy).smul hx).sub
+      ((contDiffOn_smoothMetricPairing hg hx hx).smul hy)
+  · exact ((contDiffOn_smoothMetricPairing hg hy hy).smul hx).sub
+      ((contDiffOn_smoothMetricPairing hg hx hy).smul hy)
+  · exact hx.add hy
+  · exact hx.sub hy
+
+omit [NormedSpace ℝ X] in
+/-- Every finite pivot candidate is continuous at a point whenever the
+metric and original projected-vector fields are continuous there. -/
+theorem continuousAt_smoothLorentzianPivotCandidate
+    {g : X → ContinuousBilinForm V} {x y : X → V} {z : X}
+    (recipe : LorentzianPivotRecipe)
+    (hg : ContinuousAt g z) (hx : ContinuousAt x z)
+    (hy : ContinuousAt y z) :
+    ContinuousAt (smoothLorentzianPivotCandidate g x y recipe) z := by
+  cases recipe
+  · exact hx
+  · exact hy
+  · exact ((continuousAt_smoothMetricPairing hg hx hy).smul hx).sub
+      ((continuousAt_smoothMetricPairing hg hx hx).smul hy)
+  · exact ((continuousAt_smoothMetricPairing hg hy hy).smul hx).sub
+      ((continuousAt_smoothMetricPairing hg hx hy).smul hy)
+  · exact hx.add hy
+  · exact hx.sub hy
+
+/-- Every companion field in the finite pivot construction is smooth. -/
+theorem contDiffOn_smoothLorentzianPivotCompanion
+    {n : WithTop ℕ∞} {U : Set X} {x y : X → V}
+    (recipe : LorentzianPivotRecipe)
+    (hx : ContDiffOn ℝ n x U) (hy : ContDiffOn ℝ n y U) :
+    ContDiffOn ℝ n (smoothLorentzianPivotCompanion x y recipe) U := by
+  cases recipe <;> assumption
+
+omit [NormedSpace ℝ X] [NormedSpace ℝ V] in
+/-- Every finite pivot companion is continuous with its input fields. -/
+theorem continuousAt_smoothLorentzianPivotCompanion
+    {x y : X → V} {z : X} (recipe : LorentzianPivotRecipe)
+    (hx : ContinuousAt x z) (hy : ContinuousAt y z) :
+    ContinuousAt (smoothLorentzianPivotCompanion x y recipe) z := by
+  cases recipe <;> assumption
+
+omit [NormedSpace ℝ X] in
+/-- **Local persistence for a finite Lorentzian pivot.** Once one recipe has
+the two strict Lorentzian Gram--Schmidt signs at a point, the same discrete
+recipe has them throughout a neighborhood. -/
+theorem eventually_smoothLorentzianPivotFrameSigns
+    {g : X → ContinuousBilinForm V} {x y : X → V} {z : X}
+    (recipe : LorentzianPivotRecipe)
+    (hg : ContinuousAt g z) (hx : ContinuousAt x z)
+    (hy : ContinuousAt y z)
+    (htime : smoothMetricPairing g
+      (smoothLorentzianPivotCandidate g x y recipe)
+      (smoothLorentzianPivotCandidate g x y recipe) z < 0)
+    (hrem : 0 < smoothMetricPairing g
+      (smoothMetricOrthogonalizeSecond g
+        (smoothLorentzianPivotCandidate g x y recipe)
+        (smoothLorentzianPivotCompanion x y recipe))
+      (smoothMetricOrthogonalizeSecond g
+        (smoothLorentzianPivotCandidate g x y recipe)
+        (smoothLorentzianPivotCompanion x y recipe)) z) :
+    ∀ᶠ w in 𝓝 z,
+      smoothMetricPairing g
+          (smoothLorentzianPivotCandidate g x y recipe)
+          (smoothLorentzianPivotCandidate g x y recipe) w < 0 ∧
+        0 < smoothMetricPairing g
+          (smoothMetricOrthogonalizeSecond g
+            (smoothLorentzianPivotCandidate g x y recipe)
+            (smoothLorentzianPivotCompanion x y recipe))
+          (smoothMetricOrthogonalizeSecond g
+            (smoothLorentzianPivotCandidate g x y recipe)
+            (smoothLorentzianPivotCompanion x y recipe)) w := by
+  have hpivot :=
+    continuousAt_smoothLorentzianPivotCandidate recipe hg hx hy
+  have hcompanion :=
+    continuousAt_smoothLorentzianPivotCompanion recipe hx hy
+  have hpivotPair := continuousAt_smoothMetricPairing hg hpivot hpivot
+  have horth := continuousAt_smoothMetricOrthogonalizeSecond
+    hg hpivot hcompanion (ne_of_lt htime)
+  have horthPair := continuousAt_smoothMetricPairing hg horth horth
+  filter_upwards
+    [hpivotPair.eventually_lt continuousAt_const htime,
+      continuousAt_const.eventually_lt horthPair hrem] with w hw0 hw1
+  exact ⟨hw0, hw1⟩
+
+omit [NormedSpace ℝ X] in
+/-- Local persistence of the two strict positive-plane Gram--Schmidt signs. -/
+theorem eventually_smoothSpacelikeFrameSigns
+    {g : X → ContinuousBilinForm V} {x y : X → V} {z : X}
+    (hg : ContinuousAt g z) (hx : ContinuousAt x z)
+    (hy : ContinuousAt y z)
+    (hspace : 0 < smoothMetricPairing g x x z)
+    (hrem : 0 < smoothMetricPairing g
+      (smoothMetricOrthogonalizeSecond g x y)
+      (smoothMetricOrthogonalizeSecond g x y) z) :
+    ∀ᶠ w in 𝓝 z,
+      0 < smoothMetricPairing g x x w ∧
+        0 < smoothMetricPairing g
+          (smoothMetricOrthogonalizeSecond g x y)
+          (smoothMetricOrthogonalizeSecond g x y) w := by
+  have hpair := continuousAt_smoothMetricPairing hg hx hx
+  have horth := continuousAt_smoothMetricOrthogonalizeSecond
+    hg hx hy (ne_of_gt hspace)
+  have horthPair := continuousAt_smoothMetricPairing hg horth horth
+  filter_upwards
+    [continuousAt_const.eventually_lt hpair hspace,
+      continuousAt_const.eventually_lt horthPair hrem] with w hw0 hw1
+  exact ⟨hw0, hw1⟩
+
+/-- A principal tetrad assembled from four already-constructed vector
+fields.  This generalizes the fixed-probe tetrad and permits finite
+metric-dependent Lorentzian pivot recipes. -/
+noncomputable def smoothPrincipalTetradFromFields
+    (g : X → ContinuousBilinForm V)
+    (lorentzPivot lorentzCompanion spacePivot spaceCompanion : X → V)
+    (z : X) : (V × V) × (V × V) :=
+  (smoothLorentzianPlaneFrame g lorentzPivot lorentzCompanion z,
+    smoothSpacelikePlaneFrame g spacePivot spaceCompanion z)
+
+/-- Smoothness of the field-driven principal tetrad on its strict sign
+patch. -/
+theorem contDiffOn_smoothPrincipalTetradFromFields
+    {n : WithTop ℕ∞} {U : Set X}
+    {g : X → ContinuousBilinForm V}
+    {lorentzPivot lorentzCompanion spacePivot spaceCompanion : X → V}
+    (hg : ContDiffOn ℝ n g U)
+    (hLorentzPivot : ContDiffOn ℝ n lorentzPivot U)
+    (hLorentzCompanion : ContDiffOn ℝ n lorentzCompanion U)
+    (hSpacePivot : ContDiffOn ℝ n spacePivot U)
+    (hSpaceCompanion : ContDiffOn ℝ n spaceCompanion U)
+    (htime : ∀ z ∈ U,
+      smoothMetricPairing g lorentzPivot lorentzPivot z < 0)
+    (hLorentzRemainder : ∀ z ∈ U, 0 < smoothMetricPairing g
+      (smoothMetricOrthogonalizeSecond g lorentzPivot lorentzCompanion)
+      (smoothMetricOrthogonalizeSecond g lorentzPivot lorentzCompanion) z)
+    (hspace : ∀ z ∈ U,
+      0 < smoothMetricPairing g spacePivot spacePivot z)
+    (hSpaceRemainder : ∀ z ∈ U, 0 < smoothMetricPairing g
+      (smoothMetricOrthogonalizeSecond g spacePivot spaceCompanion)
+      (smoothMetricOrthogonalizeSecond g spacePivot spaceCompanion) z) :
+    ContDiffOn ℝ n
+      (smoothPrincipalTetradFromFields g lorentzPivot lorentzCompanion
+        spacePivot spaceCompanion) U := by
+  exact (contDiffOn_smoothLorentzianPlaneFrame hg hLorentzPivot
+    hLorentzCompanion htime hLorentzRemainder).prodMk
+      (contDiffOn_smoothSpacelikePlaneFrame hg hSpacePivot hSpaceCompanion
+        hspace hSpaceRemainder)
 
 /-- A fixed ambient probe projected by a varying continuous projector. -/
 def smoothProjectedVector (P : X → V →L[ℝ] V) (u : V) (z : X) : V :=

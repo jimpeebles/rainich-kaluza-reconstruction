@@ -1,0 +1,134 @@
+{
+  "benchmark_id": "vt2-complete-detector-route",
+  "checks": [
+    {
+      "name": "committed-point-algebraic-entrance-point-gates-pass",
+      "passed": true,
+      "residual_sha256": "c0466da50ae80a90cf144cde1472eeebbec8863062e141a0223cfc3403fe3efb"
+    },
+    {
+      "name": "committed-point-timelike-scalar-radicand-gate-fails",
+      "passed": true,
+      "residual_sha256": "89277962567e84014e4fc71e6e15c1ff9431ee9990092b9e5bb6665e7e8dd74c"
+    },
+    {
+      "name": "committed-point-complete-accepted-set-is-empty",
+      "passed": true,
+      "reason": "the failed radicand gate is choice-independent and is a conjunct of every upstream entrance",
+      "residual_sha256": "89277962567e84014e4fc71e6e15c1ff9431ee9990092b9e5bb6665e7e8dd74c"
+    },
+    {
+      "name": "committed-point-independent-physical-primal-channel-returns-three",
+      "passed": true,
+      "residual_sha256": "102824e66e7e52c0157c72eadae53ae560b975d6b01cb314e4743e1cd0f4102c"
+    },
+    {
+      "name": "replacement-point-algebraic-entrance-point-gates-pass",
+      "passed": true,
+      "residual_sha256": "03ff73cf962006c1df31800c904c1088f6449061bf40189d0dbf2f3e8ae1a685"
+    },
+    {
+      "name": "replacement-point-both-scalar-radicand-gates-pass",
+      "passed": true,
+      "residual_sha256": "b79fd657a1e2f52c4ddc39627815ef1816ae47fed606558e875de64e911225e9"
+    },
+    {
+      "name": "replacement-point-selected-scalar-probe-signs-pass",
+      "passed": true,
+      "residual_sha256": "d19da5e8f0409d882370b01278c1cd795f94790c03d76d42d847d9ce56e0eee8"
+    },
+    {
+      "name": "replacement-point-literal-plus-scalar-candidate-equals-physical-gradient",
+      "passed": true,
+      "residual_sha256": "73e0ff30a3a09ca6ad3f00873cc0b040baf02c03aebb1510ec22cba69e825086"
+    },
+    {
+      "name": "replacement-point-literal-plus-scalar-closure-obstruction-vanishes",
+      "passed": true,
+      "raw_expression_sha256": "5f9f7c0138b75ed4d8514f65f7395f02b01f0878dbfbd7aea1987deef4ff8ac2",
+      "raw_numerator_operations": 463,
+      "reduction": "0",
+      "residual_sha256": "9937a9eb6b34cd5953bb3d90a0353df5266b6568f4040558fb75e05b051f598c"
+    },
+    {
+      "name": "replacement-point-independent-physical-primal-channel-returns-three",
+      "passed": true,
+      "residual_sha256": "102824e66e7e52c0157c72eadae53ae560b975d6b01cb314e4743e1cd0f4102c"
+    }
+  ],
+  "evidence_class": "exact-symbolic-routing-certificate-not-lean-proof",
+  "input": {
+    "committed_point": {
+      "r": "3",
+      "theta": "pi/4"
+    },
+    "raw_choice_count": 6291456,
+    "replacement_point": {
+      "r": "3/2",
+      "theta": "pi/4"
+    },
+    "replacement_scalar_choice_prefix": {
+      "relativeMinus": false,
+      "scalarSpacelikeProbe": 2,
+      "scalarTimelikeProbe": 1
+    },
+    "source_benchmark": "vt2-generic-helical-string"
+  },
+  "input_sha256": "410bed03ab1e1efe4333dac88f53aa0ddd6be732bd8026773e8c7e2b38d552a0",
+  "passed": true,
+  "route_manifest": {
+    "committed_point": [
+      {
+        "gate": "IsActualMetricAlgebraicEntranceAt4",
+        "status": "passed-exact-pointwise"
+      },
+      {
+        "gate": "timelike scalar amplitude 0 < -2*uA",
+        "status": "failed-exact"
+      },
+      {
+        "gate": "acceptedActualMetricFourthOrderDetectorChoicesAt",
+        "status": "empty-by-shared-failed-conjunct"
+      }
+    ],
+    "replacement_point": [
+      {
+        "gate": "IsActualMetricAlgebraicEntranceAt4",
+        "status": "passed-exact-pointwise"
+      },
+      {
+        "gate": "both scalar amplitude radicands",
+        "status": "passed-exact"
+      },
+      {
+        "gate": "selected scalar fixed-probe signs",
+        "status": "passed-exact"
+      },
+      {
+        "gate": "selected literal scalar candidate value",
+        "status": "passed-exact-equals-dphi"
+      },
+      {
+        "gate": "selected literal scalar closure first jet",
+        "status": "passed-exact"
+      },
+      {
+        "gate": "reconstruction/Maxwell/frame/Hodge upstream suffix",
+        "status": "not-evaluated"
+      },
+      {
+        "gate": "choice-free physical active wedge",
+        "status": "not-evaluated"
+      },
+      {
+        "gate": "complete fourth-order channel and output",
+        "status": "not-evaluated"
+      }
+    ]
+  },
+  "runtime": {
+    "python": "3.12.13",
+    "sympy": "1.14.0"
+  },
+  "schema_version": 1
+}

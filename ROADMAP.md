@@ -1,245 +1,208 @@
 # Research roadmap
 
-The high-impact theorem program and its phase exit criteria are specified in
-[`docs/HIGH_IMPACT_PROGRAM.md`](docs/HIGH_IMPACT_PROGRAM.md). This roadmap
-tracks the same program at repository-task granularity.
+The governing plan is [`docs/RESEARCH_RESET.md`](docs/RESEARCH_RESET.md).
+This file is only its compact execution view.
 
-## Canonical phase numbering and current critical path
+## North star
 
-Roman numerals refer only to the six phases in
-`docs/HIGH_IMPACT_PROGRAM.md`. The task groups below are supporting tracks,
-not a competing phase numbering scheme. The current audited execution order
-is maintained in
-[`docs/REALIGNED_EXECUTION_PLAN.md`](docs/REALIGNED_EXECUTION_PLAN.md):
+Prove a generic local Rainich–Kaluza identifiability theorem:
 
-1. begin the reproducible Phase-V exact-metric harness while returning the
-   main theorem effort to the Phase-II curvature/closure gate;
-2. compose the north-star theorem only after both the curvature-entry and
-   uplift-module gates are proved.
+> A finite covariant construction from a four-dimensional Lorentzian metric
+> and its finite jet reconstructs the admissible EMD branches and their
+> coupling magnitude. It recognizes the Kaluza sector by `aGeomSq = 3` and,
+> after explicit integrability obstructions, constructs the local
+> five-dimensional Ricci-flat circle uplift up to its natural orbit.
 
-Intrinsic chart-independent local Kaluza Ricci-flatness is now complete in
-`IntrinsicKaluzaLocal.lean`, and the exhaustive product-preserving uplift
-orbit is complete in `KaluzaUpliftOrbit.lean`. The conditional
-forward/converse module is assembled in `ConditionalKaluzaUplift.lean` behind
-an explicit accepted-data bridge. The live work now splits between the
-Phase-V harness and the final curvature-field realization/composition seam.
-The branch obstruction is already equivalent to genuine scalar-potential
-existence for every realized curvature patch. The realization itself is now
-constructed automatically from actual amplitude/eigen-one-form derivatives
-once their four displayed coordinate-jet identities are supplied.
+The first differentiated Rainich channels have a proved shear kernel. One
+further coordinate derivative recovers `aGeomSq` on the active locus; full
+realization may honestly require derivatives through order five.
 
-The V-T1 harness is now operational: `validation/` contains a pinned exact
-tensor engine, a provenance-and-residual artifact format, drift detection, and
-a nonlinear flat/pure-gauge seed oracle. Recovering the inherited rotating
-solution and its full normalization map remains the next V-T1/V-T2 boundary.
+## Current gate — exact routing and publication theorem presentation
 
-Starting the Phase-V harness does not mark Phase IV complete.
+Prove that every packaged Ricci--exterior EMD witness satisfying the active
+regular hypotheses supplies a survivor of the complete finite actual-metric
+detector and that, on the explicit unique
+scalar-closure locus, every pointwise survivor returns the same `a²`. The
+regularity, physical-complexion, nonemptiness, and confluence ingredients are
+now compiled; the immediate tasks are complete-detector benchmark routing and
+a clean publication theorem statement with every hypothesis exposed.
 
-## Foundation track — provenance and novelty audit
+Current substeps:
 
-- Fix the exact `a = √3` EMD action, frame, signature, and normalizations.
-- Re-derive the Einstein, Maxwell, and scalar equations.
-- Build a specialist bibliography for coupled Rainich/EMD inverse problems.
-- Recover or independently reproduce all inherited numerical calculations.
+1. **Arbitrary-basis Lorentzian frame signs — implemented and proved.** For a
+   rank-two projector range containing a timelike vector in an index-one
+   metric, any ambient basis supplies two projected basis vectors and one of
+   six explicit recipes giving both strict Gram–Schmidt signs. The complete
+   detector enumerates the recipe and builds its coframe from the resulting
+   smooth metric-dependent fields.
+2. **Coordinate-matrix pointwise specialization — complete.**
+   `exists_smoothMatrixProjectedBasisLorentzianFrameSignsAt` translates the
+   abstract basis theorem to the repository's matrix projector and smooth
+   pivot fields at an arbitrary coordinate point.
+3. **Neighborhood persistence — complete.**
+   `exists_eventually_smoothMatrixProjectedBasisLorentzianFrameSignsAt`
+   proves that one fixed coordinate pair and pivot recipe retain both strict
+   signs on a neighborhood whenever the metric and projector entries are
+   continuous at the base point.
+4. **Physical Maxwell frame entrance — complete for any fixed scalar
+   branch.** Positive observer energy now forces the negative Maxwell
+   projector to contain a timelike direction; the square law and trace force
+   both projector ranges to have rank two. The detector then selects all four
+   coordinate probes and a pivot recipe with all four strict signs on one
+   neighborhood. No preferred frame is assumed.
+5. **Finite scalar probes — complete.** Algebraic idempotence and trace one
+   force both complementary projectors to have rank one. Intrinsic timelike
+   and spacelike labeling then makes an arbitrary coordinate basis contain an
+   admissible projection on each line, with both signs persistent locally.
+   Normalized representatives are unique up to sign. The projected-probe
+   two-line theorem further proves that the enumerated sum/difference branches
+   recover the same metric-dual covector orbit as any physical normalized
+   representatives, up to one overall sign. Thus neither probe choice nor the
+   relative-sign bit remains an identifiability assumption.
+6. **True coframe, coordinate Hodge naturality, and finite orientation —
+   complete pointwise.**
+   The arbitrary-chart detector now uses the inverse tetrad as its dual
+   coframe. Maxwell algebra and frame signs prove `LᵀηL=G`. An explicit
+   determinant-`-1` reflection fixes the electric seed and negates the Hodge
+   seed. Determinant covariance of the explicit alternating symbol proves the
+   coordinate Hodge formula natural up to orientation and exactly natural for
+   `det L>0`. A non-circular detector wrapper derives exact Hodge compatibility
+   from the coframe metric identity, Maxwell/frame gates, and positive
+   determinant; the finite reflection supplies the positive branch.
+7. **Physical scalar value and first-jet identifiability — complete on the
+   stated regular patch.**
+   `PhysicalScalarIdentifiability.lean` proves that the
+   reconstruction equation in a generic pseudo-orthonormal Ricci eigenbasis
+   forces both complementary component magnitudes, kills both protected-root
+   components off the explicit resonances, and makes the finite projected-
+   probe list contain the physical covector up to global sign.
+   `ActualMetricScalarIdentifiability.lean` now instantiates the actual
+   polynomial projectors, rank and causal-line facts, coordinate probes, and
+   stored detector candidate. The choice-independent EMD Ricci witness is now
+   defined, and its physical Ricci decomposition plus Maxwell square law
+   derive reconstruction and a literal finite candidate equal to the physical
+   scalar up to sign. The patch witness and fixed-probe theorem now give a
+   pointwise two-branch cover; nonzero-component separation and continuity
+   select one branch and one global sign locally, and actual Frechet-derivative
+   transfer proves that branch's literal fourth-order closure obstruction is
+   zero. The selected branch now also clears the detector's literal
+   reconstruction and packaged Maxwell gates: the global sign cancels in the
+   rank-one tensor, the physical Ricci decomposition yields the exact matrix
+   identity, and the physical Maxwell square/self-adjointness laws yield the
+   residual and principal-projector tests. The positive-energy frame and exact
+   Hodge-orientation selectors are now composed as well: one raw choice passes
+   every upstream metric gate. The fixed-choice neighborhood-promotion theorem
+   now retains that same raw choice, its scalar `±` germ, and all four frame
+   signs on an honest smaller open patch. Its only new local regularity inputs
+   are continuity of the two strict reconstructed diagonal amplitudes and of
+   the selected coframe entries. Upstream entrance itself implies `det L>0`,
+   so exact positive-orientation Hodge compatibility persists automatically.
+8. **Finite channel selection and conditional physical splice — complete.** The
+   former universal genericity premise was vacuous because diagonal wedge
+   choices are enumerated and rejected. It has been replaced by the intrinsic
+   active-wedge condition, proved equivalent to existence of a finite generic
+   source/wedge choice. The active wedge is exactly
+   `dtheta ∧ J(dphi) != 0`, independent of the hidden sine channel. Direct
+   acceptance from upstream + physical channel + selected component is now
+   proved. The full Maxwell stress-fibre theorem is also proved pointwise in
+   arbitrary adapted coordinates. Its smooth patch version supplies
+   constructive unit-duality coordinates and the complexion one-form when the
+   positive amplitude, physical form, adapted coframe, and coframe/stress
+   identities hold smoothly throughout that patch. A new quotient-germ theorem proves that local physical
+   channel equality automatically identifies the detector's Frechet-derived
+   quotient with the physical double-angle derivative. The selected upstream
+   coframe now also has proved inverse-metric identities and a patchwise smooth
+   stress-fibre theorem. A separate `C¹` germ-transfer theorem shows that
+   equality of the physical and reconstructed Maxwell/Hodge fields on a
+   neighborhood forces equality of their first jets and transports the EMD
+   exterior closure. `NorthStarComposition.lean` now derives those two field
+   germs instead of assuming them: reconstructed stress puts the physical
+   field on the smooth duality orbit, and the positive determinant already
+   implied by upstream plus the physical Hodge relation fixes its partner with
+   the same complexion. Thus a genuine `C¹` pair on a smooth upstream patch,
+   with reconstructed
+   stress, physical Hodge relation, EMD closure, scalar continuity, and an
+   active wedge, produces a finite accepted choice with output `a²`; adding
+   `a²=3` gives the Kaluza output `3`. Scalar orientation may replace `a` by
+   `-a` but preserves the output.
+9. **Invariant-EMD composition, conventional regularity, and physical
+   activity — implemented.**
+   `InvariantEMDDetectorComposition.lean` packages a detector-choice-free
+   genuine EMD `C¹` Maxwell/Hodge pair, physical stress, metric-Hodge
+   relation, and exterior closure. It intersects the scalar `±` germ with the
+   upstream germ on one open selected patch and correlates that sign with
+   coupling `a` or `-a`. `InvariantEMDEndToEnd.lean` composes the finite
+   upstream selector and proves that the metric-only accepted set contains a
+   survivor with `aGeomSq=a²` (`3` under Kaluza normalization).
+   `ActualMetricDetectorRegularity.lean` derives the selected coframe and
+   protected positive magnitude at `C²` from conventional `C²` regularity of
+   `g`, the selected residual, and `qSq`; the regularity end-to-end module
+   substitutes these derived facts for bespoke premises. The selector-
+   certificate integration is included in the passing 2,912-job repository
+   build and axiom audit.
 
-Exit criterion: every starting equation has a source or derivation and every
-novelty statement is phrased comparatively.
+   `PhysicalComplexionInvariant.lean` defines the physical one-form
+   `omega=(C dS-S dC)/2` directly from physical `F`, its Hodge partner, inverse
+   metric, and `q`; proves frame and simultaneous physical-pair-sign
+   invariance; derives the source-free physical effective channel; and proves
+   that the detector active gate is equivalent to the choice-free physical
+   Maxwell-complexion/stress wedge, including the scalar-orbit variant.
+   `InvariantActiveWedgeOpenness.lean` proves this locus is open under
+   continuity and persists locally from `ContinuousAt`; density is not
+   asserted.
+10. **Pointwise all-survivor identifiability — complete on the sharp locus.**
+   `InvariantEMDConfluence.lean` defines
+   `IsActualMetricUniqueScalarClosureBranchAt4`, namely
+   `¬(O_false=0 ∧ O_true=0)`, and proves that every pointwise member of the
+   finite accepted set returns the physical `a²` under conventional local
+   regularity and admissible-probe hypotheses. Hence any two survivors agree
+   there. No unconditional claim is made on the two-closed-branch locus: both
+   relative-sign branches may close, so the present data do not identify one
+   physical branch. `InvariantEMDPublicationCorollaries.lean` now packages
+   these per-survivor hypotheses and proves that the complete finite output
+   image is `{a²}` from accepted-set nonemptiness plus a certificate for each
+   accepted choice.
+11. **Final invariant nonemptiness composition — complete.**
+   `exists_acceptedActualMetricFourthOrderChoice_and_eq_physical_of_invariantEMD_endToEnd_physicalActive`
+   takes the conventional selector and regularity data, one choice-free
+   physical Maxwell-complexion activity premise, and a callback supplying only
+   selected-residual `C²`. It concludes that the metric-only accepted set has
+   a member returning physical `a²`; the Kaluza corollary returns `3`.
+12. **Exact check and theorem presentation — active.** The routing audit found
+   that the original helical point is outside the detector's causal scalar
+   branch and therefore has an empty accepted set. A replacement interior
+   point passes the exact prefix through literal scalar reconstruction and
+   its full first-jet closure gate, but the remaining gates are not certified.
+   Complete that route, and state the
+   necessity plus unique-closure pointwise-confluence theorem compactly for
+   publication without hiding its regularity or admissible-probe assumptions.
 
-## Algebraic track — generic reconstruction
+Exit theorem: the detector takes only `g` and explicit generic hypotheses;
+genuine constant-coupling EMD implies its accepted set is nonempty, and on
+the explicit unique scalar-closure locus every accepted result equals the
+physical `a²` (`3` for Kaluza).
 
-- Derive the Ricci characteristic factorization from `R = S + V`.
-- Prove that rank-one scalar perturbations retain one direction in each
-  two-dimensional Maxwell principal plane. **Complete in Lean.**
-- Formalize the four-dimensional Maxwell principal-plane multiplicities and
-  convert the protected eigenvectors into characteristic-polynomial factors.
-  **Complete in Lean:** the multiplicities follow from dimension four, trace
-  zero, and the non-null square law; `AlgebraicEntrance.lean` reaches the
-  actual endomorphism `charpoly` and canonical coefficient data.
-- Prove that nonzero opposite roots force the complete quadratic
-  characteristic factorization. **Complete in Lean.**
-- Formalize the rank-one determinant identity in Lean.
-- Prove the protected eigenpair and invariant formulas.
-- Solve the linear tensor equation for `V` on the generic branch.
-- Prove admissibility and factorization uniqueness for a fixed tensor up to the
-  scalar global sign.
-- Classify the additional relative-sign tensor ambiguity and its Ricci
-  centralizer action.
-- Construct counterexamples to algebraic sufficiency.
+## Next gate — finite-jet converse
 
-Exit criterion: a zero-placeholder theorem package for the generic algebraic
-step, including an honest existence/orbit classification and every
-nondegeneracy hypothesis.
+After the entrance theorem closes:
 
-## Differential track — closure and local sufficiency
+1. impose and analyze the reconstructed `dB` and `d(aGeomSq)` obstructions;
+2. accept metric order five if differentiating `B` is genuinely necessary;
+3. reconstruct the complexion, physical Maxwell field, and constant coupling;
+4. compose with the proved local uplift and orbit theorem;
+5. state the necessary-and-sufficient generic recognition theorem.
 
-- Factor the reconstructed rank-one tensor into a covector up to sign.
-- Determine which differential conditions select or identify the two
-  pointwise relative-sign partners.
-- Prove that both relative-sign branches can be closed only on the locus where
-  their two spectral components are separately closed. **Complete in Lean as
-  an abstract linear differential lemma and as the concrete coordinate
-  exterior theorem `CurvatureScalarBranchJet4.both_branches_closed_iff`.**
-- Prove that away from the separately closed exceptional locus, existence of
-  a closed relative-sign branch makes that branch unique. **Complete in Lean
-  abstractly and for differentiable one-form fields; geometric existence
-  remains open.**
-- State and prove the closure condition implying local exactness. **Complete
-  on open convex coordinate patches using Mathlib's one-form Poincare lemma;
-  the potential is unique up to an additive constant.**
-- Apply Maxwell–Rainich algebraic and differential conditions to `S = R - V`.
-- Add the Kaluza scalar equation and duality-complexion datum.
-- Derive the rescaled Maxwell differential channels and prove abstract
-  uniqueness of `a` on a nonzero channel. **Complete in Lean at the evaluated
-  module level; curvature and differential-form instantiation open.**
-- Construct an intrinsic `a_geom²` and test `a_geom²=3` on Kaluza metrics and
-  `a_geom²≠3` on adversarial EMD metrics.
-- Prove the Lorentzian-pairing formula for `a_geom²` and primal/dual channel
-  agreement. **Complete in Lean on the non-null evaluated-channel branch.**
-- Construct the two-root polynomial spectral projector without eigenvectors.
-  **Complete in Lean.**
-- Construct the full four-root Lagrange projectors, prove their action,
-  idempotence, Ricci commutation, and resolution of the identity without a
-  chosen eigenbasis. **Complete in Lean under an explicit simple-spectrum
-  decomposition hypothesis. Their coordinate matrix fields are now proved
-  `C^n` wherever the labeled spectral gaps stay nonzero, with pointwise
-  idempotence and resolution transported from the basis-free theorem.**
-- Differentiate the full projector formula on the constant-gap branch and
-  express `∇Pᵢ` using `R`, `∇R`, and derivatives of the four curvature roots.
-  **The complete four-block formula, its universal off-diagonal identities,
-  and vanishing target block are complete in Lean; eigenvalue derivatives
-  cancel. Its coordinate Levi--Civita instantiation is now complete, and raw
-  differentiated spectral identities are proved to promote automatically to
-  the covariant ones.**
-- Differentiate the scalar amplitudes, combine them with `∇Pᵢ`, and
-  antisymmetrize to obtain curvature-derived formulas for `dα` and `dβ`.
-  **Complete in Lean on the explicit simple-spectrum/strict-sign patch:
-  forced diagonals and amplitudes are smooth, fixed projector probes give
-  smooth metric-dual eigen-one-forms, and `CurvatureScalarBranchJet4`
-  assembles explicit product-rule `dα,dβ` and the two tests `dα±dβ`. Branch
-  outcomes are now exhaustively classified, including an iff no-branch
-  obstruction and patch-level finite rejection witnesses. For any realized
-  curvature patch whose displayed jets are the actual Frechet derivatives,
-  those tests are now equivalent to genuine closedness and, on an open convex
-  patch, to scalar-potential existence. The exact zero/one/two-potential
-  classification and finite no-potential certificate are complete. Coordinate
-  components now reconstruct arbitrary Frechet derivatives and the product
-  rule automatically builds the derived branch realization. Proving the four
-  constituent coordinate-jet equalities for the concrete smooth construction
-  is the remaining curvature-entry seam.**
-- Prove that every accepted scalar candidate leaves a tracefree residual
-  obeying the Maxwell square identity. **Complete in Lean under the explicit
-  scalar square and trace hypotheses.**
-- Normalize the non-null Maxwell residual and reconstruct its two principal
-  projectors without eigenvectors. **Complete in Lean; the real two-form
-  square root and complexion reconstruction are completed below.**
-- Classify the non-null canonical Maxwell square roots as a duality orbit.
-  **Complete in Lean at the principal-frame amplitude level, including a
-  constructive and unique duality parameter; the geometric local lift is
-  completed below.**
-- Differentiate the duality orbit and solve simultaneously for the complexion
-  rate and EMD coupling. **Unique unit-circle rate and nondegenerate two-probe
-  recovery are complete in Lean; exterior-form channel identification and
-  full obstruction validation are completed below.**
-- Realize the canonical amplitudes as a Lorentzian two-form and verify its
-  stress tensor, Rainich square, energy sign, Hodge action, and positive-`q`
-  seed. **Complete in Lean in an explicit orthonormal frame, with smooth local
-  transport and patching completed below.**
-- Prove Lorentz-frame covariance of the two-form seed, Maxwell stress, square
-  law, and principal projectors. **Complete in Lean for supplied mutually
-  inverse Lorentz matrices; smooth local-frame construction and local overlap
-  algebra are completed below.**
-- Construct principal-plane frames from the curvature-polynomial projectors.
-  **Explicit Lorentzian/spacelike Gram--Schmidt, projector-range preservation,
-  cross-plane orthogonality, and the projected-probe pseudo-orthonormal tetrad
-  criterion are complete in Lean. In dimension four, trace of the normalized
-  involution now forces both ranges to have rank two; index-one signature and
-  a timelike witness in the physical minus range yield suitable probes, a
-  principal tetrad basis, and a real skew two-form whose Maxwell stress is
-  exactly the residual. Strict Gram signs persist locally for continuous data.
-  The fixed-probe tetrad, frame matrix, and transported seed are now proved
-  `C^n` on each strict sign patch. The Lorentz coframe, explicit smooth
-  inverse, transported stress equality, evaluated connection, and local
-  exterior-form assembly are also complete.**
-- Formalize local-seed overlap transitions and complexion patching. **The
-  duality group law, inverse, cocycle, and full variable-transition rate law
-  `ω↦ω+τ` are complete in Lean. The corrected quantity `ω-A` and the recovered
-  coupling are overlap invariant when `A↦A+τ`; this supplies the local
-  transition law, while global bundle topology is deferred.**
-- Substitute the duality rotation into the exterior equations. **The exact
-  `±ω∧` product-rule terms and an iff reduction to two seed-channel equations
-  are complete in Lean. For nonzero coupling with an active scalar-source
-  channel, constant duality freedom collapses to overall sign; the full circle
-  survives precisely on the proved zero-coupling/inactive-source exceptional
-  loci. The transported seed/Hodge-seed first jets now exteriorize to explicit
-  alternating three-forms.**
-- Prove a local necessary-and-sufficient theorem. **Complete on the generic
-  local branch: two explicit obstruction three-forms vanish iff the EMD
-  equations close, and the accepted constant orbit is classified.**
-- Build the Phase-IV handoff. **Complete conditionally on the accepted scalar
-  branch: the unique closed relative-sign branch has a local scalar potential,
-  the exponential unweighting derivatives are exact, the physical Maxwell
-  field and weighted dual flux are closed, and `a²=3` can be oriented to
-  `a=√3`. Phase IV now defines the radial gauge potential, proves its radial
-  gauge condition, verifies the closedness-to-curvature fundamental-calculus
-  identity for its derivative candidate, and proves Kaluza gauge invariance.
-  The IV.1 splice is complete: under a `C¹` closed regularity package on a
-  star-shaped patch, the dominated differentiation hypotheses are discharged
-  uniformly and the radial potential satisfies `dA=F`, with the local
-  potential orbit exactly `A+dχ`. The IV.2 convention constants
-  `c₁=-1/√3, c₂=2/√3, c₃=1` are derived in `docs/UPLIFT_CONVENTION.md` and
-  fixed as verified Lean definitions. The IV.3 coordinate layer is complete:
-  block-metric congruence assembly, explicit inverse formulas, determinant
-  and signature lift, and the six closed-form Christoffel blocks at a
-  normal-gauge point are complete in Lean, together with the second-jet layer
-  and all three Ricci blocks. The fiber block is the scalar equation, the
-  mixed block is the weighted Maxwell equation, and the base block is the
-  Einstein residual plus its exact scalar trace correction. Mixed-order
-  symmetry is certified for genuine second jets, and vanishing of the full
-  `5×5` Ricci tensor is Lean-proved equivalent to the complete normal-frame EMD
-  system. The smooth coordinate-germ wrapper is now complete through second
-  order: actual `C²` fields generate every symmetric jet automatically, and
-  the assembled circle-invariant local-product metric has the audited point
-  value, first jet, and full Hessian. Its curvature calculation is now
-  identified with an ansatz-independent coordinate Levi--Civita/Ricci
-  definition. Arbitrary invertible affine coordinate covariance is also
-  complete, including changes mixing base and circle directions, and
-  Ricci-flatness is preserved and reflected. The full inhomogeneous nonlinear
-  connection/Ricci cancellation is now verified for arbitrary coordinate
-  three-jets. The transformed metric second jet and its first-kind derivative
-  law are constructed. The inverse-metric derivative product rule, explicit
-  four-term first-kind derivative, and undifferentiated raised bracket are now
-  complete. The affine and inhomogeneous differentiated contractions now
-  assemble into the exact second-kind Christoffel-jet law, unconditional
-  coordinate-Ricci covariance, and the nonlinear-coordinate Kaluza
-  specialization. Intrinsic local pseudo-Riemannian packaging now extracts the
-  actual `C²` Lorentzian product-metric germ and proves Ricci-flatness
-  independent of nonlinear overlap jets. The complete product-preserving
-  circle-coordinate orbit is now classified by necessary-and-sufficient base,
-  radius, and connection compatibility laws, with active and exceptional
-  duality branches separate. The conditional forward/converse module is now
-  assembled behind the explicit accepted-data certificate.**
+## Explicitly deferred
 
-Exit criterion: Paper I candidate with manuscript-to-Lean claim translation.
+Do not divert the main effort to null/repeated-root branches, global topology,
+new exact-solution generation, extra uplift plumbing, phenomenology, or
+manifold-library migration until the two gates above close.
 
-## Degenerate-branch track
+## Publication boundary
 
-Treat `R = 0`, null Maxwell fields, null scalar gradients, `q = 0`, repeated
-eigenvalues, and eigenvalue collisions separately. Determine whether each has
-a reconstruction theorem, a no-go theorem, or unavoidable nonuniqueness.
-
-## Exact/adversarial track — canonical Phase V
-
-- Maintain the pinned exact-tensor harness and byte-for-byte artifact checks.
-- Rebuild the inherited rotating dyonic source and normalization map; the
-  nonlinear flat/pure-gauge seed oracle is complete.
-- Validate on several exact Kaluza/EMD solutions.
-- Test non-Kaluza scalar, electrovacuum, perfect-fluid, and mixed-matter metrics.
-- Distinguish algebraic false positives from differential false positives.
-- Use exact arithmetic or certified residual bounds where possible.
-
-## Applications track — canonical Phase VI
-
-Only after the reconstruction theorem is stable should the project reconnect
-to spin-induced scalar multipoles, binary signatures, or the scalar parametric
-amplifier. Each application must state whether it follows from Kaluza reduction
-or from an independent EFT assumption.
+- The compiled active-regular finite-coordinate necessity/identifiability
+  theorem is a strong detector-paper nucleus even without the converse;
+  nonlinear-coordinate covariance is a separate upgrade.
+- The full necessary-and-sufficient uplift theorem is the landmark result.
+- The helical black-string reduction is validation, not a new local solution.
+- Any priority claim remains provisional pending specialist review.

@@ -56,7 +56,9 @@ def twoFormQuadraticInvariant
     (F : Matrix (Fin 4) (Fin 4) ℝ) : ℝ :=
   ∑ i, ∑ j, raiseBothIndices F i j * F i j
 
-/-- Mixed Maxwell stress in the convention used by `EMD_CONVENTION.md`. -/
+/-- Ordinary (unhalved) mixed Maxwell stress.  For the EMD Ricci residual in
+`EMD_CONVENTION.md`, this is applied to the curvature-normalized form
+`H = exp(a phi / 2) F / sqrt(2)`. -/
 noncomputable def maxwellStressMixed
     (F : Matrix (Fin 4) (Fin 4) ℝ) : Matrix (Fin 4) (Fin 4) ℝ :=
   fun i j =>

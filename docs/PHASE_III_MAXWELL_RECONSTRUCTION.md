@@ -1,5 +1,12 @@
 # Phase III — Maxwell two-form reconstruction
 
+> **2026-08-12 correction.** The evaluated two-probe algebra below is correct,
+> but for an arbitrary curvature-normalized seed its unknown coefficients are
+> effective `(eta,A)`, not the physical `(dtheta,a)`. The complete first
+> channels have an exact shear kernel. See
+> [`../papers/coupling-detector/HUMAN_PROOF.md`](../papers/coupling-detector/HUMAN_PROOF.md)
+> for the corrected third-order no-go and fourth-order recovery theorem.
+
 ## Entry point now proved
 
 For every scalar candidate `V` surviving the pointwise and differential
@@ -152,17 +159,20 @@ existence of a unique complexion rate `ω`:
 
 `dc=-ωs`, `ds=ωc`, `ω=c ds-s dc`.
 
-Finally, two scalar probe channels `xᵢ=ωzᵢ+(a/2)yᵢ` recover `ω` and `a`
-simultaneously whenever `Δ=z₁y₂-z₂y₁≠0`:
+Finally, two abstract scalar probe channels `xᵢ=ωzᵢ+(a/2)yᵢ` recover their two
+coefficients simultaneously whenever `Δ=z₁y₂-z₂y₁≠0`:
 
 `ω=(x₁y₂-x₂y₁)/Δ`,
 
 `a=2(z₁x₂-z₂x₁)/Δ`.
 
-Lean proves joint uniqueness and the orientation law: reversing the scalar
-source leaves `ω` fixed and sends `a→-a`. The locus `Δ=0` is therefore the
-exact evaluated-channel degeneracy where complexion and coupling cannot be
-separated by those probes.
+Lean proves joint uniqueness and the corresponding orientation law. The locus
+`Δ=0` is the exact degeneracy of this evaluated linear system. For the
+curvature seed, however, the probe-free complete-channel theorem recovers
+`eta=dtheta+(B/2)Jv` and `A=a cos(2theta)`. It does not recover the physical
+`dtheta` and `B=a sin(2theta)` separately. That stronger ambiguity persists
+even when every three-form component is used and is removed generically only
+by the next-order constancy equation.
 
 The product-rule substitution has now also been lifted from scalar channels
 to exterior-form types. For a seed pair `(𝓕₀,𝓖₀)` and a one-form complexion
@@ -218,13 +228,12 @@ active nonzero-coupling branch that orbit contains only the two overall signs.
    connection constraint, and local exteriorization are complete. The
    pointwise overlap cocycle and variable-transition connection law are also
    complete.**
-4. **Complexion equation.** The unit-circle derivative and nondegenerate
-   two-probe solution for `(ω,a)` are complete in Lean. Substitute the actual
-   `𝓕_θ` into the rescaled Bianchi/Maxwell equations and identify the geometric
-   channel data `x,z,y`. **The abstract exterior-form product rule, exact iff
-   reduction, explicit transported-seed first jets, and local three-form
-   construction are complete. Nondegenerate evaluated probes recover the
-   candidate `(ω,a)`, and the full obstruction forms validate it.**
+4. **Complexion equation.** The unit-circle derivative and abstract
+   two-coefficient probe solver are complete in Lean. For the actual curvature
+   seed, the complete channels recover the effective `(eta,A)` without probes;
+   physical `(dtheta,B)` have the Lean-proved shear kernel. The next-order
+   equation generically constructs `B` and `a²=A²+B²`. **The remaining task is
+   the actual-metric fourth-order composition, not additional probe algebra.**
 5. **Integrability and orbit list.** Give necessary and sufficient closure
    conditions, classify residual constant duality freedom, and combine with
    the scalar relative-sign branches. **The duality overlap group, cocycle,

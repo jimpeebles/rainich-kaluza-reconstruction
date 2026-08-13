@@ -1,0 +1,88 @@
+{
+  "benchmark_id": "vt1b-boosted-black-string",
+  "checks": [
+    {
+      "name": "scalar-gradient-is-nonzero",
+      "passed": true,
+      "residual_sha256": "a08e03b98c9d8b1a8bc415e8848603f63e810a54bffcb171468da4f2e25a7136"
+    },
+    {
+      "name": "maxwell-field-is-nonzero",
+      "passed": true,
+      "residual_sha256": "056e536426d354d18a2fee49500569c2c5eb207fabe0a1907f35bde7e39e5a5d"
+    },
+    {
+      "name": "base-ricci-is-nonzero",
+      "passed": true,
+      "residual_sha256": "8034ed2c460171bef67c383e72ff4d7aa5f81eb213f43846b697d0b2565748e5"
+    },
+    {
+      "name": "emd-residuals-vanish-at-sqrt-three",
+      "passed": true,
+      "residual_sha256": "608c5567fbe26c0954cc921ff46cc83278ad969453ee47b55c7bc480ab247464"
+    },
+    {
+      "name": "uplift-equals-boosted-black-string",
+      "passed": true,
+      "residual_sha256": "608c5567fbe26c0954cc921ff46cc83278ad969453ee47b55c7bc480ab247464"
+    },
+    {
+      "name": "boosted-black-string-ricci-vanishes",
+      "passed": true,
+      "residual_sha256": "608c5567fbe26c0954cc921ff46cc83278ad969453ee47b55c7bc480ab247464"
+    },
+    {
+      "name": "necessary-kaluza-polynomial-obstruction-vanishes",
+      "passed": true,
+      "residual_sha256": "9937a9eb6b34cd5953bb3d90a0353df5266b6568f4040558fb75e05b051f598c"
+    },
+    {
+      "name": "dual-channel-reconstructs-coupling-squared-three",
+      "passed": true,
+      "residual_sha256": "9937a9eb6b34cd5953bb3d90a0353df5266b6568f4040558fb75e05b051f598c"
+    },
+    {
+      "name": "ricci-spectrum-is-repeated-root-degenerate",
+      "passed": true,
+      "residual_sha256": "8268f8bfc8d75009b53c8d65274c9e0ccc395ec82bc35ff9aafdeb000e2a2d0e"
+    }
+  ],
+  "evidence_class": "exact-symbolic-validation-not-lean-proof",
+  "input": {
+    "base_metric": "[[(-1 + 2/r)/sqrt(1 + 2/r), 0, 0, 0], [0, sqrt(1 + 2/r)/(1 - 2/r), 0, 0], [0, 0, r**2*sqrt(1 + 2/r), 0], [0, 0, 0, r**2*sqrt(1 + 2/r)*sin(theta)**2]]",
+    "boost": {
+      "cosh_delta": "sqrt(2)",
+      "sinh_delta": "1"
+    },
+    "coordinates": [
+      "t",
+      "r",
+      "theta",
+      "phi",
+      "z"
+    ],
+    "coupling": "sqrt(3)",
+    "expected_classification": "accepted-kaluza-emd-but-repeated-ricci-root",
+    "mass_parameter": "1",
+    "potential": [
+      "2*sqrt(2)/(r*(1 + 2/r))",
+      "0",
+      "0",
+      "0"
+    ],
+    "scalar": "sqrt(3)*log(1 + 2/r)/2",
+    "source": {
+      "external_source": null,
+      "kind": "constructed-from-standard-exact-solution",
+      "provenance": "Lorentz boost of the direct product of four-dimensional Schwarzschild with a flat fifth direction"
+    },
+    "uplift_ansatz": "exp(-phi/sqrt(3))*g + exp(2*phi/sqrt(3))*(dz+A)^2"
+  },
+  "input_sha256": "fc8a954413353baf1456e94e79a735de7fd81c33d679efddac01ae264fa6ba3e",
+  "passed": true,
+  "runtime": {
+    "python": "3.12.13",
+    "sympy": "1.14.0"
+  },
+  "schema_version": 1
+}

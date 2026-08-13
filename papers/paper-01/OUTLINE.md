@@ -1,5 +1,11 @@
 # Paper I outline
 
+> **Fallback paper outline.** The active publication target is the metric-only
+> coupling detector in
+> [`../../docs/RESEARCH_RESET.md`](../../docs/RESEARCH_RESET.md). This outline
+> remains the release path if the detector fails its statement or validation
+> gates.
+
 Working title:
 
 **Pointwise Scalar Reconstruction and Its Discrete Ambiguity in the Generic

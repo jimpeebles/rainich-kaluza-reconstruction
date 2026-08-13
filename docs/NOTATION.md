@@ -12,6 +12,8 @@ here.
 | `v` | `dφ` | local candidate |
 | `V` | `½ v^♯ ⊗ v` | fixed by the EMD Einstein equation |
 | `F` | Maxwell two-form `dA` | fixed |
+| `𝓕` | exponentially rescaled physical form `e^(aφ/2)F` | fixed |
+| `H` | Ricci-residual-normalized form `𝓕/√2`; its ordinary Maxwell stress is `S` | fixed |
 | `S` | `½e^(aφ)` times the traceless Maxwell stress endomorphism | fixed |
 | `q²` | `e^(2aφ)[(F²)²+(F·*F)²]/64` in `S²=q²I` | fixed on the non-null branch |
 | `e₁,…,e₄` | elementary characteristic coefficients | fixed by `det(λI-R)=λ⁴-e₁λ³+e₂λ²-e₃λ+e₄` |

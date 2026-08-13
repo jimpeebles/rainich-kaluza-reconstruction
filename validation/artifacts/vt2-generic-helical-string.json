@@ -1,0 +1,109 @@
+{
+  "benchmark_id": "vt2-generic-helical-string",
+  "checks": [
+    {
+      "name": "reference-black-string-ricci-vanishes",
+      "passed": true,
+      "residual_sha256": "608c5567fbe26c0954cc921ff46cc83278ad969453ee47b55c7bc480ab247464"
+    },
+    {
+      "name": "uplift-equals-helical-black-string-pullback",
+      "passed": true,
+      "residual_sha256": "608c5567fbe26c0954cc921ff46cc83278ad969453ee47b55c7bc480ab247464"
+    },
+    {
+      "name": "base-ricci-is-nonzero-at-exact-point",
+      "passed": true,
+      "residual_sha256": "d1d0c475f53ffdad35aba44d3f0092672fc3dc5591d8a078124501e1f244cf6e"
+    },
+    {
+      "name": "emd-residuals-vanish-at-exact-point",
+      "passed": true,
+      "residual_sha256": "608c5567fbe26c0954cc921ff46cc83278ad969453ee47b55c7bc480ab247464"
+    },
+    {
+      "name": "maxwell-sector-is-nonnull-at-exact-point",
+      "passed": true,
+      "residual_sha256": "bd50ff76c7ba873d9e59017c05c1f0dea4a61617311b0bf5f51a76b14369badc"
+    },
+    {
+      "name": "scalar-gradient-is-nonnull-at-exact-point",
+      "passed": true,
+      "residual_sha256": "b536a0445c389adacfdbb07fc638dc7ccb0ba1df1cfa9cfbff68b3275c3fabc2"
+    },
+    {
+      "name": "ricci-trace-is-nonzero-at-exact-point",
+      "passed": true,
+      "residual_sha256": "c74682c25beb436d4aa4836787e7574dfd1303dfae502316e3addac20db9f734"
+    },
+    {
+      "name": "mixed-ricci-spectrum-is-real-and-simple",
+      "passed": true,
+      "residual_sha256": "cfdebcaebb8658397df9067518517e35d853e3eda650887c592d744a097a0039"
+    },
+    {
+      "name": "characteristic-discriminant-is-nonzero",
+      "passed": true,
+      "residual_sha256": "f6955995832f62d5363e26f6f311c4f7377f037a16eab2af723b1e80bc69a2e4"
+    },
+    {
+      "name": "necessary-kaluza-polynomial-obstruction-vanishes",
+      "passed": true,
+      "residual_sha256": "9937a9eb6b34cd5953bb3d90a0353df5266b6568f4040558fb75e05b051f598c"
+    },
+    {
+      "name": "primal-channel-reconstructs-coupling-squared-three",
+      "passed": true,
+      "residual_sha256": "102824e66e7e52c0157c72eadae53ae560b975d6b01cb314e4743e1cd0f4102c"
+    },
+    {
+      "name": "physical-kaluza-coupling-value-is-three",
+      "passed": true,
+      "residual_sha256": "14aa822b84efe5122b44190245d251a21231e15f71a9bfcb1e34579c6e08fa6a"
+    }
+  ],
+  "evidence_class": "exact-symbolic-validation-not-lean-proof",
+  "input": {
+    "azimuthal_twist": "1",
+    "base_metric": "[[sqrt((r**3*sin(theta)**2 + r + 2)/r)*((4 - r)*(r**3*sin(theta)**2 + r + 2) - 8)/(r*(r**3*sin(theta)**2 + r + 2)), 0, 0, -2*sqrt(2)*r**2*sqrt((r**3*sin(theta)**2 + r + 2)/r)*sin(theta)**2/(r**3*sin(theta)**2 + r + 2)], [0, r*sqrt((r**3*sin(theta)**2 + r + 2)/r)/(r - 2), 0, 0], [0, 0, r**2*sqrt((r**3*sin(theta)**2 + r + 2)/r), 0], [-2*sqrt(2)*r**2*sqrt((r**3*sin(theta)**2 + r + 2)/r)*sin(theta)**2/(r**3*sin(theta)**2 + r + 2), 0, 0, r**2*sqrt((r**3*sin(theta)**2 + r + 2)/r)*(r + 2)*sin(theta)**2/(r**3*sin(theta)**2 + r + 2)]]",
+    "boost": {
+      "cosh_delta": "sqrt(2)",
+      "sinh_delta": "1"
+    },
+    "coordinates": [
+      "t",
+      "r",
+      "theta",
+      "phi",
+      "z"
+    ],
+    "exact_point": {
+      "phi": "0",
+      "r": "3",
+      "t": "0",
+      "theta": "pi/4"
+    },
+    "expected_classification": "generic-kaluza-emd-physical-channel-a-squared-three-but-complete-detector-radicand-rejects-this-point",
+    "fiber_norm": "(r**3*sin(theta)**2 + r + 2)/r",
+    "mass_parameter": "1",
+    "potential": [
+      "2*sqrt(2)/(r**3*sin(theta)**2 + r + 2)",
+      "0",
+      "0",
+      "r**3*sin(theta)**2/(r**3*sin(theta)**2 + r + 2)"
+    ],
+    "scalar": "sqrt(3)*log((r**3*sin(theta)**2 + r + 2)/r)/2",
+    "source": {
+      "external_source": null,
+      "kind": "constructed-from-standard-exact-solution",
+      "provenance": "constant boost and azimuthal twist of Schwarzschild_4 times a flat fifth direction"
+    }
+  },
+  "input_sha256": "a00383c928e59a530e6be824dd8c3cbba08f349dc5731b98cfe34f28b0da2618",
+  "passed": true,
+  "runtime": {
+    "python": "3.12.13",
+    "sympy": "1.14.0"
+  },
+  "schema_version": 1
+}

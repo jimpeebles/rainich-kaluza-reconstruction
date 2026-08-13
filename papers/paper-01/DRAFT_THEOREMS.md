@@ -1,5 +1,9 @@
 # Draft theorem statements
 
+> These statements support the fallback pointwise/differential paper. The
+> governing detector theorem and its input rule are specified in
+> [`../../docs/RESEARCH_RESET.md`](../../docs/RESEARCH_RESET.md).
+
 These are manuscript-level working statements. “Verified” below means the
 displayed finite-dimensional statement has a matching Lean declaration; it
 does not transfer unstated geometric assumptions into Lean.

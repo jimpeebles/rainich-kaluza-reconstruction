@@ -2,6 +2,9 @@
 
 Date: 2026-08-10
 
+> This is a dated state record, not the current plan. See
+> [`RESEARCH_RESET.md`](RESEARCH_RESET.md) for the 2026-08-12 research reset.
+
 ## Primary project
 
 The repository now centers the generalized Rainich–Kaluza reconstruction

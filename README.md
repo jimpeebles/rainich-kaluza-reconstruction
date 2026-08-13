@@ -42,15 +42,27 @@ metric jet satisfies the point Einstein equation, its first Ricci
 prolongation, and the point scalar equation; each matter jet satisfies both
 exterior EMD equations at the point and the point/first-jet Hodge relation.
 `CoordinateRicciFirstJet.lean` proves that the displayed normal-frame
-contraction is the genuine product-rule derivative of the coordinate Ricci
+contraction equals the algebraic product-rule coordinate-Ricci first-jet
 formula at `g₁=0`. This is a finite formal-jet collision, not two local EMD
 solutions, an all-order formal-integrability theorem, or a universal
 solution-level third-order lower bound.
 The companion theorem
 `activeAmbiguity_kaluza_vs_one_firstChannel_ambiguous_nextOrder_separates`
 makes the order separation literal: both branches have the same complete
-first channel `(A,eta)=(0,e₂)`, while the next-order quotient returns
-`B=√3` versus `B=1` and squared outputs `3` versus `1`.
+first channel `(A,eta)=(0,e₂)`, while the fixed finite next-order channel
+candidate returns `B=√3` versus `B=1` and squared candidates `3` versus `1`.
+The stronger universal theorem
+`activeAmbiguity_commonFormalMetricThreeJet_for_every_coupling` shows that
+this is not an isolated coincidence: the same fixed active formal metric
+three-jet supports the displayed truncated equations for every real `a`,
+while the matter first jet records `a` injectively and the fixed finite
+next-order channel candidate is `a²`.
+`GenericActiveThirdOrderAmbiguity.lean` proves that the common point mixed
+Ricci source is not spectrally degenerate: its roots are `-1`, `1`,
+`(3-√65)/4`, and `(3+√65)/4`, with every pairwise inequality and explicit
+nonzero eigenvectors machine checked. The continuum therefore lies on the
+four-distinct-real-root point locus, though it remains a finite formal-jet
+rather than a local-solution family.
 
 The complete detector is also now proved local in the precise fixed-coordinate
 sense: neighborhood-equal coordinate metric fields have the same accepted

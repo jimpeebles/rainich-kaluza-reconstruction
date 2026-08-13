@@ -656,8 +656,10 @@ symmetric common metric third jet realizes the resulting differentiated
 Einstein source.
 -/
 
-/-- Fixed scalar covector used by the active formal ambiguity. -/
-def activeAmbiguityScalarCovector : OneForm4 := ![1, 0, 0, 0]
+/-- Fixed scalar covector used by the active formal ambiguity.  Its support in
+both Maxwell principal planes makes the common point Ricci source have four
+distinct real eigenvalues. -/
+def activeAmbiguityScalarCovector : OneForm4 := ![1, 0, 2, 0]
 
 /-- Fixed effective first-order connection.  It is transverse to the
 principal reflection of `activeAmbiguityScalarCovector`. -/
@@ -907,7 +909,7 @@ theorem matrixExteriorDerivative_activeAmbiguityMaxwellHodgeFirstJet
       activeAmbiguityScalarCovector, activeAmbiguityMaxwellField,
       activeAmbiguityMaxwellHodge,
       canonicalPrincipalReflectionCovector, canonicalMaxwellTwoForm,
-      matrixOneWedgeTwoTensor]
+      matrixOneWedgeTwoTensor] <;> ring
 
 /-- Complete exterior EMD realization of the active formal Maxwell jet. -/
 theorem activeAmbiguityMaxwellJet_emdExteriorClosure (a : ℝ) :
@@ -1155,7 +1157,7 @@ theorem activeAmbiguityEffectiveOneForm_wedge_component :
     oneFormWedgeOneComponent activeAmbiguityEffectiveOneForm
         (canonicalPrincipalReflectionCovector
           activeAmbiguityScalarCovector) 0 2 = 1 := by
-  change (0 : ℝ) * 0 - 1 * (-1) = 1
+  change (0 : ℝ) * 2 - 1 * (-1) = 1
   norm_num
 
 /-- The first jet of the physical double-angle cosine is `-2 omega`. -/
@@ -1518,6 +1520,101 @@ theorem genericEMDScalarJetResidual_activeAmbiguity_eq_zero
   unfold genericEMDScalarJetResidual normalFrameScalarBox
   rw [activeAmbiguityMaxwell_quadraticInvariant_eq_zero]
   simp
+
+/-- The coupling is faithfully recorded in the matter first jet even though
+it is absent from the common formal metric three-jet. -/
+theorem activeAmbiguityMaxwellFirstJet_injective :
+    Function.Injective activeAmbiguityMaxwellFirstJet := by
+  intro a b hab
+  have hentry := congrArg
+    (fun D : TwoFormFirstDerivative4 => D 0 0 1) hab
+  simp [activeAmbiguityMaxwellFirstJet,
+    activeAmbiguityCommonMaxwellFirstJet,
+    activeAmbiguityShearComplexionOneForm,
+    activeAmbiguityScalarCovector, activeAmbiguityMaxwellHodge,
+    canonicalPrincipalReflectionCovector, canonicalMaxwellTwoForm] at hentry
+  linarith
+
+/-- **A continuum of active couplings over one formal metric three-jet.**
+For every real coupling `a`, the same fixed normal-coordinate metric jets
+`g₀=eta`, `g₁=0`, `activeAmbiguityFormalMetricJet2`, and
+`activeAmbiguityFormalMetricJet3` support the displayed truncated EMD data.
+The physical matter jet is active and satisfies the point equations and first
+Einstein/Ricci prolongation.  Its complete first channel is the common
+`(A,eta)=(0,e₂)` channel, while the next-order finite detector returns `a²`.
+
+This is a finite formal-jet statement, not an all-order integrability or local
+PDE-existence theorem. -/
+theorem activeAmbiguity_commonFormalMetricThreeJet_for_every_coupling
+    (a : ℝ) :
+    IsCoordinateMaxwellStressActiveWedge
+        (matrixMaxwellStress minkowskiMetric activeAmbiguityMaxwellField)
+        (activeAmbiguityPhysicalComplexionFromDoubleAngleJet a)
+        activeAmbiguityScalarCovector ∧
+      (∀ r s i j,
+        activeAmbiguityFormalMetricJet2 r s i j =
+            activeAmbiguityFormalMetricJet2 s r i j ∧
+          activeAmbiguityFormalMetricJet2 r s i j =
+            activeAmbiguityFormalMetricJet2 r s j i) ∧
+      (∀ r s t i j,
+        activeAmbiguityFormalMetricJet3 r s t i j =
+            activeAmbiguityFormalMetricJet3 s r t i j ∧
+          activeAmbiguityFormalMetricJet3 r s t i j =
+            activeAmbiguityFormalMetricJet3 r t s i j ∧
+          activeAmbiguityFormalMetricJet3 r s t i j =
+            activeAmbiguityFormalMetricJet3 r s t j i) ∧
+      (∀ n p,
+        normalFrameBaseRicci minkowskiSign
+            activeAmbiguityFormalMetricJet2 n p =
+          activeAmbiguityCovariantRicciSource n p) ∧
+      (∀ r n p,
+        coordinateRicciFirstJet minkowskiMetric 0
+            activeAmbiguityFormalMetricJet2
+            activeAmbiguityFormalMetricJet3 r n p =
+          (minkowskiMetric * activeAmbiguityRicciSourceFirstJet a r) n p) ∧
+      coordinateMetricHodgeTwoForm4 minkowskiMetric
+          activeAmbiguityMaxwellField = activeAmbiguityMaxwellHodge ∧
+      (∀ k,
+        coordinateMetricHodgeTwoForm4 minkowskiMetric
+            (activeAmbiguityMaxwellFirstJet a k) =
+          activeAmbiguityMaxwellHodgeFirstJet a k) ∧
+      EMDExteriorClosure matrixOneWedgeTwo activeAmbiguityScalarCovector a
+        activeAmbiguityMaxwellField activeAmbiguityMaxwellHodge
+        (matrixExteriorDerivative (activeAmbiguityMaxwellFirstJet a))
+        (matrixExteriorDerivative
+          (activeAmbiguityMaxwellHodgeFirstJet a)) ∧
+      genericEMDScalarJetResidual a 0 activeAmbiguityMaxwellField = 0 ∧
+      canonicalPhysicalSeedChannels (Real.sqrt 2)
+          activeAmbiguityScalarCovector
+          (activeAmbiguityPhysicalComplexionOneForm a) 0 a =
+        activeAmbiguityCommonFirstOrderChannels ∧
+      IsFourthOrderChannelCandidate (Real.sqrt 2)
+        activeAmbiguityScalarCovector
+        (activeAmbiguityCosineCouplingFirstDerivative a)
+        activeAmbiguityCommonFirstOrderChannels
+        activeAmbiguityFourthOrderChoice ∧
+      fourthOrderCouplingSqCandidate (Real.sqrt 2)
+        activeAmbiguityScalarCovector
+        (activeAmbiguityCosineCouplingFirstDerivative a)
+        activeAmbiguityCommonFirstOrderChannels
+        activeAmbiguityFourthOrderChoice = a ^ 2 := by
+  refine ⟨activeAmbiguityPhysicalComplexion_maxwellStressActive a, ?_,
+    activeAmbiguityFormalMetricJet3_symmetries, ?_, ?_,
+    coordinateMetricHodgeTwoForm4_activeAmbiguityMaxwellField,
+    activeAmbiguityMaxwellFirstJet_hodgeCompatible a,
+    activeAmbiguityMaxwellJet_emdExteriorClosure a,
+    genericEMDScalarJetResidual_activeAmbiguity_eq_zero a,
+    activeAmbiguityPhysicalSeedChannels_eq_common a,
+    activeAmbiguityFourthOrderChannelCandidate a,
+    activeAmbiguityFourthOrderCouplingSqCandidate_eq a⟩
+  · intro r s i j
+    exact ⟨normalCoordinateMetricJet2OfRicci_deriv_symm _
+        activeAmbiguityCovariantRicciSource_transpose r s i j,
+      normalCoordinateMetricJet2OfRicci_metric_symm _ r s i j⟩
+  · exact activeAmbiguityFormalMetricJet2_einsteinEquation
+  · intro r n p
+    rw [activeAmbiguityRicciSourceFirstJet_eq_common]
+    exact activeAmbiguityFormalMetricJet3_einsteinFirstProlongation r n p
 
 /-- The Kaluza coupling and the non-Kaluza control produce genuinely
 different physical Maxwell first jets. -/

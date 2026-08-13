@@ -42,11 +42,12 @@ the short theorem and assumption audit.
 > converse remain. No claim of genericity for every raw component is made;
 > diagonal wedge choices vanish identically.
 >
-> The lower-order statement is now realized by an active formal metric jet,
-> not only by channel algebra. `a=√3` and `a=1` share one explicit formal
-> normal-coordinate metric three-jet satisfying the point Einstein/scalar
-> equations and first Ricci prolongation; their distinct Maxwell first jets
-> satisfy both exterior equations and point/first-jet Hodge compatibility.
+> The lower-order statement is now realized by an active formal metric-jet
+> continuum, not only by channel algebra. Every real `a` shares one explicit
+> formal normal-coordinate metric three-jet satisfying the point
+> Einstein/scalar equations and first Ricci prolongation, while the Maxwell
+> first jet is injective in `a` and satisfies both exterior equations and
+> point/first-jet Hodge compatibility.
 > The product-rule coordinate-Ricci bridge and complete fixed-coordinate
 > detector-germ extensionality are proved. This does not assert local EMD
 > solutions, all-order integrability, or nonlinear-coordinate covariance.
@@ -192,7 +193,7 @@ Lean-proved for the full three-form pair, so adding or changing scalar probes
 cannot repair it.
 
 The obstruction also has an explicit active formal metric-three-jet
-representative. At a Minkowski normal point with `v=e^0`, balanced non-null
+representative. At a Minkowski normal point with `v=e^0+2e^2`, balanced non-null
 curvature-normalized Maxwell form, and zero scalar Hessian, a common closed
 and co-closed first-jet perturbation plus the coupling-dependent duality shear
 gives an active physical complexion with wedge component `(0,2)=1`. The
@@ -200,10 +201,11 @@ duality shear is invisible to the Maxwell-stress first variation. Hence
 `a=√3` and `a=1` have different Maxwell first jets and coupling squares but
 one common symmetric `g2,g3`, satisfying the point Einstein/scalar equations,
 first Einstein/Ricci prolongation, both exterior equations at the point, and
-point/first-jet Hodge compatibility. The genuine product-rule
+point/first-jet Hodge compatibility. The algebraic product-rule
 `CoordinateRicciFirstJet` specialization identifies the displayed Ricci
-prolongation with the derivative of coordinate Ricci. This is a collision in
-the truncated formal-jet class, not between actual local solutions.
+prolongation with the formal coordinate-Ricci first-jet expression. This is a
+collision in the truncated formal-jet class, not between actual local
+solutions or actual smooth Ricci-field germs.
 
 Constancy of `a` gives one derivative later
 
@@ -233,7 +235,8 @@ Lean proves that every valid component choice returns the same `B`.
 | metric Hodge partner | metric-constructed obstruction | determinant covariance proves that the explicit coordinate formula is natural under the true inverse coframe up to orientation and exactly natural for `det L>0`. A finite reflection supplies the positive branch; detector wrappers derive exact Hodge compatibility, and upstream implies `det L>0` on the fixed open patch. Reconstructed stress and the physical Hodge relation derive the field germs. Conventional regularity derives selected coframe/magnitude `C²`, while the choice-free physical complexion construction derives the source-free effective channel and exact invariant active-gate equivalence |
 | effective variables `(eta,A)` | third-order constructed outputs | full canonical channel map is probe-free and injective for `E!=0`, `v!=0` |
 | physical `(omega,B)` at order three | forbidden interpretation | exact shear non-identifiability and noninjectivity proved |
-| active formal metric `j3` | sharp lower-order witness | `exists_activeCommonFormalMetricThreeJet_kaluza_vs_one` gives the same normal-coordinate metric three-jet at `a²=3` and `a²=1`; `activeAmbiguity_kaluza_vs_one_firstChannel_ambiguous_nextOrder_separates` gives the same complete `(A,eta)=(0,e₂)` first channel and next-order outputs `3` versus `1`; `coordinateRicciFirstJet_minkowski_zero` supplies the genuine Ricci derivative bridge. No local PDE realization or all-order prolongation is claimed |
+| active formal metric `j3` | sharp lower-order witness in the displayed finite formal-jet class | `activeAmbiguity_commonFormalMetricThreeJet_for_every_coupling` puts every real `a` over one fixed active formal metric three-jet while `activeAmbiguityMaxwellFirstJet_injective` distinguishes the matter jets; `exists_activeCommonFormalMetricThreeJet_kaluza_vs_one` specializes to `a²=3` and `a²=1`; `activeAmbiguity_kaluza_vs_one_firstChannel_ambiguous_nextOrder_separates` gives the same complete `(A,eta)=(0,e₂)` first channel and fixed finite next-order channel candidates `3` versus `1`; `coordinateRicciFirstJet_minkowski_zero` supplies the algebraic product-rule coordinate-Ricci first-jet bridge. No actual smooth-metric `fderiv` realization, local PDE realization, or all-order prolongation is claimed |
+| formal witness spectrum | simple-real-spectrum certificate | `activeAmbiguityRicciSource_has_four_distinct_real_eigenpairs` proves exact roots `-1`, `1`, `(3-√65)/4`, `(3+√65)/4`, all pairwise distinct, with explicit eigenvectors. The remaining sharpness gap is local-solution/neighborhood realization, not repeated point spectrum |
 | `B` | fourth-order constructed output | finite explicit quotient list, full compatibility equation, and uniqueness proved |
 | `aGeomSq` | fourth-order coordinate output, invariant under the proved frame/sign/component transformations | the finite actual-metric set/value, actual `dA`, scalar-orientation invariance, source/wedge confluence, transported genuine-EMD necessity, upstream open-patch selector, and end-to-end physical-active theorem are proved. The physical active predicate is frame/sign invariant and exactly equivalent to the detector gate through a derived choice-free physical complexion/effective channel. The final wrapper has one physical-active premise and a selected-residual-`C²` callback and returns metric-only nonemptiness with output `a²`. Every pointwise accepted survivor equals physical `a²` on its probe-pair-specific `¬(O_false=0 ∧ O_true=0)` locus under conventional local regularity and admissible-probe hypotheses; unconditional confluence on the two-closed-branch locus and full nonlinear-coordinate covariance of the complete detector are not claimed |
 | scalar equation | tested obstruction | gives the independent check `A=-box(phi)/(2q)` in the Ricci-residual seed normalization |

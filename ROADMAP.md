@@ -26,8 +26,15 @@ product-rule `CoordinateRicciFirstJet` bridge gives the Ricci-prolongation
 statement its literal coordinate meaning. This is a finite formal-jet
 collision, not a pair of local solutions or an all-order integrability result.
 For this witness the order jump is explicit: both couplings share the complete
-first channel `(A,eta)=(0,e₂)`, whereas the fixed active next-order component
-recovers `B=√3` and `B=1`, producing squared outputs `3` and `1`.
+first channel `(A,eta)=(0,e₂)`, whereas the fixed active next-order channel
+candidate recovers `B=√3` and `B=1`, producing squared candidates `3` and `1`.
+More strongly, one compiled universal theorem puts every real coupling over
+that same fixed active formal metric three-jet; the rescaled-Maxwell first jet
+is injective in `a`, but the complete first channel remains common and the
+fixed finite next-order channel candidate returns `a²`.
+The common point mixed Ricci source also has four distinct real roots,
+`-1`, `1`, `(3-√65)/4`, and `(3+√65)/4`, with explicit eigenvectors proved in
+Lean. Thus the continuum is not a repeated-root artifact.
 
 ## Current gate — exact routing and publication theorem presentation
 

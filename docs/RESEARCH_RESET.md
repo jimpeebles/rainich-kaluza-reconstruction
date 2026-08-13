@@ -2,7 +2,7 @@
 
 Date adopted: 2026-08-12  
 Last recalibrated: 2026-08-13 after the active formal metric-three-jet
-collision, genuine coordinate-Ricci first-jet bridge, and fixed-coordinate
+collision, algebraic product-rule coordinate-Ricci first-jet bridge, and fixed-coordinate
 detector-germ locality theorem
 
 This is the repository's **single operational research plan**. `ROADMAP.md` is
@@ -71,7 +71,7 @@ only when it closes one premise of this statement.
 | a genuine `C¹` Maxwell/Hodge pair on a smooth upstream patch, with reconstructed stress, physical Hodge relation, EMD closure, scalar continuity, and an active wedge, produces a finite accepted choice with output `a²` (`3` at Kaluza coupling) | closed conditionally on those physical and regularity data; positivity follows from upstream |
 | package conventional invariant EMD physical fields, stress, Hodge relation, and closure without a detector choice, and align scalar/coupling `±` | closed |
 | intersect the selected scalar-sign germ and upstream germ into one honest open patch and compose the finite selector to an accepted output `a²` (`3` at Kaluza coupling) | closed |
-| derive selected `C²` coframe/magnitude regularity from conventional `C²` regularity of `g`, the residual, and `qSq` on an upstream patch | closed in `ActualMetricDetectorRegularity.lean` and the regularity end-to-end composition; included in the passing 2915-job root build |
+| derive selected `C²` coframe/magnitude regularity from conventional `C²` regularity of `g`, the residual, and `qSq` on an upstream patch | closed in `ActualMetricDetectorRegularity.lean` and the regularity end-to-end composition; included in the passing 2916-job root build |
 | construct the choice-free physical complexion covector from `F`, its Hodge partner, inverse metric, and `q`; derive the source-free physical effective channel; identify its stress wedge exactly with detector activity and prove the active set is open under continuity | closed in `PhysicalComplexionInvariant.lean` and `InvariantActiveWedgeOpenness.lean`; openness is proved, density is not claimed |
 | every pointwise accepted survivor returns physical `a²` | closed on `¬(O_false=0 ∧ O_true=0)`, with the displayed conventional local regularity and admissible-probe hypotheses; unsupported without that sharp exclusion |
 | compose conventional selector/regularity data and one choice-free physical activity premise into final invariant nonemptiness with output `a²` (`3` for Kaluza) | closed in `InvariantEMDPhysicalActiveEndToEnd.lean`; the residual callback is restricted to selected choices and supplies only residual `C²` |
@@ -147,12 +147,20 @@ On the stated non-null, real simple-spectrum branch:
     scalar equations and first Ricci prolongation; both matter branches
     satisfy the two exterior equations at the point and point/first-jet Hodge
     compatibility. The normal-frame Ricci contraction is connected to the
-    genuine product-rule coordinate Ricci derivative by
+    algebraic product-rule coordinate-Ricci first-jet formula by
     `coordinateRicciFirstJet_minkowski_zero`. This is finite formal-jet
     non-identifiability, not two local solutions or all-order integrability;
     the same construction has a compiled exact separation theorem: its
     complete first channel is `(A,eta)=(0,e₂)` for both couplings, while the
-    next-order quotient returns `B=√3` and `B=1`, hence outputs `3` and `1`;
+    fixed finite next-order channel quotient returns `B=√3` and `B=1`, hence
+    squared candidates `3` and `1`;
+    the universal version proves that the same fixed active formal metric
+    three-jet supports the displayed truncated system for every real `a`,
+    even though its matter first jet is injective in `a` and the fixed finite
+    next-order channel candidate is `a²`;
+    its common point mixed Ricci source has four pairwise-distinct real roots
+    `-1`, `1`, `(3-√65)/4`, `(3+√65)/4`, with exact splitting and explicit
+    eigenvectors compiled, so this is not a repeated-root algebraic artifact;
 14. the complete accepted set and every raw-choice output are extensional in
     the fixed-coordinate metric germ. This proves locality, not nonlinear
     coordinate covariance;
@@ -217,9 +225,9 @@ The one active objective is:
 The lower-order claim has also been sharpened without changing this execution
 gate. `ThirdOrderMatterJetAmbiguity.lean` gives a literal active collision of
 formal metric three-jets at coupling squares `3` and `1`, and
-`CoordinateRicciFirstJet.lean` proves that its first Ricci prolongation is the
-product-rule derivative of the existing coordinate Ricci formula at a normal
-point. `ActualMetricDetectorLocality.lean` separately proves complete
+`CoordinateRicciFirstJet.lean` proves that its first Ricci prolongation equals
+the algebraic product-rule coordinate-Ricci first-jet formula at a formal
+normal point. `ActualMetricDetectorLocality.lean` separately proves complete
 fixed-coordinate germ extensionality of the fourth-order accepted set and
 outputs. Neither theorem supplies nonlinear chart covariance or local PDE
 realization, so exact complete-detector benchmark routing remains unchanged.

@@ -60,6 +60,7 @@ import RainichKaluza.DifferentialCoupling
 import RainichKaluza.CouplingInvariant
 import RainichKaluza.GeometricCouplingDetector
 import RainichKaluza.ThirdOrderMatterJetAmbiguity
+import RainichKaluza.GenericActiveThirdOrderAmbiguity
 import RainichKaluza.MetricHodge
 import RainichKaluza.FourthOrderMetricDetector
 import RainichKaluza.ActualMetricDetectorLocality

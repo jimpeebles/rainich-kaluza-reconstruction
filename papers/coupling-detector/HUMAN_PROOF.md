@@ -415,7 +415,7 @@ metric-three-jet level. Work at one normal-coordinate point with
 
 ```text
 g0 = diag(-1,1,1,1),   g1 = 0,
-v = e^0,               phi2 = 0,
+v = e^0 + 2e^2,        phi2 = 0,
 H = canonicalMaxwellTwoForm(1,1),
 *H = canonicalMaxwellTwoForm(-1,1).
 ```
@@ -441,7 +441,7 @@ The normalized double-angle derivatives must include the derivative of
 from the actual first jet is
 
 ```text
-omega_a = e^2 + (a/2)e^0,
+omega_a = (a/2)e^0 + (1-a)e^2,
 (omega_a wedge Jv)_02 = 1.
 ```
 
@@ -451,8 +451,10 @@ complete Ricci-source first jet is common. An explicit symmetric metric
 second jet realizes the common point source, and an explicit fully symmetric
 metric third jet realizes its first derivative. The theorem
 `coordinateRicciFirstJet_minkowski_zero` proves that this normal-frame
-contraction is the genuine product-rule derivative of `coordinateRicci` at
-`g1=0`; it is not merely a purpose-defined symbol.
+contraction equals the algebraic product-rule coordinate-Ricci first-jet
+formula at `g1=0`; it is not merely an unrelated purpose-defined symbol. This
+does not yet identify an `fderiv` of the Ricci field of an actual smooth metric
+germ.
 
 **[Lean]** `exists_activeCommonFormalMetricThreeJet_kaluza_vs_one` specializes
 the construction to `a=sqrt(3)` and `a=1`. Their coupling squares and Maxwell
@@ -465,8 +467,23 @@ compatibility.
 `activeAmbiguity_kaluza_vs_one_firstChannel_ambiguous_nextOrder_separates`
 then packages the exact order jump for this same witness. Both couplings have
 the complete first channel `(A,eta)=(0,e₂)`; the actual-stress-derived active
-component `(0,2)` is nonzero; and the next-order quotient gives `B=√3` versus
-`B=1`, so the squared outputs are `3` versus `1`.
+component `(0,2)` is nonzero; and the fixed finite next-order channel quotient
+gives `B=√3` versus `B=1`, so the squared candidates are `3` versus `1`.
+
+**[Lean]** `activeAmbiguity_commonFormalMetricThreeJet_for_every_coupling`
+removes the specialization: the same fixed formal metric three-jet supports
+the displayed active truncated system for every real `a`.
+`activeAmbiguityMaxwellFirstJet_injective` proves that the corresponding
+matter first jets remain genuinely distinct, while the fixed finite
+next-order channel candidate is always `a²`.
+
+**[Lean]** `activeAmbiguityRicciSource_has_four_distinct_real_eigenpairs`
+proves that the common point source is on the four-distinct-real-eigenvalue
+sublocus. Its roots are `-1`, `1`, `(3-√65)/4`, `(3+√65)/4`; all pairwise
+inequalities and explicit nonzero eigenvectors are checked. The witness is
+therefore not confined to a repeated-root algebraic stratum. This does not by
+itself establish every causal, projector, probe, or neighborhood gate of the
+actual detector entrance.
 
 This is the sharp claim boundary: the repository does not prove higher
 prolongations, all-order formal integrability, or two local EMD solutions.

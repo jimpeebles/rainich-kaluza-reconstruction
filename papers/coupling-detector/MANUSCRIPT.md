@@ -17,13 +17,15 @@ where \(v=d\phi\) and \(J\) is the normalized Maxwell-stress involution.  We
 prove that these channels have an exact one-parameter shear kernel, so neither
 \(B=a\sin(2\theta)\) nor \(a^2=A^2+B^2\) is identifiable from this complete
 channel system at its third-order stage. We then exhibit a stronger active
-finite-jet collision: the Kaluza value \(a=\sqrt3\) and the non-Kaluza value
-\(a=1\) have distinct rescaled-Maxwell first jets but share one explicit
-formal normal-coordinate metric three-jet. The common jet satisfies the point
-Einstein and scalar equations and the first Ricci prolongation; each matter
-jet satisfies both exterior equations at the point and point/first-jet Hodge
+finite-jet continuum: one explicit formal normal-coordinate metric three-jet
+supports the displayed truncated equations for every real \(a\), even though
+the rescaled-Maxwell first jet is injective in \(a\). In particular the
+Kaluza value \(a=\sqrt3\) and non-Kaluza value \(a=1\) collide through the
+common third-order metric data. The common jet satisfies the point Einstein
+and scalar equations and the first Ricci prolongation; each matter jet
+satisfies both exterior equations at the point and point/first-jet Hodge
 compatibility. This is a lower bound in the displayed truncated formal-jet
-class, not a collision between local EMD solutions or a universal
+class, not a continuum of local EMD solutions or a universal
 solution-level lower bound. Constancy of \(a\) supplies one derivative later
 
 \[
@@ -307,7 +309,7 @@ than only by abstract three-form data. At a normal-coordinate point take
 
 \[
  g_0=\operatorname{diag}(-1,1,1,1),\qquad g_1=0,
- \qquad v=e^0,qquad \nabla^2\phi=0,
+ \qquad v=e^0+2e^2,\qquad \nabla^2\phi=0,
 \]
 
 and take the curvature-normalized Maxwell form to have canonical electric
@@ -332,7 +334,7 @@ Differentiating the normalized double-angle quotients, including the
 derivative of \(q^{-1}\), reconstructs
 
 \[
- \omega_a=e^2+\frac a2e^0,
+ \omega_a=\frac a2e^0+(1-a)e^2,
  \qquad (\omega_a\wedge Jv)_{02}=1.
 \]
 
@@ -352,6 +354,31 @@ satisfy the point scalar equation because the balanced quadratic invariant
 vanishes. This proves genuine non-identifiability from the common metric
 three-jet **within this finite truncated formal-EMD class**. It does not prove
 that the jets prolong to all orders or arise from two local EMD solutions.
+
+The specialization is only the Kaluza-facing corollary. The compiled theorem
+`activeAmbiguity_commonFormalMetricThreeJet_for_every_coupling` proves the
+same statement for every real \(a\) over one fixed formal metric three-jet.
+The rescaled-Maxwell first jet is injective in \(a\), the complete first
+channel is independent of \(a\), and the fixed finite next-order channel
+candidate is \(a^2\). Thus the truncated third-order blindness is a continuum, not an
+accidental pairwise degeneracy.
+
+Nor is it a repeated-root artifact. With the scalar covector tilted into both
+Maxwell principal planes, the common point mixed Ricci source is
+
+\[
+ \begin{pmatrix}
+ -3/2&0&-1&0\\ 0&-1&0&0\\ 1&0&3&0\\ 0&0&0&1
+ \end{pmatrix},
+\]
+
+with roots
+\(-1,1,(3-\sqrt{65})/4,(3+\sqrt{65})/4\). All six root inequalities and
+four explicit nonzero eigenpairs are checked in Lean. The finite-jet continuum
+therefore lies on a four-distinct-real-eigenvalue point sublocus, but this fact
+alone does not establish the detector's causal, projector, probe, or
+neighborhood entrance gates. The remaining sharpness gap is local EMD PDE
+realization and the full entrance package, not pointwise Ricci degeneracy.
 
 For constant \(a\), differentiating \(A=a\cos(2\theta)\) and eliminating
 \(d\theta\) gives
@@ -455,7 +482,9 @@ activity benchmark, but not yet a complete-detector accepted choice.
 | Complete order-three shear invariance | `canonicalFullComplexionCouplingChannels_shear_invariant` |
 | Order-three noninjectivity | `canonicalFullComplexionCouplingChannels_not_injective`; `canonicalPhysicalSeedChannels_not_injective` |
 | Active common formal metric three-jet at \(a^2=3\) and \(a^2=1\) | `exists_activeCommonFormalMetricThreeJet_kaluza_vs_one` |
-| Same complete first channel, distinct next-order outputs \(3\) and \(1\) | `activeAmbiguity_kaluza_vs_one_firstChannel_ambiguous_nextOrder_separates` |
+| Same complete first channel, distinct fixed next-order channel candidates \(3\) and \(1\) | `activeAmbiguity_kaluza_vs_one_firstChannel_ambiguous_nextOrder_separates` |
+| One fixed active formal metric three-jet for every real coupling | `activeAmbiguity_commonFormalMetricThreeJet_for_every_coupling`; `activeAmbiguityMaxwellFirstJet_injective` |
+| Four distinct real roots of the common point Ricci source | `activeAmbiguityRicciSource_has_four_distinct_real_eigenpairs` |
 | Product-rule coordinate Ricci first-jet bridge | `coordinateRicciFirstJet_minkowski_zero` |
 | Constancy equation (1) | `nextOrderSineCouplingEquation_eq_zero` |
 | Quotient (2) and uniqueness of \(B\) | `sineCouplingFromNextOrderComponent_eq`; `nextOrderSineCoupling_unique` |

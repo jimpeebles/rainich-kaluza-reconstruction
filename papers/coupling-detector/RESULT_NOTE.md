@@ -34,11 +34,13 @@ Date: 2026-08-13
 > benchmark routing, exposition/novelty validation, and the separate converse
 > remain.
 >
-> A new active formal metric-three-jet collision sharpens the lower-order
-> result. The Kaluza coupling `a=√3` and the non-Kaluza control `a=1` share
-> one explicit formal normal-coordinate metric `j3`, while their distinct
-> rescaled-Maxwell first jets satisfy the displayed point/first-jet EMD
-> equations. The genuine coordinate-Ricci first-jet bridge and complete
+> A new active formal metric-three-jet continuum sharpens the lower-order
+> result. Every real coupling shares one explicit formal normal-coordinate
+> metric `j3`, while the rescaled-Maxwell first jet is injective in `a` and
+> satisfies the displayed point/first-jet equations. In particular Kaluza
+> `a²=3` and the control `a²=1` collide through the third-order data and
+> separate one order later. The algebraic product-rule coordinate-Ricci
+> first-jet bridge and complete
 > fixed-coordinate detector-germ locality are also compiled. These are not
 > local PDE solutions, all-order integrability, or nonlinear chart covariance.
 
@@ -78,7 +80,7 @@ leaves the complete channels unchanged.  This makes the physical channel map
 noninjective and rules out the previous third-order coupling claim.
 
 That kernel now has a physically active finite-jet representative. At a
-Minkowski normal point, use `v=e^0`, zero scalar Hessian, and the balanced
+Minkowski normal point, use `v=e^0+2e^2`, zero scalar Hessian, and the balanced
 non-null curvature-normalized Maxwell/Hodge pair with amplitudes `(1,1)` and
 `(-1,1)`. Add the common closed and co-closed first-jet perturbation
 
@@ -91,7 +93,7 @@ double-angle quotients with the required `dq` normalization term, the
 physical complexion is
 
 ```text
-omega_a = e^2 + (a/2)e^0,
+omega_a = (a/2)e^0 + (1-a)e^2,
 (omega_a wedge Jv)_02 = 1.
 ```
 
@@ -99,8 +101,8 @@ Thus every branch is active. The duality tangent has zero Maxwell-stress
 first variation, so the point Ricci source and its first jet are common. An
 explicit symmetric `g2` and fully symmetric `g3` realize those common data.
 The theorem `coordinateRicciFirstJet_minkowski_zero` identifies the displayed
-normal-frame first prolongation with the genuine product-rule derivative of
-coordinate Ricci. Consequently `a=√3` and `a=1` have the same formal metric
+normal-frame first prolongation with the algebraic product-rule
+coordinate-Ricci first-jet expression. Consequently `a=√3` and `a=1` have the same formal metric
 three-jet but coupling squares `3` and `1`. Both satisfy the point Einstein
 and scalar equations, first Einstein/Ricci prolongation, both exterior
 equations at the point, and point/first-jet Hodge compatibility.
@@ -307,7 +309,15 @@ Separately, `exists_activeCommonFormalMetricThreeJet_kaluza_vs_one` proves the
 active formal `a²=3` versus `a²=1` collision, and
 `activeAmbiguity_kaluza_vs_one_firstChannel_ambiguous_nextOrder_separates`
 proves that its shared complete first channel `(A,eta)=(0,e₂)` separates one
-order later into `B=√3` versus `B=1` and outputs `3` versus `1`. Finally,
+order later into `B=√3` versus `B=1` and fixed channel candidates `3` versus
+`1`. Moreover,
+`activeAmbiguity_commonFormalMetricThreeJet_for_every_coupling` proves that
+the same fixed active formal metric three-jet supports the displayed
+truncated equations for every real `a`; the matter first jet is injective in
+`a` and the fixed finite next-order channel candidate is always `a²`.
+`activeAmbiguityRicciSource_has_four_distinct_real_eigenpairs` proves the
+common point source has four distinct real roots, so the continuum is not a
+repeated-spectrum artifact. Finally,
 `actualMetricFourthOrderDetector_coordinateGerm_extensionality` proves
 fixed-coordinate detector locality. Neither statement upgrades the necessity
 theorem to a local converse or a chart-covariant classification.

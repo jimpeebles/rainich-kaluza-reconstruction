@@ -119,13 +119,29 @@ Finally, a convention-aligned physical Maxwell/Hodge calculation agrees with
 the detector residual and gives the choice-free active component
 `(omega wedge S^T dphi)_(1,2) = 1486879232 sqrt(3)/30795876033 != 0`.
 
-Thus every pointwise gate in `IsActualMetricUpstreamEntranceAt4`, together
-with the physical active-locus premise used by the necessity theorem, is now
-certified at the replacement point. The remaining literal seam is
-`IsCurvatureSeedFourthOrderCandidateAt`: it differentiates the selected
-coframe and then the quotient-defined cosine field, requiring the selected
-frame/channel second jet. The artifact does not claim an accepted complete
-choice or a Lean instance theorem until that final channel is evaluated.
+The last finite calculation is performed in an explicit 128-dimensional
+quadratic tower. It certifies the literal selected scalar and Maxwell-residual
+one-jets, the selected frame/coframe one-jet, all 128 components of the two
+complete first-order seed channels, source component `0`, active wedge
+component `(0,3)`, and the literal cosine quotient
+`A=5 sqrt(53859)/17953`. Independently, exact differentiation of the physical
+complexion gives
+
+`d(sqrt(3) C) = (0, -3999888 sqrt(53859)/322310209,
+5869152 sqrt(53859)/322310209, 0)`.
+
+With this physical `dA`, the sine quotient is
+`B=18 sqrt(2980198)/17953`, all four next-order residuals vanish, and
+`A^2+B^2=3` exactly.
+
+There are two evidence layers. The JSON artifact directly certifies the exact
+point/tower statements above. Identifying physical `dA` with the derivative
+of the detector's literal quotient *field* is theorem-mediated: the exact
+helical uplift supplies the local constant-coupling EMD germ, the strict
+finite gates persist on a neighborhood, and the compiled physical-germ bridge
+then identifies the quotient field and derivative. The artifact does not
+independently expand the selected frame/channel second jet, and it is not a
+Lean instance theorem or a general complete-detector theorem.
 
 ## V-T2b generic near miss
 

@@ -10,6 +10,9 @@ This is the active paper track.
   analytic EMD solution germs.
 - [`../../docs/CLAIM_LEDGER.md`](../../docs/CLAIM_LEDGER.md) is authoritative
   for proved, externally justified, validated, and open claims.
+- [`../../docs/COMPANION_RESULTS.md`](../../docs/COMPANION_RESULTS.md) records
+  substantial formal side results without expanding this paper's claim
+  surface.
 
 `PROSPECTUS.md` and `RESULT_NOTE.md` are archived redirects.  They are not
 parallel paper drafts.

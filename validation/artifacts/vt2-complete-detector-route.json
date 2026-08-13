@@ -129,6 +129,47 @@
         "0"
       ],
       "value": "1486879232*sqrt(3)/30795876033"
+    },
+    {
+      "name": "replacement-point-literal-selected-scalar-and-residual-one-jets-match-physical",
+      "passed": true,
+      "residual_sha256": "9937a9eb6b34cd5953bb3d90a0353df5266b6568f4040558fb75e05b051f598c",
+      "tower_dimension": 128
+    },
+    {
+      "complete_channel_residual_count": 0,
+      "name": "replacement-point-selected-frame-one-jet-and-complete-channel-normal-form-pass",
+      "passed": true,
+      "residual_sha256": "9937a9eb6b34cd5953bb3d90a0353df5266b6568f4040558fb75e05b051f598c"
+    },
+    {
+      "cosine_value": "5*sqrt(53859)/17953",
+      "name": "replacement-point-selected-literal-cosine-quotient-and-generic-component-pass",
+      "passed": true,
+      "residual_sha256": "9937a9eb6b34cd5953bb3d90a0353df5266b6568f4040558fb75e05b051f598c",
+      "source_component": 0,
+      "wedge_component": [
+        0,
+        3
+      ]
+    },
+    {
+      "name": "replacement-point-physical-dA-is-exact-derivative-of-sqrt-three-cosine",
+      "passed": true,
+      "physical_dA": [
+        "0",
+        "-3999888*sqrt(53859)/322310209",
+        "5869152*sqrt(53859)/322310209",
+        "0"
+      ],
+      "residual_sha256": "6e16419de225c20565b8c197aa3dfd9f1bd3b44e8356c091c48abd279d6c4bf0"
+    },
+    {
+      "literal_quotient_derivative_bridge": "not-certified",
+      "name": "replacement-point-physical-dA-fourth-order-residuals-and-output-three-pass",
+      "passed": true,
+      "residual_sha256": "9937a9eb6b34cd5953bb3d90a0353df5266b6568f4040558fb75e05b051f598c",
+      "sine_value": "18*sqrt(2980198)/17953"
     }
   ],
   "evidence_class": "exact-symbolic-routing-certificate-not-lean-proof",
@@ -216,8 +257,16 @@
         "status": "passed-exact-component-1-2"
       },
       {
-        "gate": "complete fourth-order channel and output",
-        "status": "not-evaluated-expensive-second-jet-of-selected-frame-and-channel-quotient-seam"
+        "gate": "selected literal frame one-jet and complete first-order channels",
+        "status": "passed-exact-128-dimensional-quadratic-tower"
+      },
+      {
+        "gate": "literal quotient derivative equals physical dA",
+        "status": "theorem-mediated-by-physical-germ-bridge-not-independently-expanded-as-a-second-jet"
+      },
+      {
+        "gate": "complete fourth-order residuals and output",
+        "status": "passed-exact-with-physical-dA-output-three"
       }
     ]
   },

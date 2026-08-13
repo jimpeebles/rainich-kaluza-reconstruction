@@ -27,12 +27,18 @@ differentiated exterior channels determine
 \]
 
 where \(v=d\phi\) and \(J\) is the normalized Maxwell-stress involution.  The
-channels have the exact shear kernel
+channels have fibers that, when the seed amplitude and scalar covector are
+nonzero, are exactly the free affine shear orbits
 
 \[
   B\mapsto B+\tau,\qquad
   d\theta\mapsto d\theta-\frac{\tau}{2}Jv.
 \]
+
+Equality of the complete channels is equivalent to equality of \(A\) and
+membership of \((d\theta,B)\) in one unique such orbit.  Thus the third-order
+ambiguity is precisely \(\mathbb R\), rather than merely an exhibited
+one-parameter family.
 
 Constancy of \(a\) supplies one derivative later
 
@@ -41,7 +47,10 @@ Constancy of \(a\) supplies one derivative later
 \]
 
 On the active locus \(\eta\wedge Jv\ne0\), this gives a component-independent
-quotient for \(B\), and hence \(a^2=A^2+B^2\).  We also implement a finite
+quotient for \(B\), and hence \(a^2=A^2+B^2\).  On the explicit active formal
+family, the fixed fourth-order outputs for \(a\) and \(b\) agree if and only if
+\(a=\pm b\): the order-three \(\mathbb R\)-fiber collapses at order four to the
+orientation-free \(\mathbb Z_2\).  We also implement a finite
 coordinate detector using metric derivatives through order four.  Under its
 explicit active-regular Ricci--exterior EMD hypotheses, its accepted set is
 nonempty and contains the physical value \(a^2\); with a certificate for every
@@ -75,13 +84,14 @@ only after differentiation.
 
 The paper has four logically distinct results.
 
-1. The complete first curvature-seed channel system has an exact
-   one-dimensional shear kernel.
+1. The complete first curvature-seed channel fibers are exactly the unique
+   affine real-shear orbits under the stated nonvanishing hypotheses.
 2. Conditional on the explicit EMD involutivity lemma, the kernel is realized
    by active, simple-spectrum analytic EMD solution germs with one common
    metric three-jet for every real coupling.
-3. One additional derivative breaks the kernel and recovers \(a^2\) in the
-   physical channel.
+3. One additional derivative breaks the continuous kernel and recovers
+   \(a^2\) in the physical channel; on the explicit active formal family its
+   equality fibers are exactly \(a=\pm b\).
 4. A finite metric-only coordinate detector realizes the recovery as a
    necessity/correctness theorem under explicit entrance and survivor
    certificates.
@@ -172,9 +182,9 @@ Rotating the two EMD exterior equations back to the curvature seed gives
 \end{aligned}                                                \tag{3.2}
 \]
 
-For nonzero seed and \(v\ne0\), the complete pair of three-forms in (3.2)
-determines \((\eta,A)\) uniquely.  It does not determine \((d\theta,B)\).
-For every \(\tau\in\mathbb R\),
+For nonzero canonical seed amplitude and \(v\ne0\), the complete pair of
+three-forms in (3.2) determines \((\eta,A)\) uniquely.  It does not determine
+\((d\theta,B)\).  For every \(\tau\in\mathbb R\),
 
 \[
   B\longmapsto B+\tau,
@@ -182,22 +192,31 @@ For every \(\tau\in\mathbb R\),
 \]
 
 leaves both complete three-forms unchanged.  This is not a bad-probe effect:
-the entire channel tensors coincide.
+the entire channel tensors coincide.  Conversely, any two inputs producing
+the same complete tensors have the same \(A\), and their
+\((d\theta,B)\) pairs are related by exactly one transformation (3.3).  The
+parameter is unique because it is already the difference of the \(B\)
+components.
 
 ### Theorem I (complete-channel obstruction)
 
 *Claim ledger: C1.*
 
-The map from the physical variables \((d\theta,B)\) to the complete first
-curvature-seed channel pair has the shear kernel (3.3) and is never injective.
-Consequently that channel system does not identify \(a^2=A^2+B^2\).
+When the canonical seed amplitude and \(v\) are nonzero, two complete
+first-channel inputs agree if and only if their \(A\) components agree and
+their \((d\theta,B)\) pairs lie in one affine shear orbit (3.3).  The shear
+action is free, so every fiber is one uniquely parameterized copy of
+\(\mathbb R\).  Consequently that channel system does not identify
+\(a^2=A^2+B^2\).
 
 The theorem is machine checked by
-`canonicalFullComplexionCouplingChannels_shear_invariant` and the associated
-noninjectivity theorems.  By itself it is a statement about the complete
-first differentiated seed channels.  The next section upgrades the lower
-bound to actual analytic solutions and therefore excludes every rule based on
-the common metric three-jet, not merely rules built from (3.2).
+`canonicalFullComplexionCouplingChannels_eq_iff_shearOrbit` and
+`canonicalFirstOrderChannelShear_parameter_unique`; the earlier invariance and
+noninjectivity theorems are immediate weaker faces of the classification.  By
+itself this is a statement about the complete first differentiated seed
+channels.  The next section upgrades the lower bound to actual analytic
+solutions and therefore excludes every rule based on the common metric
+three-jet, not merely rules built from (3.2).
 
 ## 4. Active finite collision and the analytic solution-germ upgrade
 
@@ -368,6 +387,31 @@ the displayed active solution class.  It is not yet a claim that the complete
 finite accepted-set construction is a diffeomorphism-invariant function of an
 abstract four-jet.
 
+There is also a sharp finite-jet statement on the explicit active ambiguity
+family of Section 4.  For any real \(a,b\), its fixed fourth-order
+coupling-square candidates agree if and only if
+
+\[
+  a=b\quad\text{or}\quad a=-b.                            \tag{5.4}
+\]
+
+This is machine checked by
+`activeAmbiguityFourthOrderCouplingSqCandidates_eq_iff`.  Together with
+Theorem I, it gives the exact transition
+
+\[
+  \mathbb R\text{-shear fiber at order three}
+  \quad\longrightarrow\quad
+  \mathbb Z_2\text{ sign fiber at order four}.             \tag{5.5}
+\]
+
+The surviving sign is fundamental for a squared-coupling detector: reversing
+the scalar orientation changes the oriented coupling presentation while
+leaving \(a^2\) unchanged.  Equation (5.4) is a Lean theorem for the explicit
+formal family.  The broader scalar-orientation interpretation is a
+mathematical observation used throughout the paper, not a newly packaged
+all-order Lean symmetry theorem.
+
 ## 6. Finite metric-only detector
 
 For a coordinate metric \(g\) and point \(z\), let
@@ -453,12 +497,28 @@ from the Lean theorem surface.
 - A helical Schwarzschild-string reduction has a simple Ricci spectrum and
   returns \(3\) in the physical channel.  The original sample point fails the
   finite detector's causal scalar entrance.
-- At the replacement point \(r=3/2,\theta=\pi/4\), exact routing passes the
-  complete pointwise upstream predicate and the choice-free active wedge.  The
-  selected literal fourth-order frame/channel derivative is not yet evaluated,
-  so this is not claimed as a complete accepted-detector benchmark.
+- At the replacement point \(r=3/2,\theta=\pi/4\), the
+  `vt2-complete-detector-route` artifact passes 21 exact checks.  Its
+  128-dimensional quadratic-tower calculation verifies the literal selected
+  scalar and residual one-jets, selected frame/coframe one-jet identities, all
+  128 components of the two complete first-order channels, the exact cosine
+  quotient \(A\), physical \(dA=d(\sqrt3\,C)\), the sine quotient \(B\), all
+  four next-order residual components, and \(A^2+B^2=3\).
 - A paired near miss preserves the point metric, first jet, Lorentz signature,
   and simple spectrum while failing a named algebraic obstruction.
+
+The final literal-detector derivative identification is theorem mediated.
+The compiled bridge
+`curvatureSeedCosineField_eventuallyEq_and_coordinateDerivative_eq_of_physicalGerm`
+and
+`curvatureSeedCosineCoordinateDerivative_eq_doubleAngleCosine_of_physicalGerm`,
+together with
+`isActualMetricPhysicalConstantCouplingChannelAt_of_patch_physicalHodgeFields`
+and the compiled upstream patch-selection results, is composed with the exact
+helical Kaluza EMD patch/open gates.  The benchmark-specific instantiation is
+a mathematical composition recorded as exact evidence; it is not a
+brute-force CAS expansion of the literal quotient's second jet and is not
+itself a Lean theorem instance.
 
 No benchmark is a newly discovered exact solution.
 
@@ -466,7 +526,7 @@ No benchmark is a newly discovered exact solution.
 
 | Statement | Anchor or source | Evidence |
 |---|---|---|
-| Complete shear invariance and noninjectivity | `canonicalFullComplexionCouplingChannels_shear_invariant`; `canonicalFullComplexionCouplingChannels_not_injective` | Lean |
+| Exact complete-channel fiber classification | `canonicalFullComplexionCouplingChannels_eq_iff_shearOrbit`; `canonicalFirstOrderChannelShear_parameter_unique` | Lean |
 | Active common formal metric three-jet for every \(a\) | `activeAmbiguity_commonFormalMetricThreeJet_for_every_coupling` | Lean |
 | Matter-jet injectivity | `activeAmbiguityMaxwellFirstJet_injective` | Lean |
 | Four distinct real Ricci roots | `activeAmbiguityRicciSource_has_four_distinct_real_eigenpairs` | Lean |
@@ -476,11 +536,13 @@ No benchmark is a newly discovered exact solution.
 | Analytic EMD involutivity/realization extension | Kruglikov Theorem 3 plus the scalar-wave symbol summand and Cartan--Kähler | human proof using external theorem |
 | Next-order equation, quotient, uniqueness | `nextOrderSineCouplingEquation_eq_zero`; `sineCouplingFromNextOrderComponent_eq`; `nextOrderSineCoupling_unique` | Lean |
 | Recovery of \(a^2\) | `couplingSqFromNextOrderComponent_eq`; `fourthOrderCouplingSqCandidate_eq_physical` | Lean |
+| Active-family fourth-order equality iff \(a=\pm b\) | `activeAmbiguityFourthOrderCouplingSqCandidates_eq_iff` | Lean |
 | Finite accepted set and value | `acceptedActualMetricFourthOrderDetectorChoicesAt`; `actualMetricFourthOrderCouplingSqCandidateAt` | Lean definitions |
 | End-to-end physical survivor | `exists_acceptedActualMetricFourthOrderChoice_and_eq_physical_of_invariantEMD_endToEnd_physicalActive` | Lean |
 | Arbitrary survivor on (6.1) | `actualMetricFourthOrderCouplingSqCandidate_eq_physical_of_invariantEMD_pointwiseAccepted` | Lean |
 | Singleton output image | `acceptedActualMetricFourthOrderCouplingSqValuesAt_eq_singleton_physical` | Lean |
 | Fixed-coordinate germ locality | `actualMetricFourthOrderDetector_coordinateGerm_extensionality` | Lean |
+| Helical replacement route through output \(3\) | `vt2-complete-detector-route` (21 exact checks) | exact symbolic plus theorem-mediated bridge; not a Lean instance theorem |
 
 The Lean axiom audit reports only the standard logical principles used by the
 development; it does not certify the external Cartan--Kähler argument or
@@ -507,18 +569,17 @@ it should not be cited as though Kruglikov explicitly stated the EMD theorem.
 
 Conditional on the stated involutivity lemma, we are unaware of a prior result
 combining an active simple-spectrum solution-level common metric-three-jet
-continuum across EMD couplings, the
-complete-channel shear mechanism behind it, and an explicit one-order-higher
-recovery of \(a^2\).  This is a provisional novelty statement, not a priority
-claim.  Specialist review in formal PDE, Rainich theory, and EMD geometry is
-required before submission.
+continuum across EMD couplings, the exact affine-shear classification of its
+complete-channel fibers, and an explicit one-order-higher recovery whose
+active-family equality fiber is exactly \(a=\pm b\).  This is a provisional
+novelty statement, not a priority claim.  Specialist review in formal PDE,
+Rainich theory, and EMD geometry is required before submission.
 
 ## 10. Limitations and next theorem
 
 The present work does not establish:
 
 - full nonlinear-coordinate covariance of the complete finite accepted set;
-- a positive exact benchmark through its last selected fourth-order gate;
 - detector confluence where both scalar branches close;
 - the inactive, null, zero-trace, repeated-root, or collision branches;
 - a converse turning every accepted metric branch into an EMD solution;

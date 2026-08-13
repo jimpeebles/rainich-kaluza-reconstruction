@@ -17,6 +17,8 @@ history.
   specialist-audit proof note for the analytic solution-germ upgrade.
 - [`LITERATURE_MAP.md`](LITERATURE_MAP.md) — prior work and provisional novelty
   boundary.
+- [`COMPANION_RESULTS.md`](COMPANION_RESULTS.md) — ranked compiled results and
+  follow-up directions kept outside the active paper's headline claim.
 
 The detailed derivations and theorem-to-Lean map are in the
 [`technical supplement`](../papers/coupling-detector/TECHNICAL_SUPPLEMENT.md).

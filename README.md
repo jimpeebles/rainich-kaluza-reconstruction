@@ -25,13 +25,19 @@ differentiated seed channels determine
   \eta=d\theta+\frac{a\sin(2\theta)}2Jv,
 \]
 
-but have the exact shear kernel
+have fibers that are exactly the free affine shear orbits
 
 \[
   B\mapsto B+\tau,qquad
   d\theta\mapsto d\theta-\frac\tau2Jv,
   \qquad B=a\sin(2\theta).
 \]
+
+More precisely, when the canonical seed amplitude and scalar covector are
+nonzero, two complete first-channel inputs agree if and only if their \(A\)
+components agree and their \((d\theta,B)\) data differ by a unique real shear.
+Thus the order-three ambiguity is an exact \(\mathbb R\)-orbit, not merely an
+exhibited counterexample.
 
 The obstruction is realized by a complete compatible EMD finite jet for every
 real coupling \(a\).  The matter first jet varies injectively with \(a\), the
@@ -58,7 +64,11 @@ On \(\eta\wedge Jv\ne0\),
 
 Together with the audited analytic-realization lemma, this is the sharp
 third-versus-fourth-order separation in the selected physical curvature
-channel.  The repository also constructs a finite
+channel.  On the explicit active formal family, the fixed fourth-order
+outputs for couplings \(a\) and \(b\) agree exactly when \(a=\pm b\): the
+continuous \(\mathbb R\)-ambiguity at order three collapses to the unavoidable
+orientation-free \(\mathbb Z_2\) ambiguity at order four.  The repository also
+constructs a finite
 coordinate detector whose only input is the metric through order four.  A
 packaged physical Ricci--exterior EMD witness on the explicit active regular
 locus proves that its accepted set contains \(a^2\).  Every accepted survivor
@@ -70,7 +80,9 @@ necessary selector is \(3\); sufficiency for a Kaluza uplift is not claimed.
 
 The following pieces are machine checked in Lean:
 
-- the complete-channel shear kernel and noninjectivity;
+- the exact classification of complete first-channel fibers as unique affine
+  real-shear orbits, and the \(\mathbb R\)-to-\(\mathbb Z_2\) separation on the
+  active formal family;
 - the active common formal metric three-jet for every coupling;
 - injectivity of the matter first jet, exact activity, simple real Ricci
   spectrum, and the common Ricci first prolongation from a fully symmetric
@@ -90,10 +102,19 @@ Einstein--Maxwell potential block with the determined scalar-wave block and
 checks the EMD Noether/Bianchi compatibility.  That formal-PDE step is a human
 proof pending specialist audit, not a Lean theorem.
 
+The exact helical replacement benchmark now closes its final fourth-order
+route with 21 checks.  Its 128-dimensional quadratic-tower calculation
+verifies the selected scalar, residual, and frame one-jets, every component of
+both complete channels, \(A\), the physical derivative
+\(dA=d(\sqrt3\,C)\), \(B\), the next-order residual, and output \(3\).  The
+identification of the literal quotient derivative with physical \(dA\) uses
+the compiled physical-germ bridge together with the exact helical EMD
+patch/open gates; it is a theorem-mediated benchmark composition, not a
+brute-force second-jet CAS expansion and not a compiled Lean instance theorem.
+
 The repository does **not** yet prove full nonlinear-coordinate covariance of
-the finite accepted set, a metric-only converse, complete-detector routing of
-the positive exact benchmark, or the degenerate branches.  It contains no new
-closed-form exact spacetime.
+the finite accepted set, a metric-only converse, or the degenerate branches.
+It contains no new closed-form exact spacetime.
 
 ## Start here
 
@@ -110,6 +131,8 @@ closed-form exact spacetime.
   provenance.
 - [Literature map](docs/LITERATURE_MAP.md) -- prior work and provisional
   novelty boundary.
+- [Companion results](docs/COMPANION_RESULTS.md) -- ranked formal results that
+  support future papers without enlarging this paper's headline claim.
 - [Validation guide](validation/README.md) -- exact symbolic evidence, kept
   separate from the Lean theorem surface.
 

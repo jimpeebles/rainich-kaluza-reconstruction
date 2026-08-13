@@ -30,6 +30,9 @@ from rk_validation.helical_detector import (
     replacement_scalar_closure_certificate,
     replacement_upstream_point_certificate,
 )
+from rk_validation.helical_fourth_order import (
+    replacement_fourth_order_tower_certificate,
+)
 
 
 SCHEMA_VERSION = 1
@@ -245,6 +248,14 @@ def build_artifact() -> dict[str, object]:
         replacement["R"],
         replacement["q_sq"],
     )
+    fourth_order = replacement_fourth_order_tower_certificate(
+        coordinates,
+        metric,
+        scalar,
+        potential,
+        closure,
+        physical_active,
+    )
 
     checks = [
         {
@@ -385,6 +396,64 @@ def build_artifact() -> dict[str, object]:
             ],
             "residual_sha256": _digest(physical_active["active_value"]),
         },
+        {
+            "name": "replacement-point-literal-selected-scalar-and-residual-one-jets-match-physical",
+            "passed": bool(
+                fourth_order["literal_selected_scalar_one_jet_matches_physical"]
+            )
+            and bool(
+                fourth_order["literal_residual_one_jet_matches_physical"]
+            ),
+            "tower_dimension": fourth_order["tower_dimension"],
+            "residual_sha256": _digest(sp.S.Zero),
+        },
+        {
+            "name": "replacement-point-selected-frame-one-jet-and-complete-channel-normal-form-pass",
+            "passed": bool(fourth_order["selected_frame_orthonormal"])
+            and bool(fourth_order["selected_coframe_inverse"])
+            and fourth_order["complete_channel_residual_count"] == 0,
+            "complete_channel_residual_count": fourth_order[
+                "complete_channel_residual_count"
+            ],
+            "residual_sha256": _digest(
+                sp.Integer(fourth_order["complete_channel_residual_count"])
+            ),
+        },
+        {
+            "name": "replacement-point-selected-literal-cosine-quotient-and-generic-component-pass",
+            "passed": bool(fourth_order["source_nonzero"])
+            and bool(fourth_order["active_wedge_nonzero"])
+            and bool(fourth_order["literal_cosine_quotient_exact"]),
+            "source_component": fourth_order["source_component"],
+            "wedge_component": list(fourth_order["wedge_component"]),
+            "cosine_value": fourth_order["cosine_value"],
+            "residual_sha256": _digest(sp.S.Zero),
+        },
+        {
+            "name": "replacement-point-physical-dA-is-exact-derivative-of-sqrt-three-cosine",
+            "passed": bool(
+                fourth_order[
+                    "physical_dA_is_exact_derivative_of_sqrt_three_cosine"
+                ]
+            ),
+            "physical_dA": fourth_order["physical_dA_value"],
+            "residual_sha256": _digest(
+                *physical_active[
+                    "physical_cosine_coupling_derivative_at_point"
+                ]
+            ),
+        },
+        {
+            "name": "replacement-point-physical-dA-fourth-order-residuals-and-output-three-pass",
+            "passed": bool(fourth_order["physical_dA_sine_quotient_exact"])
+            and bool(fourth_order["physical_dA_next_order_residuals_exact"])
+            and bool(fourth_order["physical_dA_output_three_exact"]),
+            "sine_value": fourth_order["sine_value"],
+            "literal_quotient_derivative_bridge": fourth_order[
+                "literal_quotient_derivative_equals_physical_dA"
+            ],
+            "residual_sha256": _digest(sp.S.Zero),
+        },
     ]
     input_spec = {
         "source_benchmark": "vt2-generic-helical-string",
@@ -416,8 +485,16 @@ def build_artifact() -> dict[str, object]:
             {"gate": "selected oriented coframe and literal metric-Hodge equality", "status": "passed-exact"},
             {"gate": "choice-free physical active wedge", "status": "passed-exact-component-1-2"},
             {
-                "gate": "complete fourth-order channel and output",
-                "status": "not-evaluated-expensive-second-jet-of-selected-frame-and-channel-quotient-seam",
+                "gate": "selected literal frame one-jet and complete first-order channels",
+                "status": "passed-exact-128-dimensional-quadratic-tower",
+            },
+            {
+                "gate": "literal quotient derivative equals physical dA",
+                "status": "theorem-mediated-by-physical-germ-bridge-not-independently-expanded-as-a-second-jet",
+            },
+            {
+                "gate": "complete fourth-order residuals and output",
+                "status": "passed-exact-with-physical-dA-output-three",
             },
         ],
     }

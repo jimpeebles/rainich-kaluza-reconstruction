@@ -27,7 +27,7 @@ supplies the matching recovery mechanism.
 
 ## 2. Canonical theorem hierarchy
 
-### T1. Exact complete-channel shear kernel
+### T1. Exact complete-channel fiber theorem
 
 The first differentiated seed channels determine
 
@@ -36,15 +36,18 @@ The first differentiated seed channels determine
   \eta=d\theta+\frac B2Jv,\qquad B=a\sin(2\theta),
 \]
 
-but are invariant under
+have fibers given by
 
 \[
   B\mapsto B+\tau,\qquad
   d\theta\mapsto d\theta-\frac\tau2Jv.
 \]
 
-Status: proved in Lean.  This excludes identification by those complete
-third-order channels, but alone would not exclude every metric-three-jet rule.
+When the seed amplitude and scalar covector are nonzero, equality of the full
+channel pair is equivalent to equality of \(A\) plus membership in one unique
+affine real-shear orbit of \((d\theta,B)\).  Status: proved in Lean.  Thus the
+order-three ambiguity is exactly \(\mathbb R\), but this theorem alone would
+not exclude every metric-three-jet rule.
 
 ### T2. Active analytic solution-germ collision
 
@@ -90,8 +93,14 @@ On \(\eta\wedge Jv\ne0\), every nonzero component yields the same
 
 Status: proved in Lean in the selected physical curvature channel.  Combined
 with T2 after its involutivity lemma is audited, this is the sharp
-third-versus-fourth-order separation.  It is not a
-standalone proof of covariance for the complete finite accepted set.
+third-versus-fourth-order separation.  A second compiled theorem shows that,
+on the explicit active formal family, two fixed fourth-order outputs agree iff
+\(a=\pm b\).  In that precise family the \(\mathbb R\)-fiber at order three is
+reduced to the orientation-free \(\mathbb Z_2\) at order four.  The persistent
+coupling sign reflects the scalar-orientation symmetry used in the paper; this
+sentence is a mathematical interpretation, not a newly packaged all-order
+Lean theorem.  The recovery result is not a standalone proof of covariance
+for the complete finite accepted set.
 
 ### T4. Finite coordinate detector
 
@@ -124,10 +133,10 @@ output \(3\) is not by itself a metric-only converse.
 - **Human proof plus external theorem:** involutivity of analytic EMD in
   potentials and realization of the compatible collision jets.
 - **Exact symbolic evidence:** convention tests and physical benchmarks in
-  `validation/`; these are not Lean theorems.
-- **Open:** complete positive detector routing for the generic exact benchmark,
-  full detector chart covariance, metric-only converse, density of the active
-  locus, degenerate branches, and global reconstruction.
+  `validation/`, including the 21-check helical fourth-order route; these are
+  not Lean theorems.
+- **Open:** full detector chart covariance, metric-only converse, density of
+  the active locus, degenerate branches, and global reconstruction.
 
 ## 4. Publication workstream
 
@@ -147,12 +156,17 @@ perturbation statement, Noether identity, admissibility, and exact
 Cartan--Kähler conclusion.  Obtain at least one independent specialist review
 before submission.
 
-### P2. Finish the positive detector benchmark
+### P2. Positive detector benchmark -- complete
 
-At the committed generic helical-string replacement point, evaluate the final
-selected fourth-order derivative and exhibit one complete accepted detector
-choice with exact output \(3\).  Keep benchmark statements component-level and
-artifact-backed until this is done.
+At the generic helical-string replacement point, 21 exact checks now verify
+the literal selected scalar/residual/frame one-jets, all 128 complete-channel
+components, \(A\), physical \(dA=d(\sqrt3 C)\), \(B\), the complete next-order
+residual, and output \(3\).  The final equality between the literal quotient
+derivative and physical \(dA\) is a theorem-mediated composition of the
+compiled physical-germ bridge and the exact helical Kaluza EMD patch/open
+gates.  It is not an independently expanded second-jet CAS identity or a
+benchmark-specific Lean theorem instance.  Keep this result artifact-backed
+and in the exact-symbolic evidence class.
 
 ### P3. Submission hardening
 

@@ -4,7 +4,7 @@ Date: 2026-08-13
 
 Status: technical companion to the canonical manuscript
 
-> **Current boundary.**  The finite shear obstruction, common active metric
+> **Current boundary.**  The exact affine-shear fiber classification, common active metric
 > three-jet, simple Ricci spectrum, the symmetric Ricci first prolongation, explicit polynomial
 > metric germ, potential two-jet, fourth-order recovery, and finite detector
 > necessity/certified correctness are machine checked.  The promotion of the
@@ -13,8 +13,11 @@ Status: technical companion to the canonical manuscript
 > Kruglikov's gauge-degenerate Einstein--Maxwell Theorem 3 by the determined
 > scalar-wave block of Lemma 4 and use the EMD Noether/Bianchi identity.  This
 > is not a direct invocation of his Theorem 4 and is not formalized in Lean.
-> The complete detector is fixed-coordinate; its full nonlinear chart
-> covariance, complete positive-benchmark routing, and the converse remain
+> The helical replacement benchmark closes its selected fourth-order route in
+> 21 exact checks, with its final derivative bridge supplied by compiled
+> physical-germ theorems rather than a brute-force second-jet CAS expansion or
+> a benchmark-specific Lean theorem instance.  The complete detector remains
+> fixed-coordinate; its full nonlinear chart covariance and the converse are
 > open.
 
 ## Status notation
@@ -34,9 +37,12 @@ Status: technical companion to the canonical manuscript
 The central conclusion is a sharp order separation:
 the physical coupling square is not identifiable from the curvature-normalized
 Maxwell channels at metric order three.  This failure is exact, not a defect
-of the selected probes.  There is a one-parameter shear kernel.  Constancy of
-the physical coupling breaks that kernel at metric order four on the active regular
-branch, yielding an explicit, choice-independent formula for `a²`. The
+of the selected probes.  Under the nonvanishing hypotheses, every complete
+channel fiber is exactly one free affine real-shear orbit.  Constancy of the
+physical coupling breaks that \(\mathbb R\)-fiber at metric order four on the
+active regular branch, yielding an explicit, choice-independent formula for
+`a²`; on the explicit active formal family, equality survives exactly for
+`a=±b`. The
 channel obstruction is realized by active, simple-spectrum analytic EMD
 solution germs with a common metric three-jet.  The finite data are Lean
 checked; the solution-germ upgrade has the distinct human-proof status above.
@@ -370,6 +376,19 @@ the symmetry for every `E,v,omega,A,B,tau`.
 `canonicalFullComplexionCouplingChannels_not_injective` proves that the map
 from `(omega,B)` to the full first-order channel pair is never injective.
 
+The converse is now exact as well.  If `E != 0` and `v != 0`, two complete
+first-channel inputs have identical channel tensors if and only if their
+cosine components agree and their `(omega,B)` pairs differ by a real affine
+shear (6.1).  Its parameter is unique, because the action is free and the
+parameter is already visible in the second component.
+
+**[Lean]**
+`canonicalFullComplexionCouplingChannels_eq_iff_shearOrbit` proves the iff
+classification and `canonicalFirstOrderChannelShear_parameter_unique` proves
+freeness.  Thus every complete-channel fiber on this branch is exactly one
+copy of the additive group of reals; the earlier invariance and
+noninjectivity statements are strict corollaries of this stronger theorem.
+
 This result falsifies the old third-order detector claim.  It is stronger
 than failure of a particular probe determinant: no choice or number of
 linear evaluations of these channels can recover `B`, because the complete
@@ -570,6 +589,22 @@ identity `A²+B²=a²`.  `couplingSqFromNextOrderComponent_eq` proves that the
 explicit quotient (7.5), inserted into (7.6), returns the physical `a²` on
 every genuine constant-coupling channel satisfying the activity condition.
 
+On the explicit active formal family, this threshold is sharp at the level of
+equality fibers too:
+
+```text
+fourthOrderOutput(a) = fourthOrderOutput(b)
+  iff a = b or a = -b.                                 (7.9)
+```
+
+**[Lean]** `activeAmbiguityFourthOrderCouplingSqCandidates_eq_iff` proves
+(7.9).  In combination with the exact Section-6 fiber theorem, the ambiguity
+therefore changes from one affine real-shear orbit at order three to precisely
+the sign pair at order four.  The sign is the expected scalar-orientation
+freedom of a squared-coupling observable.  That geometric interpretation is a
+paper-level observation; (7.9), not a newly packaged all-order symmetry
+theorem, is the new compiled statement.
+
 This is a finite coordinate construction using metric derivatives through
 order four: `A` is constructed at order three and `dA` at order four. Full
 nonlinear-coordinate covariance of the accepted-set construction is not yet
@@ -637,14 +672,17 @@ and suppose a physical Ricci-residual-normalized Maxwell form is related to the 
 by a local unit duality rotation.  Then:
 
 1. the complete first seed-derivative pair uniquely determines `(eta,A)`;
-2. the map from the physical variables `(omega,B)` to that complete pair has
-   the shear kernel (6.1), and is never injective;
+2. under `E != 0` and `v != 0`, every fiber of the map from
+   `(omega,A,B)` to that complete pair is exactly one uniquely parameterized
+   affine real-shear orbit (6.1), at fixed `A`;
 3. if the physical coupling is constant and `eta wedge Jv != 0`, the next
    derivative determines `B` uniquely by (7.5);
 4. the scalar (7.6) equals the physical `a²` and is independent of the
-   component and adapted-frame representative.
+   component and adapted-frame representative; and
+5. on the explicit active formal family, two fixed fourth-order outputs agree
+   iff their couplings differ by at most overall sign.
 
-**Status:** all four clauses are **[Lean]**. The formal proof now includes the
+**Status:** all five clauses are **[Lean]**. The formal proof now includes the
 inverse duality-rotation calculation and the frame-covariant pullback of the
 wedge channels, so genuine local EMD closure implies (4.7)--(4.8) directly.
 
@@ -824,24 +862,38 @@ The repository supplies four exact-arithmetic roles:
    Kaluza selector;
 3. a simple-spectrum helical Kaluza reduction with exact EMD residual zero
    and physical-channel `aGeomSq=3`; the original point is outside the
-   complete detector's causal scalar branch, while a replacement point has a
-   certified full pointwise upstream choice and nonzero choice-free physical
-   active wedge, with only its fourth-order channel/output still unevaluated;
+   complete detector's causal scalar branch, while the replacement point
+   passes the selected route through its last fourth-order gate in 21 exact
+   checks; and
 4. a paired second-jet near miss preserving the point metric, first jet,
    Lorentz signature, and simple spectrum while failing a named algebraic
    obstruction.
 
 These tests validate conventions and selectivity.  They do not replace the
 fourth-order theorem, and none is a newly discovered exact Kaluza spacetime;
-the helical example is a reduction of a known Ricci-flat seed. The next
-validation upgrade is to evaluate the selected fourth-order frame/channel
-derivative at the replacement helical point; no accepted-set claim follows
-from upstream and physical-activity certificates alone.
+the helical example is a reduction of a known Ricci-flat seed.
+
+The `vt2-complete-detector-route` artifact's 128-dimensional exact quadratic
+tower verifies the selected scalar and residual one-jets, the selected
+frame/coframe one-jet identities, all 128 entries of both complete raw
+channels, the exact cosine quotient `A`, the physical derivative
+`dA=d(sqrt(3) C)`, the sine quotient `B`, every next-order residual, and final
+output `3`.
+
+One boundary matters.  The equality of the literal detector's quotient
+derivative with physical `dA` is obtained by composing the compiled
+`curvatureSeedCosineField_eventuallyEq_and_coordinateDerivative_eq_of_physicalGerm`,
+`curvatureSeedCosineCoordinateDerivative_eq_doubleAngleCosine_of_physicalGerm`,
+and `isActualMetricPhysicalConstantCouplingChannelAt_of_patch_physicalHodgeFields`
+bridges (plus the compiled upstream selection/patch results) with the exact
+helical Kaluza EMD patch/open gates.  The benchmark-specific instantiation is
+theorem-mediated exact evidence.  It is neither an independent brute-force
+second-jet CAS expansion of the literal quotient nor a Lean instance theorem.
 
 ## 13. Remaining proof obligations, in order
 
-1. Finish the replacement benchmark's selected fourth-order channel/output;
-   its complete pointwise upstream and physical active gates are certified.
+1. Obtain the formal-PDE specialist audit of the analytic EMD involutivity
+   extension used for the solution-germ lower bound.
 2. Present the compiled necessity and certified singleton-output theorems and
    validate its novelty position with specialist review.
 3. Prove full nonlinear-coordinate covariance or state the coordinate scope
@@ -867,9 +919,9 @@ Einstein-Maxwell-scalar models are also known.
 
 A focused literature search has not located the specific result proved here:
 the active analytic metric-three-jet collision between `a²=3` and `a²=1`, the
-exact shear non-identifiability of the EMD sine-coupling component in the
-complete first curvature-seed derivative channels, together with its
-one-derivative-higher quotient on the active locus and the component-independent
-`A²+B²`. This is a
+exact classification of the complete first curvature-seed derivative-channel
+fibers as unique affine real-shear orbits, together with the
+one-derivative-higher quotient on the active locus and the exact reduction to
+the `a=±b` fiber on the explicit active family. This is a
 provisional novelty assessment, not a priority claim.  A paper should say
 “we are unaware of” until a specialist literature review confirms it.

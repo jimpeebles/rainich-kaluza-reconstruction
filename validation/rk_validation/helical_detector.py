@@ -321,6 +321,12 @@ def replacement_physical_active_certificate(
     cosine = sp.factor(trace_ff / (4 * physical_q))
     sine = sp.factor(-trace_fh / (4 * physical_q))
     unit_circle = sp.factor(cosine**2 + sine**2)
+    physical_cosine_coupling_derivative = tuple(
+        sp.simplify(
+            sp.diff(sp.sqrt(3) * cosine, coordinate).subs(point)
+        )
+        for coordinate in coordinates
+    )
     omega = sp.ImmutableMatrix(
         [
             sp.factor(
@@ -374,6 +380,8 @@ def replacement_physical_active_certificate(
             hodge_squared_point + field_point
         ),
         "double_angle_unit_circle": sp.simplify(unit_circle - 1),
+        "physical_cosine_coupling_derivative_at_point":
+            physical_cosine_coupling_derivative,
         "physical_q_at_point": physical_q_point,
         "detector_q_at_point": sp.sqrt(q_sq_at_point),
         "physical_q_matches_detector": sp.simplify(
@@ -457,8 +465,11 @@ def replacement_scalar_closure_certificate(
     root_a = sp.simplify((e1 - sp.sqrt(discriminant)) / 2)
     root_b = sp.simplify((e1 + sp.sqrt(discriminant)) / 2)
 
+    mixed_ricci_first_jets = tuple(
+        simplify_matrix(mixed_field.diff(x).subs(point)) for x in coordinates
+    )
     root_jets: list[tuple[sp.Expr, sp.Expr, sp.Expr, sp.Expr]] = []
-    for dR_full in [simplify_matrix(mixed_field.diff(x).subs(point)) for x in coordinates]:
+    for dR_full in mixed_ricci_first_jets:
         de1 = sp.trace(dR_full)
         dp2 = 2 * sp.trace(R * dR_full)
         dp3 = 3 * sp.trace(R * R * dR_full)
@@ -591,6 +602,25 @@ def replacement_scalar_closure_certificate(
     physical_hessian_difference = sp.diff(scalar, radius, theta).subs(point) - sp.diff(
         scalar, theta, radius
     ).subs(point)
+    physical_scalar = sp.ImmutableMatrix(
+        [sp.simplify(sp.diff(scalar, coordinate).subs(point)) for coordinate in coordinates]
+    )
+    physical_scalar_first_jets = tuple(
+        sp.ImmutableMatrix(
+            [
+                sp.simplify(sp.diff(scalar, component, direction).subs(point))
+                for component in coordinates
+            ]
+        )
+        for direction in coordinates
+    )
+    selected_value_full = sp.ImmutableMatrix(
+        [sp.S.Zero, selected_value[0], selected_value[1], sp.S.Zero]
+    )
+    selected_jets_full = tuple(
+        sp.ImmutableMatrix([sp.S.Zero, jet[0], jet[1], sp.S.Zero])
+        for jet in selected_jets
+    )
     return {
         "certified_zero": certified,
         "full_closure_from_block_support": certified and block_support,
@@ -599,5 +629,26 @@ def replacement_scalar_closure_certificate(
         "raw_expression": raw_expression,
         "raw_numerator_operations": operations,
         "physical_hessian_antisymmetry": str(sp.simplify(physical_hessian_difference)),
+        # These exact point jets are the reusable bridge into the selected
+        # Maxwell-frame and fourth-order channel calculation.  They remain
+        # internal to the benchmark helper rather than being serialized in
+        # the public artifact.
+        "mixed_ricci_at_point": R,
+        "mixed_ricci_first_jets": mixed_ricci_first_jets,
+        "q_sq_at_point": q_sq,
+        "q_sq_first_jet": tuple(jet[3] for jet in root_jets),
+        "selected_scalar_at_point": selected_value_full,
+        "selected_scalar_first_jets": selected_jets_full,
+        "selected_value_matches_physical": _matrix_zero(
+            selected_value_full - physical_scalar
+        ),
+        "selected_first_jet_matches_physical": all(
+            _zero_certificate(entry)[0]
+            for direction in range(4)
+            for entry in (
+                selected_jets_full[direction]
+                - physical_scalar_first_jets[direction]
+            )
+        ),
         "elapsed_seconds": round(time.time() - started, 3),
     }

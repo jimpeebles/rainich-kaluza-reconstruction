@@ -21,10 +21,11 @@ classification, and every degenerate branch are not required for publication.
 
 ## The theorem ladder
 
-1. **Shear kernel -- proved in Lean.**  The complete first differentiated
-   curvature-seed channels determine \((A,\eta)\), but not the hidden sine
-   component \(B\).  The full tensors, not merely selected probes, are
-   invariant under the one-parameter shear.
+1. **Exact order-three fiber -- proved in Lean.**  When the seed amplitude and
+   scalar covector are nonzero, two complete first differentiated
+   curvature-seed channel inputs agree exactly when their \(A\) values agree
+   and their \((d\theta,B)\) data lie on one unique affine real-shear orbit.
+   The full tensors, not merely selected probes, have an \(\mathbb R\)-fiber.
 2. **Solution-level lower bound -- finite part in Lean, realization modulo one
    specialist-audit lemma.**  For every real \(a\), the repository constructs a
    complete compatible active EMD jet with one common metric three-jet, matter
@@ -41,7 +42,9 @@ classification, and every degenerate branch are not required for publication.
    \]
 
    gives a component-independent quotient for \(B\) and hence
-   \(a^2=A^2+B^2\).
+   \(a^2=A^2+B^2\).  On the explicit active formal family, two fixed
+   fourth-order outputs agree iff \(a=\pm b\): the order-three \(\mathbb R\)
+   ambiguity collapses exactly to the orientation-free \(\mathbb Z_2\).
 4. **Finite detector -- proved in Lean with stated hypotheses.**  The
    metric-only fourth-order accepted set is nonempty and contains the physical
    \(a^2\) on the packaged active-regular EMD locus.  Every survivor equals the
@@ -63,15 +66,18 @@ classification, and every degenerate branch are not required for publication.
 - Keep this step labeled as a human argument until independently reviewed; do
   not describe it as a direct application of Kruglikov's Theorem 4.
 
-### Gate 2: positive benchmark completion
+### Gate 2: positive benchmark completion -- closed
 
-- At the committed generic helical-string point, evaluate the selected
-  fourth-order frame/channel derivative.
-- Route at least one exact physical choice through the complete detector and
-  record output \(3\).
-- Preserve the current fact: the earlier sample point fails the detector's
-  causal scalar entrance, while the replacement point passes the pointwise
-  upstream gates and physical active wedge.
+- The replacement helical-string point passes 21 exact checks through the
+  selected scalar/residual/frame one-jets, all 128 complete-channel
+  components, \(A\), physical \(dA=d(\sqrt3 C)\), \(B\), the full next-order
+  residual, and output \(3\).
+- The literal quotient-derivative equality is supplied by the compiled
+  physical-germ bridge composed with the exact helical Kaluza EMD patch/open
+  gates.  This is theorem-mediated exact evidence, not a brute-force
+  second-jet CAS expansion or a benchmark-specific Lean theorem instance.
+- The earlier sample point still fails the detector's causal scalar entrance;
+  the replacement point is the positive route.
 
 ### Gate 3: paper hardening
 
@@ -103,6 +109,7 @@ remains fixed-coordinate until nonlinear chart covariance is established.
 
 - No new reconstruction machinery unless it closes one of the three
   publication gates.
-- No new exact-solution search before the positive benchmark is complete.
+- No new exact-solution search before the analytic audit and paper hardening
+  are complete.
 - No degenerate-branch classification before the active paper is reviewable.
 - No claim may exceed the evidence class recorded in the claim ledger.

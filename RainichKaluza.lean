@@ -61,6 +61,7 @@ import RainichKaluza.DifferentialCoupling
 import RainichKaluza.CouplingInvariant
 import RainichKaluza.GeometricCouplingDetector
 import RainichKaluza.ThirdOrderMatterJetAmbiguity
+import RainichKaluza.FiniteJetIdentifiabilityThreshold
 import RainichKaluza.GenericActiveThirdOrderAmbiguity
 import RainichKaluza.PolynomialMetricJetRealization
 import RainichKaluza.MetricHodge

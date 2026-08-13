@@ -5,7 +5,7 @@ as a stable redirect because older proof and documentation files link here.
 
 Use:
 
-- [`RESEARCH_RESET.md`](RESEARCH_RESET.md) for the single current north star
+- [`RESEARCH_PLAN.md`](RESEARCH_PLAN.md) for the single current north star
   and next proof gate;
 - [`CLAIM_LEDGER.md`](CLAIM_LEDGER.md) for proved/open status;
 - [`RESEARCH_STATE.md`](RESEARCH_STATE.md) for inherited infrastructure.

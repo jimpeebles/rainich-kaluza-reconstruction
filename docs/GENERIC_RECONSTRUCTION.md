@@ -1,4 +1,8 @@
-# Generic eigenbasis reconstruction
+# Generic eigenbasis reconstruction (supporting technical note)
+
+> This is supporting algebra, not an operational roadmap or a competing paper.
+> See [`RESEARCH_PLAN.md`](RESEARCH_PLAN.md) and the active
+> [`manuscript`](../papers/coupling-detector/MANUSCRIPT.md).
 
 This note records the strongest exact result currently in the repository and
 the assumptions separating it from the intended geometric theorem.

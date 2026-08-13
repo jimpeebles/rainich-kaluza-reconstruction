@@ -1,4 +1,9 @@
-# Draft release notes
+# Draft release notes (archived)
+
+> These notes predate the analytic solution-germ upgrade.  Use the active
+> [`manuscript`](papers/coupling-detector/MANUSCRIPT.md),
+> [`claim ledger`](docs/CLAIM_LEDGER.md), and
+> [`research plan`](docs/RESEARCH_PLAN.md) for current status.
 
 ## Unreleased — submission held for theorem development
 

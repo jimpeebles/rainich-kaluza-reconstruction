@@ -2,8 +2,9 @@
 
 This document records the intellectual lineage that makes the project a
 recognizable reconstruction problem rather than a free-standing speculative
-theory. Targeted literature audits were completed on 2026-08-10 and
-2026-08-12; any priority claim remains provisional pending specialist review.
+theory. Targeted literature audits were completed on 2026-08-10,
+2026-08-12, and 2026-08-13; any priority claim remains provisional pending
+specialist review.
 
 ## 1. Classical Rainich question
 
@@ -79,7 +80,7 @@ solutions:
   PoS(IC2006)061 (2006).
 
 This is essential prior art. Our defensible delta must therefore be a generic,
-coordinate-free reconstruction/orbit-classification theorem with differential closure,
+finite local reconstruction theorem with differential closure,
 not the observation that a dilaton modifies Rainich algebra and not a
 symmetry-reduced exact-solution construction.
 
@@ -120,7 +121,21 @@ Before a novelty claim is made, the bibliography must be audited for:
 - Kaluza uplift criteria stated directly in four-dimensional curvature;
 - degenerate/null reconstructions and global duality obstructions.
 
-## 8. Provisional novelty and significance assessment (updated 2026-08-12)
+## 8. Formal PDE and analytic realization
+
+The promotion from compatible finite jets to analytic EMD solution germs uses
+B. Kruglikov,
+[*Involutivity of field equations*](https://arxiv.org/abs/0902.1685).
+The relevant cited result is his Theorem 3 for the gauge-degenerate
+source-free Einstein--Maxwell potential system, together with Lemma 4 for a
+determined scalar-wave block and the analytic realization consequence.  EMD is
+not named in that paper.  Our application works in pure second-order
+potentials \((g,A,\phi)\), observes that the exponential couplings are lower
+order, and uses the EMD Noether identity for contracted-Bianchi compatibility.
+This extension is a human proof requiring specialist audit, not a Lean theorem
+and not a direct invocation of Kruglikov's Theorem 4.
+
+## 9. Provisional novelty and significance assessment (updated 2026-08-13)
 
 The audit found substantial prior work on each neighboring ingredient:
 classical and higher-dimensional algebraic Rainich theory, separate
@@ -131,7 +146,9 @@ four-dimensional, metric-only, necessary-and-sufficient reconstruction theorem
 for the coupled Kaluza EMD sector, nor a comparable machine-checked
 formalization.
 
-The 2026-08-12 proof audit identified a more precise candidate contribution.
+The 2026-08-12 proof audit identified the channel obstruction, and the
+2026-08-13 argument upgrades it to analytic solution germs conditional on the
+explicit EMD involutivity lemma pending specialist audit.
 For a curvature-normalized non-null Maxwell seed, the complete first
 seed-derivative channels determine only
 
@@ -149,15 +166,18 @@ dA + 2B eta - B²Jv = 0,
 B = a sin(2 theta),
 ```
 
-whose wedge with `Jv` generically reconstructs `B`, hence `a²=A²+B²`.
+whose wedge with `Jv` reconstructs `B` on the active locus, hence
+`a²=A²+B²`.
 
 A focused search did not locate this specific lower-order
 non-identifiability/higher-order recovery result in classical Rainich,
 scalar-geometrization, generalized scalar-tensor Rainich, higher-dimensional
 Rainich, or electromagnetic-duality-orbit work. The defensible novelty is now
-the sharp jet-order obstruction plus constructive fourth-order invariant,
-placed inside the curvature-derived zero/one/two scalar branch problem and
-checked by Lean.
+the active, simple-spectrum common metric-three-jet continuum at solution
+level conditional on that lemma,
+the complete-channel shear mechanism, and the matching fourth-order physical
+recovery.  The finite algebra is checked by Lean; the analytic solution-germ
+upgrade has the separate human-proof boundary in Section 8.
 
 This is a targeted-search conclusion, not a claim of exhaustive priority. The
 paper should say “we are unaware of” until specialist review confirms the

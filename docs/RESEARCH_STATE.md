@@ -3,7 +3,7 @@
 Date: 2026-08-10
 
 > This is a dated state record, not the current plan. See
-> [`RESEARCH_RESET.md`](RESEARCH_RESET.md) for the 2026-08-12 research reset.
+> [`RESEARCH_PLAN.md`](RESEARCH_PLAN.md) for the current research plan.
 
 ## Primary project
 

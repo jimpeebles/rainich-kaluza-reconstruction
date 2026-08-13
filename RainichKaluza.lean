@@ -18,6 +18,7 @@ import RainichKaluza.TransportedSeedDerivative
 import RainichKaluza.LocalExteriorSeed
 import RainichKaluza.PhaseIVReadiness
 import RainichKaluza.RadialGaugePotential
+import RainichKaluza.RadialGaugePotentialTwoJet
 import RainichKaluza.RadialPotentialSplice
 import RainichKaluza.UpliftConvention
 import RainichKaluza.KaluzaBlockAssembly
@@ -61,6 +62,7 @@ import RainichKaluza.CouplingInvariant
 import RainichKaluza.GeometricCouplingDetector
 import RainichKaluza.ThirdOrderMatterJetAmbiguity
 import RainichKaluza.GenericActiveThirdOrderAmbiguity
+import RainichKaluza.PolynomialMetricJetRealization
 import RainichKaluza.MetricHodge
 import RainichKaluza.FourthOrderMetricDetector
 import RainichKaluza.ActualMetricDetectorLocality

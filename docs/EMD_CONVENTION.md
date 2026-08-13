@@ -153,7 +153,7 @@ For constant `a`, one derivative later
 
 generically recovers `B` and hence `a²=A²+B²`. The proof and precise branch
 condition are in
-[`../papers/coupling-detector/HUMAN_PROOF.md`](../papers/coupling-detector/HUMAN_PROOF.md)
+[`../papers/coupling-detector/TECHNICAL_SUPPLEMENT.md`](../papers/coupling-detector/TECHNICAL_SUPPLEMENT.md)
 and `GeometricCouplingDetector.lean`. Older evaluated two-probe theorems remain
 correct abstract linear algebra; their unknowns must not be interpreted as
 physical `(dθ,a)` before this seed-to-physical distinction is resolved.

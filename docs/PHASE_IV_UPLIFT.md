@@ -1,4 +1,8 @@
-# Phase IV — constructive five-dimensional uplift
+# Phase IV — constructive five-dimensional uplift (supporting technical note)
+
+> This conditional uplift layer is downstream of the active identifiability
+> paper.  It is not the current research plan; see
+> [`RESEARCH_PLAN.md`](RESEARCH_PLAN.md).
 
 ## Verified entry data
 

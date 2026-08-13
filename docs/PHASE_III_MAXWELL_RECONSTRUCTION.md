@@ -1,10 +1,10 @@
-# Phase III — Maxwell two-form reconstruction
+# Phase III — Maxwell two-form reconstruction (supporting archive)
 
 > **2026-08-12 correction.** The evaluated two-probe algebra below is correct,
 > but for an arbitrary curvature-normalized seed its unknown coefficients are
 > effective `(eta,A)`, not the physical `(dtheta,a)`. The complete first
 > channels have an exact shear kernel. See
-> [`../papers/coupling-detector/HUMAN_PROOF.md`](../papers/coupling-detector/HUMAN_PROOF.md)
+> [`../papers/coupling-detector/TECHNICAL_SUPPLEMENT.md`](../papers/coupling-detector/TECHNICAL_SUPPLEMENT.md)
 > for the corrected third-order no-go and fourth-order recovery theorem.
 
 ## Entry point now proved

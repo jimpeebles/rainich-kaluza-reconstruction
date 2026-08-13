@@ -1,44 +1,21 @@
-# A fourth-order EMD coupling detector and a third-order no-go
+# Technical supplement: metric-jet non-identifiability and coupling-square recovery
 
-Date: 2026-08-12  
-Status: end-to-end proof draft for the detector paper
+Date: 2026-08-13
 
-> **Current formal boundary.** The channel theorem, transported-seed
-> nonemptiness, complete metric-only upstream selection, and the constructive
-> Maxwell stress-fibre theorem are machine checked. Conditional actual-metric
-> nonemptiness is now machine checked too. On a smooth
-> upstream patch, reconstructed stress and the physical metric-Hodge relation
-> derive the physical/reconstructed Maxwell/Hodge field germs; genuine `C¹`
-> first jets, EMD closure, scalar continuity, and an active wedge then produce
-> a finite accepted choice with output `a²`, or `3` at Kaluza coupling. The
-> same selected scalar/frame/orientation choice now promotes to an honest open
-> upstream patch under explicit diagonal-amplitude/coframe continuity, and
-> upstream itself implies positive determinant. The detector-choice-free
-> physical EMD package, scalar/upstream open-patch intersection, and
-> scalar/coupling sign alignment are now composed end to end, producing one
-> accepted metric-only output `a²` (`3` for Kaluza) under explicit selected
-> regular-locus hypotheses. Conventional `C²` regularity of `g`, the selected
-> residual, and `qSq` now derives the selected coframe and magnitude
-> regularity. A choice-free physical complexion covector
-> `(C dS-S dC)/2` now derives the source-free physical effective channel and
-> identifies detector activity exactly with the invariant physical
-> Maxwell-complexion/stress wedge; the active set is open under continuity,
-> with no density claim. On the unique scalar-closure locus
-> `¬(O_false=0 ∧ O_true=0)`, every pointwise accepted survivor is now proved to
-> return physical `a²`, under the displayed ordinary local regularity and
-> admissible-probe hypotheses. The final physical-active wrapper composes the
-> conventional selector/regularity data with one choice-free activity premise
-> and a callback supplying only selected-residual `C²`, and returns a
-> metric-only accepted output `a²` (`3` for Kaluza). Exact benchmark routing,
-> exposition/novelty validation, and the converse remain. A former
-> universal-generic premise is withdrawn as vacuous because
-> diagonal wedge components vanish. The lower-order boundary is now sharpened
-> by an explicit active formal normal-coordinate metric-three-jet collision:
-> `a=√3` and `a=1` share the metric jet while satisfying the displayed
-> point/first-jet EMD equations. A product-rule coordinate-Ricci theorem gives
-> the first prolongation its literal meaning. Complete fixed-coordinate
-> detector-germ locality is also proved; neither result supplies local PDE
-> solutions or nonlinear-coordinate covariance.
+Status: technical companion to the canonical manuscript
+
+> **Current boundary.**  The finite shear obstruction, common active metric
+> three-jet, simple Ricci spectrum, the symmetric Ricci first prolongation, explicit polynomial
+> metric germ, potential two-jet, fourth-order recovery, and finite detector
+> necessity/certified correctness are machine checked.  The promotion of the
+> compatible finite collision to local analytic EMD solution germs is a human
+> formal-PDE proof: in pure second-order potentials `(g,A,phi)`, extend
+> Kruglikov's gauge-degenerate Einstein--Maxwell Theorem 3 by the determined
+> scalar-wave block of Lemma 4 and use the EMD Noether/Bianchi identity.  This
+> is not a direct invocation of his Theorem 4 and is not formalized in Lean.
+> The complete detector is fixed-coordinate; its full nonlinear chart
+> covariance, complete positive-benchmark routing, and the converse remain
+> open.
 
 ## Status notation
 
@@ -46,20 +23,23 @@ Status: end-to-end proof draft for the detector paper
   repository and included in the axiom audit.
 - **[Derived]** means the displayed differential-geometric calculation is
   written out here from the convention-fixed EMD equations.
+- **[Human + external]** means the analytic-realization argument uses a cited
+  involutivity theorem plus the explicit EMD extension recorded in
+  [`../../docs/ANALYTIC_EMD_REALIZATION.md`](../../docs/ANALYTIC_EMD_REALIZATION.md).
 - **[Open seam]** means that a stated converse or realization implication has
   not yet been derived from the intended invariant boundary. Necessity
   nonemptiness, selected regularity, physical-complexion activity, and unique-
   closure pointwise confluence are no longer placed in this category.
 
-The central conclusion of this audit is a correction to the previous plan:
-the physical coupling is not identifiable from the curvature-normalized
+The central conclusion is a sharp order separation:
+the physical coupling square is not identifiable from the curvature-normalized
 Maxwell channels at metric order three.  This failure is exact, not a defect
 of the selected probes.  There is a one-parameter shear kernel.  Constancy of
-the physical coupling breaks that kernel at metric order four on the generic
+the physical coupling breaks that kernel at metric order four on the active regular
 branch, yielding an explicit, choice-independent formula for `a²`. The
-channel obstruction is now accompanied by a common active formal metric
-three-jet at coupling squares `3` and `1`; this is a finite truncated-jet
-lower bound, not a collision between actual local solutions.
+channel obstruction is realized by active, simple-spectrum analytic EMD
+solution germs with a common metric three-jet.  The finite data are Lean
+checked; the solution-germ upgrade has the distinct human-proof status above.
 
 ## 1. Convention and scope
 
@@ -408,7 +388,7 @@ the scalar wave operator use `j³g`.  At that order the field equations see
 Rainich/EMD system; it is not presented as a theorem about every conceivable
 nonlocal or unrelated metric invariant.
 
-### 6.1 Active realization of the lower-order collision
+### 6.1 Active analytic realization of the lower-order collision
 
 There is now an explicit active realization at the complete formal
 metric-three-jet level. Work at one normal-coordinate point with
@@ -453,8 +433,8 @@ metric third jet realizes its first derivative. The theorem
 `coordinateRicciFirstJet_minkowski_zero` proves that this normal-frame
 contraction equals the algebraic product-rule coordinate-Ricci first-jet
 formula at `g1=0`; it is not merely an unrelated purpose-defined symbol. This
-does not yet identify an `fderiv` of the Ricci field of an actual smooth metric
-germ.
+finite jet is also realized by the explicit polynomial metric germ
+`activeAmbiguityPolynomialMetricGerm`.
 
 **[Lean]** `exists_activeCommonFormalMetricThreeJet_kaluza_vs_one` specializes
 the construction to `a=sqrt(3)` and `a=1`. Their coupling squares and Maxwell
@@ -485,11 +465,31 @@ therefore not confined to a repeated-root algebraic stratum. This does not by
 itself establish every causal, projector, probe, or neighborhood gate of the
 actual detector entrance.
 
-This is the sharp claim boundary: the repository does not prove higher
-prolongations, all-order formal integrability, or two local EMD solutions.
-Consequently the theorem rules out identification from the common metric
-three-jet within this displayed truncated formal-EMD class, not on the class
-of all genuine local solutions.
+**[Lean]** The closed physical Maxwell one-jet is lifted explicitly to a
+radial-gauge potential two-jet by `radialGaugePotentialTwoJet4_realizes`.
+The fully symmetric metric third jet and its common Ricci first prolongation
+are checked by `activeAmbiguityFormalMetricJet3_einsteinFirstProlongation` and
+`coordinateRicciFirstJet_minkowski_zero`.  Their contracted-Bianchi
+contraction is the corresponding human index consequence used below; it is
+not advertised as a separate Lean theorem.
+
+**[Human + external]** In the pure second-order potential variables
+`(g,A,phi)`, Kruglikov's involutive gauge-degenerate Einstein--Maxwell system
+(Theorem 3) is extended by the determined scalar-wave block (Lemma 4).
+The EMD couplings are lower order and the Noether identity supplies the
+contracted-Bianchi compatibility.  Conditional on the resulting EMD
+involutivity lemma, Cartan--Kahler realizes a local analytic EMD solution germ
+for every real `a` without changing the prescribed metric three-jet.  The
+detailed specialist-audit argument is
+[`../../docs/ANALYTIC_EMD_REALIZATION.md`](../../docs/ANALYTIC_EMD_REALIZATION.md).
+This application is not formalized in Lean and is not a direct invocation of
+Kruglikov's Theorem 4.
+
+Conditional on the explicitly stated EMD involutivity lemma, the lower bound
+applies to genuine local analytic EMD solutions, not merely truncated formal
+data.  It does not assert a common metric
+four-jet, a closed-form solution, or passage through every finite detector
+gate.
 
 ## 7. Constancy breaks the kernel one derivative later
 
@@ -547,7 +547,7 @@ is needed. Since `eta=omega+(B/2)Jv`, it also satisfies
 eta wedge Jv = omega wedge Jv = dtheta wedge J(dphi).                (7.8)
 ```
 
-Thus the true generic locus is independent of the hidden sine component and
+Thus the active locus is independent of the hidden sine component and
 of the coupling.
 
 **[Lean]** `nextOrderSineCouplingEquation_eq_zero` derives (7.2) from
@@ -568,7 +568,7 @@ aGeomSq = A² + B².                                    (7.6)
 **[Lean]** `couplingSqFromDoubleAngleComponents_eq` proves the double-angle
 identity `A²+B²=a²`.  `couplingSqFromNextOrderComponent_eq` proves that the
 explicit quotient (7.5), inserted into (7.6), returns the physical `a²` on
-every genuine constant-coupling channel satisfying the genericity condition.
+every genuine constant-coupling channel satisfying the activity condition.
 
 This is a finite coordinate construction using metric derivatives through
 order four: `A` is constructed at order three and `dA` at order four. Full
@@ -612,22 +612,23 @@ potential.
 
 The result supported by the present proof is best split into three theorems.
 
-### Theorem A: active formal metric-three-jet collision
+### Theorem A: conditional active analytic metric-three-jet collision
 
-At one Minkowski normal point, the Kaluza coupling `a=sqrt(3)` and the
-non-Kaluza coupling `a=1` admit the same explicit symmetric metric jets
-`(g0,g1,g2,g3)` with `g1=0`, but distinct active curvature-normalized Maxwell
-first jets. The common metric jet satisfies the point Einstein and scalar
-equations and first Einstein/Ricci prolongation. Each matter jet satisfies
-both exterior equations at the point and point/first-jet Hodge compatibility.
-The coupling squares are `3` and `1`.
+Assume the EMD involutivity lemma in Section 6.1.  For every real `a`, there is
+a local analytic EMD solution germ with the same
+displayed metric three-jet at one Minkowski normal point.  The matter first
+jet is injective in `a`, activity is nonzero, and the common mixed Ricci tensor
+has four distinct real eigenvalues.  Therefore no function of the metric
+three-jet identifies `a²` on this family.  In particular, `a=sqrt(3)` and
+`a=1` give a Kaluza/non-Kaluza collision.
 
-**Status: [Lean].** The flagship is
-`exists_activeCommonFormalMetricThreeJet_kaluza_vs_one`; the genuine
-product-rule Ricci derivative bridge is
-`coordinateRicciFirstJet_minkowski_zero`. The claim ends at this finite
-formal-jet boundary and does not include all-order prolongation or local PDE
-solutions.
+**Status:** the complete finite jet, polynomial metric germ, potential
+two-jet, activity, spectrum, and symmetric metric/Ricci first prolongation are
+**[Lean]**.  Contracted-Bianchi compatibility is the corresponding index
+consequence used in the human formal-PDE argument.  The
+involutivity extension and analytic realization are **[Human + external]** as
+specified in Section 6.1.  Neither a common fourth metric jet nor a closed-form
+spacetime is claimed.
 
 ### Theorem B: channel-level obstruction and recovery
 
@@ -688,7 +689,7 @@ physical patch package; its Kaluza specialization returns `3`.
 
 The adversarial audit removed one false route: universal genericity over raw
 channels is impossible because diagonal wedge choices vanish. The corrected
-active-wedge theorem existentially selects a generic finite channel, and
+active-wedge theorem existentially selects a nonvanishing finite channel, and
 upstream plus a physical channel now directly gives accepted-set membership.
 Lean also proves the full pointwise Maxwell stress-fibre theorem and its
 smooth-patch version: a genuine non-null physical two-form is constructively
@@ -794,7 +795,7 @@ matter fields must also be shown to satisfy the EMD equations without taking
 an `EMDEquations` realizer as an independent input; the actual-Ricci/Hodge
 upstream composition itself is already proved.
 
-Accordingly the detector paper should lead with the no-go plus generic
+Accordingly the detector paper should lead with the no-go plus active-locus
 fourth-order recovery theorem.  The full necessary-and-sufficient Kaluza
 recognition theorem is a later corollary only after (10.2)--(10.3) and the
 remaining realization seams close.
@@ -810,7 +811,7 @@ eta wedge Jv = 0.                                     (11.1)
 Since `J` is invertible and `v != 0`, this means `eta` is pointwise parallel
 to `Jv`.  Equation (7.2) then collapses to a scalar quadratic when `dA` is
 also parallel to `Jv`, and can have zero, one, or two roots.  This locus is
-mathematically interesting but is not needed for the generic theorem.  It is
+mathematically interesting but is not needed for the active-locus theorem.  It is
 listed as a separate branch rather than buried in a denominator.
 
 ## 12. Exact tests and falsifiability
@@ -865,9 +866,10 @@ some scalar-tensor settings.  Electromagnetic duality orbits in
 Einstein-Maxwell-scalar models are also known.
 
 A focused literature search has not located the specific result proved here:
-the active formal metric-three-jet collision between `a²=3` and `a²=1`, the
+the active analytic metric-three-jet collision between `a²=3` and `a²=1`, the
 exact shear non-identifiability of the EMD sine-coupling component in the
-complete first curvature-seed derivative channels, together with its generic
-one-derivative-higher quotient and the invariant `A²+B²`. This is a
+complete first curvature-seed derivative channels, together with its
+one-derivative-higher quotient on the active locus and the component-independent
+`A²+B²`. This is a
 provisional novelty assessment, not a priority claim.  A paper should say
 “we are unaware of” until a specialist literature review confirms it.

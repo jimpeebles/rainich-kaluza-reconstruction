@@ -938,3 +938,5 @@ the axiom dependencies of the current advertised theorem surface.
 #print axioms RainichKaluza.actualMetricFourthOrderCouplingSqCandidateAt_eq_of_eventuallyEq
 #print axioms RainichKaluza.acceptedActualMetricFourthOrderDetectorChoicesAt_eq_of_eventuallyEq
 #print axioms RainichKaluza.actualMetricFourthOrderDetector_coordinateGerm_extensionality
+#print axioms RainichKaluza.radialGaugePotentialTwoJet4_realizes
+#print axioms RainichKaluza.activeAmbiguityPolynomialMetricGerm_realizes_threeJet

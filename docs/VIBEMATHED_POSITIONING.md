@@ -1,4 +1,7 @@
-# Vibemathed positioning and Lean contract
+# Vibemathed positioning and Lean contract (archived)
+
+> Historical positioning only.  Current claims and tasks are governed by
+> [`CLAIM_LEDGER.md`](CLAIM_LEDGER.md) and [`RESEARCH_PLAN.md`](RESEARCH_PLAN.md).
 
 ## Recommended submission narrative
 

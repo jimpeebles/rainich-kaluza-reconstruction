@@ -1,10 +1,11 @@
-# Pointwise Scalar Reconstruction and Its Discrete Ambiguity in the Generic Kaluza Einstein--Maxwell--Dilaton Sector
+# Pointwise Scalar Reconstruction and Its Discrete Ambiguity (archived fallback)
 
 > **Fallback manuscript track.** This manuscript isolates the already proved
 > pointwise centralizer/nonuniqueness result. It is not the current
 > metric-only coupling-detector manuscript, and some downstream status notes
 > intentionally remain outside its scope. See
-> [`../../docs/RESEARCH_RESET.md`](../../docs/RESEARCH_RESET.md).
+> The active paper is [`../coupling-detector/MANUSCRIPT.md`](../coupling-detector/MANUSCRIPT.md),
+> governed by [`../../docs/RESEARCH_PLAN.md`](../../docs/RESEARCH_PLAN.md).
 
 ## Abstract
 

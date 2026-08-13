@@ -1,6 +1,6 @@
 # Fourth-order EMD coupling detector: theorem prospectus
 
-Status: revised after the Gate 2 identifiability audit, 2026-08-12
+Status: revised after the active formal-jet audit, 2026-08-13
 
 The full derivation is in [`HUMAN_PROOF.md`](HUMAN_PROOF.md).  This file is
 the short theorem and assumption audit.
@@ -41,6 +41,15 @@ the short theorem and assumption audit.
 > Exact benchmark routing, theorem exposition/novelty validation, and the
 > converse remain. No claim of genericity for every raw component is made;
 > diagonal wedge choices vanish identically.
+>
+> The lower-order statement is now realized by an active formal metric jet,
+> not only by channel algebra. `a=√3` and `a=1` share one explicit formal
+> normal-coordinate metric three-jet satisfying the point Einstein/scalar
+> equations and first Ricci prolongation; their distinct Maxwell first jets
+> satisfy both exterior equations and point/first-jet Hodge compatibility.
+> The product-rule coordinate-Ricci bridge and complete fixed-coordinate
+> detector-germ extensionality are proved. This does not assert local EMD
+> solutions, all-order integrability, or nonlinear-coordinate covariance.
 
 ## Target detector theorem
 
@@ -182,6 +191,20 @@ in `(dtheta,B)`, and `a^2=A^2+B^2` is not identifiable at that order.  This is
 Lean-proved for the full three-form pair, so adding or changing scalar probes
 cannot repair it.
 
+The obstruction also has an explicit active formal metric-three-jet
+representative. At a Minkowski normal point with `v=e^0`, balanced non-null
+curvature-normalized Maxwell form, and zero scalar Hessian, a common closed
+and co-closed first-jet perturbation plus the coupling-dependent duality shear
+gives an active physical complexion with wedge component `(0,2)=1`. The
+duality shear is invisible to the Maxwell-stress first variation. Hence
+`a=√3` and `a=1` have different Maxwell first jets and coupling squares but
+one common symmetric `g2,g3`, satisfying the point Einstein/scalar equations,
+first Einstein/Ricci prolongation, both exterior equations at the point, and
+point/first-jet Hodge compatibility. The genuine product-rule
+`CoordinateRicciFirstJet` specialization identifies the displayed Ricci
+prolongation with the derivative of coordinate Ricci. This is a collision in
+the truncated formal-jet class, not between actual local solutions.
+
 Constancy of `a` gives one derivative later
 
 ```text
@@ -210,11 +233,13 @@ Lean proves that every valid component choice returns the same `B`.
 | metric Hodge partner | metric-constructed obstruction | determinant covariance proves that the explicit coordinate formula is natural under the true inverse coframe up to orientation and exactly natural for `det L>0`. A finite reflection supplies the positive branch; detector wrappers derive exact Hodge compatibility, and upstream implies `det L>0` on the fixed open patch. Reconstructed stress and the physical Hodge relation derive the field germs. Conventional regularity derives selected coframe/magnitude `C²`, while the choice-free physical complexion construction derives the source-free effective channel and exact invariant active-gate equivalence |
 | effective variables `(eta,A)` | third-order constructed outputs | full canonical channel map is probe-free and injective for `E!=0`, `v!=0` |
 | physical `(omega,B)` at order three | forbidden interpretation | exact shear non-identifiability and noninjectivity proved |
+| active formal metric `j3` | sharp lower-order witness | `exists_activeCommonFormalMetricThreeJet_kaluza_vs_one` gives the same normal-coordinate metric three-jet at `a²=3` and `a²=1`; `activeAmbiguity_kaluza_vs_one_firstChannel_ambiguous_nextOrder_separates` gives the same complete `(A,eta)=(0,e₂)` first channel and next-order outputs `3` versus `1`; `coordinateRicciFirstJet_minkowski_zero` supplies the genuine Ricci derivative bridge. No local PDE realization or all-order prolongation is claimed |
 | `B` | fourth-order constructed output | finite explicit quotient list, full compatibility equation, and uniqueness proved |
 | `aGeomSq` | fourth-order coordinate output, invariant under the proved frame/sign/component transformations | the finite actual-metric set/value, actual `dA`, scalar-orientation invariance, source/wedge confluence, transported genuine-EMD necessity, upstream open-patch selector, and end-to-end physical-active theorem are proved. The physical active predicate is frame/sign invariant and exactly equivalent to the detector gate through a derived choice-free physical complexion/effective channel. The final wrapper has one physical-active premise and a selected-residual-`C²` callback and returns metric-only nonemptiness with output `a²`. Every pointwise accepted survivor equals physical `a²` on its probe-pair-specific `¬(O_false=0 ∧ O_true=0)` locus under conventional local regularity and admissible-probe hypotheses; unconditional confluence on the two-closed-branch locus and full nonlinear-coordinate covariance of the complete detector are not claimed |
 | scalar equation | tested obstruction | gives the independent check `A=-box(phi)/(2q)` in the Ricci-residual seed normalization |
 | physical EMD field | correctness-side witness only | its non-null stress fibre is constructively the unit duality orbit pointwise. The metric selector supplies the open upstream patch and positive determinant; reconstructed stress/Hodge derive the field germs and first jets. `ChoiceIndependentActualMetricEMDPhysicalPatch4` packages physical fields/stress/Hodge/closure without a detector choice, and the invariant composition aligns sign and returns one accepted output. `PhysicalComplexionInvariant.lean` constructs the invariant complexion/effective channel directly from that pair. A reconstructed full EMD realizer is needed only for the converse |
 | five-dimensional germ | later corollary | conditional intrinsic uplift and converse already proved |
+| detector coordinate germ | locality boundary | `actualMetricFourthOrderDetector_coordinateGerm_extensionality` proves equal coordinate metric germs have the same complete accepted set and raw-choice outputs; nonlinear chart covariance remains separate |
 
 ## Exact evidence
 
@@ -224,12 +249,16 @@ nonzero boosted-string convention ladder, an exact
 returning `3`, and a paired second-jet near miss failing a named obstruction.
 The complete-routing audit shows that the original helical point is rejected
 by the detector's shared causal scalar gate. A replacement point passes the
-exact scalar-prefix checks through literal first-jet closure but is not yet a
-complete positive detector oracle.
+entire exact pointwise upstream predicate and the convention-aligned
+choice-free physical active wedge. Its selected fourth-order channel/output
+has not yet been evaluated, so it is not yet a complete positive detector
+oracle.
 
 ## Immediate proof sequence
 
-1. **Complete:** formal first-order shear no-go and noninjectivity.
+1. **Complete:** formal first-order shear no-go and noninjectivity, together
+   with an active common formal metric-three-jet at `a²=3` and `a²=1` and
+   the product-rule coordinate-Ricci first-jet bridge.
 2. **Complete:** formal next-order quotient, uniqueness, and `A^2+B^2=a^2`.
 3. **Complete:** finite transported-seed list, actual `dA`, full component
    obstruction checks, and open-patch confluence.
@@ -277,12 +306,16 @@ complete positive detector oracle.
     regularity/probe hypotheses and its probe-pair-specific
     `¬(O_false=0 ∧ O_true=0)`. The physical-active end-to-end theorem now
     composes these ingredients into final nonemptiness. Complete the remaining
-    gates at the replacement exact point and present the theorem cleanly.
+    selected fourth-order channel/output at the replacement exact point and
+    present the theorem cleanly.
     Do not assert unconditional identifiability where both scalar branches
     close.
-11. Validate the novelty position with specialist review and turn the compiled
+11. **Fixed-coordinate locality complete:** equal coordinate metric germs give
+    the same accepted set and every raw-choice output. Do not promote this to
+    nonlinear-coordinate covariance.
+12. Validate the novelty position with specialist review and turn the compiled
     necessity result into the paper theorem statement.
-12. Treat full local sufficiency separately; determine rather than assume its
+13. Treat full local sufficiency separately; determine rather than assume its
    minimal jet order.
 
 The zero-trace, null Maxwell, null scalar-gradient, repeated-root, collision,

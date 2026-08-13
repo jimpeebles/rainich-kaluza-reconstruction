@@ -109,10 +109,23 @@ scalar-radicand gates pass; probes `(1,2)` have the required causal signs; and
 the literal `relativeMinus=false` scalar candidate equals the exact physical
 `dphi`. Exact differentiation of the literal roots, four-root projectors,
 normalizations, and amplitudes also reduces its complete scalar-closure
-obstruction to zero. The manifest explicitly marks the remaining
-Maxwell/frame/Hodge gates, the invariant physical-active wedge, and the full
-fourth-order output as not yet certified. Thus this is a viable replacement
-point and a longer passed prefix, not a complete-detector acceptance claim.
+obstruction to zero. Its reconstruction obstruction and all six Maxwell
+residual/projector identities vanish exactly. A literal finite frame choice
+uses minus probes `(0,1)` with pivot recipe `second`, plus probes `(0,1)`, and
+`orientationReverse=true`; all four strict signs pass, its frame determinant
+is `-16 sqrt(249)/747`, its oriented coframe determinant is
+`3 sqrt(249)/16 > 0`, and the coordinate-metric Hodge equality is exact.
+Finally, a convention-aligned physical Maxwell/Hodge calculation agrees with
+the detector residual and gives the choice-free active component
+`(omega wedge S^T dphi)_(1,2) = 1486879232 sqrt(3)/30795876033 != 0`.
+
+Thus every pointwise gate in `IsActualMetricUpstreamEntranceAt4`, together
+with the physical active-locus premise used by the necessity theorem, is now
+certified at the replacement point. The remaining literal seam is
+`IsCurvatureSeedFourthOrderCandidateAt`: it differentiates the selected
+coframe and then the quotient-defined cosine field, requiring the selected
+frame/channel second jet. The artifact does not claim an accepted complete
+choice or a Lean instance theorem until that final channel is evaluated.
 
 ## V-T2b generic near miss
 

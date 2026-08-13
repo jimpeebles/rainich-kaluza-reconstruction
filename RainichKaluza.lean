@@ -26,6 +26,7 @@ import RainichKaluza.KaluzaRicci
 import RainichKaluza.KaluzaRicciMixed
 import RainichKaluza.KaluzaRicciBase
 import RainichKaluza.CoordinateRicci
+import RainichKaluza.CoordinateRicciFirstJet
 import RainichKaluza.AffineCoordinateRicci
 import RainichKaluza.NonlinearCoordinateRicci
 import RainichKaluza.KaluzaFieldReduction
@@ -58,8 +59,10 @@ import RainichKaluza.DifferentialBranchSelection
 import RainichKaluza.DifferentialCoupling
 import RainichKaluza.CouplingInvariant
 import RainichKaluza.GeometricCouplingDetector
+import RainichKaluza.ThirdOrderMatterJetAmbiguity
 import RainichKaluza.MetricHodge
 import RainichKaluza.FourthOrderMetricDetector
+import RainichKaluza.ActualMetricDetectorLocality
 import RainichKaluza.ActualMetricDetectorRegularity
 import RainichKaluza.ActualMetricScalarIdentifiability
 import RainichKaluza.NorthStarComposition

@@ -146,7 +146,7 @@ class ExactTensorTests(unittest.TestCase):
     def test_vt2_complete_detector_route_passes(self) -> None:
         artifact = build_vt2_route_artifact()
         self.assertTrue(artifact["passed"])
-        self.assertEqual(len(artifact["checks"]), 10)
+        self.assertEqual(len(artifact["checks"]), 16)
 
     def test_vt2b_benchmark_passes(self) -> None:
         artifact = build_vt2b_artifact()

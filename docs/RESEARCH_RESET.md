@@ -1,8 +1,9 @@
 # North-star research plan: generic Rainich–Kaluza identifiability
 
 Date adopted: 2026-08-12  
-Last recalibrated: 2026-08-12 after conventional regularity discharge,
-choice-free physical-complexion activity, and unique-closure confluence
+Last recalibrated: 2026-08-13 after the active formal metric-three-jet
+collision, genuine coordinate-Ricci first-jet bridge, and fixed-coordinate
+detector-germ locality theorem
 
 This is the repository's **single operational research plan**. `ROADMAP.md` is
 its compact execution view. `CLAIM_LEDGER.md` is the exact truth ledger.
@@ -70,7 +71,7 @@ only when it closes one premise of this statement.
 | a genuine `C¹` Maxwell/Hodge pair on a smooth upstream patch, with reconstructed stress, physical Hodge relation, EMD closure, scalar continuity, and an active wedge, produces a finite accepted choice with output `a²` (`3` at Kaluza coupling) | closed conditionally on those physical and regularity data; positivity follows from upstream |
 | package conventional invariant EMD physical fields, stress, Hodge relation, and closure without a detector choice, and align scalar/coupling `±` | closed |
 | intersect the selected scalar-sign germ and upstream germ into one honest open patch and compose the finite selector to an accepted output `a²` (`3` at Kaluza coupling) | closed |
-| derive selected `C²` coframe/magnitude regularity from conventional `C²` regularity of `g`, the residual, and `qSq` on an upstream patch | closed in `ActualMetricDetectorRegularity.lean` and the regularity end-to-end composition; included in the passing 2912-job root build |
+| derive selected `C²` coframe/magnitude regularity from conventional `C²` regularity of `g`, the residual, and `qSq` on an upstream patch | closed in `ActualMetricDetectorRegularity.lean` and the regularity end-to-end composition; included in the passing 2915-job root build |
 | construct the choice-free physical complexion covector from `F`, its Hodge partner, inverse metric, and `q`; derive the source-free physical effective channel; identify its stress wedge exactly with detector activity and prove the active set is open under continuity | closed in `PhysicalComplexionInvariant.lean` and `InvariantActiveWedgeOpenness.lean`; openness is proved, density is not claimed |
 | every pointwise accepted survivor returns physical `a²` | closed on `¬(O_false=0 ∧ O_true=0)`, with the displayed conventional local regularity and admissible-probe hypotheses; unsupported without that sharp exclusion |
 | compose conventional selector/regularity data and one choice-free physical activity premise into final invariant nonemptiness with output `a²` (`3` for Kaluza) | closed in `InvariantEMDPhysicalActiveEndToEnd.lean`; the residual callback is restricted to selected choices and supplies only residual `C²` |
@@ -140,8 +141,23 @@ On the stated non-null, real simple-spectrum branch:
     selector/regularity hypotheses and one choice-free physical activity
     premise into metric-only accepted-set nonemptiness with output `a²`, or
     `3` under Kaluza normalization;
-13. the local EMD-to-Ricci-flat uplift, converse reduction, and presentation
-   orbit are already proved conditional on an accepted EMD realization.
+13. an explicit active formal normal-coordinate metric three-jet is common to
+    `a=√3` and `a=1`, even though their rescaled-Maxwell first jets and
+    coupling squares differ. The common jet satisfies the point Einstein and
+    scalar equations and first Ricci prolongation; both matter branches
+    satisfy the two exterior equations at the point and point/first-jet Hodge
+    compatibility. The normal-frame Ricci contraction is connected to the
+    genuine product-rule coordinate Ricci derivative by
+    `coordinateRicciFirstJet_minkowski_zero`. This is finite formal-jet
+    non-identifiability, not two local solutions or all-order integrability;
+    the same construction has a compiled exact separation theorem: its
+    complete first channel is `(A,eta)=(0,e₂)` for both couplings, while the
+    next-order quotient returns `B=√3` and `B=1`, hence outputs `3` and `1`;
+14. the complete accepted set and every raw-choice output are extensional in
+    the fixed-coordinate metric germ. This proves locality, not nonlinear
+    coordinate covariance;
+15. the local EMD-to-Ricci-flat uplift, converse reduction, and presentation
+    orbit are already proved conditional on an accepted EMD realization.
 
 The Lean build is placeholder-free, and the exact suite contains a nonzero
 Kaluza convention ladder, an `a²=1` EMD rejection, a generic Kaluza positive,
@@ -197,6 +213,16 @@ The one active objective is:
 > complete detector and present the necessity plus unique-closure confluence
 > result cleanly in the manuscript. The full converse remains a separate later
 > theorem.
+
+The lower-order claim has also been sharpened without changing this execution
+gate. `ThirdOrderMatterJetAmbiguity.lean` gives a literal active collision of
+formal metric three-jets at coupling squares `3` and `1`, and
+`CoordinateRicciFirstJet.lean` proves that its first Ricci prolongation is the
+product-rule derivative of the existing coordinate Ricci formula at a normal
+point. `ActualMetricDetectorLocality.lean` separately proves complete
+fixed-coordinate germ extensionality of the fourth-order accepted set and
+outputs. Neither theorem supplies nonlinear chart covariance or local PDE
+realization, so exact complete-detector benchmark routing remains unchanged.
 
 An adversarial audit exposed and repaired an important quantifier error in
 the former conditional theorem: genericity cannot hold for *every* upstream
@@ -424,9 +450,12 @@ The entrance implications and final integration steps are, in order:
     adversarial routing audit proved that the original generic helical point
     does *not* pass the full finite detector: its shared timelike scalar
     radicand gate fails, so every raw choice is rejected. The replacement
-    interior point passes the exact prefix through literal scalar
-    reconstruction and the selected first-jet closure obstruction; the
-    remaining gates are explicitly uncertified.
+    interior point passes the entire exact pointwise upstream predicate:
+    literal scalar closure and reconstruction, Maxwell residual/projectors,
+    one finite frame's four strict signs, positive orientation and coordinate
+    Hodge equality. Its convention-aligned choice-free physical active wedge
+    is also exactly nonzero. The remaining uncertified gate is the selected
+    fourth-order frame/channel derivative and accepted output.
     Present nonemptiness together with per-survivor unique-closure correctness
     without suppressing the explicit regularity and admissible-probe scope.
 
@@ -452,10 +481,13 @@ an independently supplied scalar, Maxwell field, coupling, complexion,
 preferred frame, `EMDEquations`, or EMD realizer. Such objects may occur only
 as reconstructed outputs or as witnesses in the correctness direction.
 
-The third-order no-go is presently a theorem about the complete first
-curvature-seed channel system. It must not be advertised as a universal
-statement about every natural metric three-jet invariant without an
-additional formal jet-space completeness theorem.
+The third-order no-go has two exact levels. First, the complete first
+curvature-seed channel system has the shear kernel. Second, an explicit active
+formal EMD jet at `a²=3` and `a²=1` has one common normal-coordinate metric
+three-jet. The second statement rules out coupling identification from that
+formal jet within the displayed truncated equation class. It must not be
+advertised as a collision between actual local EMD solutions, an all-order
+formal-integrability result, or a universal solution-level lower bound.
 
 ## Focus rules
 
@@ -473,10 +505,11 @@ test. Theorem count and phase-checklist completion are not progress metrics.
 
 ## Publication outcomes
 
-- **Strong detector paper:** active-regular finite-coordinate nonemptiness, physical
-  correctness, confluence, the sharp channel-level third-order obstruction,
-  fourth-order coupling recovery, and exact tests; full nonlinear-coordinate
-  covariance remains an explicit upgrade.
+- **Strong detector paper:** active-regular finite-coordinate nonemptiness,
+  physical correctness, confluence, the active formal metric-three-jet
+  collision, fourth-order coupling recovery, fixed-coordinate germ locality,
+  and exact tests; local PDE realization of the collision and full
+  nonlinear-coordinate covariance remain explicit nonclaims/upgrades.
 - **Landmark paper/result:** the full finite-jet necessary-and-sufficient local
   Rainich–Kaluza recognition and uplift-orbit theorem.
 - **Fallback:** the already-proved pointwise centralizer ambiguity plus exact

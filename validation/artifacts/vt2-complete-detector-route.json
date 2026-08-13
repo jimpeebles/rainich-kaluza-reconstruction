@@ -54,6 +54,81 @@
       "name": "replacement-point-independent-physical-primal-channel-returns-three",
       "passed": true,
       "residual_sha256": "102824e66e7e52c0157c72eadae53ae560b975d6b01cb314e4743e1cd0f4102c"
+    },
+    {
+      "name": "replacement-point-reconstruction-obstruction-vanishes",
+      "passed": true,
+      "residual_sha256": "cf25ebf4b786dc9974275ac49bb1343ff8bb41a7ec586fcfa7cfcb67bd40e4b3"
+    },
+    {
+      "identities": {
+        "complementary": true,
+        "metric_self_adjoint": true,
+        "minus_idempotent": true,
+        "mutually_annihilating": true,
+        "plus_idempotent": true,
+        "square": true
+      },
+      "name": "replacement-point-maxwell-residual-and-projector-entrance-passes",
+      "passed": true,
+      "residual_sha256": "6fdb265b016eb54271e257ff6784d7b32659be7137e287c417d05185fccd97f9"
+    },
+    {
+      "choice": {
+        "maxwellMinusPivotRecipe": "second",
+        "maxwellMinusProbe0": 0,
+        "maxwellMinusProbe1": 1,
+        "maxwellPlusProbe0": 0,
+        "maxwellPlusProbe1": 1,
+        "orientationReverse": true
+      },
+      "frame_determinant": "-16*sqrt(249)/747",
+      "frame_signs": [
+        "-97*sqrt(8940594)/71812 - sqrt(498)/8",
+        "1759*sqrt(8940594)/35762376 + 53*sqrt(498)/1992",
+        "-1759*sqrt(8940594)/35762376 + 53*sqrt(498)/1992",
+        "-sqrt(498)/8 + 97*sqrt(8940594)/71812"
+      ],
+      "minus_candidate_count": 32,
+      "name": "replacement-point-selected-maxwell-frame-gates-pass",
+      "passed": true,
+      "plus_candidate_count": 8,
+      "residual_sha256": "4312f173c2d175343967ca821ce312015bf5f142408fbebb4903b3ad4f4fee40"
+    },
+    {
+      "coframe_determinant": "3*sqrt(249)/16",
+      "name": "replacement-point-selected-oriented-coframe-and-hodge-gates-pass",
+      "passed": true,
+      "residual_sha256": "050474af3342a1c993e0fb1bbf4c1d369f95c790998bc7181145eb2938afb8eb"
+    },
+    {
+      "local_density_at_point": "3*sqrt(249)/16",
+      "name": "replacement-point-physical-hodge-and-stress-align-with-detector",
+      "passed": true,
+      "physical_q_at_point": "128*sqrt(8940594)/5146083",
+      "residual_sha256": "d4ae0acf48059391dbf40db152f60539393715b8aa50511904a11f29b0882f2f"
+    },
+    {
+      "component": [
+        1,
+        2
+      ],
+      "name": "replacement-point-choice-free-physical-active-wedge-passes",
+      "omega": [
+        "0",
+        "55554*sqrt(498)/1490099",
+        "-81516*sqrt(498)/1490099",
+        "0"
+      ],
+      "passed": true,
+      "residual_sha256": "c95fb6258c2b8ae6825837229a3dce9b7a688e8658e3dc7111d0f056f8c523f7",
+      "stress_scalar_action": [
+        "0",
+        "1133312*sqrt(166)/427124889",
+        "185472*sqrt(166)/47458321",
+        "0"
+      ],
+      "value": "1486879232*sqrt(3)/30795876033"
     }
   ],
   "evidence_class": "exact-symbolic-routing-certificate-not-lean-proof",
@@ -63,6 +138,14 @@
       "theta": "pi/4"
     },
     "raw_choice_count": 6291456,
+    "replacement_maxwell_choice_prefix": {
+      "maxwellMinusPivotRecipe": "second",
+      "maxwellMinusProbe0": 0,
+      "maxwellMinusProbe1": 1,
+      "maxwellPlusProbe0": 0,
+      "maxwellPlusProbe1": 1,
+      "orientationReverse": true
+    },
     "replacement_point": {
       "r": "3/2",
       "theta": "pi/4"
@@ -74,7 +157,7 @@
     },
     "source_benchmark": "vt2-generic-helical-string"
   },
-  "input_sha256": "410bed03ab1e1efe4333dac88f53aa0ddd6be732bd8026773e8c7e2b38d552a0",
+  "input_sha256": "4a9111dc2d3540bd2d7390f4e42f41bb07aa1adcf7b1ba9aca66dd8569bc36c5",
   "passed": true,
   "route_manifest": {
     "committed_point": [
@@ -113,16 +196,28 @@
         "status": "passed-exact"
       },
       {
-        "gate": "reconstruction/Maxwell/frame/Hodge upstream suffix",
-        "status": "not-evaluated"
+        "gate": "selected scalar reconstruction obstruction",
+        "status": "passed-exact"
+      },
+      {
+        "gate": "Maxwell residual/projector entrance",
+        "status": "passed-exact"
+      },
+      {
+        "gate": "selected finite Maxwell frame and four strict signs",
+        "status": "passed-exact"
+      },
+      {
+        "gate": "selected oriented coframe and literal metric-Hodge equality",
+        "status": "passed-exact"
       },
       {
         "gate": "choice-free physical active wedge",
-        "status": "not-evaluated"
+        "status": "passed-exact-component-1-2"
       },
       {
         "gate": "complete fourth-order channel and output",
-        "status": "not-evaluated"
+        "status": "not-evaluated-expensive-second-jet-of-selected-frame-and-channel-quotient-seam"
       }
     ]
   },

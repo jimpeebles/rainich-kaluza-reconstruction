@@ -16,9 +16,15 @@ two effective variables
 where \(v=d\phi\) and \(J\) is the normalized Maxwell-stress involution.  We
 prove that these channels have an exact one-parameter shear kernel, so neither
 \(B=a\sin(2\theta)\) nor \(a^2=A^2+B^2\) is identifiable from this complete
-channel system at its third-order stage.  This is a lower bound for the
-displayed channel construction, not for every conceivable invariant of
-third-order metric data.  Constancy of \(a\) supplies one derivative later
+channel system at its third-order stage. We then exhibit a stronger active
+finite-jet collision: the Kaluza value \(a=\sqrt3\) and the non-Kaluza value
+\(a=1\) have distinct rescaled-Maxwell first jets but share one explicit
+formal normal-coordinate metric three-jet. The common jet satisfies the point
+Einstein and scalar equations and the first Ricci prolongation; each matter
+jet satisfies both exterior equations at the point and point/first-jet Hodge
+compatibility. This is a lower bound in the displayed truncated formal-jet
+class, not a collision between local EMD solutions or a universal
+solution-level lower bound. Constancy of \(a\) supplies one derivative later
 
 \[
   dA+2B\eta-B^2Jv=0.
@@ -289,8 +295,63 @@ leaves \((\eta,A)\), hence the complete channel pair, unchanged.  This is an
 exact kernel of the full channels, not a failure caused by an unfortunate
 probe.  Since changing \(B\) changes \(A^2+B^2\) in general, \(a^2\) is not
 identifiable from this complete first differentiated seed-channel system.
-This theorem does not exclude a different, presently unknown construction
-from other metric derivatives through order three.
+Taken alone, the channel theorem does not exclude a different construction
+from other metric derivatives through order three. The next subsection gives
+a metric-three-jet collision in the truncated formal equation class, while
+keeping the stronger local-solution claim explicitly open.
+
+### 4.1 An active formal metric-three-jet collision
+
+The channel kernel can be realized by a complete active finite jet rather
+than only by abstract three-form data. At a normal-coordinate point take
+
+\[
+ g_0=\operatorname{diag}(-1,1,1,1),\qquad g_1=0,
+ \qquad v=e^0,qquad \nabla^2\phi=0,
+\]
+
+and take the curvature-normalized Maxwell form to have canonical electric
+and magnetic amplitudes \((1,1)\). Thus its stress magnitude is \(q=1\), its
+quadratic scalar invariant vanishes, and its Hodge partner has amplitudes
+\((-1,1)\). Add a common closed and co-closed first-jet perturbation with
+independent entries
+
+\[
+ C_{0,12}=2,\qquad C_{2,01}=-2,
+\]
+
+and add the coupling-dependent infinitesimal duality tangent. For every
+constant \(a\), the resulting form and Hodge first jets obey
+
+\[
+ dH=\frac a2 v\wedge H,
+ \qquad d(*H)=-\frac a2v\wedge(*H).
+\]
+
+Differentiating the normalized double-angle quotients, including the
+derivative of \(q^{-1}\), reconstructs
+
+\[
+ \omega_a=e^2+\frac a2e^0,
+ \qquad (\omega_a\wedge Jv)_{02}=1.
+\]
+
+The family is therefore active for every \(a\). The coupling-dependent part
+is tangent to the duality orbit, so its Maxwell-stress first variation
+vanishes. The point Ricci source and its complete first jet are consequently
+common to all \(a\). An explicit symmetric \(g_2\) realizes the point
+Einstein equation, and an explicit fully symmetric \(g_3\) realizes the
+common differentiated Ricci source. The product-rule theorem
+`coordinateRicciFirstJet_minkowski_zero` identifies this normal-frame
+contraction with the derivative of the existing coordinate Ricci formula at
+the normal point.
+
+Specializing to \(a=\sqrt3\) and \(a=1\) gives the same formal metric
+three-jet and different coupling squares \(3\) and \(1\). Both branches also
+satisfy the point scalar equation because the balanced quadratic invariant
+vanishes. This proves genuine non-identifiability from the common metric
+three-jet **within this finite truncated formal-EMD class**. It does not prove
+that the jets prolong to all orders or arise from two local EMD solutions.
 
 For constant \(a\), differentiating \(A=a\cos(2\theta)\) and eliminating
 \(d\theta\) gives
@@ -342,6 +403,12 @@ The theorem deliberately excludes:
 - a claim that the full finite coordinate detector is already known to be
   covariant under arbitrary nonlinear chart changes.
 
+The detector does have a complete locality theorem in a fixed coordinate
+trivialization: neighborhood-equal coordinate metric fields have identical
+finite accepted sets and identical numerical outputs for every raw choice.
+This coordinate-germ extensionality must not be described as nonlinear-chart
+covariance.
+
 The scalar orientation ambiguity is not a technical defect.  The correlated
 replacement \((v,a)\mapsto(-v,-a)\) preserves the exterior EMD system and its
 metric geometry, while the detector output is unchanged.  Related
@@ -363,18 +430,23 @@ derivatives through order five; no order-four integrability replacement is
 claimed here.  Likewise, this work does not discover a previously unknown
 exact Kaluza spacetime.
 
-The complete-detector benchmark remains open.  In particular, the previously
-advertised V-T2 helical black-string sample at
+The final complete-detector channel benchmark remains open. In particular,
+the previously advertised V-T2 helical black-string sample at
 \(r=3,\theta=\pi/4\) returns \(3\) in the isolated active channel formula but,
 after audit, lies outside the causal scalar entrance; consequently its full
 accepted set is empty.  It is not a positive benchmark for
-\(\mathscr D_4\).  At \(r=3/2,\theta=\pi/4\), exact symbolic routing passes
-the algebraic, radicand, selected-probe, and literal scalar-value prefix, with
-the selected candidate equal to the physical \(d\phi\). Exact differentiation
-of the literal root, four-root-projector, normalization, and amplitude formulas
-also reduces the selected scalar-closure obstruction to zero. The remaining
-upstream suffix, physical activity, and the fourth-order accepted output are
-still uncertified, so this is not yet a positive complete-detector benchmark.
+\(\mathscr D_4\). At \(r=3/2,\theta=\pi/4\), exact symbolic routing passes
+the entire pointwise upstream predicate: the selected candidate equals the
+physical \(d\phi\), its literal closure and reconstruction obstructions
+vanish, the Maxwell residual/projector entrance passes, an enumerated finite
+frame clears all four strict signs, and the positively oriented coframe obeys
+the literal coordinate-Hodge equality. An independent convention-aligned
+physical Maxwell/Hodge calculation identifies the same residual and gives
+\((\omega\wedge S^{\mathsf T}d\phi)_{12}
+=1486879232\sqrt3/30795876033\neq0\). What remains uncertified is the literal
+fourth-order channel: differentiating the selected coframe and its
+quotient-defined cosine field. Hence this is a positive exact upstream and
+activity benchmark, but not yet a complete-detector accepted choice.
 
 ## 6. Machine-checked theorem map
 
@@ -382,11 +454,15 @@ still uncertified, so this is not yet a positive complete-detector benchmark.
 |---|---|
 | Complete order-three shear invariance | `canonicalFullComplexionCouplingChannels_shear_invariant` |
 | Order-three noninjectivity | `canonicalFullComplexionCouplingChannels_not_injective`; `canonicalPhysicalSeedChannels_not_injective` |
+| Active common formal metric three-jet at \(a^2=3\) and \(a^2=1\) | `exists_activeCommonFormalMetricThreeJet_kaluza_vs_one` |
+| Same complete first channel, distinct next-order outputs \(3\) and \(1\) | `activeAmbiguity_kaluza_vs_one_firstChannel_ambiguous_nextOrder_separates` |
+| Product-rule coordinate Ricci first-jet bridge | `coordinateRicciFirstJet_minkowski_zero` |
 | Constancy equation (1) | `nextOrderSineCouplingEquation_eq_zero` |
 | Quotient (2) and uniqueness of \(B\) | `sineCouplingFromNextOrderComponent_eq`; `nextOrderSineCoupling_unique` |
 | Recovery of \(a^2\) | `couplingSqFromNextOrderComponent_eq`; `fourthOrderCouplingSqCandidate_eq_physical` |
 | Finite component selection on the active wedge | `exists_fourthOrderComponentChoice_iff_activeWedge`; `exists_actualMetricGenericFourthOrderComponentAt_withChannel_iff` |
 | Complete finite coordinate accepted set and value | `acceptedActualMetricFourthOrderDetectorChoicesAt`; `actualMetricFourthOrderCouplingSqCandidateAt`; `mem_acceptedActualMetricFourthOrderDetectorChoicesAt_iff` |
+| Complete fixed-coordinate metric-germ locality | `actualMetricFourthOrderDetector_coordinateGerm_extensionality` |
 | Scalar-orientation invariance of the output | `fourthOrderCouplingSqCandidate_neg_scalar` |
 | Finite metric upstream selector and persistent germ | `exists_eventually_actualMetricUpstreamEntranceAt4_of_emdRicciWitnessPatch` |
 | Selected regularity from conventional data | `actualMetricDetectorRegularity_of_residual` |
@@ -431,10 +507,11 @@ the conclusion that \(a^2\), not signed \(a\), is the sharp sign-insensitive tar
 To the extent of our focused primary-source search, we are unaware of a prior
 finite coordinate construction from metric derivatives through order four
 that recovers an unknown EMD coupling magnitude on this explicit active
-regular locus under a Ricci--exterior witness, or of the specific exact shear
-obstruction for the complete first
-differentiated seed channels followed by the active-locus next-order quotient
-proved here.  This is a provisional novelty position, not a priority claim
+regular locus under a Ricci--exterior witness, or of the specific combination
+of an active formal metric-three-jet collision between \(a^2=3\) and \(a^2=1\),
+the exact shear obstruction for the complete first differentiated seed
+channels, and the active-locus next-order quotient proved here. This is a
+provisional novelty position, not a priority claim
 and not a universal lower-bound claim.  It should remain phrased as “we are
 unaware of” until citation-chain searches and review by specialists in
 Rainich theory, EMD geometry, and exact solutions are complete.
@@ -442,24 +519,32 @@ Rainich theory, EMD geometry, and exact solutions are complete.
 ## 8. Publication status
 
 The result is cohesive enough for a focused theorem-paper draft if its claim
-is kept at the present boundary: an exact shear obstruction for one complete
-third-order channel system plus a constructive finite coordinate recovery
-using metric derivatives through order four, with accepted-branch correctness
-on an explicit active regular locus and a necessary Kaluza selector.  The
+is kept at the present boundary: an active formal metric-three-jet collision
+between coupling squares `3` and `1`, an exact shear obstruction for the
+complete third-order channel system, and a constructive finite coordinate
+recovery using metric derivatives through order four, with accepted-branch
+correctness on an explicit active regular locus and a necessary Kaluza
+selector. The
 machine-checked chain is substantially stronger than a formal algebra
 exercise because it includes finite scalar/frame selection, Maxwell
 stress-fibre classification, Hodge transport, physical field-germ transfer,
 regularity promotion, invariant physical activity, and cross-choice
 correctness.
 
+The formal collision is deliberately not advertised as two local solutions:
+all-order formal integrability, higher equation prolongations, and PDE
+existence are not proved. The complete detector's fixed-coordinate germ
+locality is proved, but nonlinear-coordinate covariance remains a distinct
+upgrade.
+
 The largest remaining exposition/formal gap is to compress the long coordinate
 entrance signature into a geometric active-regular proposition and prove both
 its equivalence to the displayed finite Lean gates and the required
 nonlinear-coordinate covariance.  The complete benchmark must also be
 replaced: V-T2 at \(r=3,\theta=\pi/4\) fails causal scalar entrance, while the
-\(r=3/2,\theta=\pi/4\) candidate passes the exact prefix through its scalar
-closure gate. Its remaining upstream, activity, and accepted-output suffix is
-uncertified.
+\(r=3/2,\theta=\pi/4\) candidate passes the exact full pointwise upstream
+predicate and the choice-free physical active wedge. Its remaining
+accepted-output seam is the selected fourth-order frame/channel derivative.
 Closing those items would make the
 theorem independently readable and computationally auditable without
 inflating its mathematical scope.  Specialist novelty review is the other

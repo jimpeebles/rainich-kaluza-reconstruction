@@ -6,7 +6,393 @@ import time
 
 import sympy as sp
 
-from rk_validation.exact import ricci_tensor, simplify_matrix
+from rk_validation.exact import (
+    exterior_derivative_one_form,
+    hodge_star_two_form,
+    ricci_tensor,
+    simplify_matrix,
+)
+
+
+def _matrix_zero(matrix: sp.MatrixBase) -> bool:
+    return all(sp.simplify(entry) == 0 for entry in matrix)
+
+
+def _positive(expression: sp.Expr) -> bool:
+    return sp.ask(sp.Q.positive(sp.simplify(expression))) is True
+
+
+def _negative(expression: sp.Expr) -> bool:
+    return sp.ask(sp.Q.negative(sp.simplify(expression))) is True
+
+
+def _coordinate_hodge_two_form(
+    metric: sp.MatrixBase, two_form: sp.MatrixBase
+) -> sp.ImmutableMatrix:
+    """Literal four-dimensional coordinate Hodge formula used by Lean."""
+    inverse = simplify_matrix(metric.inv())
+    raised = simplify_matrix(inverse * two_form * inverse.T)
+
+    def epsilon(i: int, j: int, k: int, l: int) -> int:
+        indices = tuple(map(int, (i, j, k, l)))
+        if len(set(indices)) != 4:
+            return 0
+        inversions = sum(
+            indices[a] > indices[b]
+            for a in range(4)
+            for b in range(a + 1, 4)
+        )
+        return -1 if inversions % 2 else 1
+
+    complement = sp.ImmutableMatrix(
+        4,
+        4,
+        lambda i, j: sum(
+            epsilon(i, j, k, l) * raised[k, l]
+            for k in range(4)
+            for l in range(4)
+        ),
+    )
+    return simplify_matrix(-sp.sqrt(-metric.det()) * complement / 2)
+
+
+def replacement_upstream_point_certificate(
+    metric: sp.ImmutableMatrix,
+    mixed_ricci: sp.ImmutableMatrix,
+    q_sq: sp.Expr,
+    selected_scalar: sp.ImmutableMatrix,
+) -> dict[str, object]:
+    """Route the literal pointwise suffix after scalar closure.
+
+    The selected scalar has already been certified equal to the literal
+    fixed-probe candidate.  This routine evaluates the reconstruction and
+    Maxwell gates, performs the finite Maxwell-frame search, and checks the
+    selected coordinate Hodge equality exactly.
+    """
+    identity = sp.eye(4)
+    raised_scalar = simplify_matrix(metric.inv() * selected_scalar)
+    scalar_contribution = simplify_matrix(raised_scalar * selected_scalar.T / 2)
+    scalar_trace = sp.simplify((selected_scalar.T * raised_scalar)[0] / 2)
+    reconstruction = simplify_matrix(
+        mixed_ricci * scalar_contribution
+        + scalar_contribution * mixed_ricci
+        - scalar_trace * scalar_contribution
+        - (mixed_ricci * mixed_ricci - q_sq * identity)
+    )
+
+    residual = simplify_matrix(mixed_ricci - scalar_contribution)
+    q = sp.sqrt(q_sq)
+    minus_projector = simplify_matrix((identity - residual / q) / 2)
+    plus_projector = simplify_matrix((identity + residual / q) / 2)
+    maxwell_checks = {
+        "square": _matrix_zero(residual * residual - q_sq * identity),
+        "metric_self_adjoint": _matrix_zero(
+            (metric * residual).T - metric * residual
+        ),
+        "minus_idempotent": _matrix_zero(
+            minus_projector * minus_projector - minus_projector
+        ),
+        "plus_idempotent": _matrix_zero(
+            plus_projector * plus_projector - plus_projector
+        ),
+        "mutually_annihilating": _matrix_zero(minus_projector * plus_projector),
+        "complementary": _matrix_zero(minus_projector + plus_projector - identity),
+    }
+
+    def pairing(left: sp.MatrixBase, right: sp.MatrixBase) -> sp.Expr:
+        return sp.simplify((left.T * metric * right)[0])
+
+    def orthogonal_remainder(
+        pivot: sp.MatrixBase, companion: sp.MatrixBase
+    ) -> sp.ImmutableMatrix:
+        return simplify_matrix(
+            companion - pairing(pivot, companion) * pivot / pairing(pivot, pivot)
+        )
+
+    recipes = (
+        "first",
+        "second",
+        "firstWeighted",
+        "secondWeighted",
+        "sum",
+        "difference",
+    )
+
+    def pivot_pair(
+        x: sp.MatrixBase, y: sp.MatrixBase, recipe: str
+    ) -> tuple[sp.ImmutableMatrix, sp.ImmutableMatrix]:
+        if recipe == "first":
+            return sp.ImmutableMatrix(x), sp.ImmutableMatrix(y)
+        if recipe == "second":
+            return sp.ImmutableMatrix(y), sp.ImmutableMatrix(x)
+        if recipe == "firstWeighted":
+            return simplify_matrix(pairing(x, y) * x - pairing(x, x) * y), sp.ImmutableMatrix(x)
+        if recipe == "secondWeighted":
+            return simplify_matrix(pairing(y, y) * x - pairing(x, y) * y), sp.ImmutableMatrix(y)
+        if recipe == "sum":
+            return simplify_matrix(x + y), sp.ImmutableMatrix(x)
+        return simplify_matrix(x - y), sp.ImmutableMatrix(x)
+
+    minus_candidates: list[
+        tuple[
+            int,
+            int,
+            str,
+            sp.ImmutableMatrix,
+            sp.ImmutableMatrix,
+            sp.Expr,
+            sp.Expr,
+        ]
+    ] = []
+    for probe0 in range(4):
+        for probe1 in range(4):
+            x = minus_projector[:, probe0]
+            y = minus_projector[:, probe1]
+            for recipe in recipes:
+                pivot, companion = pivot_pair(x, y, recipe)
+                pivot_norm = pairing(pivot, pivot)
+                if not _negative(pivot_norm):
+                    continue
+                remainder = orthogonal_remainder(pivot, companion)
+                remainder_norm = pairing(remainder, remainder)
+                if _positive(remainder_norm):
+                    minus_candidates.append(
+                        (
+                            probe0,
+                            probe1,
+                            recipe,
+                            pivot,
+                            remainder,
+                            pivot_norm,
+                            remainder_norm,
+                        )
+                    )
+
+    plus_candidates: list[
+        tuple[int, int, sp.ImmutableMatrix, sp.ImmutableMatrix, sp.Expr, sp.Expr]
+    ] = []
+    for probe0 in range(4):
+        for probe1 in range(4):
+            pivot = plus_projector[:, probe0]
+            pivot_norm = pairing(pivot, pivot)
+            if not _positive(pivot_norm):
+                continue
+            remainder = orthogonal_remainder(pivot, plus_projector[:, probe1])
+            remainder_norm = pairing(remainder, remainder)
+            if _positive(remainder_norm):
+                plus_candidates.append(
+                    (probe0, probe1, pivot, remainder, pivot_norm, remainder_norm)
+                )
+
+    if not minus_candidates or not plus_candidates:
+        return {
+            "reconstruction_zero": _matrix_zero(reconstruction),
+            "reconstruction_obstruction": reconstruction,
+            "maxwell_checks": maxwell_checks,
+            "maxwell_entrance": all(maxwell_checks.values()),
+            "frame_found": False,
+            "minus_candidate_count": len(minus_candidates),
+            "plus_candidate_count": len(plus_candidates),
+        }
+
+    (
+        minus_probe0,
+        minus_probe1,
+        recipe,
+        timelike,
+        lorentz_remainder,
+        timelike_norm,
+        lorentz_remainder_norm,
+    ) = minus_candidates[0]
+    (
+        plus_probe0,
+        plus_probe1,
+        spacelike,
+        space_remainder,
+        spacelike_norm,
+        space_remainder_norm,
+    ) = plus_candidates[0]
+    tetrad = simplify_matrix(
+        sp.Matrix.hstack(
+            timelike / sp.sqrt(-timelike_norm),
+            lorentz_remainder / sp.sqrt(lorentz_remainder_norm),
+            spacelike / sp.sqrt(spacelike_norm),
+            space_remainder / sp.sqrt(space_remainder_norm),
+        )
+    )
+    minkowski = sp.diag(-1, 1, 1, 1)
+    frame_det = sp.simplify(sp.radsimp(tetrad.det()))
+    base_coframe = simplify_matrix(tetrad.inv())
+    if _positive(frame_det):
+        orientation_reverse = False
+        coframe = base_coframe
+    elif _negative(frame_det):
+        orientation_reverse = True
+        coframe = simplify_matrix(sp.diag(1, 1, 1, -1) * base_coframe)
+    else:
+        raise AssertionError("selected exact frame determinant has unknown sign")
+    coframe_det = sp.simplify((-1 if orientation_reverse else 1) / frame_det)
+    amplitude = sp.sqrt(2 * q)
+    canonical_electric = sp.zeros(4)
+    canonical_electric[0, 1] = amplitude
+    canonical_electric[1, 0] = -amplitude
+    canonical_hodge = sp.zeros(4)
+    canonical_hodge[2, 3] = amplitude
+    canonical_hodge[3, 2] = -amplitude
+    electric_seed = simplify_matrix(coframe.T * canonical_electric * coframe)
+    transported_hodge = simplify_matrix(coframe.T * canonical_hodge * coframe)
+    metric_hodge = _coordinate_hodge_two_form(metric, electric_seed)
+    frame_signs = (
+        timelike_norm,
+        lorentz_remainder_norm,
+        spacelike_norm,
+        space_remainder_norm,
+    )
+    return {
+        "reconstruction_zero": _matrix_zero(reconstruction),
+        "reconstruction_obstruction": reconstruction,
+        "maxwell_checks": maxwell_checks,
+        "maxwell_entrance": all(maxwell_checks.values()),
+        "residual": residual,
+        "minus_projector": minus_projector,
+        "plus_projector": plus_projector,
+        "frame_found": True,
+        "minus_candidate_count": len(minus_candidates),
+        "plus_candidate_count": len(plus_candidates),
+        "frame_choice": {
+            "maxwellMinusProbe0": minus_probe0,
+            "maxwellMinusProbe1": minus_probe1,
+            "maxwellMinusPivotRecipe": recipe,
+            "maxwellPlusProbe0": plus_probe0,
+            "maxwellPlusProbe1": plus_probe1,
+            "orientationReverse": orientation_reverse,
+        },
+        "frame_signs": frame_signs,
+        "pseudo_orthonormal": _matrix_zero(tetrad.T * metric * tetrad - minkowski),
+        "frame_det": frame_det,
+        "coframe_metric": _matrix_zero(coframe.T * minkowski * coframe - metric),
+        "coframe_det": coframe_det,
+        "coframe_det_positive": _positive(coframe_det),
+        "hodge_obstruction": simplify_matrix(metric_hodge - transported_hodge),
+        "hodge_compatible": _matrix_zero(metric_hodge - transported_hodge),
+    }
+
+
+def replacement_physical_active_certificate(
+    coordinates: tuple[sp.Symbol, ...],
+    metric: sp.ImmutableMatrix,
+    scalar: sp.Expr,
+    potential: tuple[sp.Expr, ...],
+    fiber_norm: sp.Expr,
+    mixed_ricci_at_point: sp.ImmutableMatrix,
+    q_sq_at_point: sp.Expr,
+) -> dict[str, object]:
+    """Exact choice-free physical active-wedge certificate.
+
+    The local volume density uses the positive ``r>0, sin(theta)>0`` germ
+    containing the replacement point.  ``hodge_star_two_form`` has the
+    opposite orientation sign from Lean's ``coordinateMetricHodgeTwoForm4``,
+    hence the explicit negation below.
+    """
+    t, radius, theta, phi = coordinates
+    point = {
+        t: sp.S.Zero,
+        radius: sp.Rational(3, 2),
+        theta: sp.pi / 4,
+        phi: sp.S.Zero,
+    }
+    inverse = simplify_matrix(metric.inv())
+    physical_field = simplify_matrix(
+        fiber_norm ** sp.Rational(3, 4)
+        * exterior_derivative_one_form(coordinates, potential)
+        / sp.sqrt(2)
+    )
+    local_density = sp.sqrt(
+        radius**3 * (radius**3 * sp.sin(theta) ** 2 + radius + 2)
+    ) * sp.sin(theta)
+    physical_hodge = simplify_matrix(
+        -hodge_star_two_form(metric, physical_field, volume_density=local_density)
+    )
+    core_ff = simplify_matrix(inverse * physical_field * inverse * physical_field)
+    core_fh = simplify_matrix(inverse * physical_field * inverse * physical_hodge)
+    trace_ff = sp.factor(sp.trace(core_ff))
+    trace_fh = sp.factor(sp.trace(core_fh))
+    physical_q = sp.factor(sp.sqrt(sp.factor(trace_ff**2 + trace_fh**2)) / 4)
+    cosine = sp.factor(trace_ff / (4 * physical_q))
+    sine = sp.factor(-trace_fh / (4 * physical_q))
+    unit_circle = sp.factor(cosine**2 + sine**2)
+    omega = sp.ImmutableMatrix(
+        [
+            sp.factor(
+                (
+                    cosine * sp.diff(sine, coordinate)
+                    - sine * sp.diff(cosine, coordinate)
+                )
+                / 2
+            )
+            for coordinate in coordinates
+        ]
+    )
+
+    metric_point = simplify_matrix(metric.subs(point))
+    inverse_point = simplify_matrix(metric_point.inv())
+    field_point = simplify_matrix(physical_field.subs(point))
+    hodge_point = simplify_matrix(physical_hodge.subs(point))
+    literal_hodge_point = _coordinate_hodge_two_form(metric_point, field_point)
+    hodge_squared_point = _coordinate_hodge_two_form(metric_point, literal_hodge_point)
+    density_point = sp.simplify(local_density.subs(point))
+    omega_point = simplify_matrix(omega.subs(point))
+    scalar_point = sp.ImmutableMatrix(
+        [sp.simplify(sp.diff(scalar, coordinate).subs(point)) for coordinate in coordinates]
+    )
+    core_point = simplify_matrix(core_ff.subs(point))
+    stress_point = simplify_matrix(
+        -core_point + sp.trace(core_point) * sp.eye(4) / 4
+    )
+    raised_scalar = simplify_matrix(inverse_point * scalar_point)
+    detector_residual = simplify_matrix(
+        mixed_ricci_at_point - raised_scalar * scalar_point.T / 2
+    )
+    stress_scalar_action = simplify_matrix(stress_point.T * scalar_point)
+    wedge = {
+        (i, j): sp.simplify(
+            omega_point[i] * stress_scalar_action[j]
+            - omega_point[j] * stress_scalar_action[i]
+        )
+        for i in range(4)
+        for j in range(i + 1, 4)
+    }
+    physical_q_point = sp.simplify(physical_q.subs(point))
+    return {
+        "local_density_squared": sp.simplify(local_density**2 + metric.det()),
+        "local_density_at_point": density_point,
+        "local_density_positive": _positive(density_point),
+        "hodge_matches_literal_at_point": _matrix_zero(
+            hodge_point - literal_hodge_point
+        ),
+        "hodge_squares_to_minus_at_point": _matrix_zero(
+            hodge_squared_point + field_point
+        ),
+        "double_angle_unit_circle": sp.simplify(unit_circle - 1),
+        "physical_q_at_point": physical_q_point,
+        "detector_q_at_point": sp.sqrt(q_sq_at_point),
+        "physical_q_matches_detector": sp.simplify(
+            physical_q_point - sp.sqrt(q_sq_at_point)
+        )
+        == 0,
+        "stress_matches_detector_residual": _matrix_zero(
+            stress_point - detector_residual
+        ),
+        "stress_square_matches_detector_q_sq": _matrix_zero(
+            stress_point * stress_point - q_sq_at_point * sp.eye(4)
+        ),
+        "omega_at_point": omega_point,
+        "stress_scalar_action_at_point": stress_scalar_action,
+        "wedge_components": wedge,
+        "active_component": (1, 2),
+        "active_value": wedge[(1, 2)],
+        "active": sp.simplify(wedge[(1, 2)]) != 0,
+    }
 
 
 def _zero_certificate(expression: sp.Expr) -> tuple[bool, str, int, str]:

@@ -17,6 +17,18 @@ The first differentiated Rainich channels have a proved shear kernel. One
 further coordinate derivative recovers `aGeomSq` on the active locus; full
 realization may honestly require derivatives through order five.
 
+The order separation now has an exact active formal witness. The Kaluza value
+`a²=3` and a non-Kaluza value `a²=1` share one explicit normal-coordinate
+metric three-jet satisfying the point Einstein and scalar equations and the
+first Ricci prolongation, while their distinct Maxwell first jets satisfy both
+exterior equations and point/first-jet Hodge compatibility. The
+product-rule `CoordinateRicciFirstJet` bridge gives the Ricci-prolongation
+statement its literal coordinate meaning. This is a finite formal-jet
+collision, not a pair of local solutions or an all-order integrability result.
+For this witness the order jump is explicit: both couplings share the complete
+first channel `(A,eta)=(0,e₂)`, whereas the fixed active next-order component
+recovers `B=√3` and `B=1`, producing squared outputs `3` and `1`.
+
 ## Current gate — exact routing and publication theorem presentation
 
 Prove that every packaged Ricci--exterior EMD witness satisfying the active
@@ -168,12 +180,23 @@ Current substeps:
    physical Maxwell-complexion activity premise, and a callback supplying only
    selected-residual `C²`. It concludes that the metric-only accepted set has
    a member returning physical `a²`; the Kaluza corollary returns `3`.
-12. **Exact check and theorem presentation — active.** The routing audit found
+12. **Active formal lower-order collision and fixed-coordinate locality —
+    complete.** `ThirdOrderMatterJetAmbiguity.lean` exhibits the common active
+    formal metric three-jet at `a=√3` and `a=1`, with all point/first-jet
+    equations stated above. `CoordinateRicciFirstJet.lean` identifies its
+    normal-frame Ricci derivative with the product-rule derivative of the
+    coordinate Ricci formula. `ActualMetricDetectorLocality.lean` proves that
+    neighborhood-equal coordinate metric fields give the same complete finite
+    accepted set and the same numerical raw-choice outputs. The latter is
+    fixed-coordinate germ extensionality, not chart covariance.
+13. **Exact check and theorem presentation — active.** The routing audit found
    that the original helical point is outside the detector's causal scalar
    branch and therefore has an empty accepted set. A replacement interior
-   point passes the exact prefix through literal scalar reconstruction and
-   its full first-jet closure gate, but the remaining gates are not certified.
-   Complete that route, and state the
+   point now passes the entire exact pointwise upstream predicate, including
+   reconstruction, Maxwell projectors, a finite signed frame, oriented Hodge
+   compatibility, and the choice-free physical active wedge. The remaining
+   route is the selected fourth-order frame/channel derivative and accepted
+   output. Complete that route, and state the
    necessity plus unique-closure pointwise-confluence theorem compactly for
    publication without hiding its regularity or admissible-probe assumptions.
 
@@ -203,6 +226,9 @@ manifold-library migration until the two gates above close.
 - The compiled active-regular finite-coordinate necessity/identifiability
   theorem is a strong detector-paper nucleus even without the converse;
   nonlinear-coordinate covariance is a separate upgrade.
+- The active `a²=3` versus `a²=1` formal metric-three-jet collision is a
+  sharp lower-order companion theorem only at the finite formal-jet level; it
+  is not advertised as a collision between actual local EMD solutions.
 - The full necessary-and-sufficient uplift theorem is the landmark result.
 - The helical black-string reduction is validation, not a new local solution.
 - Any priority claim remains provisional pending specialist review.

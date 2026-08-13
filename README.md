@@ -15,8 +15,9 @@ where that theorem fails or changes form.
 
 ## Current research focus
 
-The repository was adversarially re-audited on 2026-08-12. The formal
-infrastructure is substantial and builds without placeholders, but the full
+The repository was adversarially re-audited on 2026-08-12 and sharpened on
+2026-08-13. The formal infrastructure is substantial and builds without
+placeholders, but the full
 metric-only recognition converse is not yet proved. The finite detector
 itself takes only the metric. On the explicit active regular locus, packaged
 physical EMD data now give an accepted survivor with output `a²`, and every
@@ -32,6 +33,30 @@ curvature-seed derivative channels have an exact one-parameter shear kernel,
 so the former third-order coupling claim is false. One derivative later,
 constancy of the physical EMD coupling breaks that kernel on the active locus
 and constructs `aGeomSq=A²+B²=a²` using metric derivatives through order four.
+The lower-order obstruction is now stronger than the original channel-level
+statement. `ThirdOrderMatterJetAmbiguity.lean` constructs one explicit
+**active formal normal-coordinate metric three-jet** shared by the Kaluza
+coupling `a=√3` and the non-Kaluza control `a=1`. The two branches have
+distinct Maxwell first jets and coupling squares `3` and `1`, while the common
+metric jet satisfies the point Einstein equation, its first Ricci
+prolongation, and the point scalar equation; each matter jet satisfies both
+exterior EMD equations at the point and the point/first-jet Hodge relation.
+`CoordinateRicciFirstJet.lean` proves that the displayed normal-frame
+contraction is the genuine product-rule derivative of the coordinate Ricci
+formula at `g₁=0`. This is a finite formal-jet collision, not two local EMD
+solutions, an all-order formal-integrability theorem, or a universal
+solution-level third-order lower bound.
+The companion theorem
+`activeAmbiguity_kaluza_vs_one_firstChannel_ambiguous_nextOrder_separates`
+makes the order separation literal: both branches have the same complete
+first channel `(A,eta)=(0,e₂)`, while the next-order quotient returns
+`B=√3` versus `B=1` and squared outputs `3` versus `1`.
+
+The complete detector is also now proved local in the precise fixed-coordinate
+sense: neighborhood-equal coordinate metric fields have the same accepted
+finite set and the same output for every raw choice. This coordinate-germ
+extensionality is not nonlinear-coordinate covariance.
+
 The compiled theorem says that every packaged Ricci--exterior EMD witness
 satisfying the displayed regular and active hypotheses produces a survivor
 of the explicit finite metric-only detector; on the unique scalar-closure
@@ -148,13 +173,15 @@ every accepted survivor makes the complete finite output image exactly
 nonemptiness on the explicit active regular locus: its callback asks only for
 selected-residual `C²`, and its sole activity premise is the choice-free
 physical Maxwell-complexion condition. The immediate tasks are exact benchmark
-routing and manuscript presentation, followed separately by the converse.
+routing of the final fourth-order channel and manuscript presentation,
+followed separately by the converse.
 The first complete routing audit found that the original helical point fails
 the detector's causal scalar-radicand gate, despite passing the physical EMD
 channel. A replacement point passes the exact prefix through literal scalar
-reconstruction and its selected closure obstruction, but is not yet a
-certified accepted detector instance. No new
-exact Kaluza spacetime has been discovered.
+reconstruction and now clears the full pointwise upstream predicate plus the
+choice-free physical active wedge, but its selected fourth-order channel has
+not yet been evaluated and it is not a certified accepted detector instance.
+No new exact Kaluza spacetime has been discovered.
 
 [`docs/RESEARCH_RESET.md`](docs/RESEARCH_RESET.md) is the single operational
 plan. The older high-impact and realigned phase documents are historical
@@ -568,8 +595,11 @@ derives the effective channel and exact activity equivalence. Pointwise all-
 survivor correctness is proved on unique scalar closure; the two-closed-branch
 locus is explicitly excluded. The compatible normal-gauge `C²` EMD realizer
 belongs to the later converse and is not an input to the necessity detector.
-Necessity composition is closed; complete benchmark routing and theorem
-presentation now precede the separate converse.
+Necessity composition is closed. Exact V-T2 routing at the replacement point
+now clears the full pointwise upstream predicate and the convention-aligned
+choice-free physical active wedge. The remaining benchmark seam is the
+literal fourth-order selected-frame/channel derivative and accepted output;
+that computation and theorem presentation precede the separate converse.
 See the [`research reset`](docs/RESEARCH_RESET.md) for the active theorem,
 forbidden-input audit, exact-metric gates, and publication decision points.
 

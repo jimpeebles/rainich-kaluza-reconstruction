@@ -25,7 +25,11 @@ from rk_validation.exact import (
     simplify_matrix,
     wedge_one_form_two_form,
 )
-from rk_validation.helical_detector import replacement_scalar_closure_certificate
+from rk_validation.helical_detector import (
+    replacement_physical_active_certificate,
+    replacement_scalar_closure_certificate,
+    replacement_upstream_point_certificate,
+)
 
 
 SCHEMA_VERSION = 1
@@ -212,7 +216,9 @@ def _physical_primal_coupling_squares(radius: sp.Rational | sp.Integer) -> tuple
 
 
 def build_artifact() -> dict[str, object]:
-    coordinates, metric, scalar, _ = _metric_fields()
+    coordinates, metric, scalar, potential = _metric_fields()
+    _, r, theta, _ = coordinates
+    fiber_norm = (r**3 * sp.sin(theta) ** 2 + r + 2) / r
     committed = _spectral_point(sp.Integer(3))
     replacement = _spectral_point(sp.Rational(3, 2))
     committed_gate = sp.simplify(-2 * committed["diagonal_a"])
@@ -224,6 +230,21 @@ def build_artifact() -> dict[str, object]:
     physical_squares_3 = _physical_primal_coupling_squares(sp.Integer(3))
     physical_squares_replacement = _physical_primal_coupling_squares(sp.Rational(3, 2))
     closure = replacement_scalar_closure_certificate(coordinates, metric, scalar)
+    upstream = replacement_upstream_point_certificate(
+        replacement["G"],
+        replacement["R"],
+        replacement["q_sq"],
+        scalar_gradient,
+    )
+    physical_active = replacement_physical_active_certificate(
+        coordinates,
+        metric,
+        scalar,
+        potential,
+        fiber_norm,
+        replacement["R"],
+        replacement["q_sq"],
+    )
 
     checks = [
         {
@@ -287,6 +308,83 @@ def build_artifact() -> dict[str, object]:
             and all(value == 3 for value in physical_squares_replacement),
             "residual_sha256": _digest(*(value - 3 for value in physical_squares_replacement)),
         },
+        {
+            "name": "replacement-point-reconstruction-obstruction-vanishes",
+            "passed": bool(upstream["reconstruction_zero"]),
+            "residual_sha256": _digest(*list(upstream["reconstruction_obstruction"])),
+        },
+        {
+            "name": "replacement-point-maxwell-residual-and-projector-entrance-passes",
+            "passed": bool(upstream["maxwell_entrance"]),
+            "identities": upstream["maxwell_checks"],
+            "residual_sha256": _digest(
+                *list(upstream["residual"] * upstream["residual"]
+                    - replacement["q_sq"] * sp.eye(4)),
+                *list((replacement["G"] * upstream["residual"]).T
+                    - replacement["G"] * upstream["residual"]),
+            ),
+        },
+        {
+            "name": "replacement-point-selected-maxwell-frame-gates-pass",
+            "passed": bool(upstream["frame_found"])
+            and bool(upstream["pseudo_orthonormal"])
+            and sp.simplify(upstream["frame_det"] + 16 * sp.sqrt(249) / 747) == 0
+            and all(
+                _negative(value) if index == 0 else _positive(value)
+                for index, value in enumerate(upstream["frame_signs"])
+            ),
+            "choice": upstream["frame_choice"],
+            "minus_candidate_count": upstream["minus_candidate_count"],
+            "plus_candidate_count": upstream["plus_candidate_count"],
+            "frame_signs": [str(value) for value in upstream["frame_signs"]],
+            "frame_determinant": str(upstream["frame_det"]),
+            "residual_sha256": _digest(
+                *upstream["frame_signs"],
+                upstream["frame_det"] + 16 * sp.sqrt(249) / 747,
+            ),
+        },
+        {
+            "name": "replacement-point-selected-oriented-coframe-and-hodge-gates-pass",
+            "passed": bool(upstream["coframe_metric"])
+            and bool(upstream["coframe_det_positive"])
+            and sp.simplify(upstream["coframe_det"] - 3 * sp.sqrt(249) / 16) == 0
+            and bool(upstream["hodge_compatible"]),
+            "coframe_determinant": str(upstream["coframe_det"]),
+            "residual_sha256": _digest(
+                *list(upstream["hodge_obstruction"]),
+                upstream["coframe_det"],
+            ),
+        },
+        {
+            "name": "replacement-point-physical-hodge-and-stress-align-with-detector",
+            "passed": physical_active["local_density_squared"] == 0
+            and bool(physical_active["local_density_positive"])
+            and bool(physical_active["hodge_matches_literal_at_point"])
+            and bool(physical_active["hodge_squares_to_minus_at_point"])
+            and physical_active["double_angle_unit_circle"] == 0
+            and bool(physical_active["physical_q_matches_detector"])
+            and bool(physical_active["stress_matches_detector_residual"])
+            and bool(physical_active["stress_square_matches_detector_q_sq"]),
+            "local_density_at_point": str(physical_active["local_density_at_point"]),
+            "physical_q_at_point": str(physical_active["physical_q_at_point"]),
+            "residual_sha256": _digest(
+                physical_active["local_density_squared"],
+                physical_active["double_angle_unit_circle"],
+                physical_active["physical_q_at_point"]
+                    - physical_active["detector_q_at_point"],
+            ),
+        },
+        {
+            "name": "replacement-point-choice-free-physical-active-wedge-passes",
+            "passed": bool(physical_active["active"]),
+            "component": list(physical_active["active_component"]),
+            "value": str(physical_active["active_value"]),
+            "omega": [str(value) for value in physical_active["omega_at_point"]],
+            "stress_scalar_action": [
+                str(value) for value in physical_active["stress_scalar_action_at_point"]
+            ],
+            "residual_sha256": _digest(physical_active["active_value"]),
+        },
     ]
     input_spec = {
         "source_benchmark": "vt2-generic-helical-string",
@@ -298,6 +396,7 @@ def build_artifact() -> dict[str, object]:
             "scalarSpacelikeProbe": 2,
             "relativeMinus": False,
         },
+        "replacement_maxwell_choice_prefix": upstream["frame_choice"],
     }
     route_manifest = {
         "committed_point": [
@@ -311,9 +410,15 @@ def build_artifact() -> dict[str, object]:
             {"gate": "selected scalar fixed-probe signs", "status": "passed-exact"},
             {"gate": "selected literal scalar candidate value", "status": "passed-exact-equals-dphi"},
             {"gate": "selected literal scalar closure first jet", "status": "passed-exact"},
-            {"gate": "reconstruction/Maxwell/frame/Hodge upstream suffix", "status": "not-evaluated"},
-            {"gate": "choice-free physical active wedge", "status": "not-evaluated"},
-            {"gate": "complete fourth-order channel and output", "status": "not-evaluated"},
+            {"gate": "selected scalar reconstruction obstruction", "status": "passed-exact"},
+            {"gate": "Maxwell residual/projector entrance", "status": "passed-exact"},
+            {"gate": "selected finite Maxwell frame and four strict signs", "status": "passed-exact"},
+            {"gate": "selected oriented coframe and literal metric-Hodge equality", "status": "passed-exact"},
+            {"gate": "choice-free physical active wedge", "status": "passed-exact-component-1-2"},
+            {
+                "gate": "complete fourth-order channel and output",
+                "status": "not-evaluated-expensive-second-jet-of-selected-frame-and-channel-quotient-seam",
+            },
         ],
     }
     return {

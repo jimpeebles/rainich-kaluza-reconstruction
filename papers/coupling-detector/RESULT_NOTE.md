@@ -1,6 +1,6 @@
 # Result note: third-order obstruction, fourth-order recovery
 
-Date: 2026-08-12
+Date: 2026-08-13
 
 > **Current formal boundary.** Channel-level recovery and transported-seed
 > nonemptiness are proved, and the metric-only construction now produces a
@@ -33,6 +33,14 @@ Date: 2026-08-12
 > output `a²`; the Kaluza corollary returns `3`. Exact complete-detector
 > benchmark routing, exposition/novelty validation, and the separate converse
 > remain.
+>
+> A new active formal metric-three-jet collision sharpens the lower-order
+> result. The Kaluza coupling `a=√3` and the non-Kaluza control `a=1` share
+> one explicit formal normal-coordinate metric `j3`, while their distinct
+> rescaled-Maxwell first jets satisfy the displayed point/first-jet EMD
+> equations. The genuine coordinate-Ricci first-jet bridge and complete
+> fixed-coordinate detector-germ locality are also compiled. These are not
+> local PDE solutions, all-order integrability, or nonlinear chart covariance.
 
 The strongest coherent result in the repository has changed.  The former
 evaluated two-channel constructor was mathematically correct in an aligned
@@ -68,6 +76,38 @@ dtheta -> dtheta - (tau/2)Jv
 
 leaves the complete channels unchanged.  This makes the physical channel map
 noninjective and rules out the previous third-order coupling claim.
+
+That kernel now has a physically active finite-jet representative. At a
+Minkowski normal point, use `v=e^0`, zero scalar Hessian, and the balanced
+non-null curvature-normalized Maxwell/Hodge pair with amplitudes `(1,1)` and
+`(-1,1)`. Add the common closed and co-closed first-jet perturbation
+
+```text
+C_0,12 = 2,   C_2,01 = -2,
+```
+
+and the coupling-dependent duality tangent. After differentiating the
+double-angle quotients with the required `dq` normalization term, the
+physical complexion is
+
+```text
+omega_a = e^2 + (a/2)e^0,
+(omega_a wedge Jv)_02 = 1.
+```
+
+Thus every branch is active. The duality tangent has zero Maxwell-stress
+first variation, so the point Ricci source and its first jet are common. An
+explicit symmetric `g2` and fully symmetric `g3` realize those common data.
+The theorem `coordinateRicciFirstJet_minkowski_zero` identifies the displayed
+normal-frame first prolongation with the genuine product-rule derivative of
+coordinate Ricci. Consequently `a=√3` and `a=1` have the same formal metric
+three-jet but coupling squares `3` and `1`. Both satisfy the point Einstein
+and scalar equations, first Einstein/Ricci prolongation, both exterior
+equations at the point, and point/first-jet Hodge compatibility.
+
+This is a collision in a finite truncated formal-EMD jet class. It is not a
+claim that the jets prolong to all orders or arise from two local EMD
+solutions.
 
 For constant physical coupling,
 
@@ -208,7 +248,8 @@ This is not a failed third-order proof patched by more probes.  It is a sharp
 identifiability result:
 
 - the metric three-jet reaches a genuine one-dimensional information barrier
-  in the first differentiated EMD/Rainich system;
+  in the first differentiated EMD/Rainich system, now witnessed by an active
+  common formal metric `j3` at coupling squares `3` and `1`;
 - one additional metric derivative breaks that barrier on the active locus
   because `a` is a constant theory parameter;
 - the resulting scalar is the orientation-independent physical coupling
@@ -220,6 +261,10 @@ The detailed derivation and theorem boundary are in
 This result is a new identifiability theorem candidate, not a newly discovered
 exact Kaluza spacetime. The helical Schwarzschild-string reduction is a
 validation oracle built from a known Ricci-flat seed.
+
+The complete detector is also local in a fixed coordinate trivialization:
+equal metric germs give the same finite accepted set and every raw-choice
+output. This germ extensionality is not nonlinear-coordinate covariance.
 
 ## What may be claimed now
 
@@ -248,12 +293,24 @@ probe hypotheses; hence all survivors agree on that locus. The exclusion is
 sharp for the present argument because both relative-sign scalar branches may
 close. `InvariantEMDPhysicalActiveEndToEnd.lean` closes the nonemptiness
 composition with one choice-free physical-active premise and a callback that
-supplies only selected-residual `C²`. The publication work now is exact
-complete-detector routing and theorem exposition/novelty validation. The
-repository does not yet prove the full local converse: reconstructing an
+supplies only selected-residual `C²`. Exact V-T2 routing now certifies the full
+pointwise upstream predicate and choice-free physical active wedge at the
+replacement point. The remaining publication computation is the selected
+fourth-order channel/output, followed by theorem exposition and novelty
+validation. The repository does not yet prove the full local converse:
+reconstructing an
 actual constant coupling and complexion requires the remaining relation for
 `dB`, which may introduce a fifth metric derivative unless a fourth-order
 integrability formulation is found.
+
+Separately, `exists_activeCommonFormalMetricThreeJet_kaluza_vs_one` proves the
+active formal `a²=3` versus `a²=1` collision, and
+`activeAmbiguity_kaluza_vs_one_firstChannel_ambiguous_nextOrder_separates`
+proves that its shared complete first channel `(A,eta)=(0,e₂)` separates one
+order later into `B=√3` versus `B=1` and outputs `3` versus `1`. Finally,
+`actualMetricFourthOrderDetector_coordinateGerm_extensionality` proves
+fixed-coordinate detector locality. Neither statement upgrades the necessity
+theorem to a local converse or a chart-covariant classification.
 
 The detector now enriches its finite coordinate-pair choices with six
 metric-dependent Lorentzian pivot recipes. A Lean theorem proves that any
@@ -300,7 +357,8 @@ full finite detector and present and validate the theorem's novelty.
 ## Publication route
 
 The detector paper should be organized around the lower-order obstruction and
-the higher-order recovery, with the existing zero/one/two scalar classifier
-and exact EMD/Kaluza tests as the geometric setting.  The full local Kaluza
-recognition theorem should be presented only as a later corollary if its
+its active formal metric-three-jet witness, followed by the higher-order
+recovery, with the existing zero/one/two scalar classifier and exact EMD/Kaluza
+tests as the geometric setting. The full local Kaluza recognition theorem
+should be presented only as a later corollary if its
 realization and constancy seams close.

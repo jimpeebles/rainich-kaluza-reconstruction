@@ -26,7 +26,10 @@ Normalization note (2026-08-12): the upstream canonical seed has amplitude
 therefore `H=exp(a phi/2)F/sqrt(2)` in the convention registry. The legacy
 `physical*` definitions below unweight `H` and hence represent `F/sqrt(2)`.
 Their closure theorems are unchanged, but the eventual EMD/uplift matching
-interface must multiply them by the constant `sqrt(2)`.
+interface must multiply them by the constant `sqrt(2)`.  The
+`conventionNormalizedPhysicalMaxwell*` bridge near the end of this file now
+performs that scaling while preserving the complete closed `C¹` package and
+its gauge potentials.
 -/
 
 namespace RainichKaluza
@@ -1070,6 +1073,70 @@ variable {U : Set CurvatureCoordinateSpace4}
   {M : PositiveQPhaseIIIPatch4 U}
   {branch : RelativeSignScalarBranch4}
   {x : CurvatureCoordinateSpace4}
+
+/-- Convention-registry Maxwell field `F`, obtained from the legacy
+curvature-normalized realization `F / sqrt 2`. -/
+noncomputable def conventionNormalizedPhysicalMaxwell
+    (P : PhaseIIIPhysicalMaxwellC1Realization C M branch) :
+    CurvatureCoordinateSpace4 →
+      ContinuousBilinForm CurvatureCoordinateSpace4 :=
+  Real.sqrt 2 • P.physicalMaxwell
+
+/-- Frechet derivative field of the convention-registry Maxwell field. -/
+noncomputable def conventionNormalizedPhysicalMaxwellDerivative
+    (P : PhaseIIIPhysicalMaxwellC1Realization C M branch) :
+    CurvatureCoordinateSpace4 → CurvatureCoordinateSpace4 →L[ℝ]
+      ContinuousBilinForm CurvatureCoordinateSpace4 :=
+  Real.sqrt 2 • P.physicalMaxwellDerivative
+
+/-- **Normalization bridge.** The convention-registry field `F` inherits the
+complete closed `C¹` two-form package from the legacy `F / sqrt 2`
+realization by constant scaling. -/
+theorem conventionNormalizedPhysicalMaxwell_closed
+    (P : PhaseIIIPhysicalMaxwellC1Realization C M branch) :
+    IsC1ClosedTwoFormOn P.conventionNormalizedPhysicalMaxwell
+      P.conventionNormalizedPhysicalMaxwellDerivative U := by
+  exact P.physicalMaxwell_closed.const_smul (Real.sqrt 2)
+
+/-- Coordinate values of the convention-registry field match
+`sqrt 2 * exp(-a phi / 2) H`, the normalization used by the EMD and Kaluza
+uplift convention registry. -/
+theorem conventionNormalizedPhysicalMaxwell_matches_seed
+    (P : PhaseIIIPhysicalMaxwellC1Realization C M branch)
+    {z : CurvatureCoordinateSpace4} (hz : z ∈ U) (i j : Fin 4) :
+    P.conventionNormalizedPhysicalMaxwell z
+        (coordinateDirection i) (coordinateDirection j) =
+      Real.sqrt 2 *
+        negativeEMDWeight M.coupling P.scalarRepresentative z *
+          (M.exteriorJet z).rotatedF i j := by
+  change Real.sqrt 2 *
+      P.physicalMaxwell z (coordinateDirection i) (coordinateDirection j) = _
+  rw [P.physicalMaxwell_matches_unweightedSeed z hz i j]
+  ring
+
+/-- Scaling a potential for the legacy field by `sqrt 2` gives a potential
+for the convention-registry Maxwell field. -/
+theorem conventionNormalizedPhysicalMaxwell_gaugePotential
+    (P : PhaseIIIPhysicalMaxwellC1Realization C M branch)
+    {A : CurvatureCoordinateSpace4 →
+      CurvatureCoordinateSpace4 →L[ℝ] ℝ}
+    (hA : IsGaugePotentialOn A P.physicalMaxwell U) :
+    IsGaugePotentialOn (Real.sqrt 2 • A)
+      P.conventionNormalizedPhysicalMaxwell U := by
+  exact hA.const_smul (Real.sqrt 2)
+
+/-- The closed convention-registry field has an explicit potential obtained
+by multiplying a potential of the legacy realization by `sqrt 2`. -/
+theorem exists_conventionNormalizedPhysicalMaxwell_gaugePotential
+    (P : PhaseIIIPhysicalMaxwellC1Realization C M branch) :
+    ∃ A : CurvatureCoordinateSpace4 →
+        CurvatureCoordinateSpace4 →L[ℝ] ℝ,
+      IsGaugePotentialOn A P.physicalMaxwell U ∧
+        IsGaugePotentialOn (Real.sqrt 2 • A)
+          P.conventionNormalizedPhysicalMaxwell U := by
+  obtain ⟨A, hA⟩ := exists_gaugePotentialOn_of_closed
+    P.physicalMaxwell_closed
+  exact ⟨A, hA, P.conventionNormalizedPhysicalMaxwell_gaugePotential hA⟩
 
 /-- Insert the constructed scalar/Maxwell package into the former broad
 conditional-uplift interface. -/

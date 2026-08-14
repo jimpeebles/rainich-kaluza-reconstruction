@@ -145,6 +145,28 @@ theorem continuousOn_self (h : IsC1ClosedTwoFormOn F DF U) :
     ContinuousOn F U :=
   fun x hx => ((h.differentiable x hx).continuousAt).continuousWithinAt
 
+/-- A constant rescaling of a genuine closed `C¹` two-form package is again
+a genuine closed `C¹` two-form package.  This is the field-level bridge
+needed when an upstream curvature normalization differs from the physical
+Maxwell convention by a fixed scalar. -/
+theorem const_smul (h : IsC1ClosedTwoFormOn F DF U) (c : ℝ) :
+    IsC1ClosedTwoFormOn (c • F) (c • DF) U where
+  isOpen := h.isOpen
+  starShaped := h.starShaped
+  alternating := by
+    intro x hx u v
+    change c * F x u v = -(c * F x v u)
+    rw [h.alternating x hx u v, h.alternating x hx v u]
+    ring
+  differentiable := by
+    intro x hx
+    exact (h.differentiable x hx).const_smul c
+  derivContinuousOn := h.derivContinuousOn.const_smul c
+  closed := by
+    intro x hx a b d
+    change c * DF x a b d + c * DF x b d a + c * DF x d a b = 0
+    linear_combination c * h.closed x hx a b d
+
 end IsC1ClosedTwoFormOn
 
 /-- Frechet differentiation of the doubly evaluated two-form field.  The
@@ -538,6 +560,21 @@ def IsGaugePotentialOn
   DifferentiableOn ℝ A U ∧
     ∀ x ∈ U, ∀ u v,
       fderiv ℝ A x u v - fderiv ℝ A x v u = F x u v
+
+/-- A gauge potential scales with its curvature: if `dA = F`, then
+`d(c A) = c F`. -/
+theorem IsGaugePotentialOn.const_smul
+    {A : E → E →L[ℝ] ℝ} {F : E → ContinuousBilinForm E}
+    {U : Set E} (h : IsGaugePotentialOn A F U) (c : ℝ) :
+    IsGaugePotentialOn (c • A) (c • F) U := by
+  constructor
+  · exact h.1.const_smul c
+  · intro x hx u v
+    rw [fderiv_const_smul_field c]
+    calc
+      c * fderiv ℝ A x u v - c * fderiv ℝ A x v u =
+          c * (fderiv ℝ A x u v - fderiv ℝ A x v u) := by ring
+      _ = c * F x u v := by rw [h.2 x hx u v]
 
 /-- The radial gauge potential is a genuine differentiable local gauge
 potential on the whole patch. -/

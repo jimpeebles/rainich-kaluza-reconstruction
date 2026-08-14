@@ -21,6 +21,17 @@ history.
   follow-up directions kept outside the active paper's headline claim.
 - [`ADVERSARIAL_REVIEW_RESPONSE.md`](ADVERSARIAL_REVIEW_RESPONSE.md) — the
   signature-level audit response, repairs, and prioritized remaining gates.
+- [`KALUZA_ARC_PLAN.md`](KALUZA_ARC_PLAN.md) — the post-paper program for the
+  local metric-only Kaluza recognition theorem; records the compiled
+  conditional pointwise fixed-choice endpoint with all three EMD equation
+  blocks derived, and the still-open invariant, unconditional recognition
+  boundary; plans work, claims nothing, and
+  defers to the claim ledger and research plan.
+- [`KALUZA_CONVERSE_DERIVATION.md`](KALUZA_CONVERSE_DERIVATION.md) — the
+  audited fixed-choice K2 derivation, corrected order count, compiled
+  Einstein/source and pointwise-recognition progress, staged scalar gate, and
+  exact remaining representative/covariance seams; also a zero-claim working
+  note.
 
 The detailed derivations and theorem-to-Lean map are in the
 [`technical supplement`](../papers/coupling-detector/TECHNICAL_SUPPLEMENT.md).

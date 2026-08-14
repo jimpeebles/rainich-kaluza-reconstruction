@@ -9,8 +9,8 @@ is [`docs/CLAIM_LEDGER.md`](docs/CLAIM_LEDGER.md).
 Publish a sharp local identifiability theorem for the EMD coupling magnitude
 from the metric:
 
-> After auditing the explicit EMD involutivity lemma, on an active, non-null,
-> simple-spectrum analytic solution class,
+> After specialist audit of the external-theorem-dependent EMD involutivity
+> proposition, on an active, non-null, simple-spectrum analytic solution class,
 > the metric three-jet cannot identify \(a^2\), while the physical
 > curvature-normalized channel identifies \(a^2\) from one additional metric
 > derivative.  A finite fourth-order coordinate detector realizes the positive
@@ -26,17 +26,25 @@ classification, and every degenerate branch are not required for publication.
    curvature-seed channel inputs agree exactly when their \(A\) values agree
    and their \((d\theta,B)\) data lie on one unique affine real-shear orbit.
    The full tensors, not merely selected probes, have an \(\mathbb R\)-fiber.
-2. **Solution-level lower bound -- finite part in Lean, realization modulo one
-   specialist-audit lemma.**  For every real \(a\), the repository constructs a
-   complete compatible active EMD jet with one common metric three-jet, matter
+2. **Solution-level lower bound -- finite part in Lean, proposition-level
+   realization pending specialist audit.**  For every real \(a\), the repository constructs a
+   displayed compatible active truncated EMD jet with one common metric three-jet, matter
    first jet injective in \(a\), and common simple real Ricci spectrum.  The
    correctly unweighted physical Maxwell first jet is now proved closed and
-   is connected to explicit compatible radial-gauge potential two-jet
-   coefficients for every coupling.  The written analytic realization
-   argument uses the second-order potential
+   is realized by an actual quadratic radial-gauge potential with genuine
+   nested first and second Fréchet derivatives for every coupling.  The
+   proposition-level analytic realization argument uses the second-order potential
    variables \((g,A,\phi)\), Kruglikov's Theorem 3 plus Lemma 4, and EMD
-   Noether/Bianchi compatibility.  Until its EMD involutivity lemma is audited,
-   state the solution-germ theorem conditional on that lemma.
+   Noether/Bianchi compatibility.  An exact rational certificate reproduces
+   the predicted Cartan characters \((60,45,25,5)\),
+   \(\dim g_2=135\), \(\dim g_3=245\), Hilbert growth through \(g_5\), and
+   syzygy exhaustion through that tested range.  It also extracts the full
+   coordinate residual's 150-column highest-jet Jacobian at the active lower
+   jet, matches the hand-built symbol entrywise for symbolic \(a\), and finds
+   rank 15.  It does not certify lower-order Noether torsion, prolonged
+   nonlinear regularity, all-order formal integrability, or realization.  Until
+   the EMD proposition is independently audited, state the solution-germ
+   theorem as external-theorem dependent and pending that audit.
 3. **Fourth-order recovery -- proved in Lean in the physical channel.**  On
    \(\eta\wedge Jv\ne0\), the constancy equation
 
@@ -48,12 +56,18 @@ classification, and every degenerate branch are not required for publication.
    \(a^2=A^2+B^2\).  On the explicit active formal family, two fixed
    fourth-order outputs agree iff \(a=\pm b\): the order-three \(\mathbb R\)
    ambiguity collapses exactly to the orientation-free \(\mathbb Z_2\).
-4. **Finite detector -- proved in Lean with stated hypotheses.**  The
+4. **Finite detector -- proved in Lean with stated hypotheses; primitive
+   four-jet factorization partially closed.**  The
    exact raw search has \(6{,}291{,}456\) choices.  The metric-only
    fourth-order accepted set is nonempty and contains the physical
    \(a^2\) on the packaged active-regular Ricci--exterior EMD locus.  Every survivor equals the
    physical value only with the displayed realized-branch, regularity, probe,
-   and unique scalar-closure certificates.
+   and unique scalar-closure certificates.  The algebraic entrance factors
+   through the metric two-jet and the channel factors through a finite
+   operational first-jet payload.  The genuine matrix-inverse chain rule and
+   actual composed-Ricci one-jet factorization are compiled.  What remains is
+   the downstream chain-rule bridge showing that the literal metric four-jet
+   determines the full upstream entrance and the rest of that payload.
 5. **Kaluza selector -- necessary.**  For the convention-fixed warp constants,
    five-dimensional vacuum reduction verifies \(a^2=3\).  Lean does not yet
    prove those constants unique in a general warp family.  Detector output
@@ -63,12 +77,13 @@ classification, and every degenerate branch are not required for publication.
 
 ### Gate 1: formal-PDE specialist audit
 
-- Check the potential-two-jet lift and the pure second-order
+- Check the actual quadratic potential lift and the pure second-order
   \((g,A,\phi)\) formulation.
-- Check that adding the determined scalar-wave block to Kruglikov's
-  gauge-degenerate Einstein--Maxwell system preserves involutivity.
-- Check the lower-order EMD terms and the Noether identity at the first
-  compatibility order.
+- Audit the proposition-level direct-sum argument against Kruglikov's Spencer
+  complex and the exact-rational characters \((60,45,25,5)\).
+- Check that the Maxwell gauge identity and EMD Noether/Bianchi identity
+  exhaust the complete first compatibility space, and that regularity plus
+  Cartan--Kähler gives the prescribed-jet conclusion.
 - Keep this step labeled as a human argument until independently reviewed; do
   not describe it as a direct application of Kruglikov's Theorem 4.
 
@@ -112,8 +127,9 @@ quotient for \(B\) may require a metric five-jet.
 The current uplift realizer already assumes the complete EMD equations, and
 the detector's strongest abstract physical/survivor packages have no concrete
 Lean inhabitant.  Replacing those handoffs with lower-level derived data,
-proving an explicit coordinate four-jet factorization, and then proving chart
-covariance are the next formalization gates.
+closing the remaining metric-four-jet-to-upstream-and-operational-jet
+chain-rule seams, and
+then proving chart covariance are the next formalization gates.
 
 Only after that should the project broaden to repeated-root, null-Maxwell,
 null-scalar, or global/topological sectors.  Claims of genericity remain

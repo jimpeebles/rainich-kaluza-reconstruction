@@ -8,10 +8,12 @@ This repository studies a coupled inverse problem in mathematical relativity:
 > five-dimensional vacuum Kaluza gravity?
 
 The current result reaches a sharp metric-jet order barrier on an explicit
-active, simple-spectrum class, modulo one clearly isolated analytic EMD
-involutivity lemma pending specialist audit.  It also gives a finite
-fourth-order coordinate detector under stated regularity and correctness
-hypotheses.
+active, simple-spectrum class.  The solution-germ upgrade now has a
+proposition-level EMD involutivity argument, backed by an independent exact
+rational symbol certificate, but it still depends on Kruglikov's published
+Spencer calculation and analytic Cartan--Kähler realization and is pending a
+formal-PDE specialist audit.  The repository also gives a finite fourth-order
+coordinate detector under stated regularity and correctness hypotheses.
 
 ## Main result
 
@@ -39,13 +41,14 @@ components agree and their \((d\theta,B)\) data differ by a unique real shear.
 Thus the order-three ambiguity is an exact \(\mathbb R\)-orbit, not merely an
 exhibited counterexample.
 
-The obstruction is realized by a complete compatible EMD finite jet for every
+The obstruction is realized by displayed compatible truncated EMD data for every
 real coupling \(a\).  The matter first jet varies injectively with \(a\), the
 physical activity wedge is nonzero, and the common mixed Ricci tensor has four
-distinct real eigenvalues.  The formal-PDE argument below upgrades these data
-to local analytic EMD solution germs with the same metric three-jet,
-conditional only on the explicit EMD involutivity lemma.  Once that lemma is
-audited, no function of the metric three-jet can identify \(a^2\) on this
+distinct real eigenvalues.  The proposition-level formal-PDE argument below
+upgrades these data to a local analytic EMD solution germ for every real
+coupling, all with the same metric three-jet.  This conclusion is
+external-theorem dependent and remains pending specialist audit.  Subject to
+that audit, no function of the metric three-jet can identify \(a^2\) on this
 family; in particular \(a=\sqrt3\) and \(a=1\) collide through order three.
 
 One derivative later, constancy of \(a\) gives
@@ -70,9 +73,16 @@ continuous \(\mathbb R\)-ambiguity at order three collapses to the unavoidable
 orientation-free \(\mathbb Z_2\) ambiguity at order four.  The repository also
 constructs a finite
 coordinate detector whose only input is the metric.  Tracing its nested
-Fréchet-derivative definitions reaches metric derivative order four; an
-explicit factorization through a packaged coordinate four-jet is not yet
-compiled.  A
+Fréchet-derivative definitions reaches metric derivative order four.  A new
+partial factorization packages the literal metric four-jet, proves that the
+algebraic entrance already factors through its two-jet truncation, and proves
+that channel acceptance and output factor through a finite operational
+first-jet payload.  The remaining seam is the explicit chain-rule theorem
+showing that equality of metric four-jets determines both the full upstream
+entrance and the rest of that derived payload.  The first nonlinear layer is
+now compiled: the actual Fréchet derivative of the composed Ricci tensor is
+the algebraic Ricci first-jet evaluator on the genuine metric three-jet, and
+equal literal four-jets give equal Ricci one-jets.  A
 structural Lean theorem proves that it filters exactly (6{,}291{,}456) raw
 choices.  A
 packaged physical Ricci--exterior EMD witness on the explicit active regular
@@ -92,17 +102,28 @@ The following pieces are machine checked in Lean:
 - injectivity of the matter first jet, exact activity, simple real Ricci
   spectrum, and the common Ricci first prolongation from a fully symmetric
   metric third jet;
+- realization of the common metric three-jet by an actual cubic metric field,
+  an open symmetric nondegenerate determinant-negative neighborhood, and
+  equality of its genuine point Ricci tensor and composed-Ricci Fréchet
+  derivative with the prescribed common source and source first jet;
 - exact unweighting and closure of the active physical Maxwell first jet and
-  its family-specific compatible radial-gauge potential two-jet coefficients;
+  its family-specific radial-gauge potential two-jet, now realized by an
+  actual quadratic one-form field with genuine nested Fréchet derivatives and
+  the required differentiated curl;
 - the next-order quotient, component independence, and recovery of \(a^2\);
 - the finite metric-only coordinate detector, physical nonemptiness, certified
   survivor correctness, and fixed-coordinate germ locality;
 - the conditional local Kaluza uplift and presentation orbit from an accepted
   EMD realizer.
 
-The detector's compiled locality theorem is germ-based; an explicit
-coordinate four-jet extensionality theorem and full chart covariance remain
-open.  The conditional uplift realizer already supplies complete EMD
+The detector's compiled locality theorem is germ-based.  Its finite
+four-jet/operational-jet factorization is now isolated, but the chain-rule
+bridge beyond the now-compiled Ricci one-jet layer, the full upstream bridge,
+and full chart covariance remain open.
+The actual and finite-jet Ricci evaluators explicitly force `Matrix.inv`, and
+definitionally checked regression theorems guard against accidental
+entrywise inversion on the matrix's underlying function type.
+The conditional uplift realizer already supplies complete EMD
 equations, and the fixed warp constants are verified rather than proved
 unique in a general ansatz.
 
@@ -110,10 +131,24 @@ The promotion from compatible finite jets to local analytic EMD solution germs
 uses Cartan--Kähler theory and a short potential-variable symbol extension of
 [Kruglikov's Einstein--Maxwell involutivity
 theorem](https://arxiv.org/abs/0902.1685).  Kruglikov does not state this EMD
-specialization verbatim: the argument combines his source-free
-Einstein--Maxwell potential block with the determined scalar-wave block and
-checks the EMD Noether/Bianchi compatibility.  That formal-PDE step is a human
-proof pending specialist audit, not a Lean theorem.
+specialization verbatim: the proposition-level argument combines his
+source-free Einstein--Maxwell potential block with the determined scalar-wave
+block and checks the complete Maxwell-gauge and EMD Noether/Bianchi
+compatibility space.  An exact rational certificate independently finds
+Cartan characters \((60,45,25,5)\), \(\dim g_2=135\), \(\dim g_3=245\), the
+predicted Hilbert growth through \(g_5\), and exhaustion of the tested left
+kernels by the known syzygies.  It also extracts all 150 highest-jet columns
+from the full coordinate EMD residual evaluator at the active lower jet,
+reproduces the hand-built symbol entrywise for symbolic \(a\), and verifies
+rank 15 there.  This certifies witness-level highest-jet regularity, but not an
+independent variational derivation, lower-order Noether torsion, regularity of
+every prolonged nonlinear equation manifold, all-order formal integrability,
+or analytic realization.  On four tested non-null covectors the symbol kernel
+is exactly the five gauge directions; two tested null covectors add two
+metric, two Maxwell, and one scalar mode.  A Lorentz-orbit argument would be
+needed to universalize this sampled characteristic statement.  The EMD
+extension remains a human proof pending specialist audit, not
+a Lean theorem.
 
 The exact helical replacement benchmark now closes its final fourth-order
 route with 21 checks.  Its 128-slot exact quadratic quotient calculation

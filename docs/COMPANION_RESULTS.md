@@ -100,13 +100,15 @@ finite-jet counterexamples and formal-PDE entrance data.
 Lean anchors:
 
 - `activeAmbiguityPolynomialMetricGerm_realizes_threeJet` and
-  `coordinateRicciFirstJet_minkowski_zero`;
+  `activeAmbiguityPolynomialMetricGerm_actualRicci_coordinateFDeriv_zero`;
 - `matrixExteriorDerivative_activeAmbiguityPhysicalMaxwellFirstJet`;
 - `activeAmbiguityPhysicalMaxwellPotentialTwoJet_realizes`.
+- `activeAmbiguityPhysicalRadialPotentialPolynomial_realizes` and
+  `activeAmbiguityPhysicalRadialPotentialPolynomial_curl_realizes`.
 
 Boundary: the metric theorem realizes genuine derivatives of an actual cubic
-field; the potential theorem constructs holonomic coefficient arrays but not
-yet an actual quadratic one-form field.  Neither is automatically an
+field; the potential-polynomial theorem likewise realizes genuine derivatives
+of an actual quadratic one-form field.  Neither is automatically an
 all-order PDE solution.  The active collision's analytic solution-germ promotion retains
 the separate human-plus-external involutivity status in
 [`ANALYTIC_EMD_REALIZATION.md`](ANALYTIC_EMD_REALIZATION.md).

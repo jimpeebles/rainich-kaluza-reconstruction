@@ -64,7 +64,7 @@ noncomputable def coordinateChristoffelJet
 `Ric_NP = ∂_M Γ^M_NP - ∂_N Γ^M_MP
           + Γ^M_MQ Γ^Q_NP - Γ^M_NQ Γ^Q_MP`. -/
 noncomputable def coordinateRicci
-    (gInv : I → I → ℝ) (dg : CoordinateMetricJet1 I)
+    (gInv : Matrix I I ℝ) (dg : CoordinateMetricJet1 I)
     (ddg : CoordinateMetricJet2 I) (N P : I) : ℝ :=
   (∑ M : I, coordinateChristoffelJet gInv dg ddg M M N P) -
     (∑ M : I, coordinateChristoffelJet gInv dg ddg N M M P) +

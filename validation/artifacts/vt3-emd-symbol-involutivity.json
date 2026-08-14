@@ -1,0 +1,630 @@
+{
+  "benchmark_id": "vt3-emd-symbol-involutivity",
+  "characteristic_polarization_count": {
+    "Maxwell-potential": {
+      "nonnull_kernel_dimension": 1,
+      "nonnull_matrix_sha256": "cb4d83c6664234dd78e7ee48a2372f80e83a681b4123e072b6724a3a29b7f40f",
+      "null_excess_beyond_gauge": 2,
+      "null_kernel_dimension": 3,
+      "null_matrix_sha256": "6e3dbb28f9d5316f7024aaf31f7c6a0d7f4e5e53a48c0728cabff6a4bb63a8b0"
+    },
+    "linearized-Ricci": {
+      "nonnull_kernel_dimension": 4,
+      "nonnull_matrix_sha256": "a55526fd076b6d67360370b57ac0179217d5b827fcaf85fefd1981815eeeed7f",
+      "null_excess_beyond_gauge": 2,
+      "null_kernel_dimension": 6,
+      "null_matrix_sha256": "3e44f53295143e1ec8b721d6b1a687392da67e33b28a3190b526cb9fc24345e6"
+    },
+    "scalar-wave": {
+      "nonnull_kernel_dimension": 0,
+      "nonnull_matrix_sha256": "c116dcd467d3a576f32fe1b8599dfc5bd4d480a38535151051d177b0bd78266e",
+      "null_excess_beyond_gauge": 1,
+      "null_kernel_dimension": 1,
+      "null_matrix_sha256": "f218bf1ba6dc671812dba0c2693330479c653c1e6b7d874daab028c5070fab3f"
+    }
+  },
+  "checks": [
+    {
+      "name": "sector-ranks-flags-and-characters-match-falsification-targets",
+      "passed": true
+    },
+    {
+      "name": "emd-order-two-symbol-is-surjective",
+      "passed": true
+    },
+    {
+      "name": "full-coordinate-emd-evaluator-reproduces-symbol-at-active-lower-jet",
+      "passed": true
+    },
+    {
+      "name": "emd-g2-and-g3-have-target-dimensions",
+      "passed": true
+    },
+    {
+      "name": "emd-symbol-passes-cartans-first-prolongation-dimension-test",
+      "passed": true
+    },
+    {
+      "name": "cartan-hilbert-growth-persists-through-g4-and-g5",
+      "passed": true
+    },
+    {
+      "name": "bianchi-and-maxwell-syzygies-annihilate-first-three-prolongations",
+      "passed": true
+    },
+    {
+      "name": "known-syzygies-exhaust-first-three-symbol-left-kernels",
+      "passed": true
+    },
+    {
+      "name": "emd-prolongations-are-sectorwise-direct-sums",
+      "passed": true
+    },
+    {
+      "name": "non-null-covectors-have-only-five-gauge-kernel-directions",
+      "passed": true
+    },
+    {
+      "name": "null-covector-is-characteristic-beyond-gauge",
+      "passed": true
+    },
+    {
+      "name": "null-symbol-excess-splits-into-two-plus-two-plus-one-modes",
+      "passed": true
+    }
+  ],
+  "coordinate_formula_cross_check": {
+    "matches_index_formula": true,
+    "matrix_sha256": "bb1a226db19f0364e2547a54000af661f7323c238536e9cee942772951c1201d",
+    "matrix_shape": [
+      15,
+      150
+    ],
+    "rank": 15,
+    "regularity_consequence": "the coordinate equation map is a submersion in its 150 highest-jet directions at the displayed active lower jet"
+  },
+  "covector_symbols": {
+    "mixed-null-5-3-4-0": {
+      "gauge_image_annihilated": true,
+      "gauge_image_dimension": 5,
+      "kernel_dimension": 10,
+      "lorentz_square": 0,
+      "matrix_sha256": "7aa421f73c2101c86b23aa3f8e0e626d165ae1b7fb9b4b8903f86c7f492ce85c",
+      "rank": 5
+    },
+    "mixed-spacelike-1-2-3-5": {
+      "gauge_image_annihilated": true,
+      "gauge_image_dimension": 5,
+      "kernel_dimension": 5,
+      "lorentz_square": 37,
+      "matrix_sha256": "44ad3284ee4d561a405afe386fc87bbf5c6e968f78206e95b5b85f7e632db0f9",
+      "rank": 10
+    },
+    "mixed-timelike-5-1-2-3": {
+      "gauge_image_annihilated": true,
+      "gauge_image_dimension": 5,
+      "kernel_dimension": 5,
+      "lorentz_square": -11,
+      "matrix_sha256": "350f33dab96c2fe6e87bad8d6f2f24e99ebfac730976b4ba85eb9e2469959e95",
+      "rank": 10
+    },
+    "null-e0-plus-e3": {
+      "gauge_image_annihilated": true,
+      "gauge_image_dimension": 5,
+      "kernel_dimension": 10,
+      "lorentz_square": 0,
+      "matrix_sha256": "86d0f56763a3f43224cc9f203c468d02720203fbe0025cd11d7d12c884b06cb7",
+      "rank": 5
+    },
+    "spacelike-e3": {
+      "gauge_image_annihilated": true,
+      "gauge_image_dimension": 5,
+      "kernel_dimension": 5,
+      "lorentz_square": 1,
+      "matrix_sha256": "d99c3c693fcbc2f2df6bed4762dd43132564ab83c5779d7d4187e571ac70953f",
+      "rank": 10
+    },
+    "timelike-e0": {
+      "gauge_image_annihilated": true,
+      "gauge_image_dimension": 5,
+      "kernel_dimension": 5,
+      "lorentz_square": -1,
+      "matrix_sha256": "06b9824584e8379bff0f51ddea5d120ca4b9c0889b6f4b6f123e11eae1c84f2a",
+      "rank": 10
+    }
+  },
+  "evidence_class": "exact-rational-symbol-certificate-not-formal-integrability-proof",
+  "implementation_sha256": "004a058870d1f7bd2453202e84c58017e9ee25de5ad593751960757e86aacdff",
+  "input": {
+    "active_witness_first_jet": {
+      "coupling_for_coordinate_extraction": "symbolic real a",
+      "dphi": [
+        1,
+        0,
+        2,
+        0
+      ],
+      "physical_F_nonzero_components": {
+        "F01": "sqrt(2)",
+        "F23": "sqrt(2)"
+      },
+      "radial_gauge_potential": [
+        "0",
+        "sqrt(2)*x0",
+        "0",
+        "sqrt(2)*x2"
+      ]
+    },
+    "active_witness_scalar_value": "phi=0",
+    "coordinate_condition": "normal-coordinate point, so first metric jet vanishes",
+    "dimension": 4,
+    "equations": {
+      "scalar_wave_components": 1,
+      "trace_reversed_Ricci_components": 10,
+      "weighted_Maxwell_potential_components": 4
+    },
+    "falsification_targets": {
+      "EMD_cartan_characters": [
+        60,
+        45,
+        25,
+        5
+      ],
+      "dim_g2": 135,
+      "dim_g3": 245
+    },
+    "point_metric": [
+      -1,
+      1,
+      1,
+      1
+    ],
+    "principal_symbol_scope": "Matter, exponential-coupling, and active-witness values occur only below order two; the symbol is Ricci direct-sum div-d direct-sum wave",
+    "rank_arithmetic": "exact rational DomainMatrix row reduction",
+    "standard_flag": [
+      "span(e0)",
+      "span(e0,e1)",
+      "span(e0,e1,e2)",
+      "span(e0,e1,e2,e3)"
+    ],
+    "unknowns": {
+      "potential_components": 4,
+      "scalar_components": 1,
+      "symmetric_metric_components": 10
+    }
+  },
+  "input_sha256": "ec36ae7c280a7ebcb483063d76ca862e8359243474495bcf957c68cc772ee0fe",
+  "interpretation": {
+    "certified": "the displayed rational principal symbol has Cartan characters (60,45,25,5), dim(g2)=135, dim(g3)=245, and involutive Cartan/Hilbert growth through g5; the five standard first syzygies exhaust the tested symbol-level dependencies; and the full coordinate EMD residual evaluator has this same surjective highest-jet Jacobian at the active lower jet; the null-symbol kernel modulo gauge splits into 2 metric, 2 Maxwell, and 1 scalar amplitudes",
+    "not_certified": "an independent derivation from the variational action; the off-shell lower-order Noether compatibility; regularity of every prolonged nonlinear equation manifold; all-order formal integrability; or analytic solution-germ realization"
+  },
+  "model_sha256": "1c11c430f72ae1a50d1aedce4c1322bf027767242bb93cc3d2a8e8dbe0854a12",
+  "passed": true,
+  "runtime": {
+    "python": "3.12.13",
+    "sympy": "1.14.0"
+  },
+  "schema_version": 1,
+  "sectors": {
+    "EMD-potential": {
+      "cartan_characters": [
+        60,
+        45,
+        25,
+        5
+      ],
+      "differential_syzygies": [
+        {
+          "annihilates_symbol": true,
+          "exhausts_left_kernel": true,
+          "jet_order": 3,
+          "matrix_sha256": "a20de51b77a1eae2268337acdfdc986a47dbf39dbb9b28065d43e3887e4cf87e",
+          "relation_matrix_shape": [
+            5,
+            60
+          ],
+          "relation_rank": 5,
+          "symbol_left_nullity": 5
+        },
+        {
+          "annihilates_symbol": true,
+          "exhausts_left_kernel": true,
+          "jet_order": 4,
+          "matrix_sha256": "317a94307e79701c7344900d94adbe69f5a48fb6fa5560df328ab1aa80314426",
+          "relation_matrix_shape": [
+            20,
+            150
+          ],
+          "relation_rank": 20,
+          "symbol_left_nullity": 20
+        },
+        {
+          "annihilates_symbol": true,
+          "exhausts_left_kernel": true,
+          "jet_order": 5,
+          "matrix_sha256": "dfe3c983156eecf3379eac390adbd99634183d3f75b0ceef5b380177f7401fe0",
+          "relation_matrix_shape": [
+            50,
+            300
+          ],
+          "relation_rank": 50,
+          "symbol_left_nullity": 50
+        }
+      ],
+      "equation_count": 15,
+      "field_count": 15,
+      "prolongations": [
+        {
+          "cartan_predicted_nullity": 135,
+          "jet_order": 2,
+          "matrix_sha256": "bb1a226db19f0364e2547a54000af661f7323c238536e9cee942772951c1201d",
+          "matrix_shape": [
+            15,
+            150
+          ],
+          "nonzero_entries": 112,
+          "nullity": 135,
+          "rank": 15
+        },
+        {
+          "cartan_predicted_nullity": 245,
+          "jet_order": 3,
+          "matrix_sha256": "d77027db3dc57b9dca62a04ed2af4f923023dab1c07ec558b5a1889e00f341a7",
+          "matrix_shape": [
+            60,
+            300
+          ],
+          "nonzero_entries": 448,
+          "nullity": 245,
+          "rank": 55
+        },
+        {
+          "cartan_predicted_nullity": 395,
+          "jet_order": 4,
+          "matrix_sha256": "4c5d33bc68d20602778b87f7d01301b2915836ff9d0faa13ca3c2825aa3706e2",
+          "matrix_shape": [
+            150,
+            525
+          ],
+          "nonzero_entries": 1120,
+          "nullity": 395,
+          "rank": 130
+        },
+        {
+          "cartan_predicted_nullity": 590,
+          "jet_order": 5,
+          "matrix_sha256": "099f48f415ba01ac9ffe2bc8736d008e68ab8098ef1c29ddbd9a65387c76bf98",
+          "matrix_shape": [
+            300,
+            840
+          ],
+          "nonzero_entries": 2240,
+          "nullity": 590,
+          "rank": 250
+        }
+      ],
+      "standard_flag_dimensions": [
+        135,
+        75,
+        30,
+        5,
+        0
+      ]
+    },
+    "Maxwell-potential": {
+      "cartan_characters": [
+        16,
+        12,
+        7,
+        1
+      ],
+      "differential_syzygies": [
+        {
+          "annihilates_symbol": true,
+          "exhausts_left_kernel": true,
+          "jet_order": 3,
+          "matrix_sha256": "395115af772336dbe0f0383870aafe850579f6c9d66a3937dddbb4d4320df193",
+          "relation_matrix_shape": [
+            1,
+            16
+          ],
+          "relation_rank": 1,
+          "symbol_left_nullity": 1
+        },
+        {
+          "annihilates_symbol": true,
+          "exhausts_left_kernel": true,
+          "jet_order": 4,
+          "matrix_sha256": "e78b3dd4e3060fc507900a6aee36b30a30f86de4513461e02ccc5afd19c511dc",
+          "relation_matrix_shape": [
+            4,
+            40
+          ],
+          "relation_rank": 4,
+          "symbol_left_nullity": 4
+        },
+        {
+          "annihilates_symbol": true,
+          "exhausts_left_kernel": true,
+          "jet_order": 5,
+          "matrix_sha256": "594644b362c8c6658399d292c582850937f74ae5c0bbd25d8f8b5ede19f40c1b",
+          "relation_matrix_shape": [
+            10,
+            80
+          ],
+          "relation_rank": 10,
+          "symbol_left_nullity": 10
+        }
+      ],
+      "equation_count": 4,
+      "field_count": 4,
+      "prolongations": [
+        {
+          "cartan_predicted_nullity": 36,
+          "jet_order": 2,
+          "matrix_sha256": "daced06b14ee3281c01c73411e614549d0979b2fdeec67137a0a974f93ced960",
+          "matrix_shape": [
+            4,
+            40
+          ],
+          "nonzero_entries": 24,
+          "nullity": 36,
+          "rank": 4
+        },
+        {
+          "cartan_predicted_nullity": 65,
+          "jet_order": 3,
+          "matrix_sha256": "708f5e0f4566f895e645e22246a6268f3a069a495e2cfacc1549d59b193595f9",
+          "matrix_shape": [
+            16,
+            80
+          ],
+          "nonzero_entries": 96,
+          "nullity": 65,
+          "rank": 15
+        },
+        {
+          "cartan_predicted_nullity": 104,
+          "jet_order": 4,
+          "matrix_sha256": "edc65e8724b58374ee5b646746fc6c84c96573b4cdf1fecd64c93e91da98d561",
+          "matrix_shape": [
+            40,
+            140
+          ],
+          "nonzero_entries": 240,
+          "nullity": 104,
+          "rank": 36
+        },
+        {
+          "cartan_predicted_nullity": 154,
+          "jet_order": 5,
+          "matrix_sha256": "3e310d5335926f36eef2ded112d8fddd26343865ebfa29814720d9fe58c19150",
+          "matrix_shape": [
+            80,
+            224
+          ],
+          "nonzero_entries": 480,
+          "nullity": 154,
+          "rank": 70
+        }
+      ],
+      "standard_flag_dimensions": [
+        36,
+        20,
+        8,
+        1,
+        0
+      ]
+    },
+    "linearized-Ricci": {
+      "cartan_characters": [
+        40,
+        30,
+        16,
+        4
+      ],
+      "differential_syzygies": [
+        {
+          "annihilates_symbol": true,
+          "exhausts_left_kernel": true,
+          "jet_order": 3,
+          "matrix_sha256": "64a0bba4775fab579a95ad76ac23c0744d3fb00bf73705ad31441313e1d388fb",
+          "relation_matrix_shape": [
+            4,
+            40
+          ],
+          "relation_rank": 4,
+          "symbol_left_nullity": 4
+        },
+        {
+          "annihilates_symbol": true,
+          "exhausts_left_kernel": true,
+          "jet_order": 4,
+          "matrix_sha256": "04c3100eb2051f828ff788a77a7ea625e30cab19f8d19d750be9f16b756c5c10",
+          "relation_matrix_shape": [
+            16,
+            100
+          ],
+          "relation_rank": 16,
+          "symbol_left_nullity": 16
+        },
+        {
+          "annihilates_symbol": true,
+          "exhausts_left_kernel": true,
+          "jet_order": 5,
+          "matrix_sha256": "4b514a51a3e647c2d09dc432ba8d67c27b4ac21271af3faeae77310d30440753",
+          "relation_matrix_shape": [
+            40,
+            200
+          ],
+          "relation_rank": 40,
+          "symbol_left_nullity": 40
+        }
+      ],
+      "equation_count": 10,
+      "field_count": 10,
+      "prolongations": [
+        {
+          "cartan_predicted_nullity": 90,
+          "jet_order": 2,
+          "matrix_sha256": "35d3f874d56e01ccd66cf682adb4570bbb1b431a31e127c83ad56904dfa7e80b",
+          "matrix_shape": [
+            10,
+            100
+          ],
+          "nonzero_entries": 84,
+          "nullity": 90,
+          "rank": 10
+        },
+        {
+          "cartan_predicted_nullity": 164,
+          "jet_order": 3,
+          "matrix_sha256": "8b7ebe7c06d582e008ea2f011daf9318480e5aeb206a45e21324a3feabb0825b",
+          "matrix_shape": [
+            40,
+            200
+          ],
+          "nonzero_entries": 336,
+          "nullity": 164,
+          "rank": 36
+        },
+        {
+          "cartan_predicted_nullity": 266,
+          "jet_order": 4,
+          "matrix_sha256": "a2d26b583d7882a2af2996b7acece1a5e2eb35487c2a3d50b870c9d0ab611ec8",
+          "matrix_shape": [
+            100,
+            350
+          ],
+          "nonzero_entries": 840,
+          "nullity": 266,
+          "rank": 84
+        },
+        {
+          "cartan_predicted_nullity": 400,
+          "jet_order": 5,
+          "matrix_sha256": "85374616a42c9916305d641d531eff28de45856e43dadd02ad1e883454a9a5d3",
+          "matrix_shape": [
+            200,
+            560
+          ],
+          "nonzero_entries": 1680,
+          "nullity": 400,
+          "rank": 160
+        }
+      ],
+      "standard_flag_dimensions": [
+        90,
+        50,
+        20,
+        4,
+        0
+      ]
+    },
+    "scalar-wave": {
+      "cartan_characters": [
+        4,
+        3,
+        2,
+        0
+      ],
+      "differential_syzygies": [
+        {
+          "annihilates_symbol": true,
+          "exhausts_left_kernel": true,
+          "jet_order": 3,
+          "matrix_sha256": "a0df63224233ed4fb9195c3110136adf33a1d155436ff864afad14fb968e00ac",
+          "relation_matrix_shape": [
+            0,
+            4
+          ],
+          "relation_rank": 0,
+          "symbol_left_nullity": 0
+        },
+        {
+          "annihilates_symbol": true,
+          "exhausts_left_kernel": true,
+          "jet_order": 4,
+          "matrix_sha256": "83a4573a36553d3a1d9d7e11ea97b077142b1bc02172e07d04964e65edaf8087",
+          "relation_matrix_shape": [
+            0,
+            10
+          ],
+          "relation_rank": 0,
+          "symbol_left_nullity": 0
+        },
+        {
+          "annihilates_symbol": true,
+          "exhausts_left_kernel": true,
+          "jet_order": 5,
+          "matrix_sha256": "f8cd37847c2d4633e6e7ef61719765b658df01404348d784e63558b147e620d3",
+          "relation_matrix_shape": [
+            0,
+            20
+          ],
+          "relation_rank": 0,
+          "symbol_left_nullity": 0
+        }
+      ],
+      "equation_count": 1,
+      "field_count": 1,
+      "prolongations": [
+        {
+          "cartan_predicted_nullity": 9,
+          "jet_order": 2,
+          "matrix_sha256": "ed954b3cb6b69ea8b6db91a0caa5f9fe6bd564db3a341821d11ba17d1a34b2ff",
+          "matrix_shape": [
+            1,
+            10
+          ],
+          "nonzero_entries": 4,
+          "nullity": 9,
+          "rank": 1
+        },
+        {
+          "cartan_predicted_nullity": 16,
+          "jet_order": 3,
+          "matrix_sha256": "fed8c12a8015472af3534a74baaafb65989a7b8a42f5d643232195ece39e544c",
+          "matrix_shape": [
+            4,
+            20
+          ],
+          "nonzero_entries": 16,
+          "nullity": 16,
+          "rank": 4
+        },
+        {
+          "cartan_predicted_nullity": 25,
+          "jet_order": 4,
+          "matrix_sha256": "d6f3db26c59cdb28f40e75d0bb7e0012ffcaf4b989dfec4c0e6937c38034c633",
+          "matrix_shape": [
+            10,
+            35
+          ],
+          "nonzero_entries": 40,
+          "nullity": 25,
+          "rank": 10
+        },
+        {
+          "cartan_predicted_nullity": 36,
+          "jet_order": 5,
+          "matrix_sha256": "7d868e6786ac8b1f4a66cceea967024330f69c58fc3e16aefbe9381497373a75",
+          "matrix_shape": [
+            20,
+            56
+          ],
+          "nonzero_entries": 80,
+          "nullity": 36,
+          "rank": 20
+        }
+      ],
+      "standard_flag_dimensions": [
+        9,
+        5,
+        2,
+        0,
+        0
+      ]
+    }
+  }
+}

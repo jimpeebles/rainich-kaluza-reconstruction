@@ -694,9 +694,24 @@ noncomputable def actualCoordinateRicciCovariantField4
     (g : CurvatureCoordinateSpace4 →
       ContinuousBilinForm CurvatureCoordinateSpace4)
     (z : CurvatureCoordinateSpace4) : Matrix4 :=
-  fun i j => coordinateRicci (coordinateMetricMatrixField4 g z)⁻¹
+  fun i j => coordinateRicci ((coordinateMetricMatrixField4 g z)⁻¹ : Matrix4)
     (actualCoordinateMetricJet1Field4 g z)
     (actualCoordinateMetricJet2Field4 g z) i j
+
+/-- Regression lock: the inverse supplied to the coordinate Ricci formula is
+the matrix inverse, not the entrywise inverse inherited by the underlying
+function type.  The explicit type ascription in this statement is
+scientifically significant. -/
+theorem actualCoordinateRicciCovariantField4_uses_matrixInverse
+    (g : CurvatureCoordinateSpace4 →
+      ContinuousBilinForm CurvatureCoordinateSpace4)
+    (z : CurvatureCoordinateSpace4) :
+    actualCoordinateRicciCovariantField4 g z =
+      fun i j => coordinateRicci
+        ((coordinateMetricMatrixField4 g z)⁻¹ : Matrix4)
+        (actualCoordinateMetricJet1Field4 g z)
+        (actualCoordinateMetricJet2Field4 g z) i j := by
+  rfl
 
 /-- Actual mixed Ricci endomorphism `R^i_j`, constructed from the metric
 alone. -/

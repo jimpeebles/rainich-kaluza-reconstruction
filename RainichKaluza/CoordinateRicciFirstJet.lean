@@ -67,7 +67,7 @@ noncomputable def coordinateChristoffelJetFirstJet
 The four lines respectively differentiate the two `∂Γ` contractions and
 the two quadratic `ΓΓ` contractions in the coordinate Ricci formula. -/
 noncomputable def coordinateRicciFirstJet
-    (gInv : I → I → ℝ) (dg : CoordinateMetricJet1 I)
+    (gInv : Matrix I I ℝ) (dg : CoordinateMetricJet1 I)
     (ddg : CoordinateMetricJet2 I) (dddg : CoordinateMetricJet3 I)
     (R N P : I) : ℝ :=
   (∑ M : I,

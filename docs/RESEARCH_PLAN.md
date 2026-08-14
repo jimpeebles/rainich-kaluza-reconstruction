@@ -10,7 +10,8 @@ The paper should establish an exact order threshold for learning the constant
 Einstein--Maxwell--dilaton coupling magnitude from the metric on a genuinely
 nondegenerate solution class:
 
-> Conditional on one explicit analytic EMD involutivity lemma, there is an
+> Subject to specialist audit of an external-theorem-dependent,
+> proposition-level analytic EMD involutivity argument, there is an
 > active, non-null, simple-spectrum family of local analytic EMD solution
 > germs, one for every real coupling \(a\), with one common metric three-jet.
 > Therefore no metric-three-jet rule identifies
@@ -22,8 +23,8 @@ nondegenerate solution class:
 This order-separation theorem is the north star.  It is both more defensible
 and more consequential than an open-ended hunt for a new closed-form Kaluza
 metric: it identifies a previously hidden obstruction, gives a finite
-compatible realization, reduces the analytic upgrade to one audit lemma, and
-supplies the matching recovery mechanism.
+compatible realization, reduces the analytic upgrade to one auditable
+formal-PDE proposition, and supplies the matching recovery mechanism.
 
 ## 2. Canonical theorem hierarchy
 
@@ -55,24 +56,43 @@ The explicit finite data have a common metric three-jet for every \(a\), an
 injectively varying Maxwell first jet, uniform activity, and four distinct real
 Ricci eigenvalues.  The polynomial metric germ, Hodge identities, explicit
 Ricci first prolongation, exact unweighting/closure of the physical Maxwell
-first jet, and its family-specific compatible radial-gauge potential two-jet
-coefficients are machine checked.  Contracted-Bianchi compatibility is the
+first jet, and its family-specific actual quadratic radial-gauge potential
+with genuine nested first and second Fréchet derivatives are machine checked.
+The polynomial metric is symmetric and nondegenerate on an open
+determinant-negative neighborhood, and its actual point Ricci tensor is the
+prescribed source.  The genuine Fréchet derivative of the composed Ricci
+field is now proved equal to the algebraic first-prolongation evaluator, and
+the active polynomial germ realizes the prescribed source first jet.
+Contracted-Bianchi compatibility is the
 consequence of the fully symmetric metric third jet in the human realization
 argument.
 
-The analytic upgrade is a human formal-PDE argument conditional on one
-explicit EMD involutivity lemma.  Work in the pure
+The analytic upgrade is a proposition-level human formal-PDE argument using
+published external results.  Work in the pure
 second-order potential variables \((g,A,\phi)\).  Extend Kruglikov's
 involutivity proof for the gauge-degenerate source-free Einstein--Maxwell
 potential system (Theorem 3) by the determined scalar-wave block (Lemma 4).
-The exponential EMD couplings are lower order, and the EMD Noether identity
-supplies the contracted-Bianchi compatibility.  Cartan--Kähler then realizes
-the compatible finite data by local analytic EMD solution germs.
+The exponential EMD couplings are lower order, while the Maxwell gauge and
+EMD Noether identities exhaust the displayed first compatibility space.
+Cartan--Kähler then realizes the compatible finite data by local analytic EMD
+solution germs.  Independently, an exact rational symbol certificate gives
+Cartan characters \((60,45,25,5)\), \(\dim g_2=135\), \(\dim g_3=245\),
+the predicted growth through \(g_5\), and exhaustion of the tested symbol
+left kernels by the known syzygies.  It also extracts all 150 highest-jet
+columns from the full coordinate EMD residual at the active lower jet,
+reproduces the hand-built symbol entrywise for symbolic \(a\), and verifies
+rank 15.  It does not check lower-order Noether torsion, every nonlinear
+prolongation, all-order formal integrability, or analytic realization.  On
+four tested non-null covectors its kernel is exactly the five gauge
+directions; two tested null covectors add the expected two metric, two
+Maxwell, and one scalar modes.  Universalization requires a Lorentz-orbit
+argument.
 
 Status: finite algebra, metric/Ricci first prolongation, polynomial metric
-germ, and potential lift in Lean.  The contracted-Bianchi contraction,
-involutivity extension, and analytic realization are a specialist-audit human
-proof.  Do not call this a
+germ, and actual quadratic potential lift in Lean; principal-symbol ranks and
+characters have separate exact-symbolic evidence.  The involutivity extension
+and analytic realization remain an external-theorem-dependent human proof
+pending specialist audit.  Do not call this a
 direct application of Kruglikov's Theorem 4, and do not use the mixed-order
 \((g,F,\phi)\) system as the main proof.
 
@@ -93,7 +113,7 @@ On \(\eta\wedge Jv\ne0\), every nonzero component yields the same
 \]
 
 Status: proved in Lean in the selected physical curvature channel.  Combined
-with T2 after its involutivity lemma is audited, this is the sharp
+with T2 after its involutivity proposition is audited, this is the sharp
 third-versus-fourth-order separation.  A second compiled theorem shows that,
 on the explicit active formal family, two fixed fourth-order outputs agree iff
 \(a=\pm b\).  In that precise family the \(\mathbb R\)-fiber at order three is
@@ -108,8 +128,12 @@ for the complete finite accepted set.
 The finite constructor enumerates scalar probes, scalar relative sign,
 principal-frame probes, coframe pivots, orientation, and source/wedge
 components.  Dependency tracing through its nested Fréchet derivatives
-reaches metric order four; explicit extensionality through a packaged
-coordinate four-jet remains open.  Its raw search size is exactly
+reaches metric order four.  A partial factorization now packages the literal
+coordinate metric four-jet, shows that algebraic entrance uses its two-jet
+truncation, and factors channel acceptance/output through a finite operational
+first-jet payload.  Explicit chain-rule extensionality from the former to the
+latter remains open beyond the compiled actual-Ricci one-jet layer, and the
+full upstream equivalence remains a separate seam.  Its raw search size is exactly
 \(6{,}291{,}456\), now proved structurally in Lean.
 
 - On the packaged active-regular Ricci--exterior EMD locus, at least one
@@ -136,15 +160,18 @@ general warp ansatz.
 
 - **Lean:** finite algebra, jet identities, the symmetric metric/Ricci first
   prolongation, polynomial metric-jet realization, active-family closed
-  physical Maxwell/potential two-jet, shear obstruction, physical
+  physical Maxwell/actual quadratic potential two-jet, shear obstruction,
+  partial metric-four-jet/operational-jet factorization, physical
   fourth-order recovery, finite detector necessity/correctness, and stated
   conditional uplift modules.
-- **Human proof plus external theorem:** involutivity of analytic EMD in
-  potentials and realization of the compatible collision jets.
+- **Human proof plus external theorem:** proposition-level involutivity of
+  analytic EMD in potentials and realization of the compatible collision
+  jets, pending independent specialist audit.
 - **Exact symbolic evidence:** convention tests and physical benchmarks in
-  `validation/`, including the 21-check helical fourth-order route; these are
-  not Lean theorems.
-- **Open:** explicit four-jet factorization (current locality is germ-based),
+  `validation/`, including the 21-check helical fourth-order route and the
+  exact rational EMD symbol certificate; these are not Lean theorems.
+- **Open:** the remaining upstream and post-Ricci chain-rule bridges completing
+  four-jet extensionality (current complete locality is germ-based),
   a concrete Lean inhabitant of the full physical/survivor packages, full
   detector chart covariance, metric-only converse, density of the active
   locus, degenerate branches, and global reconstruction.
@@ -161,11 +188,13 @@ general warp ansatz.
 
 ### P1. Audit the analytic realization argument
 
-Deliverable: a two-to-four-page proof that a formal-PDE specialist can check
-line by line, with the explicit potential jet, symbol sequence, lower-order
-perturbation statement, Noether identity, admissibility, and exact
-Cartan--Kähler conclusion.  Obtain at least one independent specialist review
-before submission.
+Deliverable now drafted: a proposition-level proof that a formal-PDE
+specialist can check line by line, with the actual potential jet, pure-order
+two symbol sequence, characters, lower-order statement, complete first
+compatibility identities, admissibility, and exact Cartan--Kähler conclusion.
+The exact rational certificate is an adversarial cross-check, not a substitute
+for review.  Obtain at least one independent specialist review before
+submission.
 
 ### P2. Positive detector benchmark -- complete
 

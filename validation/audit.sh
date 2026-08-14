@@ -19,3 +19,4 @@ uv run --frozen python -m benchmarks.vt1c_non_kaluza_dilaton --check
 uv run --frozen python -m benchmarks.vt2_generic_helical_string --check
 uv run --frozen python -m benchmarks.vt2_complete_detector_route --check
 uv run --frozen python -m benchmarks.vt2b_generic_near_miss --check
+uv run --frozen python -m benchmarks.vt3_emd_symbol_involutivity --check

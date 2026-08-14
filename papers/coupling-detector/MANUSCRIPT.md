@@ -7,9 +7,9 @@ Einstein--Maxwell--dilaton (EMD) theory can be inferred from the metric alone.
 The answer has a sharp jet-order structure on an explicit active, non-null,
 simple-spectrum branch.
 
-First, modulo one explicit analytic EMD involutivity lemma for which we give a
-direct symbol/Noether argument pending specialist audit, we construct a
-one-parameter family of local analytic EMD solution germs, indexed by the real
+First, using an external-theorem-dependent proposition-level EMD involutivity
+argument pending specialist audit, we construct a one-parameter family of
+local analytic EMD solution germs, indexed by the real
 coupling \(a\), whose metric three-jets at a common
 normal-coordinate point are identical.  Their matter first jets are distinct
 and injectively record \(a\); their common mixed Ricci tensor has four distinct
@@ -52,8 +52,11 @@ family, the fixed fourth-order outputs for \(a\) and \(b\) agree if and only if
 \(a=\pm b\): the order-three \(\mathbb R\)-fiber collapses at order four to the
 orientation-free \(\mathbb Z_2\).  We also implement a finite
 coordinate detector whose nested Fréchet-derivative definitions reach metric
-order four by dependency tracing.  We have not yet compiled a separate
-factorization through a packaged coordinate four-jet.  Under its
+order four by dependency tracing.  A partial factorization packages the
+literal metric four-jet and the finite operational first-jet payload; the
+actual composed-Ricci derivative and its four-jet extensionality are compiled,
+but the downstream derived-field chain rules and full upstream bridge remain open.
+Under its
 explicit active-regular Ricci--exterior EMD hypotheses, its accepted set is
 nonempty and contains the physical value \(a^2\); with a certificate for every
 survivor on the unique scalar-closure locus, the complete output image is
@@ -62,10 +65,13 @@ survivor on the unique scalar-closure locus, the complete output image is
 The finite collision jet, channel obstruction and recovery, detector
 construction, and correctness implications are checked in Lean.  The
 upgrade from compatible finite jets to analytic solution germs uses
-Cartan--Kähler theory and a short symbol extension of Kruglikov's involutivity
-theorem for source-free Einstein--Maxwell equations; that formal-PDE step is a
-human mathematical argument pending specialist audit, not part of the Lean
-proof.  We do not claim full nonlinear-coordinate covariance for the finite
+Cartan--Kähler theory and a proposition-level symbol/Noether extension of
+Kruglikov's involutivity theorem for source-free Einstein--Maxwell equations.
+An exact rational certificate verifies the predicted symbol characters and
+prolongation ranks through the tested order, but not nonlinear formal
+integrability or analytic realization.  The formal-PDE step remains a human
+mathematical argument pending specialist audit, not part of the Lean proof.
+We do not claim full nonlinear-coordinate covariance for the finite
 detector, a metric-only converse, or a new closed-form spacetime.
 
 ## 1. Problem and result hierarchy
@@ -88,9 +94,10 @@ The paper has four logically distinct results.
 
 1. The complete first curvature-seed channel fibers are exactly the unique
    affine real-shear orbits under the stated nonvanishing hypotheses.
-2. Conditional on the explicit EMD involutivity lemma, the kernel is realized
-   by active, simple-spectrum analytic EMD solution germs with one common
-   metric three-jet for every real coupling.
+2. Subject to specialist audit of the external-theorem-dependent EMD
+   involutivity proposition, the kernel is realized by active,
+   simple-spectrum analytic EMD solution germs with one common metric
+   three-jet for every real coupling.
 3. One additional derivative breaks the continuous kernel and recovers
    \(a^2\) in the physical channel; on the explicit active formal family its
    equality fibers are exactly \(a=\pm b\).
@@ -98,8 +105,8 @@ The paper has four logically distinct results.
    necessity/correctness theorem under explicit entrance and survivor
    certificates.
 
-Conditional on the stated involutivity lemma, Result 2 is the solution-level
-lower bound.  Result 3 is the matching
+Subject to the stated external inputs and audit, Result 2 is the
+solution-level lower bound.  Result 3 is the matching
 one-order-higher recovery in the selected physical curvature channel.  Result
 4 is deliberately stated with more hypotheses: this paper does not assert
 that every analytic germ supplied by Result 2 has already been routed through
@@ -268,21 +275,32 @@ with four distinct real eigenvalues
   \frac{3+\sqrt{65}}4.                                    \tag{4.2}
 \]
 
+The common jet is realized by an actual cubic coordinate metric field.  Lean
+proves that this field is symmetric and nondegenerate on an open
+determinant-negative neighborhood of the origin, has the index-one
+Minkowski form at the origin, and has actual coordinate Ricci tensor equal to
+the displayed common source there.  Its genuine nested metric derivatives
+also feed the algebraic Ricci first-prolongation formula.  The further chain
+rule identifying that formula with the Fréchet derivative of the *composed*
+Ricci field is now machine checked, including the derivative of the genuine
+matrix inverse.  For the active cubic germ this derivative is exactly the
+displayed common Ricci-source first jet.
+
 The finite jet obeys the point Einstein and scalar equations, the first
 Einstein/Ricci prolongation, both exterior equations, point/first-jet Hodge
 compatibility, and the contracted-Bianchi compatibility condition.  The
 Maxwell first jet depends injectively on \(a\).
 
-### Analytic realization lemma
+### Analytic realization proposition
 
 The analytic EMD equations are put in the pure second-order potential
 variables \((g,A,\phi)\), with \(F=dA\).  Before invoking any formal-PDE
 result, the closed finite Maxwell data above are lifted by an explicit radial
-homotopy formula to a potential two-jet \(j^2A\).  The prescribed data are
-therefore compatible holonomic coefficient jets in the variables used by the
-PDE, not a mixed-order \((g,F,\phi)\) surrogate.  Lean does not yet package
-these coefficients as an explicit quadratic one-form field with nested
-Fréchet derivatives.
+homotopy formula to a potential two-jet \(j^2A\), and an actual quadratic
+one-form field realizes those coefficients with genuine nested Fréchet
+derivatives and the required differentiated curl.  The prescribed data are
+therefore holonomic jets in the variables used by the PDE, not a mixed-order
+\((g,F,\phi)\) surrogate.
 
 Kruglikov proves involutivity of the gauge-degenerate source-free
 Einstein--Maxwell potential system
@@ -290,26 +308,45 @@ Einstein--Maxwell potential system
 determined scalar-wave block, whose symbol has the required involutivity by
 his Lemma 4.  The exponential factors and the EMD couplings among \(A\),
 \(\phi\), and the stress tensor are lower order, so they do not alter the
-combined principal-symbol complex.  The EMD Noether identity makes stress
-conservation a differential consequence of the Maxwell and scalar equations,
-supplying the contracted-Bianchi compatibility for the Einstein block.  The
-Theorem-3 symbol argument therefore extends to analytic EMD, and
-Cartan--Kähler realizes compatible finite jets as local analytic solution
-germs.
+combined principal-symbol complex.  The Maxwell gauge identity and EMD
+Noether identity account for the scalar and four-vector first compatibility
+components: stress conservation is a differential consequence of the Maxwell
+and scalar equations.  The proposition-level argument therefore extends the
+Theorem-3 symbol complex to analytic EMD, and standard analytic
+Cartan--Kähler realization supplies compatible local solution germs.
+
+As an independent falsification test, the exact-rational artifact
+[`vt3-emd-symbol-involutivity`](../../validation/artifacts/vt3-emd-symbol-involutivity.json)
+finds Cartan characters \((60,45,25,5)\), \(\dim g_2=135\),
+\(\dim g_3=245\), the predicted Cartan--Hilbert growth through \(g_5\), and
+exhaustion of the tested symbol left kernels by the Maxwell/Bianchi syzygies.
+At the active lower jet, it also extracts all 150 highest-jet columns from the
+full coordinate EMD residual evaluator, reproduces the hand-built symbol
+entrywise for symbolic \(a\), and verifies rank 15.  Thus it certifies the
+displayed coordinate symbol and witness-level highest-jet submersion.  It is
+not an independent variational derivation and does not certify lower-order
+Noether torsion, regularity of every prolonged nonlinear equation manifold,
+all-order formal integrability, or analytic realization.  The same exact
+covector probes recover the expected characteristic content on sampled
+directions: four tested non-null covectors have only the five gauge-kernel
+directions, while two tested null covectors add two metric, two Maxwell, and
+one scalar mode.  This is not yet a universal Lorentz-orbit theorem.
 
 For the displayed family the finite Einstein, Maxwell, scalar, Hodge, and
 first-prolongation identities hold, and the contracted-Bianchi residual
 vanishes.  The remaining higher matter slots can consequently be completed
-without changing the prescribed metric three-jet.  Conditional on the EMD
-involutivity lemma, this yields a local analytic EMD germ for every \(a\).
+without changing the prescribed metric three-jet.  Subject to the cited
+Spencer and Cartan--Kähler inputs and the specialist audit of the EMD
+extension, this yields a local analytic EMD germ for every \(a\).
 
 This is a short application argument pending specialist audit, not a quotation
 of a theorem in which
 Kruglikov names EMD.  In particular, we do not invoke his Theorem 4 directly.
-The finite-jet identities, explicit potential coefficient two-jet, and symmetric
-metric/Ricci first prolongation are checked in Lean.  The contracted-Bianchi
-contraction, Spencer-complex extension, and Cartan--Kähler application belong
-to the human proof and are not formalized in Lean.
+The finite-jet identities, actual quadratic potential realization, and
+symmetric metric/Ricci first prolongation are checked in Lean.  The
+Spencer-complex extension, lower-order compatibility calculation, and
+Cartan--Kähler application belong to the human proof and are not formalized in
+Lean.
 The complete proof boundary is recorded in
 [`docs/ANALYTIC_EMD_REALIZATION.md`](../../docs/ANALYTIC_EMD_REALIZATION.md).
 
@@ -317,8 +354,8 @@ The complete proof boundary is recorded in
 
 *Claim ledger: finite inputs C2--C4; conditional solution upgrade C5--C6.*
 
-Assume the analytic potential-EMD involutivity lemma stated above.  For every
-real \(a\), there is a local analytic EMD solution germ
+Assume the external inputs and the analytic potential-EMD involutivity
+proposition stated above.  For every real \(a\), there is a local analytic EMD solution germ
 \((g_a,\phi_a,F_a)\) at the displayed point such that:
 
 - all metric three-jets \(j^3g_a\) are equal;
@@ -545,9 +582,14 @@ No benchmark is a newly discovered exact solution.
 | Four distinct real Ricci roots | `activeAmbiguityRicciSource_has_four_distinct_real_eigenpairs` | Lean |
 | Common Ricci first prolongation from the symmetric metric third jet | `activeAmbiguityFormalMetricJet3_einsteinFirstProlongation`; `coordinateRicciFirstJet_minkowski_zero` | Lean |
 | Polynomial metric-germ realization through order three | `activeAmbiguityPolynomialMetricGerm_realizes_threeJet` | Lean |
-| Active-family closed physical Maxwell jet and compatible potential coefficient two-jet | `matrixExteriorDerivative_activeAmbiguityPhysicalMaxwellFirstJet`; `activeAmbiguityPhysicalMaxwellPotentialTwoJet_realizes` | Lean |
+| Polynomial metric neighborhood and actual Ricci value/first derivative | `exists_activeAmbiguityPolynomialMetricGerm_nondegenerateNeighborhood`; `activeAmbiguityPolynomialMetricGerm_actualRicci_zero`; `activeAmbiguityPolynomialMetricGerm_actualRicci_coordinateFDeriv_zero` | Lean |
+| Primitive metric-jet to actual Ricci-one-jet factorization | `scalarFieldCoordinateFDeriv_actualCoordinateRicciCovariantField4`; `actualCoordinateRicciFirstJet_eq_of_sameFourJet` | Lean; fixed-coordinate and uses only the three-jet truncation |
+| Active-family closed physical Maxwell jet and actual quadratic potential two-jet | `matrixExteriorDerivative_activeAmbiguityPhysicalMaxwellFirstJet`; `activeAmbiguityPhysicalRadialPotentialPolynomial_realizes`; `activeAmbiguityPhysicalRadialPotentialPolynomial_curl_realizes` | Lean |
 | Exact raw detector-choice count \(6{,}291{,}456\) | `allActualMetricDetectorChoices4_card` | Lean |
-| Analytic EMD involutivity/realization extension | Kruglikov Theorem 3 plus the scalar-wave symbol summand and Cartan--Kähler | human proof using external theorem |
+| Partial metric-four-jet/operational-jet factorization | `FixedCoordinateMetricFourJet4`; `isActualMetricAlgebraicEntranceAt4_iff_of_sameFourJet`; `actualMetricFourthOrderDetector_extensionality_of_operationalJets` | Lean |
+| Matrix-inverse instance regression locks | `actualCoordinateRicciCovariantField4_uses_matrixInverse`; `FixedCoordinateMetricTwoJet4.ricciCovariant_uses_matrixInverse` | Lean; guards against entrywise inversion on the underlying function type |
+| Analytic EMD involutivity/realization extension | proposition-level direct-sum and Noether argument using Kruglikov Theorem 3, Lemma 4, and analytic Cartan--Kähler | human proof using external theorem; pending specialist audit |
+| Exact rational EMD potential-symbol certificate | `vt3-emd-symbol-involutivity`: full-coordinate symbol extraction and rank 15 at the witness; characters \((60,45,25,5)\), \(\dim g_2=135\), \(\dim g_3=245\), tested growth/syzygies through \(g_5\), and the null characteristic split \(2+2+1\) beyond gauge | exact symbolic; not a lower-order or all-order formal-integrability proof |
 | Next-order equation, quotient, uniqueness | `nextOrderSineCouplingEquation_eq_zero`; `sineCouplingFromNextOrderComponent_eq`; `nextOrderSineCoupling_unique` | Lean |
 | Recovery of \(a^2\) | `couplingSqFromNextOrderComponent_eq`; `fourthOrderCouplingSqCandidate_eq_physical` | Lean |
 | Active-family fourth-order equality iff \(a=\pm b\) | `activeAmbiguityFourthOrderCouplingSqCandidates_eq_iff` | Lean |
@@ -581,7 +623,8 @@ whose Theorem 3 treats source-free Einstein--Maxwell.  Our use adds the
 determined scalar-wave symbol block and verifies the EMD compatibility map;
 it should not be cited as though Kruglikov explicitly stated the EMD theorem.
 
-Conditional on the stated involutivity lemma, we are unaware of a prior result
+Subject to specialist audit of the stated involutivity proposition, we are
+unaware of a prior result
 combining an active simple-spectrum solution-level common metric-three-jet
 continuum across EMD couplings, the exact affine-shear classification of its
 complete-channel fibers, and an explicit one-order-higher recovery whose
@@ -593,8 +636,12 @@ Rainich theory, and EMD geometry is required before submission.
 
 The present work does not establish:
 
-- factorization of the complete construction through an explicit coordinate
-  four-jet (the compiled locality theorem assumes equality of metric germs);
+- the remaining post-Ricci chain-rule bridge from equality of the literal
+  coordinate metric four-jet to equivalence of the full upstream entrance and
+  equality of the rest of the derived operational first-jet payload
+  (algebraic entrance, actual Ricci one-jet extensionality, and operational
+  channel factorization are compiled, while complete locality still assumes
+  equality of metric germs);
 - full nonlinear-coordinate covariance of the complete finite accepted set;
 - a concrete Lean inhabitant of every physical-patch and per-survivor
   certificate used by the abstract detector theorems;

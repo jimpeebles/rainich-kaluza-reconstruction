@@ -24,6 +24,8 @@ uv run python -m benchmarks.vt2_complete_detector_route
 uv run python -m benchmarks.vt2_complete_detector_route --check
 uv run python -m benchmarks.vt2b_generic_near_miss
 uv run python -m benchmarks.vt2b_generic_near_miss --check
+uv run python -m benchmarks.vt3_emd_symbol_involutivity
+uv run python -m benchmarks.vt3_emd_symbol_involutivity --check
 ```
 
 The Python minor line and SymPy release are fixed in `pyproject.toml`; exact
@@ -166,6 +168,46 @@ mixed Ricci tensor still has four distinct real roots, but the named Kaluza
 polynomial obstruction becomes nonzero and the original EMD fields no longer
 solve the Einstein equation. This supplies a close, generic, exact non-EMD
 rejection rather than an obviously unrelated counterexample.
+
+## V-T3 EMD potential-symbol involutivity certificate
+
+`vt3-emd-symbol-involutivity` builds the exact rational principal symbol of
+the pure second-order potential-form EMD system at a Lorentzian normal-frame
+point.  It checks the linearized-Ricci, Maxwell `div d`, and scalar-wave
+blocks separately and as a direct sum.  Exact row reduction gives Cartan
+characters
+
+```text
+Einstein/Ricci       (40, 30, 16, 4)
+Maxwell potential    (16, 12,  7, 1)
+scalar wave           (4,  3,  2, 0)
+EMD total            (60, 45, 25, 5)
+```
+
+and dimensions `dim g2=135`, `dim g3=245`.  The committed certificate also
+checks the Cartan/Hilbert growth through `g5`, verifies that the four
+contracted-Bianchi plus one Maxwell-gauge syzygies annihilate and exhaust the
+tested symbol left kernels.  On four selected non-null covectors the symbol
+kernel is exactly the explicit five-dimensional gauge image; two selected
+null covectors exhibit the expected additional characteristic kernel.  The
+artifact does not itself prove the corresponding statement on every Lorentz
+orbit.
+
+As an independent modeling check, the benchmark also extracts all 150
+highest-jet Jacobian columns from the full coordinate EMD residual evaluator
+at the repository's active lower jet, with the coupling retained as a symbolic
+real parameter.  This coordinate Jacobian equals the hand-built block symbol
+entry-for-entry and has rank 15, certifying that the second-order equation map
+is a submersion in its highest-jet directions at that witness.  The evaluator
+uses the trace-reversed Ricci form of the metric equation; in four dimensions
+this differs from the Einstein-tensor form by an invertible target trace
+reversal and has the same regularity and solution set.
+
+This is an exact principal-symbol/Cartan certificate, not by itself a proof
+of nonlinear formal integrability.  It does not certify the lower-order
+Noether compatibility, all prolonged nonlinear regularity, or analytic
+Cartan--Kähler realization.  Those steps are stated separately in
+`docs/ANALYTIC_EMD_REALIZATION.md` and remain the point for specialist audit.
 
 ## Evidence policy
 

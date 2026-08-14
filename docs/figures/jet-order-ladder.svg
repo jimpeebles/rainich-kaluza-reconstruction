@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="330" viewBox="0 0 920 330" role="img" aria-label="Metric-jet identifiability ladder for the EMD coupling square">
+  <style>
+    .panel { fill: #ffffff; stroke: #d6d9df; }
+    .card  { fill: #f7f8fa; stroke: #d6d9df; }
+    .card-open { fill: #ffffff; stroke: #9aa1ad; stroke-dasharray: 5 4; }
+    .ink   { fill: #1f2430; }
+    .sub   { fill: #5b6472; }
+    .accent{ fill: #4650c0; }
+    .arrow { stroke: #9aa1ad; stroke-width: 1.5; fill: none; }
+    .ah    { fill: #9aa1ad; }
+    text { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
+    .t  { font-size: 15px; font-weight: 600; }
+    .st { font-size: 11.5px; }
+    .k  { font-size: 11px; font-weight: 600; letter-spacing: .04em; }
+    .h  { font-size: 13px; font-weight: 600; }
+    .b  { font-size: 11.5px; }
+    .cap{ font-size: 11px; font-style: italic; }
+  </style>
+  <rect class="panel" x="0.5" y="0.5" width="919" height="329" rx="10"/>
+  <text class="t ink" x="24" y="34">Metric-jet identifiability of the EMD coupling square a&#178;</text>
+  <text class="st sub" x="24" y="53">Active, non-null, simple-spectrum branch &#183; convention a&#178; = 3 is the Kaluza sector &#183; see CLAIM_LEDGER.md for exact boundaries</text>
+
+  <!-- order 2 -->
+  <rect class="card" x="24" y="74" width="196" height="168" rx="8"/>
+  <text class="k sub" x="40" y="98">METRIC JET ORDER 2</text>
+  <text class="h ink" x="40" y="120">Fields, not the coupling</text>
+  <text class="b sub" x="40" y="141">Ricci splits as S + &#189;v&#8855;v;</text>
+  <text class="b sub" x="40" y="157">magnitude q, involution J,</text>
+  <text class="b sub" x="40" y="173">seed pair (H&#8320;, *H&#8320;)</text>
+  <text class="b sub" x="40" y="189">reconstructed pointwise.</text>
+  <text class="b sub" x="40" y="211">a&#178; invisible.</text>
+
+  <!-- order 3 -->
+  <rect class="card" x="244" y="74" width="196" height="168" rx="8"/>
+  <text class="k sub" x="260" y="98">METRIC JET ORDER 3</text>
+  <text class="h ink" x="260" y="120">Coupling hidden: fiber &#8477;</text>
+  <text class="b sub" x="260" y="141">Complete channels fix only</text>
+  <text class="b sub" x="260" y="157">A = a&#183;cos2&#952; and &#951;.</text>
+  <text class="b sub" x="260" y="173">A free affine shear mixes</text>
+  <text class="b sub" x="260" y="189">B with d&#952;: exact &#8477;-orbit.</text>
+  <text class="b sub" x="260" y="211">One 3-jet, every real a.</text>
+
+  <!-- order 4 -->
+  <rect class="card" x="464" y="74" width="196" height="168" rx="8"/>
+  <text class="k sub" x="480" y="98">METRIC JET ORDER 4</text>
+  <text class="h accent" x="480" y="120">a&#178; recovered: fiber &#8484;&#8322;</text>
+  <text class="b sub" x="480" y="141">dA + 2B&#951; &#8722; B&#178;Jv = 0</text>
+  <text class="b sub" x="480" y="157">gives B, hence a&#178; = A&#178;+B&#178;,</text>
+  <text class="b sub" x="480" y="173">component-independently.</text>
+  <text class="b sub" x="480" y="189">Finite detector, 6,291,456</text>
+  <text class="b sub" x="480" y="205">choices. Kaluza selector:</text>
+  <text class="b sub" x="480" y="221">output 3 (necessary only).</text>
+
+  <!-- order 5 -->
+  <rect class="card-open" x="684" y="74" width="212" height="168" rx="8"/>
+  <text class="k sub" x="700" y="98">METRIC JET ORDER 5 &#183; OPEN</text>
+  <text class="h ink" x="700" y="120">Recognition program</text>
+  <text class="b sub" x="700" y="141">Propagation dB = 2A&#969;;</text>
+  <text class="b sub" x="700" y="157">phase, Maxwell, Einstein,</text>
+  <text class="b sub" x="700" y="173">scalar (via Bianchi/Noether)</text>
+  <text class="b sub" x="700" y="189">reconstructed; Ricci-flat 5D</text>
+  <text class="b sub" x="700" y="205">uplift. Conditional today:</text>
+  <text class="b sub" x="700" y="221">see KALUZA_ARC_PLAN.md.</text>
+
+  <!-- arrows -->
+  <path class="arrow" d="M221 158 H240"/><path class="ah" d="M240 154 l8 4 -8 4 z"/>
+  <path class="arrow" d="M441 158 H460"/><path class="ah" d="M460 154 l8 4 -8 4 z"/>
+  <path class="arrow" d="M661 158 H680"/><path class="ah" d="M680 154 l8 4 -8 4 z"/>
+
+  <text class="cap sub" x="24" y="272">Lower bound: an explicit family of compatible truncated EMD data shares one metric three-jet for every real a (Lean);</text>
+  <text class="cap sub" x="24" y="288">its upgrade to analytic solution germs is a written argument pending specialist audit. Detector correctness is proved under</text>
+  <text class="cap sub" x="24" y="304">explicit entrance and certificate hypotheses, in a fixed coordinate chart; chart covariance and degenerate strata are open.</text>
+</svg>

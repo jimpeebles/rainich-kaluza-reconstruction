@@ -4,8 +4,8 @@
 > pointwise centralizer/nonuniqueness result. It is not the current
 > metric-only coupling-detector manuscript, and some downstream status notes
 > intentionally remain outside its scope. See
-> The active paper is [`../coupling-detector/MANUSCRIPT.md`](../coupling-detector/MANUSCRIPT.md),
-> governed by [`../../docs/RESEARCH_PLAN.md`](../../docs/RESEARCH_PLAN.md).
+> The active paper is [`../coupling-detector/MANUSCRIPT.md`](../../coupling-detector/MANUSCRIPT.md),
+> governed by [`../../docs/RESEARCH_PLAN.md`](../../../docs/RESEARCH_PLAN.md).
 
 ## Abstract
 

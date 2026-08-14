@@ -12,13 +12,19 @@ an honest neighborhood Einstein/source equality and a conditional pointwise
 recognition theorem with the scalar residual derived by the normal
 Bianchi/Noether bridge.  This is a fixed-coordinate, fixed-choice result with
 an explicitly supplied compatible normal representative and matter jets.
-The strongest compiled endpoint assumes none of the three EMD equation
-blocks: its Einstein equation is derived from the core entrance, its weighted
-Maxwell equation from exterior Hodge closure, and its scalar equation from
-contracted Bianchi/Noether.  It
-is not yet invariant, does not construct that representative from the metric
-conditions alone, and therefore is not the unconditional recognition theorem
-advertised by K-B/K-C.
+The strongest compiled endpoint -- the `_of_preHodge` theorem in
+`CoreSourceDerivedHodgeBridge.lean` -- assumes no Einstein, weighted-Maxwell,
+or scalar block: its Einstein equation is derived from the core entrance, its
+weighted Maxwell/Hodge equation from exterior Hodge closure, and its scalar
+equation from contracted Bianchi/Noether.  One Maxwell-side input remains
+inside the normal matter-jet package: the rescaled exterior law
+`NormalRescaledMaxwellBianchi` is assumed rather than derived, though the
+Hodge-side derivation pattern from the core's closed convention field appears
+to apply and its derivation is the cheapest outstanding item.  The endpoint
+is not yet invariant, does not construct the normal representative from the
+metric conditions alone (no normal-chart existence lemma is compiled), and
+therefore is not the unconditional recognition theorem advertised by
+K-B/K-C.
 
 ## 1. What can be attempted now
 
@@ -361,8 +367,10 @@ representative exterior-Hodge law, so the strongest pre-Hodge endpoint does
 not store it either.  The remaining conditional inputs are the existence of
 the compatible `C²` normal/radial-gauge germ, its normal
 matter-jet/regularity package, including the exact detector-to-normal
-residual formula and the two rescaled Maxwell first-jet identities used by
-Noether.  `CoreScalarResidualAlignment.lean` then derives the
+residual formula, the two rescaled Maxwell first-jet identities used by
+Noether, and the assumed rescaled exterior law
+`NormalRescaledMaxwellBianchi`; no compiled lemma yet constructs a normal
+chart from a general nonsingular point.  `CoreScalarResidualAlignment.lean` then derives the
 product residual equality from those data; it is no longer a representative
 field.
 The accepted coframe identity and its `C²` frame regularity now also prove

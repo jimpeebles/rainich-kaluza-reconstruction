@@ -1,7 +1,7 @@
 # Notation and convention registry
 
 > Supporting cross-reference only.  The convention authority for the active
-> paper is [`EMD_CONVENTION.md`](EMD_CONVENTION.md); resolve any discrepancy in
+> paper is [`EMD_CONVENTION.md`](../EMD_CONVENTION.md); resolve any discrepancy in
 > its favor.
 
 No calculation should enter the theorem surface until its convention is fixed

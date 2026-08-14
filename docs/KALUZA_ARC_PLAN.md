@@ -23,12 +23,24 @@ Maxwell-stress transport through the reconstructed coframe, and the literal
 neighborhood Einstein/source identity.  A conditional pointwise
 fixed-coordinate/fixed-choice recognition theorem also compiles, including a
 derived scalar residual and a Ricci-flat local Kaluza germ.  The strongest
-pre-Hodge endpoint no longer assumes any of the three normal EMD equation
-blocks or the exterior-Hodge law: Einstein is derived from the staged source
-and exact trace reversal, weighted Maxwell from the staged closed weighted
-flux and normal Hodge differentiation, and the scalar equation from
-contracted Bianchi/Noether.  Only the normal matter-jet package and a
-compatible `C²` normal representative remain at that fixed-chart layer.  The
+compiled endpoint is the `_of_preHodge` theorem in
+`CoreSourceDerivedHodgeBridge.lean` (not the file
+`SourceDerivedPointwiseKaluzaRecognition.lean`, whose representative still
+stores the exterior-Hodge law).  At that endpoint Einstein is derived from
+the staged source and exact trace reversal, the weighted Maxwell/Hodge law
+is derived from the staged closed weighted flux and normal Hodge
+differentiation, and the scalar equation is derived from contracted
+Bianchi/Noether.  One Maxwell-side input survives inside the normal
+matter-jet package: the rescaled exterior law recorded as
+`NormalRescaledMaxwellBianchi` is assumed, never derived, although the
+analogous Hodge-side derivation pattern
+(`matrixHodgeExterior_of_closed_scaledFirstJet` from the core's closed
+convention Maxwell field) appears to apply.  Deriving it is the cheapest
+outstanding Lean item.  Beyond that, only the normal matter-jet package and
+a compatible `C²` normal representative remain at that fixed-chart layer,
+and no theorem yet constructs a normal chart (metric value $\eta$, first
+jet $0$) from a general nonsingular point, so the endpoints cannot yet be
+applied away from an already-normalized presentation.  The
 accepted coframe data now imply componentwise `C²` regularity of the original
 coordinate metric; the unsolved representative work is the `C²` scalar and
 gauge fields plus construction of a compatible normal-coordinate germ.  The
@@ -46,7 +58,7 @@ One theorem closes the arc:
 > simple-spectrum branch, an explicit finite list of curvature conditions on
 > a four-dimensional Lorentzian metric, using metric derivatives through a
 > fixed finite order, is necessary and sufficient for the local existence of
-> Einstein--Maxwell--dilaton fields at the Kaluza coupling \(a^2=3\), unique
+> Einstein--Maxwell--dilaton fields at the Kaluza coupling $a^2=3$, unique
 > up to the stated presentation orbit, whose convention-fixed uplift is a
 > local Ricci-flat five-dimensional vacuum.
 
@@ -74,7 +86,7 @@ Three structural facts shape everything below.
 ## 2. Draft target statement and expected jet order
 
 Conventions are those of [`EMD_CONVENTION.md`](EMD_CONVENTION.md); the
-metric-constructed objects \(v\), \(J\), \(H_0\), \(\eta\), \(A\), \(B\) are
+metric-constructed objects $v$, $J$, $H_0$, $\eta$, $A$, $B$ are
 the compiled detector fields.  The anticipated hypothesis tiers are:
 
 - **Algebraic entrance (metric order two).**  The existing pointwise
@@ -89,48 +101,56 @@ the compiled detector fields.  The anticipated hypothesis tiers are:
   a sufficiently small open patch, one fixed finite raw detector choice must
   satisfy the full upstream entrance and reproduce every component of both
   seed-channel identities, not only the quotient components used to define
-  \(A\) and \(B\).  In addition:
+  $A$ and $B$.  In addition:
 
-  \[
-    dv = 0,
-  \]
+
+```math
+dv = 0,
+```
+
 
   together with the constancy equation already used by the detector,
 
-  \[
-    dA + 2B\eta - B^2 Jv = 0 .
-  \]
+
+```math
+dA + 2B\eta - B^2 Jv = 0 .
+```
+
 
 - **Phase propagation (expected metric order five).**
 
-  \[
-    dB = 2A\Bigl(\eta-\frac B2\,Jv\Bigr).
-  \]
+
+```math
+dB = 2A\Bigl(\eta-\frac B2\,Jv\Bigr).
+```
+
 
   Because the constancy equation is
-  \(dA=-2B(\eta-(B/2)Jv)\), the two phase laws give
-  \(d(A^2+B^2)=0\), the coupling square is constant on the patch and the
-  Kaluza selector reduces to the single pointwise equality \(A^2+B^2=3\).
-  After shrinking into one half-angle chart, lift \((A,B)/\sqrt3\) to
-  \(c^2+s^2=1\).  Differentiating this algebraic lift gives
-  \(dc=-s\omega\), \(ds=c\omega\), where
-  \(\omega=\eta-(B/2)Jv\).  Thus \(d\omega=0\) and a local angle are
+  $dA=-2B(\eta-(B/2)Jv)$, the two phase laws give
+  $d(A^2+B^2)=0$, the coupling square is constant on the patch and the
+  Kaluza selector reduces to the single pointwise equality $A^2+B^2=3$.
+  After shrinking into one half-angle chart, lift $(A,B)/\sqrt3$ to
+  $c^2+s^2=1$.  Differentiating this algebraic lift gives
+  $dc=-s\omega$, $ds=c\omega$, where
+  $\omega=\eta-(B/2)Jv$.  Thus $d\omega=0$ and a local angle are
   consequences rather than separate hypotheses.
 
 - **Optional unique-branch gate.**  The exclusion
 
-  \[
-    \neg\bigl(O_-=0\wedge O_+=0\bigr)
-  \]
+
+```math
+\neg\bigl(O_-=0\wedge O_+=0\bigr)
+```
+
 
   is not needed for existence from one fixed accepted branch.  Retain it
   only for confluence or uniqueness across the two scalar branches.
 
-**Expected order.**  \(B\) consumes the metric four-jet, so its propagation
+**Expected order.**  $B$ consumes the metric four-jet, so its propagation
 law spends one further derivative.  The working expectation is therefore
 that the recognition system closes at metric order **five**: identifying
-\(a^2\) is fourth order, while phase propagation is fifth.  The separate
-closure test for \(\eta-(B/2)Jv\), which would also be fifth order if imposed
+$a^2$ is fourth order, while phase propagation is fifth.  The separate
+closure test for $\eta-(B/2)Jv$, which would also be fifth order if imposed
 directly, is redundant after the local half-angle lift.  This mirrors
 classical Rainich, where algebraic conditions are joined by a differential
 condition on the complexion gradient.  Whether order four already suffices
@@ -138,41 +158,41 @@ for recognition is open; neither optimality nor sufficiency of order five
 may be claimed until settled.
 
 **Conclusion of the target theorem.**  On a possibly smaller patch there
-exist \(\phi\) with \(d\phi=v\), a local angle \(\theta\) with
-\(d\theta=\eta-\frac B2 Jv\), the rotated physical field
-\(H=\cos\theta\,H_0+\sin\theta\,(*H_0)\), and
-\(F=\sqrt2\,e^{-\sqrt3\,\phi/2}H\) with a compiled gauge potential, such
-that \((g,\phi,F)\) solves convention EMD at \(a=\sqrt3\).  For one fixed
+exist $\phi$ with $d\phi=v$, a local angle $\theta$ with
+$d\theta=\eta-\frac B2 Jv$, the rotated physical field
+$H=\cos\theta\,H_0+\sin\theta\,(*H_0)$, and
+$F=\sqrt2\,e^{-\sqrt3\,\phi/2}H$ with a compiled gauge potential, such
+that $(g,\phi,F)$ solves convention EMD at $a=\sqrt3$.  For one fixed
 persistent accepted branch, the reconstructed presentation orbit is up to
 the duality/scalar sign, the
-\(\phi\)-shift/fiber-radius modulus, and Maxwell gauge (anchors:
+$\phi$-shift/fiber-radius modulus, and Maxwell gauge (anchors:
 `constantDuality_emd_iff_sign_of_active`, `equivalentUnder_dilatonShift`,
 `equivalentUnder_gauge`, `equivalentUnder_iff_compatible`); and the
 convention uplift is locally Ricci flat by `intrinsicRicciFlatAt_iff_emd`.
 The converse direction -- every active-branch Kaluza reduction satisfies the
 conditions -- reuses the compiled reduction equivalence.
 
-The category is smooth with finite regularity (roughly \(C^5\) metric data);
+The category is smooth with finite regularity (roughly $C^5$ metric data);
 no analyticity is required on this path.  Uniqueness among arbitrary raw
 detector choices is a further confluence/covariance obligation, not a
 consequence of the cited fixed-branch orbit theorems alone.
 
 ## 3. K1 -- keystone lemma: contracted Bianchi for the actual Einstein tensor
 
-Formalize \(\nabla^\mu G_{\mu\nu}=0\) for the coordinate Einstein tensor
-built from `actualCoordinateRicciCovariantField4` of a \(C^3\) metric.  This
+Formalize $\nabla^\mu G_{\mu\nu}=0$ for the coordinate Einstein tensor
+built from `actualCoordinateRicciCovariantField4` of a $C^3$ metric.  This
 is a keystone Lean object in the program.  To force the scalar field equation
 in the converse, it must be composed with a second formal deliverable: the
 repository-normalized Maxwell- and scalar-stress divergence identities, or
 equivalently the off-shell EMD Noether identity:
 
 - Einstein holds by construction (the entrance forces the decomposition
-  \(\mathcal R=S+V\));
+  $\mathcal R=S+V$);
 - Maxwell holds by construction (Section 2's closure tier plus the channel
   identities);
 - Bianchi, Maxwell, and the matter-divergence identities then give
-  \(\bigl(\Box_g\phi-\frac{\sqrt3}4 e^{\sqrt3\phi}F^2\bigr)\,v = 0\),
-  and \(v\ne0\) on the active branch finishes the scalar equation.
+  $\bigl(\Box_g\phi-\frac{\sqrt3}4 e^{\sqrt3\phi}F^2\bigr)\,v = 0$,
+  and $v\ne0$ on the active branch finishes the scalar equation.
 
 This is the exact mirror of the Noether identity used in
 [`ANALYTIC_EMD_REALIZATION.md`](ANALYTIC_EMD_REALIZATION.md), run in the
@@ -219,13 +239,13 @@ explicit metric-constructed scalar residual are in
 [`KALUZA_CONVERSE_DERIVATION.md`](KALUZA_CONVERSE_DERIVATION.md).
 The paper derivation comes first because the principal mathematical risk of
 the whole program is that the tier list is incomplete.  The skeleton is
-\(\phi\)-integrability from scalar closure, propagation of \(A^2+B^2\), a
+$\phi$-integrability from scalar closure, propagation of $A^2+B^2$, a
 local algebraic half-angle lift producing the phase fields, rotation of the
 compiled seed pair, verification of the two
 exterior equations as field identities through the existing germ/persistence
 formulations, Einstein from the entrance identities, and the scalar equation
 from K1.  The compiled radial-splice and potential modules supply a gauge
-potential \(\mathcal A\) with \(d\mathcal A=F\) and its gauge orbit.  Only
+potential $\mathcal A$ with $d\mathcal A=F$ and its gauge orbit.  Only
 after the full channel implications survive should the final Lean converse
 statement be frozen.
 
@@ -256,10 +276,20 @@ and gauge germs to the product's genuine second jet.
 Einstein block rather than storing it, derives weighted Maxwell through the
 normal Hodge bridge, and derives the scalar equation through Noether.  Thus a
 pointwise fixed-coordinate/fixed-choice conditional recognition theorem is
-compiled with no EMD equation block assumed.  It remains conditional on a
+compiled with no Einstein or scalar block assumed and the exterior-Hodge law
+derived at the pre-Hodge endpoint; the rescaled Maxwell exterior law
+(`NormalRescaledMaxwellBianchi`) is still an input carried by the matter-jet
+package.  It remains conditional on a
 compatible `C²` Minkowski normal/radial-gauge representative and the explicit
 normal matter-jet/regularity package (including the detector-to-normal
-residual formula and rescaled Maxwell first-jet identities).
+residual formula and rescaled Maxwell first-jet identities).  Three named
+Lean items close the visible gaps at this layer: derive
+`NormalRescaledMaxwellBianchi` from the core's closed convention Maxwell
+field by the Hodge-side pattern; prove normal-chart existence so the
+endpoints apply at a general nonsingular accepted point; and consolidate the
+recognition endpoint tower (`Staged`/`ScalarResidualFree`/`PointwiseCore`/
+`SourceDerived`/pre-Hodge) into one canonical endpoint module, pruning
+padding fields such as `presentation_orbit_complete`.
 `NormalCoordinateHodgeFirstJet.lean` proves that differentiating the metric
 Hodge star at a Minkowski normal point contributes no metric-variation term,
 and `CoreSourceDerivedHodgeBridge.lean` uses this to derive the
@@ -281,7 +311,7 @@ the operational channel payload.  Second, restate the recognition conditions
 invariantly -- the eigenvalue data, wedge conditions, and closure of
 constructed one-forms are covariant in disguise; the probe/pivot enumeration
 is scaffolding -- and prove **output covariance**: chart-independence of
-condition satisfaction and of the recovered \(a^2\) under the compiled
+condition satisfaction and of the recovered $a^2$ under the compiled
 nonlinear coordinate-jet transformations.  Choice-by-choice correspondence
 of raw detector choices is not required for the arc theorem.  The
 publication term upgrades from "fixed-coordinate finite detector" only after
@@ -294,9 +324,9 @@ Replace the conditional realizer: K2's outputs construct the fields that
 unconditional corollary of recognition via the compiled equivalence
 (`nonlinearLocalProductCoordinateRicciFlat_iff_emd`,
 `intrinsicRicciFlatAt_iff_emd`).  Separately, quantify the warp ansatz and
-prove the convention constants \(c_1=-1/\sqrt3\), \(c_2=2/\sqrt3\),
-\(c_3=1\) unique up to the stated presentation symmetries, so that
-\(a^2=3\) is derived rather than convention-checked.  This permanently
+prove the convention constants $c_1=-1/\sqrt3$, $c_2=2/\sqrt3$,
+$c_3=1$ unique up to the stated presentation symmetries, so that
+$a^2=3$ is derived rather than convention-checked.  This permanently
 closes the honesty caveats recorded on C11 and C12.
 
 ## 7. K5 -- sharpness track (identical to the active paper's Gate G/P1)
@@ -316,11 +346,11 @@ K1--K4.
 Priority order: the **repeated-root static stratum first**, since every
 committed closed-form oracle (boosted string, GMGHS control) lives there and
 Weyl-type methods may make it tractable by classical means; then null
-Maxwell; then the \(v=0\) and \(F=0\) edges.  Each stratum gets its own
+Maxwell; then the $v=0$ and $F=0$ edges.  Each stratum gets its own
 ledger rows before any recognition language extends to it.
 
 One item is a result in either direction and deserves separate attention:
-the both-branches-closed locus excluded by \(\neg(O_-=0\wedge O_+=0)\).
+the both-branches-closed locus excluded by $\neg(O_-=0\wedge O_+=0)$.
 Either prove rigidity there, or exhibit a metric with two inequivalent EMD
 realizations.  The second outcome would be a striking standalone theorem.
 
@@ -338,7 +368,7 @@ differentiation of the literal benchmark quotient) remains on this track.
 ## 10. K8 -- global layer (v2, explicitly out of scope for v1)
 
 Gluing local uplifts into a genuine circle bundle: duality-phase holonomy,
-the dilaton-shift/fiber-radius modulus, and flux quantization of \(F\).  The
+the dilaton-shift/fiber-radius modulus, and flux quantization of $F$.  The
 compiled overlap cocycle and presentation-orbit results
 (`duality_overlap_cocycle`, `equivalentUnder_iff_compatible`) are the seeds.
 Arc v1 is local in the Misner--Wheeler sense; every announcement must say
@@ -365,15 +395,34 @@ artifacts substantially narrow, but do not retire, the remaining risks.
 Zero-claim items that may begin before the active paper's P1--P3 close,
 because they add no claim surface: the K2 paper derivation, the K1 Bianchi
 and Noether infrastructure, the pointwise phase-propagation algebra supporting
-K2, and K5 reviewer outreach (which *is* P1).
+K2, and K5 reviewer outreach (which *is* P1).  Three further zero-claim Lean
+items are now queued from the Section 4 audit: deriving
+`NormalRescaledMaxwellBianchi`, the normal-chart existence lemma, and the
+endpoint-tower consolidation.
+
+## 11a. Gate crosswalk
+
+Status of the gates from
+[`ADVERSARIAL_REVIEW_RESPONSE.md`](ADVERSARIAL_REVIEW_RESPONSE.md), which is
+now a dated snapshot; this table is the live tracker.
+
+| Gate | Content | Now lives in | Status (2026-08-14) |
+|---|---|---|---|
+| A | Four-jet extensionality | K3 | Partially closed: entrance factors through the two-jet, acceptance/output through the operational payload, actual Ricci one-jets from four-jet equality; the derived-payload chain rule and upstream bridge remain open. |
+| B | Compiled flagship inhabitant | K7 | Open; sharpened by the uninstantiated recognition representatives. |
+| C | Direct benchmark quotient differentiation | K7 | Open. |
+| D | Simplify all-survivor correctness | K3 (confluence) | Open. |
+| E | Covariance | K3 | Open; constitutive for the arc theorem. |
+| F | Kaluza converse without `realize_emd` | K2/K4 | Substantially advanced: staged and pointwise conditional endpoints compiled; representative construction, normal-chart existence, and the rescaled Maxwell derivation remain. |
+| G | Formal-PDE specialist audit | K5 | Package ready (realization note + V5 certificate); outreach pending. |
 
 ## 12. Intended ledger rows (not yet claims)
 
 | ID | Intended claim | Intended evidence class |
 |---|---|---|
-| K-A | Contracted Bianchi identity for the actual coordinate Einstein tensor of a \(C^3\) metric, plus the normalized matter-divergence/EMD Noether identity used to derive the scalar equation. | Lean |
-| K-B | The Section 2 condition tiers imply local EMD fields at \(a^2=3\) for one fixed persistent accepted branch; a separate unique-closure corollary supplies the stated cross-branch orbit only after confluence is proved. | Lean, after a written derivation |
-| K-C | Condition satisfaction and recovered \(a^2\) are covariant under the supported nonlinear coordinate jets. | Lean |
+| K-A | Contracted Bianchi identity for the actual coordinate Einstein tensor of a $C^3$ metric, plus the normalized matter-divergence/EMD Noether identity used to derive the scalar equation. | Lean |
+| K-B | The Section 2 condition tiers imply local EMD fields at $a^2=3$ for one fixed persistent accepted branch; a separate unique-closure corollary supplies the stated cross-branch orbit only after confluence is proved. | Lean, after a written derivation |
+| K-C | Condition satisfaction and recovered $a^2$ are covariant under the supported nonlinear coordinate jets. | Lean |
 | K-D | Unconditional local Ricci-flat uplift from a recognized branch; warp constants unique up to presentation symmetries. | Lean |
 | K-E | Solution-level order-three lower bound. | Human + external until audited; compiled finite-jet floor already in place |
 | K-F | Repeated-root stratum recognition. | Open |

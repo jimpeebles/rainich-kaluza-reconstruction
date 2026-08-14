@@ -1,8 +1,8 @@
 # Paper I theorem-to-Lean map (archived fallback)
 
 > This map supports an archived scalar-reconstruction draft.  Use
-> [`../coupling-detector/MANUSCRIPT.md`](../coupling-detector/MANUSCRIPT.md) and
-> [`../../docs/CLAIM_LEDGER.md`](../../docs/CLAIM_LEDGER.md) for current claims.
+> [`../coupling-detector/MANUSCRIPT.md`](../../coupling-detector/MANUSCRIPT.md) and
+> [`../../docs/CLAIM_LEDGER.md`](../../../docs/CLAIM_LEDGER.md) for current claims.
 
 This table prevents an informal manuscript statement from becoming stronger
 than its machine-checked counterpart.

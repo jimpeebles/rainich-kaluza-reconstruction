@@ -92,7 +92,7 @@ bundle theorem, or classification under every non-product presentation.
 The collision data are not merely formal arrays.  A cubic polynomial metric
 field realizes their symmetric metric three-jet.  For the active family, the
 rescaled Maxwell jet is explicitly unweighted, the resulting physical
-one-jet is proved closed for every \(a\), and an explicit radial-gauge
+one-jet is proved closed for every $a$, and an explicit radial-gauge
 compatible potential coefficient two-jet realizes it.  These
 constructions are reusable for
 finite-jet counterexamples and formal-PDE entrance data.

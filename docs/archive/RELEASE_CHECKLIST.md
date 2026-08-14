@@ -2,9 +2,9 @@
 
 > This checklist records the repository's earlier centralizer-only release
 > boundary. It is not the policy for the current coupling-detector paper.
-> Use [`RESEARCH_PLAN.md`](RESEARCH_PLAN.md),
-> [`CLAIM_LEDGER.md`](CLAIM_LEDGER.md), and
-> [`../papers/coupling-detector/MANUSCRIPT.md`](../papers/coupling-detector/MANUSCRIPT.md)
+> Use [`RESEARCH_PLAN.md`](../RESEARCH_PLAN.md),
+> [`CLAIM_LEDGER.md`](../CLAIM_LEDGER.md), and
+> [`../papers/coupling-detector/MANUSCRIPT.md`](../../papers/coupling-detector/MANUSCRIPT.md)
 > for current claims. In particular, differential coupling recovery is now
 > proved on the explicit active regular locus, while a converse and full
 > nonlinear-coordinate covariance remain open.

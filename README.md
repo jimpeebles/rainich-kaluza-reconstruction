@@ -1,197 +1,90 @@
 # Rainich--Kaluza reconstruction
 
-This repository studies a coupled inverse problem in mathematical relativity:
+[![Lean verification](https://github.com/jimpeebles/rainich-kaluza-reconstruction/actions/workflows/lean.yml/badge.svg)](https://github.com/jimpeebles/rainich-kaluza-reconstruction/actions/workflows/lean.yml)
+![Lean](https://img.shields.io/badge/Lean-4.32.1-blue)
+![Mathlib](https://img.shields.io/badge/Mathlib-v4.32.1-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-> Can a four-dimensional Lorentzian metric determine the scalar and Maxwell
-> fields of Einstein--Maxwell--dilaton theory, identify the coupling magnitude,
-> and recognize the distinguished \(a^2=3\) sector obtained from
-> five-dimensional vacuum Kaluza gravity?
+Can a four-dimensional Lorentzian metric identify the coupling constant of
+the theory it solves?  For Einstein--Maxwell--dilaton (EMD) gravity -- whose
+distinguished value $a^2=3$ is exactly five-dimensional vacuum Kaluza
+gravity in disguise -- this repository proves a sharp local answer on an
+explicit active, non-null, simple-spectrum branch:
 
-The current result reaches a sharp metric-jet order barrier on an explicit
-active, simple-spectrum class.  The solution-germ upgrade now has a
-proposition-level EMD involutivity argument, backed by an independent exact
-rational symbol certificate, but it still depends on Kruglikov's published
-Spencer calculation and analytic Cartan--Kähler realization and is pending a
-formal-PDE specialist audit.  The repository also gives a finite fourth-order
-coordinate detector under stated regularity and correctness hypotheses.
+> **The metric three-jet cannot identify $a^2$; one further derivative
+> can.**  The order-three ambiguity is exactly a free one-parameter shear
+> group (a full $\mathbb R$ of couplings over one metric three-jet); at
+> order four it collapses to the unavoidable sign $\mathbb Z_2$, and a
+> finite metric-only detector recovers $a^2$ with compiled correctness
+> theorems.  On an accepted Kaluza branch the necessary output is $3$ --
+> necessary, not sufficient.
 
-## Main result
+![Jet-order identifiability ladder](docs/figures/jet-order-ladder.svg)
 
-Let \(v=d\phi\), let \(J\) be the normalized non-null Maxwell-stress
-involution, and write a physical curvature-normalized Maxwell field as a
-duality rotation of its canonical curvature seed.  The complete first
-differentiated seed channels determine
+The finite-jet obstruction, the shear-fiber classification, the fourth-order
+recovery, and the detector are machine-checked in Lean 4 over Mathlib.  The
+upgrade of the obstruction from finite jets to analytic EMD solution germs is
+a written formal-PDE argument -- an explicit involutivity extension of
+Kruglikov's Einstein--Maxwell theorem -- pending independent specialist
+audit, supported by an exact rational symbol/Cartan certificate.  Nothing
+here is a new exact spacetime, a global theorem, or a converse uplift
+criterion.
 
-\[
-  A=a\cos(2\theta),\qquad
-  \eta=d\theta+\frac{a\sin(2\theta)}2Jv,
-\]
+## Results at a glance
 
-have fibers that are exactly the free affine shear orbits
+| Result | Evidence | Anchor |
+|---|---|---|
+| Complete first-channel fibers are exactly free affine shear orbits (order-three ambiguity $=\mathbb R$) | Lean (C1) | `canonicalFullComplexionCouplingChannels_eq_iff_shearOrbit` |
+| One active formal metric three-jet supports compatible truncated EMD data for every real $a$, matter jet injective in $a$, simple Ricci spectrum | Lean (C2--C4) | `activeAmbiguity_commonFormalMetricThreeJet_for_every_coupling` |
+| No function of that three-jet returns $a^2$ on the family | Lean (C6, finite part) | `no_couplingSquare_identifier_on_activeFormalMetricThreeJet` |
+| Analytic solution-germ upgrade of the collision | Human + external, pending audit (C5) | `docs/ANALYTIC_EMD_REALIZATION.md` |
+| Fourth-order recovery $a^2=A^2+B^2$, component-independent; family outputs agree iff $a=\pm b$ | Lean (C7) | `activeAmbiguityFourthOrderCouplingSqCandidates_eq_iff` |
+| Finite metric-only detector: exactly 6,291,456 raw choices, correctness under explicit certificates, fixed-coordinate germ locality | Lean (C8--C10) | `allActualMetricDetectorChoices4_card`, `acceptedActualMetricFourthOrderCouplingSqValuesAt_eq_singleton_physical` |
+| Kaluza reduction: 5D Ricci-flat $\iff$ convention EMD; selector $a^2=3$ necessary; conditional local uplift | Lean (C11--C12) | `intrinsicRicciFlatAt_iff_emd` |
+| Exact-arithmetic oracles V1--V4 and the EMD symbol/Cartan certificate V5 | Exact symbolic | `validation/` |
+| Kaluza recognition (converse) program: conditional pointwise fixed-choice endpoints compiled; invariant theorem open | In progress, no claims | `docs/KALUZA_ARC_PLAN.md` |
 
-\[
-  B\mapsto B+\tau,qquad
-  d\theta\mapsto d\theta-\frac\tau2Jv,
-  \qquad B=a\sin(2\theta).
-\]
-
-More precisely, when the canonical seed amplitude and scalar covector are
-nonzero, two complete first-channel inputs agree if and only if their \(A\)
-components agree and their \((d\theta,B)\) data differ by a unique real shear.
-Thus the order-three ambiguity is an exact \(\mathbb R\)-orbit, not merely an
-exhibited counterexample.
-
-The obstruction is realized by displayed compatible truncated EMD data for every
-real coupling \(a\).  The matter first jet varies injectively with \(a\), the
-physical activity wedge is nonzero, and the common mixed Ricci tensor has four
-distinct real eigenvalues.  The proposition-level formal-PDE argument below
-upgrades these data to a local analytic EMD solution germ for every real
-coupling, all with the same metric three-jet.  This conclusion is
-external-theorem dependent and remains pending specialist audit.  Subject to
-that audit, no function of the metric three-jet can identify \(a^2\) on this
-family; in particular \(a=\sqrt3\) and \(a=1\) collide through order three.
-
-One derivative later, constancy of \(a\) gives
-
-\[
-  dA+2B\eta-B^2Jv=0.
-\]
-
-On \(\eta\wedge Jv\ne0\),
-
-\[
-  B=-\frac{(dA\wedge Jv)_{ij}}
-          {2(\eta\wedge Jv)_{ij}},
-  \qquad a_{\rm geom}^2=A^2+B^2=a^2.
-\]
-
-Together with the audited analytic-realization lemma, this is the sharp
-third-versus-fourth-order separation in the selected physical curvature
-channel.  On the explicit active formal family, the fixed fourth-order
-outputs for couplings \(a\) and \(b\) agree exactly when \(a=\pm b\): the
-continuous \(\mathbb R\)-ambiguity at order three collapses to the unavoidable
-orientation-free \(\mathbb Z_2\) ambiguity at order four.  The repository also
-constructs a finite
-coordinate detector whose only input is the metric.  Tracing its nested
-Fréchet-derivative definitions reaches metric derivative order four.  A new
-partial factorization packages the literal metric four-jet, proves that the
-algebraic entrance already factors through its two-jet truncation, and proves
-that channel acceptance and output factor through a finite operational
-first-jet payload.  The remaining seam is the explicit chain-rule theorem
-showing that equality of metric four-jets determines both the full upstream
-entrance and the rest of that derived payload.  The first nonlinear layer is
-now compiled: the actual Fréchet derivative of the composed Ricci tensor is
-the algebraic Ricci first-jet evaluator on the genuine metric three-jet, and
-equal literal four-jets give equal Ricci one-jets.  A
-structural Lean theorem proves that it filters exactly (6{,}291{,}456) raw
-choices.  A
-packaged physical Ricci--exterior EMD witness on the explicit active regular
-locus proves that its accepted set contains \(a^2\).  Every accepted survivor
-has that value only when its displayed realized-branch, probe, regularity, and
-unique scalar-closure certificate is supplied.  At Kaluza coupling the
-necessary selector is \(3\); sufficiency for a Kaluza uplift is not claimed.
+The authoritative statement of every claim, its exact boundary, and the
+prohibited upgrades is [`docs/CLAIM_LEDGER.md`](docs/CLAIM_LEDGER.md).
 
 ## Evidence boundary
 
-The following pieces are machine checked in Lean:
+Machine-checked (Lean 4, Mathlib pinned, no `sorry`, no project axioms,
+1,056-entry axiom audit): the shear-fiber classification; the active common
+formal metric three-jet family with its Einstein/Maxwell/scalar/Hodge
+truncated-equation certificates and first Ricci prolongation; realization of
+the metric data by an actual cubic germ with genuine Frechet-derivative
+Ricci; the finite-jet impossibility theorem; the fourth-order recovery and
+its $a=\pm b$ fiber; the detector, its exact choice count, correctness
+under displayed entrance/certificate hypotheses, and germ locality; the 5D
+Ricci-block reduction and conditional uplift.
 
-- the exact classification of complete first-channel fibers as unique affine
-  real-shear orbits, and the \(\mathbb R\)-to-\(\mathbb Z_2\) separation on the
-  active formal family;
-- the active common formal metric three-jet for every coupling;
-- injectivity of the matter first jet, exact activity, simple real Ricci
-  spectrum, and the common Ricci first prolongation from a fully symmetric
-  metric third jet;
-- realization of the common metric three-jet by an actual cubic metric field,
-  an open symmetric nondegenerate determinant-negative neighborhood, and
-  equality of its genuine point Ricci tensor and composed-Ricci Fréchet
-  derivative with the prescribed common source and source first jet;
-- exact unweighting and closure of the active physical Maxwell first jet and
-  its family-specific radial-gauge potential two-jet, now realized by an
-  actual quadratic one-form field with genuine nested Fréchet derivatives and
-  the required differentiated curl;
-- the next-order quotient, component independence, and recovery of \(a^2\);
-- the finite metric-only coordinate detector, physical nonemptiness, certified
-  survivor correctness, and fixed-coordinate germ locality;
-- the conditional local Kaluza uplift and presentation orbit from an accepted
-  EMD realizer.
-
-The detector's compiled locality theorem is germ-based.  Its finite
-four-jet/operational-jet factorization is now isolated, but the chain-rule
-bridge beyond the now-compiled Ricci one-jet layer, the full upstream bridge,
-and full chart covariance remain open.
-The actual and finite-jet Ricci evaluators explicitly force `Matrix.inv`, and
-definitionally checked regression theorems guard against accidental
-entrywise inversion on the matrix's underlying function type.
-The conditional uplift realizer already supplies complete EMD
-equations, and the fixed warp constants are verified rather than proved
-unique in a general ansatz.
-
-The promotion from compatible finite jets to local analytic EMD solution germs
-uses Cartan--Kähler theory and a short potential-variable symbol extension of
-[Kruglikov's Einstein--Maxwell involutivity
-theorem](https://arxiv.org/abs/0902.1685).  Kruglikov does not state this EMD
-specialization verbatim: the proposition-level argument combines his
-source-free Einstein--Maxwell potential block with the determined scalar-wave
-block and checks the complete Maxwell-gauge and EMD Noether/Bianchi
-compatibility space.  An exact rational certificate independently finds
-Cartan characters \((60,45,25,5)\), \(\dim g_2=135\), \(\dim g_3=245\), the
-predicted Hilbert growth through \(g_5\), and exhaustion of the tested left
-kernels by the known syzygies.  It also extracts all 150 highest-jet columns
-from the full coordinate EMD residual evaluator at the active lower jet,
-reproduces the hand-built symbol entrywise for symbolic \(a\), and verifies
-rank 15 there.  This certifies witness-level highest-jet regularity, but not an
-independent variational derivation, lower-order Noether torsion, regularity of
-every prolonged nonlinear equation manifold, all-order formal integrability,
-or analytic realization.  On four tested non-null covectors the symbol kernel
-is exactly the five gauge directions; two tested null covectors add two
-metric, two Maxwell, and one scalar mode.  A Lorentz-orbit argument would be
-needed to universalize this sampled characteristic statement.  The EMD
-extension remains a human proof pending specialist audit, not
-a Lean theorem.
-
-The exact helical replacement benchmark now closes its final fourth-order
-route with 21 checks.  Its 128-slot exact quadratic quotient calculation
-verifies the selected scalar, residual, and frame one-jets, every component of
-both complete channels, \(A\), the physical derivative
-\(dA=d(\sqrt3\,C)\), \(B\), the next-order residual, and output \(3\).  The
-128 slots are a reduction representation, not a claimed proof of a
-degree-128 number field.  The artifact separately hashes its symbolic model,
-implementation sources, quotient relations, and coefficient payload.  The
-identification of the literal quotient derivative with physical \(dA\) uses
-the compiled physical-germ bridge together with the exact helical EMD
-patch/open gates; it is a theorem-mediated benchmark composition, not a
-brute-force second-jet CAS expansion and not a compiled Lean instance theorem.
-
-The repository does **not** yet prove full nonlinear-coordinate covariance of
-the finite accepted set, a metric-only converse, or the degenerate branches.
-It contains no new closed-form exact spacetime.
+Not machine-checked: the analytic solution-germ realization (human proof
+using Kruglikov's involutivity theorem; the single specialist-audit
+dependency); full nonlinear-coordinate covariance of the detector; density
+of the active locus; the null, repeated-root, and collision strata -- which
+contain the textbook spherical solutions; any sufficiency of detector output
+$3$ for a Kaluza uplift; and novelty, which remains "we are unaware of"
+pending review.  The exact symbolic validation layer is reproducible
+evidence, not proof.
 
 ## Start here
 
-- [Paper manuscript](papers/coupling-detector/MANUSCRIPT.md) -- canonical
-  scientific narrative and theorem hierarchy.
-- [Technical supplement](papers/coupling-detector/TECHNICAL_SUPPLEMENT.md) --
-  detailed derivations and hypotheses.
-- [Claim ledger](docs/CLAIM_LEDGER.md) -- exact proved/external/open boundary.
-- [Research plan](docs/RESEARCH_PLAN.md) -- one operational north star and next
-  gates.
-- [Documentation map](docs/README.md) -- canonical, supporting, and archived
-  files at a glance.
-- [Conventions](docs/EMD_CONVENTION.md) -- normalization and field-equation
-  provenance.
-- [Literature map](docs/LITERATURE_MAP.md) -- prior work and provisional
-  novelty boundary.
-- [Companion results](docs/COMPANION_RESULTS.md) -- ranked formal results that
-  support future papers without enlarging this paper's headline claim.
-- [Adversarial review response](docs/ADVERSARIAL_REVIEW_RESPONSE.md) --
-  signature-level findings, completed repairs, and remaining gates.
-- [Validation guide](validation/README.md) -- exact symbolic evidence, kept
-  separate from the Lean theorem surface.
+- Physicists: [`docs/OVERVIEW.md`](docs/OVERVIEW.md), then the
+  [manuscript](papers/coupling-detector/MANUSCRIPT.md) and
+  [technical supplement](papers/coupling-detector/TECHNICAL_SUPPLEMENT.md).
+- Formalization auditors: [`docs/CLAIM_LEDGER.md`](docs/CLAIM_LEDGER.md),
+  [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md),
+  [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md), then the audit below.
+- Formal-PDE specialists:
+  [`docs/ANALYTIC_EMD_REALIZATION.md`](docs/ANALYTIC_EMD_REALIZATION.md)
+  with the V5 certificate described in
+  [`validation/README.md`](validation/README.md).
+- Documentation map and precedence rules: [`docs/README.md`](docs/README.md).
 
 ## Reproduce
 
-Install `elan`, then run:
+Install `elan`, then:
 
 ```sh
 lake update
@@ -202,28 +95,30 @@ bash scripts/audit.sh
 
 The audit builds with warnings treated as errors, rejects placeholders and
 project axioms on the advertised theorem surface, and prints the axiom
-dependencies of the headline Lean theorems.
-
-Run the exact symbolic validation separately:
+dependencies of the headline Lean theorems.  Run the exact symbolic
+validation separately (pinned Python/SymPy, no floating point, byte-pinned
+artifacts):
 
 ```sh
 cd validation
 ./audit.sh
 ```
 
-The Python and SymPy versions are pinned.  The suite uses exact arithmetic and
-rejects byte-level drift in committed artifacts.  These computations are
-evidence and regression tests, not Lean proofs.
-
 ## Repository map
 
-- `RainichKaluza/` -- formal definitions and Lean theorems.
+- `RainichKaluza/` -- Lean library; layer map in
+  [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 - `papers/coupling-detector/` -- active paper and technical supplement.
-- `validation/` -- pinned exact-symbolic benchmarks.
-- `docs/` -- conventions, claim boundary, literature, and active research plan.
-- `papers/paper-01/` and dated phase documents -- archived historical tracks;
-  they are not sources of current claims or tasks.
+- `validation/` -- pinned exact-symbolic benchmarks V1--V5.
+- `docs/` -- claim ledger, plans, conventions, proof notes;
+  archived history in `docs/archive/` and `papers/archive/`.
 
-The project is intended as a focused reconstruction theorem, not a new
-unified-field proposal.  Priority language remains “we are unaware of” until
-specialists in formal PDE, Rainich theory, and EMD geometry review the result.
+## Where this is going
+
+The forward program -- a local, metric-only recognition theorem for the
+Kaluza sector, with the Ricci-flat uplift delivered constructively -- is
+specified with its own stop rules in
+[`docs/KALUZA_ARC_PLAN.md`](docs/KALUZA_ARC_PLAN.md).  The project is
+intended as a focused reconstruction theorem, not a new unified-field
+proposal.  Priority language remains "we are unaware of" until specialists
+in formal PDE, Rainich theory, and EMD geometry review the result.

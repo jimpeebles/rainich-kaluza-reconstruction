@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use or discuss this repository, please cite it as below."
+title: >-
+  Rainich-Kaluza reconstruction: third-order non-identifiability and
+  fourth-order recovery of the Einstein-Maxwell-dilaton coupling square
+  from metric jets
+type: software
+authors:
+  - family-names: Kehoe
+    given-names: James
+repository-code: "https://github.com/jimpeebles/rainich-kaluza-reconstruction"
+license: MIT
+version: 0.3.0-dev
+date-released: 2026-08-14
+keywords:
+  - Lean 4
+  - Mathlib
+  - formalized mathematics
+  - general relativity
+  - Rainich theory
+  - Kaluza-Klein
+  - Einstein-Maxwell-dilaton
+  - inverse problems
+abstract: >-
+  A Lean 4 / Mathlib formalization of a sharp metric-jet identifiability
+  threshold for the Einstein-Maxwell-dilaton coupling square on an active,
+  non-null, simple-spectrum branch: the metric three-jet cannot identify
+  the coupling (the ambiguity is an exact one-parameter shear orbit), while
+  a finite fourth-order metric-only detector recovers it, with the Kaluza
+  value 3 as a necessary selector. Includes an exact-arithmetic validation
+  suite and a claim ledger separating machine-checked, human/external,
+  exact-symbolic, and open claims.

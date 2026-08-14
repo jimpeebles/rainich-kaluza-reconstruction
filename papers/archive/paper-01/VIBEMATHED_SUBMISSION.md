@@ -1,7 +1,7 @@
 # VibeMathed submission draft (archived fallback)
 
 > This is not the active submission.  See
-> [`../coupling-detector/MANUSCRIPT.md`](../coupling-detector/MANUSCRIPT.md).
+> [`../coupling-detector/MANUSCRIPT.md`](../../coupling-detector/MANUSCRIPT.md).
 
 **Status: held. Do not submit this draft.** The research program is continuing
 toward full tangent-space and differential reconstruction; the eventual

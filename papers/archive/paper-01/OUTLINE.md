@@ -2,7 +2,7 @@
 
 > **Fallback paper outline.** The active publication target is the metric-only
 > coupling detector in
-> [`../../docs/RESEARCH_PLAN.md`](../../docs/RESEARCH_PLAN.md). This outline
+> [`../../docs/RESEARCH_PLAN.md`](../../../docs/RESEARCH_PLAN.md). This outline
 > remains the release path if the detector fails its statement or validation
 > gates.
 

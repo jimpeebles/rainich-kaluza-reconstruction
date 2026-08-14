@@ -130,7 +130,7 @@ The relevant cited result is his Theorem 3 for the gauge-degenerate
 source-free Einstein--Maxwell potential system, together with Lemma 4 for a
 determined scalar-wave block and the analytic realization consequence.  EMD is
 not named in that paper.  Our application works in pure second-order
-potentials \((g,A,\phi)\), observes that the exponential couplings are lower
+potentials $(g,A,\phi)$, observes that the exponential couplings are lower
 order, and uses the EMD Noether identity for contracted-Bianchi compatibility.
 This extension is a human proof requiring specialist audit, not a Lean theorem
 and not a direct invocation of Kruglikov's Theorem 4.

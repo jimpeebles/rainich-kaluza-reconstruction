@@ -2,8 +2,14 @@
 
 Date: 2026-08-13
 
-Status: active response to the four repository-audit prompts supplied after
-the high-level review
+Status: **historical snapshot.**  The response and repairs below are
+complete; Gates A--G are now tracked live in the gate crosswalk of
+[`KALUZA_ARC_PLAN.md`](KALUZA_ARC_PLAN.md), which governs their current
+status.  This file records the audit findings and repairs as of its date and
+is no longer updated.
+
+Original status: active response to the four repository-audit prompts
+supplied after the high-level review
 
 ## 1. What was reviewed
 

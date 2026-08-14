@@ -2,8 +2,8 @@
 
 > These statements support the fallback pointwise/differential paper. The
 > governing detector theorem and its input rule are specified in
-> The active paper is [`../coupling-detector/MANUSCRIPT.md`](../coupling-detector/MANUSCRIPT.md),
-> governed by [`../../docs/RESEARCH_PLAN.md`](../../docs/RESEARCH_PLAN.md).
+> The active paper is [`../coupling-detector/MANUSCRIPT.md`](../../coupling-detector/MANUSCRIPT.md),
+> governed by [`../../docs/RESEARCH_PLAN.md`](../../../docs/RESEARCH_PLAN.md).
 
 These are manuscript-level working statements. “Verified” below means the
 displayed finite-dimensional statement has a matching Lean declaration; it

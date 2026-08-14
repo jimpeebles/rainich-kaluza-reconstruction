@@ -13,7 +13,7 @@ Status: technical companion to the canonical manuscript
 > Kruglikov's gauge-degenerate Einstein--Maxwell Theorem 3 by the determined
 > scalar-wave block of Lemma 4 and use the Maxwell-gauge and EMD
 > Noether/Bianchi identities.  The proposition is independently stress-tested
-> by an exact-rational symbol certificate through \(g_5\), including extraction
+> by an exact-rational symbol certificate through $g_5$, including extraction
 > of the full highest-jet Jacobian at the active lower jet, but that certificate
 > is not an all-order formal-integrability proof.  The argument is not a direct
 > invocation of Kruglikov's Theorem 4 and is not formalized in Lean.
@@ -45,7 +45,7 @@ the physical coupling square is not identifiable from the curvature-normalized
 Maxwell channels at metric order three.  This failure is exact, not a defect
 of the selected probes.  Under the nonvanishing hypotheses, every complete
 channel fiber is exactly one free affine real-shear orbit.  Constancy of the
-physical coupling breaks that \(\mathbb R\)-fiber at metric order four on the
+physical coupling breaks that $\mathbb R$-fiber at metric order four on the
 active regular branch, yielding an explicit, choice-independent formula for
 `a²`; on the explicit active formal family, equality survives exactly for
 `a=±b`. The
@@ -79,7 +79,7 @@ Maxwell stress of `calF`. The field equations used below are
 Ric_mn = H_mr H_n^r - (1/4) g_mn H^2
          + (1/2) v_m v_n,                              (1.1)
 d H = (a/2) v wedge H,                                 (1.2)
-d (*H) = -(a/2) v wedge (*H),                          (1.3)
+d (\ast H) = -(a/2) v wedge (\ast H),                          (1.3)
 box phi = (a/2) H^2.                                   (1.4)
 ```
 
@@ -191,7 +191,7 @@ coframe `(e0,e1,e2,e3)` adapted to these planes and set
 ```text
 E  = sqrt(2q),
 F0 = E e0 wedge e1,
-G0 = *F0 = E e2 wedge e3.                             (3.2)
+G0 = \ast F0 = E e2 wedge e3.                             (3.2)
 ```
 
 The Maxwell stress of `F0` is exactly `S`. Every
@@ -438,7 +438,7 @@ exteriorization gives
 
 ```text
 dH    =  (a/2) v wedge H,
-d(*H) = -(a/2) v wedge (*H).
+d(\ast H) = -(a/2) v wedge (\ast H).
 ```
 
 The normalized double-angle derivatives must include the derivative of
@@ -504,7 +504,7 @@ actual detector entrance.
 **[Lean]** The rescaled active Maxwell jet is first unweighted with the exact
 product-rule term.  The family-specific theorem
 `matrixExteriorDerivative_activeAmbiguityPhysicalMaxwellFirstJet` proves
-closure for every \(a\), and
+closure for every $a$, and
 `activeAmbiguityPhysicalMaxwellPotentialTwoJet_realizes` first supplies the
 compatible radial-gauge coefficient two-jet.  The stronger theorems
 `activeAmbiguityPhysicalRadialPotentialPolynomial_realizes` and
